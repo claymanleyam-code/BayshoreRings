@@ -1,0 +1,100 @@
+<section class="section process" id="process">
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <span class="eyebrow section-label">{{ section.settings.eyebrow }}</span>
+      <h2 class="section-heading">{{ section.settings.heading }}</h2>
+      <div class="gold-bar center"></div>
+      <p class="section-body" style="margin:0 auto;">{{ section.settings.subheading }}</p>
+    </div>
+    <div class="process-row">
+      {%- for block in section.blocks -%}
+        <div class="process-step reveal d{{ forloop.index }}" {{ block.shopify_attributes }}>
+          <div class="step-circle">0{{ forloop.index }}</div>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.body }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Process",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "How It's Made"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Four Steps. One Ring."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Every ring follows the same careful process — from a retired board to a finished piece."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step title",
+          "default": "Find the Board"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Step description",
+          "default": "We source retired decks from shops and riders. Every board carries its own story."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Process",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Find the Board",
+            "body": "We source retired decks from shops and riders. Every board carries its own story."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Cut the Layers",
+            "body": "The deck is cut into cross-sections, revealing the layered plies within."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Shape the Ring",
+            "body": "We press, drill, and turn the blank into a clean ring form on a precision lathe."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Finish by Hand",
+            "body": "Each ring is hand-sanded, sealed, and inspected before it ships."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

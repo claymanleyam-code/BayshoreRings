@@ -1,0 +1,261 @@
+<!-- ═══════════════════════════════════════════════════
+     BAYSHORE RINGS — Article Detail
+     ═══════════════════════════════════════════════════ -->
+
+<article itemscope itemtype="https://schema.org/Article">
+
+  <!-- ARTICLE HERO -->
+  <header class="about-hero article-hero" aria-labelledby="article-h1">
+    <div class="container">
+      <a href="{{ blog.url }}" class="article-back-link reveal d1" aria-label="Back to {{ blog.title }}">
+        ← {{ blog.title }}
+      </a>
+      {%- if article.tags.size > 0 -%}
+        <div class="article-tags reveal d1" aria-label="Article tags">
+          {%- for tag in article.tags -%}
+            <span class="article-tag">{{ tag }}</span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      <h1 id="article-h1" class="reveal d2" itemprop="headline">{{ article.title }}</h1>
+      <div class="article-byline reveal d3">
+        <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}" itemprop="datePublished">
+          {{ article.published_at | date: '%B %d, %Y' }}
+        </time>
+        {%- if article.author != blank -%}
+          <span class="article-byline-sep" aria-hidden="true">·</span>
+          <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <span itemprop="name">{{ article.author }}</span>
+          </span>
+        {%- endif -%}
+      </div>
+    </div>
+  </header>
+
+  {%- if article.image -%}
+    <div class="article-featured-img-wrap">
+      <img
+        src="{{ article.image | image_url: width: 1200 }}"
+        alt="{{ article.image.alt | default: article.title | append: ' — Bayshore Rings handmade skateboard jewelry, Tampa FL' | escape }}"
+        class="article-featured-img"
+        loading="eager"
+        width="1200"
+        height="600"
+        itemprop="image">
+    </div>
+  {%- endif -%}
+
+  <!-- ARTICLE BODY -->
+  <section class="section article-body-section">
+    <div class="container">
+      <div class="article-body-inner">
+
+        <div class="article-content rte" itemprop="articleBody">
+          {{ article.content }}
+        </div>
+
+        <!-- SIDEBAR LINKS -->
+        <aside class="article-sidebar" aria-label="Explore Bayshore Rings">
+          <span class="eyebrow" style="display:block;margin-bottom:1rem;color:var(--gold);">Explore Bayshore Rings</span>
+          <ul class="article-sidebar-links">
+            <li><a href="/collections/all">Shop Recycled Skateboard Rings →</a></li>
+            <li><a href="/pages/our-process">How Each Ring Is Made →</a></li>
+            <li><a href="/pages/about">Our Story →</a></li>
+            <li><a href="/pages/reviews">Customer Reviews →</a></li>
+            <li><a href="{{ blog.url }}">More Articles →</a></li>
+          </ul>
+          <div class="article-sidebar-tags" aria-label="Article tags">
+            {%- for tag in article.tags -%}
+              <span class="article-tag article-tag--small">{{ tag }}</span>
+            {%- endfor -%}
+          </div>
+        </aside>
+
+      </div>
+
+      <!-- BACK LINK -->
+      <div class="article-nav-row">
+        <a href="{{ blog.url }}" class="btn btn-navy article-back-btn">← Back to {{ blog.title }}</a>
+        <a href="/collections/all" class="btn btn-gold">Shop Rings</a>
+      </div>
+
+    </div>
+  </section>
+
+</article>
+
+<style>
+/* ── Article Hero ── */
+.article-hero { padding-bottom: 3rem; text-align: center; }
+.article-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(240,231,211,0.5);
+  margin-bottom: 1.5rem;
+  transition: color 0.2s;
+}
+.article-back-link:hover { color: var(--gold); }
+.article-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.article-tag {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(212,150,56,0.12);
+  padding: 0.25rem 0.65rem;
+  border-radius: 3px;
+}
+.article-hero h1 {
+  font-size: clamp(1.9rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: var(--cream);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  max-width: 24ch;
+  margin: 0 auto 1.25rem;
+}
+.article-byline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.88rem;
+  color: rgba(240,231,211,0.45);
+}
+.article-byline-sep { color: rgba(240,231,211,0.25); }
+
+/* ── Featured Image ── */
+.article-featured-img-wrap {
+  width: 100%;
+  max-height: 520px;
+  overflow: hidden;
+  background: var(--navy-dark);
+}
+.article-featured-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ── Article Body ── */
+.article-body-section { background: var(--cream-light); }
+.article-body-inner {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 4rem;
+  align-items: start;
+}
+
+.article-content.rte {
+  font-family: 'Barlow', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.82;
+  color: #333;
+}
+.article-content.rte h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin: 2.5rem 0 1rem;
+  letter-spacing: 0.01em;
+}
+.article-content.rte h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin: 2rem 0 0.75rem;
+}
+.article-content.rte p { margin-bottom: 1.4rem; }
+.article-content.rte a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
+.article-content.rte a:hover { color: var(--gold-light); }
+.article-content.rte img { max-width: 100%; border-radius: 6px; margin: 1.5rem 0; display: block; }
+.article-content.rte ul, .article-content.rte ol { padding-left: 1.5rem; margin-bottom: 1.4rem; }
+.article-content.rte li { margin-bottom: 0.4rem; }
+.article-content.rte strong { color: var(--navy); }
+.article-content.rte blockquote {
+  border-left: 3px solid var(--gold);
+  margin: 2rem 0;
+  padding: 0.75rem 1.5rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ── Sidebar ── */
+.article-sidebar {
+  position: sticky;
+  top: 88px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.article-sidebar-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: var(--cream);
+  border: 1px solid var(--cream-dark);
+  border-left: 3px solid var(--gold);
+  border-radius: 6px;
+  padding: 1.25rem 1.1rem;
+}
+.article-sidebar-links a {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.35;
+  transition: color 0.2s;
+}
+.article-sidebar-links a:hover { color: var(--gold); }
+.article-sidebar-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.article-tag--small {
+  font-size: 0.58rem;
+  padding: 0.18rem 0.5rem;
+}
+
+/* ── Nav Row ── */
+.article-nav-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--cream-dark);
+}
+.article-back-btn { font-size: 0.82rem; padding: 0.75rem 1.75rem; }
+
+@media (max-width: 860px) {
+  .article-body-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .article-sidebar { position: static; }
+}
+@media (max-width: 560px) {
+  .article-nav-row { flex-direction: column; align-items: flex-start; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": [],
+  "presets": [{ "name": "Article" }]
+}
+{% endschema %}

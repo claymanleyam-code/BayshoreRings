@@ -1,0 +1,80 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-about",
+      "blocks": {
+        "stat_1": { "type": "stat", "settings": { "number": "100%", "label": "Recycled Jewelry" } },
+        "stat_2": { "type": "stat", "settings": { "number": "7", "label": "Maple Plies" } },
+        "stat_3": { "type": "stat", "settings": { "number": "1", "label": "Of a Kind" } },
+        "val_1": {
+          "type": "value",
+          "settings": {
+            "title": "Built From Real Boards",
+            "body": "No new wood. Just decks that already skated their last run."
+          }
+        },
+        "val_2": {
+          "type": "value",
+          "settings": {
+            "title": "Small Batch Always",
+            "body": "Made in small batches, by hand. When it's gone, it's gone."
+          }
+        },
+        "val_3": {
+          "type": "value",
+          "settings": {
+            "title": "Tampa Roots",
+            "body": "Born in Tampa. Named for Bayshore Blvd. First sold to local skaters."
+          }
+        }
+      },
+      "block_order": ["stat_1", "stat_2", "stat_3", "val_1", "val_2", "val_3"],
+      "settings": {
+        "eyebrow": "Our Story",
+        "heading": "Built From Boards",
+        "subheading": "Every ring starts with a board that already had a life. We just give it another one.",
+
+        "origin_eyebrow": "Where It Started",
+        "origin_heading": "When a Skateboarder Begins to Love Woodworking",
+        "origin_body_1": "Started in my dad's garage. Broken boards piling up, nowhere to go. I started cutting them up. Jewelry first.",
+        "origin_body_2": "Rings turned out to be the thing. Seven layers of maple — teal, red, raw wood — stacked like nothing else. Looked right on a finger. Bayshore Rings grew from there.",
+        "badge_text": "One Board. One Ring. One Story.",
+        "badge_sub": "Bayshore · Tampa, FL",
+
+        "material_eyebrow": "The Material",
+        "material_heading": "Why Skateboards",
+        "material_body": "Seven layers of hard maple, pressed under thousands of pounds of force. Between those plies: colored veneers that change by brand and era. Cut across the deck — those layers become the ring's grain. No dye. No stain.",
+
+        "values_eyebrow": "What We Stand For",
+        "values_heading": "Made Right. Every Time.",
+
+        "founder_eyebrow": "The Maker",
+        "founder_name": "Clay",
+        "founder_bio": "Started in Tampa, named for Bayshore Boulevard. Both founders grew up here. First rings went to local skaters who got it before anyone else.",
+        "founder_bio_2": "Retired skaters had no way to carry the culture without the full kit. A ring from a real board fills that — wearable, understated, made from something that already meant something.",
+        "founder_signature": "",
+
+        "process_eyebrow": "How It's Made",
+        "process_heading": "Want to see the whole process?",
+        "process_body": "From source board to finished ring. Four steps, no shortcuts.",
+        "process_link": "/pages/our-process",
+        "process_btn": "See How We Make Them",
+
+        "cta_eyebrow": "Get Yours",
+        "cta_heading": "Wear the Board. Keep the Story.",
+        "cta_link": "/collections/all",
+        "cta_btn": "Shop the Collection"
+      }
+    }
+  },
+  "order": ["main"]
+}

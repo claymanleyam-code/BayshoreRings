@@ -1,0 +1,84 @@
+<section class="section story" id="story">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-text">
+        <div class="reveal">
+          <span class="eyebrow section-label">{{ section.settings.eyebrow }}</span>
+          <h2 class="section-heading">{{ section.settings.heading }}</h2>
+          <div class="gold-bar"></div>
+          <p class="section-body">{{ section.settings.body }}</p>
+        </div>
+        <div class="story-tags reveal d1">
+          <span class="tag tag-navy">Coastal Heritage</span>
+          <span class="tag tag-teal">Handcrafted</span>
+          <span class="tag tag-red">Skate Roots</span>
+        </div>
+        <div class="reveal d2" style="margin-top:2rem;">
+          <a href="{{ section.settings.btn_url | default: '/pages/our-process' }}" class="btn btn-navy">{{ section.settings.btn_text }}</a>
+        </div>
+      </div>
+      <div class="story-media reveal d1">
+        <div class="story-badge">
+          <div class="story-badge-core">
+            <p>{{ section.settings.badge_text }}</p>
+            <small>{{ section.settings.badge_sub }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand Story",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "Our Story"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Built From Boards With a Story"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body text",
+      "default": "Every ring starts with a skateboard that has already lived a life. We preserve the layered wood, color, and character of the deck, then shape it into a clean everyday ring made for people who value craft, movement, and originality."
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button text",
+      "default": "See How We Make Them"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Boards with a Life of Their Own"
+    },
+    {
+      "type": "text",
+      "id": "badge_sub",
+      "label": "Badge subtext",
+      "default": "Est. Bayshore · Coastal Craft"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Story"
+    }
+  ]
+}
+{% endschema %}

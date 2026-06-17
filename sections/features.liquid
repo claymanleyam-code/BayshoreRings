@@ -1,0 +1,86 @@
+<section class="section features">
+  <div class="container">
+    <div class="reveal" style="text-align:center; margin-bottom:3rem;">
+      <span class="eyebrow section-label">{{ section.settings.eyebrow }}</span>
+      <h2 class="section-heading">{{ section.settings.heading }}</h2>
+      <div class="gold-bar center"></div>
+    </div>
+    <div class="features-grid">
+      {%- for block in section.blocks -%}
+        <div class="feature-card reveal d{{ forloop.index }}" {{ block.shopify_attributes }}>
+          <div class="feature-num">0{{ forloop.index }}</div>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.body }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Features",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "Why Bayshore"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Made Different. Worn Everyday."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Recycled Skateboard Wood"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Description",
+          "default": "Each ring is made from layered skateboard decks, giving every piece its own color pattern. No two rings are identical."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Features",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Recycled Skateboard Wood",
+            "body": "Each ring is made from layered skateboard decks, giving every piece its own color pattern. No two rings are identical."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Clean Everyday Fit",
+            "body": "Designed to feel comfortable, simple, and wearable — not bulky or overdone. A ring you forget you're wearing."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Small-Batch Craft",
+            "body": "Built in small batches with attention to finish, shape, and detail. We don't rush. Each ring gets the time it deserves."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

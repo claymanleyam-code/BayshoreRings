@@ -1,0 +1,77 @@
+<div class="page-wrap">
+  <div class="collection-header reveal">
+    <span class="eyebrow section-label">The Collection</span>
+    <h1>{{ collection.title }}</h1>
+    <div class="gold-bar"></div>
+    {%- if collection.description != blank -%}
+      <p class="section-body" style="margin-top:0.75rem;">{{ collection.description }}</p>
+    {%- endif -%}
+  </div>
+
+  {%- paginate collection.products by 6 -%}
+
+    {%- if collection.products_count > 0 -%}
+      <div class="collection-grid">
+        {%- assign delay_classes = 'd1,d2,d3,d1,d2,d3,d1,d2,d3,d1,d2,d3' | split: ',' -%}
+        {%- for product in collection.products -%}
+          {%- assign delay = delay_classes[forloop.index0] -%}
+          <a href="{{ product.url }}" class="p-card reveal {{ delay }}">
+            <div class="p-img">
+              {%- if product.featured_image -%}
+                <img
+                  src="{{ product.featured_image | image_url: width: 600 }}"
+                  alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                  width="600" height="600"
+                  loading="lazy">
+              {%- else -%}
+                {% render 'ring-placeholder' %}
+              {%- endif -%}
+
+              {%- if product.available == false -%}
+                <span class="p-status s-soldout">Sold Out</span>
+              {%- elsif product.tags contains 'limited' or product.tags contains 'Limited' -%}
+                <span class="p-status s-limited">Limited</span>
+              {%- elsif product.tags contains 'new' or product.tags contains 'New' -%}
+                <span class="p-status s-new">New</span>
+              {%- elsif product.tags contains 'popular' or product.tags contains 'Popular' -%}
+                <span class="p-status s-popular">Popular</span>
+              {%- endif -%}
+
+              <div class="p-img-overlay"></div>
+            </div>
+            <div class="p-info">
+              <div class="p-name">{{ product.title }}</div>
+              <p class="p-desc">{{ product.description | strip_html | truncate: 90 }}</p>
+              <div class="p-foot">
+                <span class="p-price">
+                  {%- if product.price_varies -%}From {{ product.price_min | money }}{%- else -%}{{ product.price | money }}{%- endif -%}
+                </span>
+                <span class="p-btn{% unless product.available %} p-btn--sold-out{% endunless %}">
+                  {%- if product.available -%}Shop Now{%- else -%}Sold Out{%- endif -%}
+                </span>
+              </div>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <div style="text-align:center;margin-top:3rem;">
+          {{ paginate | default_pagination }}
+        </div>
+      {%- endif -%}
+
+    {%- else -%}
+      <p style="text-align:center;padding:4rem 0;color:var(--muted);">No products found in this collection.</p>
+    {%- endif -%}
+
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [],
+  "presets": [{ "name": "Collection" }]
+}
+{% endschema %}

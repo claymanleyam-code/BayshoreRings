@@ -1,0 +1,102 @@
+<section class="hero" id="home">
+  <div class="hero-text">
+    <div class="hero-kicker">
+      <div class="hero-kicker-line"></div>
+      <span>{{ section.settings.kicker }}</span>
+    </div>
+    <h1>{{ section.settings.heading }}</h1>
+    <p class="hero-sub">{{ section.settings.subheading }}</p>
+    <div class="hero-actions">
+      <a href="{{ section.settings.btn_primary_url | default: '/collections/all' }}" class="btn btn-gold btn-hero-primary">
+        <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0;">
+          <circle cx="10" cy="10" r="9.5" fill="#c07838"/>
+          <circle cx="10" cy="10" r="7.8" fill="#2e7e72"/>
+          <circle cx="10" cy="10" r="6.3" fill="#c07838"/>
+          <circle cx="10" cy="10" r="4.8" fill="#c4422c"/>
+          <circle cx="10" cy="10" r="3.4" fill="#c07838"/>
+          <circle cx="10" cy="10" r="2.1" fill="#d49638"/>
+          <circle cx="10" cy="10" r="1" fill="#0e1828"/>
+        </svg>
+        {{ section.settings.btn_primary }}
+      </a>
+      <a href="{{ section.settings.btn_secondary_url | default: '/pages/our-process' }}" class="btn btn-ghost">{{ section.settings.btn_secondary }}</a>
+    </div>
+    <div class="hero-trust">
+      <span class="trust-item">Skateboard Rings</span>
+      <span class="trust-item">Recycled Jewelry</span>
+      <span class="trust-item">Tampa, FL</span>
+      <span class="trust-item">Wooden Jewelry</span>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-ring-wrap">
+      {%- assign hero_product = all_products['mystery-ring'] -%}
+      {%- if hero_product.featured_image -%}
+        <div class="hero-ring-frame">
+          <div class="hero-ring-glow"></div>
+          {{ hero_product.featured_image | image_url: width: 840 | image_tag:
+            class: 'hero-ring-photo',
+            alt: hero_product.featured_image.alt | default: 'Bayshore Ring — Recycled Skateboard Wood',
+            loading: 'eager',
+            widths: '420, 600, 840'
+          }}
+          <div class="hero-ring-shadow"></div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker text",
+      "default": "Bayshore Rings · Small Batch · Coastal Craft"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Handcrafted Rings From Recycled Skateboards"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Bayshore Rings turns retired skateboard decks into clean, durable rings with natural color, character, and history in every piece."
+    },
+    {
+      "type": "text",
+      "id": "btn_primary",
+      "label": "Primary button text",
+      "default": "Shop Rings"
+    },
+    {
+      "type": "url",
+      "id": "btn_primary_url",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "btn_secondary",
+      "label": "Secondary button text",
+      "default": "Our Process"
+    },
+    {
+      "type": "url",
+      "id": "btn_secondary_url",
+      "label": "Secondary button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

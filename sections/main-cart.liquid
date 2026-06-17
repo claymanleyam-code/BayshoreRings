@@ -1,0 +1,90 @@
+<div class="cart-wrap">
+  <div class="cart-header">
+    <span class="eyebrow" style="color:var(--teal);">Your Order</span>
+    <h1>Shopping Cart</h1>
+  </div>
+
+  <div class="cart-body">
+    {%- if cart.item_count > 0 -%}
+
+      <form action="/cart" method="post">
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th colspan="2">Item</th>
+              <th>Quantity</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for item in cart.items -%}
+              <tr class="cart-row" data-line="{{ forloop.index }}">
+                <td class="cart-item-img-wrap">
+                  <a href="{{ item.url }}">
+                    {%- if item.image -%}
+                      <img class="cart-item-img"
+                        src="{{ item.image | image_url: width: 144 }}"
+                        alt="{{ item.image.alt | default: item.title | escape }}"
+                        width="72" height="72" loading="lazy">
+                    {%- else -%}
+                      <div class="cart-item-img" style="display:flex;align-items:center;justify-content:center;font-size:1.5rem;">⚖</div>
+                    {%- endif -%}
+                  </a>
+                </td>
+                <td>
+                  <div class="cart-item-name">{{ item.product.title }}</div>
+                  {%- unless item.variant.title == 'Default Title' -%}
+                    <div class="cart-item-variant">{{ item.variant.title }}</div>
+                  {%- endunless -%}
+                  <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="cart-item-remove">Remove</a>
+                </td>
+                <td>
+                  <div class="cart-qty">
+                    <button type="button" class="cart-qty-btn" data-dir="down" aria-label="Decrease quantity">&minus;</button>
+                    <input class="cart-qty-input"
+                      type="number"
+                      name="updates[]"
+                      value="{{ item.quantity }}"
+                      min="0"
+                      aria-label="Quantity for {{ item.title | escape }}">
+                    <button type="button" class="cart-qty-btn" data-dir="up" aria-label="Increase quantity">+</button>
+                  </div>
+                </td>
+                <td class="cart-price">{{ item.final_line_price | money }}</td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+
+        <div class="cart-footer">
+          <div class="cart-summary">
+            <div class="cart-subtotal-row">
+              <span class="cart-subtotal-label">Subtotal</span>
+              <span class="cart-subtotal-amount">{{ cart.total_price | money }}</span>
+            </div>
+            <p class="cart-shipping-note">Shipping & taxes calculated at checkout</p>
+            <button type="submit" name="checkout" class="cart-checkout-btn">
+              Checkout &rarr;
+            </button>
+            <a href="/collections/all" class="cart-continue">&#8592; Continue Shopping</a>
+          </div>
+        </div>
+      </form>
+
+    {%- else -%}
+      <div class="cart-empty">
+        <h2>Your cart is empty</h2>
+        <p>Looks like you haven't added any rings yet.</p>
+        <a href="/collections/all" class="btn btn-gold">Shop the Collection</a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": [],
+  "presets": [{ "name": "Cart" }]
+}
+{% endschema %}

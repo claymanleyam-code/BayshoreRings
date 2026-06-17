@@ -1,0 +1,107 @@
+<section class="section coastal" id="coastal">
+  <div class="container">
+    <div class="coastal-inner reveal">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2>{{ section.settings.heading }}</h2>
+      <div class="coastal-rule"></div>
+      <p>{{ section.settings.body }}</p>
+      <div class="coastal-stats">
+        {%- for block in section.blocks -%}
+          <div {{ block.shopify_attributes }}>
+            <span class="stat-num">{{ block.settings.number }}</span>
+            <span class="stat-lbl">{{ block.settings.label }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  <!-- Bayshore Blvd coastal photo — replace src="" with your uploaded image URL -->
+  <figure class="coastal-photo-wrap reveal">
+    <img
+      src="{{ 'bayshore-blvd.jpg' | asset_url }}"
+      alt="Sunset over Bayshore Boulevard, Tampa, Florida — the coastal inspiration behind Bayshore Rings eco-friendly skateboard jewelry"
+      class="coastal-photo"
+      loading="lazy"
+      width="1024"
+      height="500">
+    <figcaption class="coastal-photo-caption">Bayshore Boulevard · Tampa, FL</figcaption>
+  </figure>
+
+  <!-- Skateboarding on Bayshore Blvd — B&W action photo placeholder. Replace src="" with your uploaded image URL -->
+  <figure class="coastal-photo-wrap coastal-photo-skate-wrap reveal">
+    <img
+      src=""
+      alt="Skateboarder pushing down Bayshore Boulevard at sunrise, Tampa, Florida — the skate roots and coastal craft identity of Bayshore Rings recycled wooden jewelry"
+      class="coastal-photo coastal-photo--skate"
+      loading="lazy"
+      width="1024"
+      height="500">
+    <figcaption class="coastal-photo-caption">Skating Bayshore · Tampa, FL — where skate culture meets the Gulf Coast</figcaption>
+  </figure>
+</section>
+
+{% schema %}
+{
+  "name": "Coastal Americana",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "Brand Direction"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Coastal Craft. Skate Roots."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body text",
+      "default": "Bayshore Rings blends small-town coastal design with the grit and creativity of skate culture. The result is a ring that feels classic, personal, and different without trying too hard."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "100%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Recycled Wood"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Coastal Americana",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": { "number": "100%", "label": "Recycled Wood" }
+        },
+        {
+          "type": "stat",
+          "settings": { "number": "7", "label": "Maple Plies" }
+        },
+        {
+          "type": "stat",
+          "settings": { "number": "1", "label": "Of a Kind" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

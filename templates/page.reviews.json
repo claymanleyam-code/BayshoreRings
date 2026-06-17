@@ -1,0 +1,151 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "name": "Marcus T.",
+            "location": "Austin, TX",
+            "title": "Better than I expected",
+            "body": "I've been wearing this thing every day for three months. Water, gym, everything. It still looks perfect. The layers in the wood are unlike anything I've seen on another ring — people ask about it constantly.",
+            "ring": "The Bayshore Classic",
+            "date": "March 2025",
+            "verified": true
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "name": "Danielle R.",
+            "location": "Portland, OR",
+            "title": "Got it for my husband — he won't take it off",
+            "body": "We wanted something different for his wedding band. He skated for years and it felt right. The ring arrived beautifully packaged and the craftsmanship is incredible up close. Worth every penny.",
+            "ring": "The Bayshore Classic",
+            "date": "April 2025",
+            "verified": true
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "name": "Cole W.",
+            "location": "Tampa, FL",
+            "title": "Local and legit",
+            "body": "Bought this because I'm from Tampa and love the concept. Turns out it's also just a genuinely great ring. Sizing was spot on, the beeswax finish feels solid, and knowing it came from a recycled deck makes it cooler.",
+            "ring": "The Bayshore Classic",
+            "date": "May 2025",
+            "verified": true
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "name": "Jordan K.",
+            "location": "San Diego, CA",
+            "title": "Sustainable jewelry done right",
+            "body": "Been looking for eco friendly jewelry that doesn't look like eco friendly jewelry — this is it. The skateboard wood grain is insane in person. Shipped fast, packaged beautifully, and the beeswax finish holds up.",
+            "ring": "The Bayshore Classic",
+            "date": "May 2025",
+            "verified": true
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "name": "Alex M.",
+            "location": "Brooklyn, NY",
+            "title": "Unique piece, great story",
+            "body": "I skated through high school and this ring is the most personal thing I own now. Each layer in the wood is a different color — you can see the whole history of the deck right there on your finger.",
+            "ring": "The Bayshore Classic",
+            "date": "June 2025",
+            "verified": true
+          }
+        },
+        "review_6": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "name": "Serena B.",
+            "location": "Nashville, TN",
+            "title": "Perfect anniversary gift",
+            "body": "My partner grew up skating. I ordered this as an anniversary gift and he was blown away — the craftsmanship is obvious the second you hold it. Lightweight, smooth finish, absolutely zero scratches after two months of daily wear.",
+            "ring": "The Bayshore Classic",
+            "date": "June 2025",
+            "verified": true
+          }
+        },
+        "ig_post_1": {
+          "type": "instagram_post",
+          "settings": {
+            "handle": "bayshorerings",
+            "caption": "Skating Bayshore at golden hour. The rings go everywhere we go.",
+            "alt": "Skateboarder on Bayshore Boulevard Tampa wearing Bayshore Rings recycled skateboard wood ring"
+          }
+        },
+        "ig_post_2": {
+          "type": "instagram_post",
+          "settings": {
+            "handle": "bayshorerings",
+            "caption": "Every layer tells a story. Seven plies of hard maple — one ring.",
+            "alt": "Close-up of Bayshore Rings handmade wooden ring showing reclaimed skateboard deck wood grain layers"
+          }
+        },
+        "ig_post_3": {
+          "type": "instagram_post",
+          "settings": {
+            "handle": "bayshorerings",
+            "caption": "Worn daily. Salt water, sunsets, and Bayshore Blvd.",
+            "alt": "Customer wearing Bayshore Rings sustainable skateboard jewelry on the Gulf Coast"
+          }
+        },
+        "ig_post_4": {
+          "type": "instagram_post",
+          "settings": {
+            "handle": "bayshorerings",
+            "caption": "Reclaimed. Handmade. Tampa made. Tag us to be featured.",
+            "alt": "Bayshore Rings eco friendly handmade wooden ring from reclaimed skateboard decks"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5",
+        "review_6",
+        "ig_post_1",
+        "ig_post_2",
+        "ig_post_3",
+        "ig_post_4"
+      ],
+      "settings": {
+        "eyebrow": "Bayshore Rings Reviews",
+        "heading": "Reviews",
+        "subheading": "Real feedback from real customers. Every Bayshore Rings handmade wooden ring is crafted from reclaimed skateboard decks — here is what people who wear them every day have to say about our recycled skateboard rings, eco friendly jewelry, and sustainable handmade rings.",
+        "community_show_placeholder": true,
+        "community_eyebrow": "The Bayshore Community",
+        "community_heading": "From the Bayshore Community",
+        "community_subheading": "Real people wearing handmade skateboard jewelry in the wild. Tag us to be featured.",
+        "instagram_handle": "bayshorerings"
+      }
+    }
+  },
+  "order": ["main"]
+}

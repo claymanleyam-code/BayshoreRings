@@ -1,0 +1,905 @@
+<!-- ═══════════════════════════════════════════════════
+     BAYSHORE RINGS — Reviews Page
+     ═══════════════════════════════════════════════════ -->
+
+{%- assign review_blocks = section.blocks | where: 'type', 'review' -%}
+{%- assign ig_blocks     = section.blocks | where: 'type', 'instagram_post' -%}
+{%- assign total_reviews = review_blocks | size -%}
+{%- assign sum = 0 -%}
+{%- for block in review_blocks -%}
+  {%- assign sum = sum | plus: block.settings.rating -%}
+{%- endfor -%}
+{%- if total_reviews > 0 -%}
+  {%- assign avg_raw   = sum | times: 10 | divided_by: total_reviews -%}
+  {%- assign avg_whole = avg_raw | divided_by: 10 -%}
+  {%- assign avg_dec   = avg_raw | modulo: 10 -%}
+{%- endif -%}
+
+<!-- ══════════════════════════════════════════
+     1. HERO
+     ══════════════════════════════════════════ -->
+<section class="about-hero reviews-hero" aria-labelledby="reviews-h1">
+  <div class="container">
+    <span class="eyebrow reveal d1">{{ section.settings.eyebrow | default: 'Bayshore Rings Reviews' }}</span>
+    <div class="gold-bar center reveal d1" aria-hidden="true"></div>
+    <h1 id="reviews-h1" class="reveal d2">{{ section.settings.heading | default: 'Reviews' }}</h1>
+    <p class="about-hero-sub reveal d3">
+      {{ section.settings.subheading | default: 'Real feedback from real customers. Every Bayshore Rings handmade wooden ring is crafted from reclaimed skateboard decks — here is what people who wear them every day have to say about our recycled skateboard rings, eco friendly jewelry, and sustainable handmade rings.' }}
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     2. RATING SUMMARY
+     ══════════════════════════════════════════ -->
+{%- if total_reviews > 0 -%}
+<section class="section reviews-summary-section" aria-label="Overall rating">
+  <div class="container">
+    <div class="reviews-summary reveal">
+      <div class="reviews-avg-block">
+        <span class="reviews-avg-number" aria-label="{{ avg_whole }}.{{ avg_dec }} out of 5 stars">{{ avg_whole }}.{{ avg_dec }}</span>
+        <div class="reviews-avg-stars" aria-hidden="true">
+          {%- for i in (1..5) -%}
+            <svg class="star-icon{% if i <= avg_whole %} filled{% endif %}" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          {%- endfor -%}
+        </div>
+        <span class="reviews-avg-count">{{ total_reviews }} review{% if total_reviews != 1 %}s{% endif %}</span>
+      </div>
+      <div class="reviews-breakdown" aria-label="Rating breakdown">
+        {%- for star in (5..1) -%}
+          {%- assign star_count = 0 -%}
+          {%- for block in review_blocks -%}
+            {%- if block.settings.rating == star -%}
+              {%- assign star_count = star_count | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- assign bar_pct = star_count | times: 100 | divided_by: total_reviews -%}
+          <div class="reviews-bar-row">
+            <span class="reviews-bar-label">{{ star }}</span>
+            <svg class="star-icon filled small" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <div class="reviews-bar-track" role="progressbar" aria-valuenow="{{ bar_pct }}" aria-valuemin="0" aria-valuemax="100" aria-label="{{ star_count }} {{ star }}-star reviews">
+              <div class="reviews-bar-fill" style="width:{{ bar_pct }}%"></div>
+            </div>
+            <span class="reviews-bar-count">{{ star_count }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+<!-- ══════════════════════════════════════════
+     3. REVIEW CARDS
+     ══════════════════════════════════════════ -->
+{%- if total_reviews > 0 -%}
+<section class="section reviews-cards-section" aria-label="Customer reviews for Bayshore Rings skateboard jewelry">
+  <div class="container">
+
+    <div class="reviews-section-header reveal">
+      <span class="eyebrow section-label">Verified Customer Feedback</span>
+      <h2 class="section-heading">What Our Customers Say</h2>
+      <div class="gold-bar"></div>
+      <p class="section-body">Handmade wooden rings crafted from reclaimed skateboard wood — worn daily by skaters, surfers, and anyone who values sustainable rings made by hand.</p>
+    </div>
+
+    <div class="reviews-grid">
+      {%- for block in review_blocks -%}
+        <article
+          class="review-card reveal"
+          style="--delay:{{ forloop.index | times: 80 }}ms"
+          {{ block.shopify_attributes }}
+          aria-label="Review by {{ block.settings.name | default: 'Anonymous' }}{% if block.settings.ring != blank %} for {{ block.settings.ring }}{% endif %}">
+
+          {%- if block.settings.image != blank -%}
+            <div class="review-card-img-wrap">
+              <img
+                src="{{ block.settings.image | image_url: width: 600 }}"
+                alt="Customer photo of Bayshore Rings {{ block.settings.ring | default: 'recycled skateboard ring' }} — review by {{ block.settings.name | default: 'customer' }}"
+                class="review-card-img"
+                loading="lazy"
+                width="600"
+                height="400">
+            </div>
+          {%- endif -%}
+
+          <div class="review-card-body">
+            <div class="review-card-top">
+              <div class="review-stars" aria-label="{{ block.settings.rating }} out of 5 stars">
+                {%- for i in (1..5) -%}
+                  <svg class="star-icon{% if i <= block.settings.rating %} filled{% endif %}" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                {%- endfor -%}
+              </div>
+              {%- if block.settings.verified -%}
+                <span class="review-verified">Verified Purchase</span>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.title != blank -%}
+              <h3 class="review-title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            <p class="review-body">{{ block.settings.body }}</p>
+            <div class="review-card-footer">
+              <div class="review-author">
+                <span class="review-name">{{ block.settings.name | default: 'Anonymous' }}</span>
+                {%- if block.settings.location != blank -%}
+                  <span class="review-location">{{ block.settings.location }}</span>
+                {%- endif -%}
+              </div>
+              {%- if block.settings.ring != blank or block.settings.date != blank -%}
+                <div class="review-meta">
+                  {%- if block.settings.ring != blank -%}
+                    <span class="review-ring">{{ block.settings.ring }}</span>
+                  {%- endif -%}
+                  {%- if block.settings.date != blank -%}
+                    <span class="review-date">{{ block.settings.date }}</span>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+
+    <div class="reviews-shop-cta reveal">
+      <p>Ready to own one? <a href="/collections/all" class="reviews-inline-link">Shop all reclaimed skateboard wood rings →</a></p>
+    </div>
+
+  </div>
+</section>
+{%- endif -%}
+
+<!-- ══════════════════════════════════════════
+     4. LEAVE A REVIEW FORM
+     ══════════════════════════════════════════ -->
+<section class="section reviews-form-section" id="write-review" aria-labelledby="write-review-heading">
+  <div class="container">
+    <div class="reviews-form-wrap reveal">
+
+      <div class="reviews-form-header">
+        <span class="eyebrow section-label">Share Your Experience</span>
+        <h2 id="write-review-heading" class="section-heading">Write a Review</h2>
+        <div class="gold-bar"></div>
+        <p class="section-body" style="margin-top:1rem;">Your review helps other customers discover handmade sustainable rings crafted from recycled skateboard decks — and goes directly to the maker.</p>
+      </div>
+
+      {%- form 'contact', id: 'ReviewForm', class: 'review-submit-form' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="review-success" role="alert">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <p>Thank you — your review has been submitted and will appear once approved.</p>
+          </div>
+        {%- else -%}
+
+          <input type="hidden" name="contact[tags]" value="review-submission">
+
+          <!-- Star Rating Picker -->
+          <div class="form-field">
+            <label class="form-label">Rating <span class="req" aria-hidden="true">*</span></label>
+            <div class="star-picker" role="group" aria-label="Star rating, required">
+              {%- for i in (1..5) -%}
+                <input type="radio" name="contact[body-rating]" id="star{{ i }}" value="{{ i }}" class="star-radio" required>
+                <label for="star{{ i }}" class="star-pick-label" aria-label="{{ i }} star{% if i != 1 %}s{% endif %}">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </label>
+              {%- endfor -%}
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="ReviewName" class="form-label">Your Name <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="ReviewName" name="contact[name]" class="form-input" placeholder="First name or initials" required autocomplete="name">
+            </div>
+            <div class="form-field">
+              <label for="ReviewEmail" class="form-label">Email <span class="req" aria-hidden="true">*</span></label>
+              <input type="email" id="ReviewEmail" name="contact[email]" class="form-input" placeholder="your@email.com" required autocomplete="email">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="ReviewLocation" class="form-label">Location</label>
+              <input type="text" id="ReviewLocation" name="contact[body-location]" class="form-input" placeholder="City, State">
+            </div>
+            <div class="form-field">
+              <label for="ReviewRing" class="form-label">Ring Purchased</label>
+              <input type="text" id="ReviewRing" name="contact[body-ring]" class="form-input" placeholder="e.g. The Bayshore Classic">
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="ReviewTitle" class="form-label">Review Title</label>
+            <input type="text" id="ReviewTitle" name="contact[body-title]" class="form-input" placeholder="Sum it up in a few words">
+          </div>
+
+          <div class="form-field">
+            <label for="ReviewBody" class="form-label">Your Review <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="ReviewBody" name="contact[body]" class="form-textarea" rows="5" placeholder="Tell us about your ring — how it fits, how it looks, how it wears..." required></textarea>
+          </div>
+
+          <!-- Photo upload note -->
+          <div class="review-photo-note" aria-label="Photo upload information">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <div>
+              <strong>Want to add a photo?</strong>
+              <span>Mention it in your review text and email a photo to <a href="mailto:contact@bayshorerings.com" class="reviews-inline-link">contact@bayshorerings.com</a> — we'll attach it manually until a review app is connected.</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-gold review-submit-btn">Submit Review</button>
+
+          <p class="review-disclaimer">Reviews are approved before publishing. Your email won't be displayed publicly.</p>
+
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     5. INSTAGRAM / COMMUNITY POSTS
+     ══════════════════════════════════════════ -->
+{%- if ig_blocks.size > 0 or section.settings.community_show_placeholder -%}
+<section class="section community-section" aria-labelledby="community-heading">
+  <div class="container">
+
+    <div class="community-header reveal">
+      <span class="eyebrow section-label">{{ section.settings.community_eyebrow | default: 'The Bayshore Community' }}</span>
+      <h2 id="community-heading" class="section-heading">{{ section.settings.community_heading | default: 'From the Bayshore Community' }}</h2>
+      <div class="gold-bar"></div>
+      <p class="section-body" style="margin-top:0.75rem;">{{ section.settings.community_subheading | default: 'Real people wearing handmade skateboard jewelry in the wild. Tag us to be featured.' }}</p>
+      {%- if section.settings.instagram_handle != blank -%}
+        <a href="https://instagram.com/{{ section.settings.instagram_handle | remove: '@' }}" class="community-ig-link" target="_blank" rel="noopener noreferrer" aria-label="Follow Bayshore Rings on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          @{{ section.settings.instagram_handle | remove: '@' }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if ig_blocks.size > 0 -%}
+      <div class="community-grid">
+        {%- for block in ig_blocks -%}
+          <article class="community-post reveal" style="--delay:{{ forloop.index | times: 60 }}ms" {{ block.shopify_attributes }}>
+            {%- if block.settings.post_url != blank -%}
+              <a href="{{ block.settings.post_url }}" target="_blank" rel="noopener noreferrer" class="community-post-link" aria-label="View Instagram post by {{ block.settings.handle | default: '@bayshorerings' }}: {{ block.settings.caption | truncate: 80 }}">
+            {%- endif -%}
+
+            <div class="community-post-img-wrap">
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 600 }}"
+                  alt="{{ block.settings.alt | default: block.settings.caption | default: 'Bayshore Rings customer wearing reclaimed skateboard wood ring' | truncate: 120 | escape }}"
+                  class="community-post-img"
+                  loading="lazy"
+                  width="600"
+                  height="600">
+              {%- else -%}
+                <div class="community-post-placeholder" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  <span>Add image in theme editor</span>
+                </div>
+              {%- endif -%}
+              <div class="community-post-overlay" aria-hidden="true">
+                <svg class="community-ig-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </div>
+            </div>
+
+            {%- if block.settings.caption != blank or block.settings.handle != blank -%}
+              <div class="community-post-info">
+                {%- if block.settings.handle != blank -%}
+                  <span class="community-handle">@{{ block.settings.handle | remove: '@' }}</span>
+                {%- endif -%}
+                {%- if block.settings.caption != blank -%}
+                  <p class="community-caption">{{ block.settings.caption }}</p>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            {%- if block.settings.post_url != blank -%}
+              </a>
+            {%- endif -%}
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="community-grid community-grid--placeholders">
+        {%- for i in (1..4) -%}
+          <div class="community-post reveal" style="--delay:{{ i | times: 60 }}ms">
+            <div class="community-post-img-wrap">
+              <div class="community-post-placeholder" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+{%- endif -%}
+
+
+<!-- ══════════════════════════════════════════
+     STYLES — scoped to reviews page
+     ══════════════════════════════════════════ -->
+<style>
+/* ── Reviews Hero ── */
+.reviews-hero { padding-bottom: 3rem; }
+
+/* ── Rating Summary ── */
+.reviews-summary-section { padding-top: 0; }
+.reviews-summary {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  background: var(--cream);
+  border: 1px solid var(--cream-dark);
+  border-radius: 12px;
+  padding: 2.5rem 3rem;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.reviews-avg-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 110px;
+}
+.reviews-avg-number {
+  font-family: 'Oswald', sans-serif;
+  font-size: 3.6rem;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.reviews-avg-stars { display: flex; gap: 3px; }
+.reviews-avg-count { font-family: 'Oswald', sans-serif; font-size: 0.84rem; color: #888; letter-spacing: 0.1em; text-transform: uppercase; }
+.reviews-breakdown { flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
+.reviews-bar-row { display: flex; align-items: center; gap: 0.5rem; }
+.reviews-bar-label { font-family: 'Oswald', sans-serif; font-size: 0.86rem; color: var(--navy); font-weight: 500; min-width: 10px; text-align: right; }
+.reviews-bar-track { flex: 1; height: 8px; background: var(--cream-dark); border-radius: 4px; overflow: hidden; }
+.reviews-bar-fill { height: 100%; background: var(--gold); border-radius: 4px; transition: width 0.6s ease; }
+.reviews-bar-count { font-family: 'Oswald', sans-serif; font-size: 0.81rem; color: #888; min-width: 16px; }
+
+/* ── Star Icons (shared) ── */
+.star-icon { width: 16px; height: 16px; fill: none; stroke: var(--gold); stroke-width: 2; }
+.star-icon.filled { fill: var(--gold); stroke: var(--gold); }
+.star-icon.small { width: 12px; height: 12px; }
+
+/* ── Reviews Section Header ── */
+.reviews-section-header { margin-bottom: 3rem; }
+
+/* ── Review Cards ── */
+.reviews-cards-section { background: var(--cream-light); }
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.review-card {
+  background: #fff;
+  border: 1px solid var(--cream-dark);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.review-card-img-wrap {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--cream-dark);
+}
+.review-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.review-card:hover .review-card-img { transform: scale(1.04); }
+.review-card-body {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+.review-card-top { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+.review-stars { display: flex; gap: 2px; }
+.review-verified {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  background: rgba(46,126,114,0.08);
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.review-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.063rem;
+  font-weight: 500;
+  color: var(--navy);
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+.review-body {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.963rem;
+  line-height: 1.68;
+  color: #555;
+  flex: 1;
+  margin: 0;
+}
+.review-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 0.5rem;
+  border-top: 1px solid var(--cream-dark);
+  padding-top: 0.75rem;
+  margin-top: auto;
+}
+.review-author { display: flex; flex-direction: column; gap: 0.15rem; }
+.review-name { font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 0.88rem; color: var(--navy); letter-spacing: 0.06em; text-transform: uppercase; }
+.review-location { font-family: 'Barlow', sans-serif; font-size: 0.81rem; color: #999; }
+.review-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 0.15rem; }
+.review-ring { font-family: 'Barlow', sans-serif; font-size: 0.78rem; color: var(--teal); font-style: italic; }
+.review-date { font-family: 'Barlow', sans-serif; font-size: 0.78rem; color: #bbb; }
+
+/* ── Inline CTA below cards ── */
+.reviews-shop-cta {
+  text-align: center;
+  margin-top: 3rem;
+  font-family: 'Barlow', sans-serif;
+  font-size: 1rem;
+  color: var(--muted);
+}
+.reviews-inline-link {
+  color: var(--gold);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+.reviews-inline-link:hover { color: var(--gold-light); }
+
+/* ── Write Review Form ── */
+.reviews-form-section { background: var(--cream); }
+.reviews-form-wrap { max-width: 660px; margin: 0 auto; }
+.reviews-form-header { margin-bottom: 2.5rem; }
+.review-submit-form { display: flex; flex-direction: column; gap: 1.25rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-label { font-family: 'Oswald', sans-serif; font-size: 0.65rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--navy); }
+.form-label .req { color: var(--gold); }
+.form-input, .form-textarea {
+  background: #fff;
+  border: 1.5px solid var(--cream-dark);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  font-family: 'Barlow', sans-serif;
+  font-size: 1.013rem;
+  color: var(--navy);
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+.form-input:focus, .form-textarea:focus { outline: none; border-color: var(--gold); }
+.form-textarea { resize: vertical; }
+
+/* ── Star Picker ── */
+.star-picker { display: flex; flex-direction: row-reverse; gap: 4px; width: fit-content; }
+.star-radio { display: none; }
+.star-pick-label { cursor: pointer; }
+.star-pick-label svg { width: 36px; height: 36px; fill: none; stroke: var(--cream-dark); stroke-width: 1.5; transition: fill 0.15s, stroke 0.15s; }
+.star-picker .star-pick-label:hover svg,
+.star-picker .star-pick-label:hover ~ .star-pick-label svg,
+.star-picker .star-radio:checked ~ .star-pick-label svg,
+.star-picker .star-radio:checked + .star-pick-label svg { fill: var(--gold); stroke: var(--gold); }
+
+/* ── Photo upload note ── */
+.review-photo-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: rgba(26,40,71,0.04);
+  border: 1px dashed var(--cream-dark);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.review-photo-note svg { width: 22px; height: 22px; flex-shrink: 0; margin-top: 2px; stroke: var(--gold); }
+.review-photo-note strong { color: var(--navy); display: block; margin-bottom: 0.25rem; }
+
+.review-submit-btn { align-self: flex-start; padding: 0.85rem 2.5rem; }
+.review-disclaimer { font-family: 'Barlow', sans-serif; font-size: 0.84rem; color: #aaa; margin: 0; }
+.review-success {
+  display: flex; align-items: center; gap: 1rem;
+  background: rgba(46,126,114,0.08);
+  border: 1px solid var(--teal);
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  color: var(--teal);
+}
+.review-success svg { width: 28px; height: 28px; flex-shrink: 0; }
+.review-success p { margin: 0; font-weight: 500; }
+
+/* ── Community / Instagram Section ── */
+.community-section { background: var(--navy); }
+.community-header { margin-bottom: 3rem; }
+.community-header .eyebrow { color: var(--gold); }
+.community-header .section-heading { color: var(--cream); }
+.community-header .section-body { color: rgba(240,231,211,0.62); max-width: 52ch; }
+.community-ig-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  transition: opacity 0.2s;
+}
+.community-ig-link:hover { opacity: 0.75; }
+.community-ig-link svg { width: 18px; height: 18px; fill: var(--gold); }
+
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.community-post {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  flex-direction: column;
+}
+.community-post-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: inherit;
+}
+.community-post-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.community-post-img-wrap {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: rgba(255,255,255,0.05);
+}
+.community-post-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.community-post:hover .community-post-img { transform: scale(1.06); }
+.community-post-placeholder {
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: rgba(255,255,255,0.2);
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 1rem;
+  text-align: center;
+}
+.community-post-placeholder svg { width: 32px; height: 32px; opacity: 0.4; }
+.community-post-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0.6rem;
+  transition: background 0.25s;
+}
+.community-post:hover .community-post-overlay { background: rgba(0,0,0,0.28); }
+.community-ig-icon {
+  width: 18px; height: 18px;
+  fill: rgba(255,255,255,0);
+  transition: fill 0.25s;
+}
+.community-post:hover .community-ig-icon { fill: rgba(255,255,255,0.9); }
+.community-post-info {
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+}
+.community-handle {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  text-transform: lowercase;
+}
+.community-caption {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: rgba(240,231,211,0.62);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.community-empty {
+  text-align: center;
+  padding: 3rem;
+  color: rgba(240,231,211,0.5);
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.95rem;
+  border: 1px dashed rgba(255,255,255,0.1);
+  border-radius: 8px;
+}
+.community-empty strong { color: var(--gold); }
+.community-empty em { color: rgba(240,231,211,0.7); font-style: italic; }
+
+/* ── Internal Links Strip ── */
+.reviews-links-section { background: var(--cream); }
+.reviews-links-header { margin-bottom: 3rem; }
+.reviews-links-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.reviews-link-card {
+  background: var(--cream-light);
+  border: 1px solid var(--cream-dark);
+  border-radius: 10px;
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: border-color 0.22s, box-shadow 0.22s, transform 0.22s;
+}
+.reviews-link-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 6px 24px rgba(212,150,56,0.12);
+  transform: translateY(-2px);
+}
+.reviews-link-eyebrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.reviews-link-heading {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: 0.02em;
+}
+.reviews-link-body {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 0.25rem 0 0.5rem;
+  flex: 1;
+}
+.reviews-link-cta {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: auto;
+  transition: letter-spacing 0.2s;
+}
+.reviews-link-card:hover .reviews-link-cta { letter-spacing: 0.14em; }
+
+/* ── Responsive ── */
+@media (max-width: 1060px) {
+  .community-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 860px) {
+  .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+  .reviews-summary { flex-direction: column; gap: 2rem; padding: 2rem; text-align: center; }
+  .reviews-avg-stars { justify-content: center; }
+  .community-grid { grid-template-columns: repeat(2, 1fr); }
+  .reviews-links-grid { grid-template-columns: 1fr; gap: 1rem; }
+}
+@media (max-width: 580px) {
+  .reviews-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .community-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 420px) {
+  .community-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Reviews Page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "Bayshore Rings Reviews"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Page Heading (H1)",
+      "default": "Reviews"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Hero Subtitle",
+      "default": "Real feedback from real customers. Every Bayshore Rings handmade wooden ring is crafted from reclaimed skateboard decks — here is what people who wear them every day have to say about our recycled skateboard rings, eco friendly jewelry, and sustainable handmade rings."
+    },
+    {
+      "type": "header",
+      "content": "Community / Instagram Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "community_show_placeholder",
+      "label": "Show section even with no posts added",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "community_eyebrow",
+      "label": "Section Eyebrow",
+      "default": "The Bayshore Community"
+    },
+    {
+      "type": "text",
+      "id": "community_heading",
+      "label": "Section Heading",
+      "default": "From the Bayshore Community"
+    },
+    {
+      "type": "textarea",
+      "id": "community_subheading",
+      "label": "Section Subtitle",
+      "default": "Real people wearing handmade skateboard jewelry in the wild. Tag us to be featured."
+    },
+    {
+      "type": "text",
+      "id": "instagram_handle",
+      "label": "Instagram Handle (without @)",
+      "placeholder": "bayshorerings"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Customer Photo (optional)"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Reviewer Name",
+          "default": "J. Smith"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "placeholder": "Tampa, FL"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Review Title",
+          "placeholder": "Amazing ring"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Review Text"
+        },
+        {
+          "type": "text",
+          "id": "ring",
+          "label": "Ring Purchased",
+          "placeholder": "The Bayshore Classic"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date",
+          "placeholder": "June 2025"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified Purchase",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "instagram_post",
+      "name": "Community Post",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Post Image"
+        },
+        {
+          "type": "text",
+          "id": "handle",
+          "label": "Instagram Handle (without @)",
+          "placeholder": "username"
+        },
+        {
+          "type": "textarea",
+          "id": "caption",
+          "label": "Caption",
+          "placeholder": "Wearing my Bayshore ring every day since I got it..."
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Image Alt Text",
+          "placeholder": "Customer wearing Bayshore Rings recycled skateboard ring"
+        },
+        {
+          "type": "url",
+          "id": "post_url",
+          "label": "Link to Instagram Post (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Reviews Page" }]
+}
+{% endschema %}

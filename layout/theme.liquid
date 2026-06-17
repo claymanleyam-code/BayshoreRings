@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {%- if template.name == 'index' -%}
+    <title>Bayshore Rings | Skateboard Rings &amp; Recycled Wooden Jewelry — Tampa, FL</title>
+    <meta name="description" content="Handcrafted skateboard rings &amp; recycled wooden jewelry made in Tampa, FL. Bayshore Rings turns retired skateboard decks into unique recycled jewelry — eco-friendly Tampa jewelry made in small batches.">
+    <meta name="keywords" content="skateboard rings, recycled jewelry, Tampa jewelry, wooden jewelry, recycled skateboard rings, wooden wedding bands, eco-friendly rings, skateboard wedding bands, Tampa FL jewelry">
+
+  {%- elsif template.name == 'product' -%}
+    <title>{{ product.title | escape }} | Skateboard Ring &amp; Recycled Wooden Jewelry — Bayshore Rings</title>
+    <meta name="description" content="{{ product.description | strip_html | truncate: 120, '' | default: '' | escape }}{% if product.description == blank %}Handcrafted skateboard ring — recycled wooden jewelry made in Tampa, FL. Each piece is unique recycled jewelry shaped from a retired skateboard deck.{% endif %}">
+    <meta name="keywords" content="skateboard rings, recycled jewelry, wooden jewelry, Tampa jewelry, {{ product.title | escape | downcase }}, recycled skateboard ring, eco-friendly wooden jewelry">
+
+  {%- elsif template.name == 'collection' -%}
+    <title>{{ collection.title | escape }} | Skateboard Rings &amp; Recycled Wooden Jewelry — Bayshore Rings</title>
+    <meta name="description" content="Shop {{ collection.title | escape }} — handcrafted skateboard rings &amp; recycled wooden jewelry by Bayshore Rings. Tampa-made, eco-friendly recycled jewelry from retired skateboard decks.">
+    <meta name="keywords" content="skateboard rings, recycled jewelry, wooden jewelry, Tampa jewelry, recycled skateboard jewelry, wooden rings Tampa FL">
+
+  {%- else -%}
+    <title>
+      {%- if page_title == shop.name -%}
+        {{ shop.name }} — Handcrafted Rings From Recycled Skateboards
+      {%- else -%}
+        {{ page_title }} — {{ shop.name }}
+      {%- endif -%}
+    </title>
+    <meta name="description" content="{{ page_description | default: shop.description | escape }}">
+  {%- endif -%}
+
+  <!-- Canonical -->
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="Bayshore Rings">
+  {%- if template.name == 'product' -%}
+    <meta property="og:type" content="product">
+    <meta property="og:title" content="{{ product.title | escape }} | Recycled Wooden Jewelry — Bayshore Rings">
+    <meta property="og:description" content="Handcrafted skateboard ring &amp; recycled wooden jewelry from Tampa, FL. {{ product.description | strip_html | truncate: 140, '...' | escape }}">
+    <meta property="og:image" content="{{ product.featured_image | image_url: width: 1200 }}">
+    <meta property="product:price:amount" content="{{ product.price | money_without_currency }}">
+    <meta property="product:price:currency" content="{{ cart.currency.iso_code }}">
+  {%- elsif template.name == 'index' -%}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Bayshore Rings | Skateboard Rings &amp; Recycled Wooden Jewelry — Tampa, FL">
+    <meta property="og:description" content="Handcrafted skateboard rings &amp; recycled wooden jewelry made in Tampa, FL. Unique eco-friendly Tampa jewelry from retired skateboard decks — small batch, coastal craft.">
+    <meta property="og:image" content="{{ 'logo-512.png' | asset_url }}">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+  {%- else -%}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ page_title }} — {{ shop.name }}">
+    <meta property="og:description" content="{{ page_description | default: shop.description | escape }}">
+  {%- endif -%}
+  <meta property="og:url" content="{{ canonical_url }}">
+
+  <!-- Favicon — multiple sizes for Google search listing & browser tabs -->
+  <link rel="icon" type="image/png" sizes="96x96" href="{{ 'favicon-96.png' | asset_url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ 'favicon-32.png' | asset_url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ 'favicon-16.png' | asset_url }}">
+  <link rel="apple-touch-icon" sizes="192x192" href="{{ 'logo-192.png' | asset_url }}">
+  <link rel="apple-touch-icon" sizes="512x512" href="{{ 'logo-512.png' | asset_url }}">
+  <meta name="msapplication-TileImage" content="{{ 'logo-192.png' | asset_url }}">
+
+  <!-- JSON-LD Structured Data -->
+  {%- if template.name == 'index' -%}
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Bayshore Rings",
+        "url": "{{ shop.url }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ 'logo-512.png' | asset_url }}",
+          "width": 512,
+          "height": 512
+        },
+        "image": "{{ 'logo-512.png' | asset_url }}",
+        "description": "Tampa, Florida jewelry maker crafting unique skateboard rings and recycled wooden jewelry from retired skateboard decks. Eco-friendly Tampa jewelry — small-batch recycled jewelry made by hand.",
+        "keywords": "skateboard rings, recycled jewelry, Tampa jewelry, wooden jewelry, recycled skateboard rings, eco-friendly rings, wooden wedding bands",
+        "foundingLocation": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Tampa",
+            "addressRegion": "FL",
+            "addressCountry": "US"
+          }
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "contact@bayshorerings.com",
+          "contactType": "customer service"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Bayshore Rings",
+        "url": "{{ shop.url }}",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "{{ shop.url }}/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+    </script>
+
+  {%- elsif template.name == 'product' -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "description": {{ product.description | strip_html | json }},
+      "image": "{{ product.featured_image | image_url: width: 1200 }}",
+      "url": "{{ shop.url }}{{ product.url }}",
+      "sku": {{ product.selected_or_first_available_variant.sku | json }},
+      "brand": {
+        "@type": "Brand",
+        "name": "Bayshore Rings"
+      },
+      "category": "Wooden Jewelry",
+      "material": "Recycled Skateboard Wood",
+      "keywords": "skateboard rings, recycled jewelry, wooden jewelry, Tampa jewelry, recycled skateboard ring, eco-friendly wooden jewelry",
+      "additionalProperty": [
+        { "@type": "PropertyValue", "name": "Material", "value": "Recycled Skateboard Wood" },
+        { "@type": "PropertyValue", "name": "Origin", "value": "Tampa, Florida" },
+        { "@type": "PropertyValue", "name": "Type", "value": "Wooden Jewelry" }
+      ],
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "{{ cart.currency.iso_code }}",
+        "lowPrice": "{{ product.price_min | money_without_currency | remove: ',' }}",
+        "highPrice": "{{ product.price_max | money_without_currency | remove: ',' }}",
+        "offerCount": {{ product.variants.size }},
+        "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+        "seller": {
+          "@type": "Organization",
+          "name": "Bayshore Rings"
+        }
+      }
+      {%- if product.metafields.reviews.rating != blank -%}
+      ,"aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{ product.metafields.reviews.rating.value.rating }}",
+        "ratingCount": "{{ product.metafields.reviews.rating_count }}"
+      }
+      {%- endif -%}
+    }
+    </script>
+  {%- endif -%}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+
+  {{ content_for_header }}
+  {{ 'bayshore.css' | asset_url | stylesheet_tag }}
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <a href="/" class="nav-brand">
+    <img src="{{ 'logo.png' | asset_url }}" alt="Bayshore Rings" class="nav-logo-img">
+  </a>
+  <button class="hamburger" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/">Home</a></li>
+    <li><a href="/pages/our-process">Our Process</a></li>
+    <li><a href="/pages/about">About</a></li>
+    <li><a href="/pages/reviews">Reviews</a></li>
+    <li><a href="/collections/all" class="nav-cta">Shop Rings</a></li>
+  </ul>
+  <a href="/cart" class="nav-cart" aria-label="Cart, {{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %}">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    {%- if cart.item_count > 0 -%}
+      <span class="nav-cart-count">{{ cart.item_count }}</span>
+    {%- endif -%}
+  </a>
+</nav>
+
+<main>
+  {{ content_for_layout }}
+</main>
+
+<!-- FOOTER — split panel layout -->
+<footer class="sf" id="contact">
+  <div class="sf-split">
+
+    <!-- LEFT: gradient + newsletter -->
+    <div class="sf-left">
+      <a href="/" class="sf-logo-link">
+        <img src="{{ 'logo.png' | asset_url }}" alt="Bayshore Rings" class="sf-logo">
+      </a>
+      <h3 class="sf-nl-heading">Become a Bayshore insider.</h3>
+      <p class="sf-nl-sub">First drop notifications, behind-the-scenes from the workshop, and early access to limited batches — straight to your inbox.</p>
+      {%- form 'customer', id: 'SfNewsletter', class: 'sf-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="sf-email-wrap">
+          <input
+            type="email"
+            name="contact[email]"
+            class="sf-email-input"
+            placeholder="Your email"
+            aria-label="Email address"
+            required>
+          <button type="submit" class="sf-email-btn">Subscribe</button>
+        </div>
+      {%- endform -%}
+    </div>
+
+    <!-- RIGHT: white panel with link columns -->
+    <div class="sf-right">
+      <div class="sf-cols">
+
+        <div class="sf-group">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="mailto:contact@bayshorerings.com">contact@bayshorerings.com</a></li>
+            <li><a href="/pages/faq">Help Center</a></li>
+          </ul>
+        </div>
+
+        <div class="sf-group">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="/collections/all">All Rings</a></li>
+            <li><a href="/pages/ring-sizing">Ring Sizing Guide</a></li>
+            <li><a href="/pages/our-process">How It's Made</a></li>
+            <li><a href="/pages/about">Our Story</a></li>
+            <li><a href="/blogs/journal">Articles</a></li>
+          </ul>
+        </div>
+
+        <div class="sf-group">
+          <h4>Collaborations</h4>
+          <ul>
+            <li><a href="mailto:contact@bayshorerings.com">Partnerships</a></li>
+          </ul>
+        </div>
+
+        <div class="sf-group">
+          <h4>Follow Us</h4>
+          <ul>
+            <li>
+              <a href="https://www.instagram.com/bayshorerings/" target="_blank" rel="noopener" class="sf-social-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                <span>Instagram</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sf-social-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.19a8.24 8.24 0 004.84 1.56V7.31a4.85 4.85 0 01-1.07-.62z"/></svg>
+                <span>TikTok</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sf-social-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                <span>Facebook</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sf-social-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+                <span>Pinterest</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sf-social-link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.987 0C5.373 0 0 5.372 0 12c0 6.626 5.372 12 11.987 12C18.627 24 24 18.627 24 12c0-6.628-5.373-12-12.013-12zm1.086 16.627c-.195.238-.39.433-.585.433H8.413c-1.214 0-1.95-.715-1.95-1.799V8.627c0-.954.498-1.756 1.95-1.756h5.847c.195 0 .39.217.39.434v1.28c0 .216-.195.39-.39.39H9.8v1.95h3.5c.196 0 .37.196.37.413v1.13c0 .217-.174.39-.37.39H9.8v2.39h3.66c.196 0 .37.195.37.412v1.367l-.757.6z"/></svg>
+                <span>Etsy</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="sf-socials">
+        {%- if settings.social_instagram != blank -%}
+          <a href="{{ settings.social_instagram }}" class="sf-soc" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if settings.social_tiktok != blank -%}
+          <a href="{{ settings.social_tiktok }}" class="sf-soc" aria-label="TikTok" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.19a8.24 8.24 0 004.84 1.56V7.31a4.85 4.85 0 01-1.07-.62z"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if settings.social_pinterest != blank -%}
+          <a href="{{ settings.social_pinterest }}" class="sf-soc" aria-label="Pinterest" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sf-bottom">
+    <p>&copy; {{ 'now' | date: '%Y' }} Bayshore Rings. All rights reserved.</p>
+    <p>
+      <a href="/policies/privacy-policy">Privacy</a>
+      <a href="/policies/terms-of-service">Terms</a>
+      <a href="/policies/shipping-policy">Shipping</a>
+    </p>
+  </div>
+</footer>
+
+{{ 'bayshore.js' | asset_url | script_tag }}
+</body>
+</html>

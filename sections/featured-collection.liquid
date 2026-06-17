@@ -1,0 +1,111 @@
+{%- if section.settings.collection != blank -%}
+  {%- assign featured_collection = collections[section.settings.collection] -%}
+{%- else -%}
+  {%- assign featured_collection = collections['shop-rings'] -%}
+{%- endif -%}
+
+<!-- ── MARQUEE TICKER ──────────────────────────────────── -->
+<div class="drop-ticker" aria-hidden="true">
+  <div class="drop-ticker-track">
+    {%- for i in (1..4) -%}
+      <span>RECLAIMED SKATEBOARDS</span>
+      <span class="drop-ticker-sep">·</span>
+      <span>HANDCRAFTED IN TAMPA</span>
+      <span class="drop-ticker-sep">·</span>
+      <span>SMALL BATCH</span>
+      <span class="drop-ticker-sep">·</span>
+      <span>1 OF 1</span>
+      <span class="drop-ticker-sep">·</span>
+      <span>COASTAL FLORIDA</span>
+      <span class="drop-ticker-sep">·</span>
+      <span>BEESWAX FINISH</span>
+      <span class="drop-ticker-sep">·</span>
+    {%- endfor -%}
+  </div>
+</div>
+
+<!-- ── DROP SECTION ───────────────────────────────────── -->
+<section class="drop-section" id="products">
+  <div class="drop-header">
+    <div class="drop-header-left">
+      <span class="eyebrow" style="color:var(--teal);">{{ section.settings.eyebrow }}</span>
+      <h2 class="drop-heading">{{ section.settings.heading }}</h2>
+    </div>
+    <a href="{{ section.settings.view_all_url | default: '/collections/shop-rings' }}" class="drop-view-all">
+      {{ section.settings.view_all_text }} &rarr;
+    </a>
+  </div>
+
+  {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
+    <div class="drop-grid">
+      {%- for product in featured_collection.products limit: section.settings.product_limit -%}
+        <a href="{{ product.url }}" class="drop-card">
+
+          <div class="drop-card-img-wrap">
+            {%- if product.featured_image -%}
+              {%- assign card_alt = product.featured_image.alt | default: product.title -%}
+              {%- unless card_alt contains 'Bayshore' -%}
+                {%- assign card_alt = card_alt | append: ' — Recycled Skateboard Ring by Bayshore Rings' -%}
+              {%- endunless -%}
+              <img
+                src="{{ product.featured_image | image_url: width: 800 }}"
+                alt="{{ card_alt | escape }}"
+                width="800" height="800"
+                loading="lazy"
+                class="drop-card-img">
+            {%- else -%}
+              {%- render 'ring-placeholder' -%}
+            {%- endif -%}
+
+            {%- if product.available == false -%}
+              <span class="drop-card-badge drop-card-badge--sold">Sold Out</span>
+            {%- elsif product.tags contains 'Limited' or product.tags contains 'limited' -%}
+              <span class="drop-card-badge drop-card-badge--limited">Limited</span>
+            {%- elsif product.tags contains 'New' or product.tags contains 'new' -%}
+              <span class="drop-card-badge drop-card-badge--new">New</span>
+            {%- endif -%}
+          </div>
+
+          <div class="drop-card-info">
+            <div class="drop-card-name">{{ product.title }}</div>
+            <div class="drop-card-price">
+              {%- if product.price_varies -%}
+                From {{ product.price_min | money }}
+              {%- else -%}
+                {{ product.price | money }}
+              {%- endif -%}
+            </div>
+          </div>
+
+        </a>
+      {%- endfor -%}
+    </div>
+
+    <div class="drop-footer">
+      <a href="{{ section.settings.view_all_url | default: '/collections/shop-rings' }}" class="btn btn-gold btn-hero-primary">
+        {{ section.settings.view_all_text }}
+      </a>
+    </div>
+
+  {%- else -%}
+    <p class="products-empty">
+      Create a collection called <strong>Shop Rings</strong> and add products to see them here.
+    </p>
+  {%- endif -%}
+
+</section>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Collection" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Current Drop" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "product_limit", "label": "Max products", "min": 2, "max": 12, "step": 1, "default": 6 },
+    { "type": "text", "id": "view_all_text", "label": "View All text", "default": "Shop All Rings" },
+    { "type": "url", "id": "view_all_url", "label": "View All link" }
+  ],
+  "presets": [{ "name": "Featured Collection" }]
+}
+{% endschema %}

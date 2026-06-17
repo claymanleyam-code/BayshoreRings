@@ -1,0 +1,72 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "kicker": "Tampa, FL · Small Batch · Recycled Wooden Jewelry",
+        "heading": "Skateboard Rings. Recycled Wooden Jewelry.",
+        "subheading": "Bayshore Rings turns retired skateboard decks into clean, durable wooden jewelry with natural color, character, and history in every piece — Tampa-made recycled jewelry, crafted by hand.",
+        "btn_primary": "Shop the Drop",
+        "btn_primary_url": "",
+        "btn_secondary": "See How It's Made",
+        "btn_secondary_url": ""
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "The Collection",
+        "heading": "Featured Rings",
+        "collection": "",
+        "product_limit": 6,
+        "view_all_text": "View All Rings",
+        "view_all_url": ""
+      }
+    },
+    "brand_story": {
+      "type": "brand-story",
+      "settings": {
+        "eyebrow": "Our Story",
+        "heading": "Recycled Jewelry Built From Boards",
+        "body": "Every piece of recycled jewelry starts with a skateboard that has already lived a life. We preserve the layered wood and color of the deck, then shape it into unique wooden jewelry for people who value craft, movement, and originality.",
+        "btn_text": "See How We Make Them",
+        "btn_url": "",
+        "badge_text": "Boards with a Life of Their Own",
+        "badge_sub": "Est. Bayshore · Coastal Craft"
+      }
+    },
+    "coastal": {
+      "type": "coastal-americana",
+      "settings": {
+        "eyebrow": "Brand Direction",
+        "heading": "Tampa Jewelry. Skate Roots.",
+        "body": "Bayshore Rings is Tampa's source for handcrafted skateboard rings and recycled wooden jewelry. We blend coastal design with skate culture — Tampa jewelry that feels classic, personal, and genuinely different."
+      }
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "eyebrow": "Get Yours",
+        "heading": "Wear the Board. Keep the Story.",
+        "btn_text": "Shop the Collection",
+        "btn_url": ""
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "featured_collection",
+    "brand_story",
+    "coastal",
+    "cta"
+  ]
+}

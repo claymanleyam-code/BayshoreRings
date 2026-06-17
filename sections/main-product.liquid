@@ -1,0 +1,133 @@
+<article class="page-wrap" itemscope itemtype="https://schema.org/Product">
+  <meta itemprop="brand" content="Bayshore Rings">
+  <meta itemprop="category" content="Eco-Friendly Jewelry">
+
+  <div class="product-layout">
+
+    <div class="product-image">
+      {%- if product.featured_image -%}
+        {%- assign img_alt = product.featured_image.alt | default: product.title -%}
+        {%- unless img_alt contains 'Bayshore' -%}
+          {%- assign img_alt = img_alt | append: ' — Recycled Skateboard Ring by Bayshore Rings' -%}
+        {%- endunless -%}
+        <img
+          src="{{ product.featured_image | image_url: width: 800 }}"
+          alt="{{ img_alt | escape }}"
+          width="800"
+          height="800"
+          loading="eager"
+          itemprop="image">
+      {%- else -%}
+        {% render 'ring-placeholder' %}
+      {%- endif -%}
+    </div>
+
+    <div class="product-info">
+      {%- if product.type != blank -%}
+        <p class="product-type" itemprop="category">{{ product.type }}</p>
+      {%- endif -%}
+
+      <h1 itemprop="name">{{ product.title }}</h1>
+      <div class="product-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+        <span itemprop="price" content="{{ product.price | money_without_currency | remove: ',' }}">{{ product.price | money }}</span>
+        <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
+        <link itemprop="availability" href="{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}">
+      </div>
+
+      {%- if product.description != blank -%}
+        <div class="product-desc" itemprop="description">{{ product.description }}</div>
+      {%- endif -%}
+
+      {%- form 'product', product, class: 'product-form' -%}
+
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <div class="product-option">
+              <div class="product-option-header">
+                <label class="product-option-label" for="Option-{{ forloop.index }}">
+                  {{ option.name }}
+                </label>
+                {%- if option.name == 'Size' or option.name == 'Ring Size' -%}
+                  <a href="/pages/ring-sizing" class="size-guide-link" target="_blank">
+                    Size Guide
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  </a>
+                {%- endif -%}
+              </div>
+              <select id="Option-{{ forloop.index }}" name="id" class="product-select">
+                {%- for variant in product.variants -%}
+                  <option
+                    value="{{ variant.id }}"
+                    {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
+                    {% unless variant.available %}disabled{% endunless %}
+                  >
+                    {{ variant.title }}{% unless variant.available %} — Sold Out{% endunless %}
+                  </option>
+                {%- endfor -%}
+              </select>
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {%- endunless -%}
+
+        <button type="submit" class="product-submit" {% unless product.available %}disabled{% endunless %}>
+          {%- if product.available -%}
+            Add to Cart
+          {%- else -%}
+            Sold Out
+          {%- endif -%}
+        </button>
+
+      {%- endform -%}
+
+      <div class="product-meta">
+        <span class="product-meta-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          Free shipping on all domestic orders
+        </span>
+        <span class="product-meta-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 12 20 22 4 22"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+          Handcrafted from recycled skateboard wood
+        </span>
+        <span class="product-meta-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Made to order — ships in 5–7 business days
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SEO Feature Callouts -->
+  <section class="product-features" aria-label="Why Bayshore Rings">
+    <h2 class="product-features-heading">Why Bayshore Rings Skateboard Rings?</h2>
+    <div class="product-features-grid">
+      <div class="product-feature-item">
+        <h3>Waterproof Wooden Jewelry</h3>
+        <p>Sealed with a food-grade beeswax finish so your wooden jewelry holds up to daily wear, water, and the elements — without cracking or warping.</p>
+      </div>
+      <div class="product-feature-item">
+        <h3>Real Recycled Jewelry</h3>
+        <p>Every skateboard ring is shaped from a retired deck. The natural maple layers make each piece of recycled jewelry unique — no two colorways are the same.</p>
+      </div>
+      <div class="product-feature-item">
+        <h3>Tampa-Made Recycled Jewelry</h3>
+        <p>Crafted by hand in Tampa, FL. Our recycled jewelry is made in small batches — zero mass production, zero virgin materials, zero shortcuts.</p>
+      </div>
+      <div class="product-feature-item">
+        <h3>The Only Skateboard Ring Like It</h3>
+        <p>A standout choice for skaters, surfers, and anyone who wants Tampa jewelry that tells a real story — an alternative wedding band with actual skate culture roots.</p>
+      </div>
+    </div>
+  </section>
+
+</article>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [],
+  "presets": [{ "name": "Product" }]
+}
+{% endschema %}
