@@ -1,28 +1,15 @@
-<section class="section story" id="story">
+<section class="section story" id="story" style="background-image: url('{{ 'decks-floor.jpg' | asset_url }}'); background-size: cover; background-position: center;">
   <div class="container">
-    <div class="story-grid">
-      <div class="story-text">
-        <div class="reveal">
-          <span class="eyebrow section-label">{{ section.settings.eyebrow }}</span>
-          <h2 class="section-heading">{{ section.settings.heading }}</h2>
-          <div class="gold-bar"></div>
-          <p class="section-body">{{ section.settings.body }}</p>
-        </div>
-        <div class="story-tags reveal d1">
-          <span class="tag tag-navy">Coastal Heritage</span>
-          <span class="tag tag-teal">Handcrafted</span>
-          <span class="tag tag-red">Skate Roots</span>
-        </div>
-        <div class="reveal d2" style="margin-top:2rem;">
-          <a href="{{ section.settings.btn_url | default: '/pages/our-process' }}" class="btn btn-navy">{{ section.settings.btn_text }}</a>
-        </div>
-      </div>
+    <div class="story-grid story-grid--inverted">
       <div class="story-media reveal d1">
-        <div class="story-badge">
-          <div class="story-badge-core">
-            <p>{{ section.settings.badge_text }}</p>
-            <small>{{ section.settings.badge_sub }}</small>
-          </div>
+        <a href="{{ section.settings.btn_url | default: '/pages/our-process' }}" class="btn story-btn-large">{{ section.settings.btn_text }}</a>
+      </div>
+      <div class="story-text story-text--right">
+        <div class="reveal">
+          <span class="eyebrow section-label" style="color:#ffffff;">{{ section.settings.eyebrow }}</span>
+          <h2 class="section-heading" style="color:#ffffff;">{{ section.settings.heading }}</h2>
+          <div class="gold-bar"></div>
+          <p class="section-body" style="color:#ffffff;">{{ section.settings.body }}</p>
         </div>
       </div>
     </div>
