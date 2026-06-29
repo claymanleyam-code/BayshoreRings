@@ -4,13 +4,61 @@
      ═══════════════════════════════════════════════════ -->
 
 <!-- ── HERO ────────────────────────────────────────────── -->
-<div class="proc-hero">
-  <div class="container">
-    <span class="eyebrow reveal d1" style="color:var(--teal);">Handcrafted in Tampa, FL</span>
-    <h1 class="reveal d2">From a Retired Board<br>to a Ring You'll Wear Forever</h1>
-    <p class="proc-hero-sub reveal d3">Every Bayshore ring starts with a skateboard donated by someone in our community — a Tampa local, a Bayshore Boulevard regular, a Florida skater ready to pass their deck on. Here's what happens next.</p>
+<div class="proc-hero proc-hero--video">
+  <div class="proc-hero-video-wrap">
+    <iframe
+      class="proc-hero-video"
+      src="https://www.youtube.com/embed/sYscjbla2XI?autoplay=1&mute=1&loop=1&playlist=sYscjbla2XI&controls=0&showinfo=0&modestbranding=1&playsinline=1"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+    <div class="proc-hero-video-overlay"></div>
+  </div>
+  <div class="container proc-hero-content">
+    <span class="eyebrow reveal d1" style="color:#ffffff;">Handcrafted in Tampa, FL</span>
+    <h1 class="reveal d2">Giving New Life To Old Boards</h1>
+    <p class="proc-hero-sub reveal d3">Each ring is individuallu cut, shaped, and hand-finished to take the skatepark into your everyday life. Durable enough for daily wear and unique enough that no two are ever the same.</p>
   </div>
 </div>
+
+<style>
+.proc-hero--video {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 !important;
+}
+.proc-hero-video-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.proc-hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 177.78vh;
+  min-width: 100%;
+  height: 56.25vw;
+  min-height: 100%;
+}
+.proc-hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+.proc-hero-content {
+  position: relative;
+  z-index: 2;
+  padding-bottom: 5rem;
+  padding-top: 10rem;
+  padding-left: 4rem;
+}
+</style>
 
 <!-- ── INTRO / COMMUNITY HOOK ──────────────────────────── -->
 <section class="section proc-intro">
@@ -22,27 +70,6 @@
         <div class="gold-bar"></div>
         <p class="section-body">Tampa has always been one of the most important cities in skateboarding — from Skatepark of Tampa to Bayshore Boulevard, the culture runs deep here. When a board gets too beat up to skate, we give it a second life. Our riders, local shops, and community members across the Tampa Bay area drop off their retired decks, and we turn them into rings that carry that history on your finger.</p>
         <p class="section-body" style="margin-top:1rem;">Every ring is traceable to the Florida skate community. No mass production. No imported wood. Just boards from local riders, shaped by local hands.</p>
-        <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:1.5rem;">
-          <span class="tag tag-navy">Tampa, FL</span>
-          <span class="tag tag-teal">Bayshore Community</span>
-          <span class="tag tag-red">Recycled &amp; Upcycled</span>
-        </div>
-      </div>
-      <div class="proc-community-visual reveal d2">
-        <div class="proc-stat-stack">
-          <div class="proc-stat-card">
-            <span class="proc-stat-num">100%</span>
-            <span class="proc-stat-label">Community-Donated Boards</span>
-          </div>
-          <div class="proc-stat-card">
-            <span class="proc-stat-num">0</span>
-            <span class="proc-stat-label">New Wood Used</span>
-          </div>
-          <div class="proc-stat-card">
-            <span class="proc-stat-num">1 of 1</span>
-            <span class="proc-stat-label">Every Ring Is Unique</span>
-          </div>
-        </div>
       </div>
     </div>
   </div>
