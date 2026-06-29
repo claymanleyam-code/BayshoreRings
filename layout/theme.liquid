@@ -158,12 +158,15 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
 
   {{ content_for_header }}
   {{ 'bayshore.css' | asset_url | stylesheet_tag }}
 </head>
 <body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="nav-announce">Free shipping on U.S. orders · Small batch · Handmade in Tampa, FL</div>
 
 <!-- NAV -->
 <nav class="nav" id="mainNav">
@@ -178,7 +181,26 @@
     <li><a href="/pages/our-process">Our Process</a></li>
     <li><a href="/pages/about">About</a></li>
     <li><a href="/pages/reviews">Reviews</a></li>
-    <li><a href="/collections/all" class="nav-cta">Shop Rings</a></li>
+    <li class="nav-shop-preview-wrap">
+      <a href="/collections/all" class="nav-cta nav-shop-trigger">Shop Rings</a>
+      <div class="nav-shop-preview" aria-hidden="true">
+        <div class="nav-shop-preview-inner">
+          <div class="nav-shop-preview-grid">
+            {%- assign preview_collection = collections['all'] -%}
+            {%- for product in preview_collection.products limit: 4 -%}
+              <a href="{{ product.url }}" class="nav-preview-card">
+                {%- if product.featured_image -%}
+                  <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.title | escape }}" class="nav-preview-img" loading="lazy">
+                {%- endif -%}
+                <span class="nav-preview-title">{{ product.title }}</span>
+                <span class="nav-preview-price">{{ product.price | money }}</span>
+              </a>
+            {%- endfor -%}
+          </div>
+          <a href="/collections/all" class="nav-preview-viewall">View All Rings &rarr;</a>
+        </div>
+      </div>
+    </li>
   </ul>
   <a href="/cart" class="nav-cart" aria-label="Cart, {{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %}">
     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
