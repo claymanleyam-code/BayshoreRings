@@ -14,30 +14,24 @@
 </section>
 
 <!-- ── 2. ORIGIN STORY ─────────────────────────────────── -->
-<section class="section story about-origin">
-  <div class="container">
-    <div class="story-grid">
-      <div class="about-origin-text">
-        <span class="eyebrow reveal d1">{{ section.settings.origin_eyebrow | default: 'Where It Started' }}</span>
-        <h2 class="section-heading reveal d2">{{ section.settings.origin_heading | default: 'A Board, a Saw, and a Good Idea' }}</h2>
-        <div class="gold-bar reveal d2"></div>
-        <p class="section-body reveal d3">{{ section.settings.origin_body_1 | default: 'It started the way most things worth doing start — not with a business plan, but with a question. A retired skateboard deck was sitting in the corner of a garage, and instead of the trash, it went onto the bandsaw. What came out of that first cross-section cut stopped everything. Seven maple plies. Teal, red, and raw wood stacked like a tiny landscape. A ring was the first thing that came to mind.' }}</p>
-        <p class="section-body reveal d4" style="margin-top:1.25rem;">{{ section.settings.origin_body_2 | default: "Bayshore Rings grew from that one cut. We're a small operation rooted in Tampa, Florida — shaped by Bayshore Boulevard, the Gulf Coast, and a deep respect for things made by hand. Every ring we make starts with a board that's already been somewhere." }}</p>
-        <div class="about-origin-tags reveal d4">
-          <span class="tag tag-navy">Est. Bayshore</span>
-          <span class="tag tag-teal">Tampa, FL</span>
-          <span class="tag tag-red">Skate Roots</span>
-        </div>
-      </div>
-      <div class="story-media reveal d2">
-        <div class="about-origin-photos">
-          <div class="about-origin-photo-main">
-            <img
-              src="{{ 'about-decks.jpg' | asset_url }}"
-              alt="Skateboard decks marked with ring size templates — Bayshore Rings workshop process, Tampa, FL"
-              loading="lazy" width="600" height="400">
-          </div>
-        </div>
+<section class="section about-origin">
+  <div class="about-origin-img about-origin-img--tr" aria-hidden="true">
+    <img src="{{ 'about-decks.jpg' | asset_url }}" alt="" loading="lazy">
+  </div>
+  <div class="about-origin-img about-origin-img--bl" aria-hidden="true">
+    <img src="{{ 'about-working.jpg' | asset_url }}" alt="" loading="lazy">
+  </div>
+  <div class="container about-origin-body">
+    <div class="about-origin-text">
+      <span class="eyebrow reveal d1">{{ section.settings.origin_eyebrow | default: 'Where It Started' }}</span>
+      <h2 class="section-heading reveal d2">{{ section.settings.origin_heading | default: 'A Board, a Saw, and a Good Idea' }}</h2>
+      <div class="gold-bar reveal d2"></div>
+      <p class="section-body reveal d3">{{ section.settings.origin_body_1 | default: 'It started the way most things worth doing start — not with a business plan, but with a question. A retired skateboard deck was sitting in the corner of a garage, and instead of the trash, it went onto the bandsaw. What came out of that first cross-section cut stopped everything. Seven maple plies. Teal, red, and raw wood stacked like a tiny landscape. A ring was the first thing that came to mind.' }}</p>
+      <p class="section-body reveal d4" style="margin-top:1.25rem;">{{ section.settings.origin_body_2 | default: "Bayshore Rings grew from that one cut. We're a small operation rooted in Tampa, Florida — shaped by Bayshore Boulevard, the Gulf Coast, and a deep respect for things made by hand. Every ring we make starts with a board that's already been somewhere." }}</p>
+      <div class="about-origin-tags reveal d4">
+        <span class="tag tag-navy">Est. Bayshore</span>
+        <span class="tag tag-teal">Tampa, FL</span>
+        <span class="tag tag-red">Skate Roots</span>
       </div>
     </div>
   </div>
@@ -220,36 +214,60 @@
 </section>
 
 <style>
-/* ── Origin story photo stack ──────────────────────────── */
-.about-origin-photos {
+/* ── Origin story — diagonal corner images ─────────────── */
+.about-origin {
   position: relative;
-  width: 100%;
-}
-.about-origin-photo-main img {
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-  display: block;
-  border-radius: 2px;
-}
-.about-origin-photo-secondary {
-  position: absolute;
-  bottom: -1.5rem;
-  right: -1.5rem;
-  width: 48%;
-  border: 3px solid var(--cream-light);
-  border-radius: 2px;
+  background: var(--cream-light);
   overflow: hidden;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
 }
-.about-origin-photo-secondary img {
+.about-origin-img {
+  position: absolute;
+  pointer-events: none;
+}
+.about-origin-img img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: 100%;
   object-fit: cover;
   display: block;
+}
+.about-origin-img--tr {
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 50%;
+  -webkit-mask-image: radial-gradient(ellipse 240% 230% at 100% 0%, black 18%, transparent 72%);
+  mask-image: radial-gradient(ellipse 240% 230% at 100% 0%, black 18%, transparent 72%);
+}
+.about-origin-img--bl {
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  height: 62%;
+  -webkit-mask-image: radial-gradient(ellipse 240% 230% at 0% 100%, black 18%, transparent 72%);
+  mask-image: radial-gradient(ellipse 240% 230% at 0% 100%, black 18%, transparent 72%);
+}
+.about-origin-img--bl img {
+  object-position: center center;
+}
+.about-origin-body {
+  position: relative;
+  z-index: 1;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+.about-origin-text {
+  max-width: 50ch;
+  margin: 0 auto;
 }
 @media (max-width: 860px) {
-  .about-origin-photo-secondary { display: none; }
+  .about-origin { min-height: auto; padding-top: 44vw; padding-bottom: 44vw; display: block; }
+  .about-origin-img--tr { width: 75%; height: 40%; }
+  .about-origin-img--bl { width: 75%; height: 46%; }
+  .about-origin-body { padding: 2rem; }
+  .about-origin-text { max-width: 100%; }
 }
 
 /* ── Founder photo stack ───────────────────────────────── */
