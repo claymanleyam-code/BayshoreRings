@@ -1,20 +1,17 @@
 <!-- ── WHERE IT STARTED ───────────────────────────────────── -->
 <section class="about-maker">
-  <div class="about-maker-grid">
-    <div class="about-maker-text-col">
-      <h2 class="about-maker-name">Where It Started</h2>
-      <p class="about-maker-bio">{{ section.settings.origin_body_1 }}</p>
-      {%- if section.settings.origin_body_2 != blank -%}
-        <p class="about-maker-bio">{{ section.settings.origin_body_2 }}</p>
-      {%- endif -%}
-    </div>
-    <div class="about-maker-img-col">
-      <img
-        src="{{ 'about-decks.jpg' | asset_url }}"
-        alt="Skateboard decks — Bayshore Rings"
-        class="about-maker-photo"
-        loading="eager">
-    </div>
+  <div class="about-maker-img about-maker-img--tr" aria-hidden="true">
+    <img src="{{ 'about-decks.jpg' | asset_url }}" alt="" loading="eager">
+  </div>
+  <div class="about-maker-img about-maker-img--bl" aria-hidden="true">
+    <img src="{{ 'about-working.jpg' | asset_url }}" alt="" loading="lazy">
+  </div>
+  <div class="about-maker-body">
+    <h2 class="about-maker-name">Where It Started</h2>
+    <p class="about-maker-bio">{{ section.settings.origin_body_1 }}</p>
+    {%- if section.settings.origin_body_2 != blank -%}
+      <p class="about-maker-bio">{{ section.settings.origin_body_2 }}</p>
+    {%- endif -%}
   </div>
 </section>
 
@@ -40,31 +37,69 @@
 </section>
 
 <style>
-/* ── SHARED ── */
-.about-maker,
+/* ── WHERE IT STARTED — diagonal corner images ─────────── */
+.about-maker {
+  position: relative;
+  background: #ffffff;
+  overflow: hidden;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  padding-top: 6.5rem;
+}
+.about-maker-img {
+  position: absolute;
+  pointer-events: none;
+}
+.about-maker-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.about-maker-img--tr {
+  top: 0;
+  right: 0;
+  width: 55%;
+  height: 55%;
+  -webkit-mask-image: radial-gradient(ellipse 220% 210% at 100% 0%, black 20%, transparent 70%);
+  mask-image: radial-gradient(ellipse 220% 210% at 100% 0%, black 20%, transparent 70%);
+}
+.about-maker-img--bl {
+  bottom: 0;
+  left: 0;
+  width: 55%;
+  height: 65%;
+  -webkit-mask-image: radial-gradient(ellipse 220% 210% at 0% 100%, black 20%, transparent 70%);
+  mask-image: radial-gradient(ellipse 220% 210% at 0% 100%, black 20%, transparent 70%);
+}
+.about-maker-img--bl img {
+  object-position: center center;
+}
+.about-maker-body {
+  position: relative;
+  z-index: 1;
+  max-width: 50ch;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+/* ── SHARED TEXT STYLES ── */
 .about-founder {
-  background: #ffffff !important;
+  background: #ffffff;
   padding: 0;
   margin: 0;
 }
-.about-maker {
-  padding-top: 6.5rem;
-}
-.about-maker-grid,
 .about-founder-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 50vh;
   align-items: stretch;
 }
-
-/* ── IMAGES ── */
-.about-maker-img-col,
 .about-founder-img-col {
   overflow: hidden;
   padding: 0;
 }
-.about-maker-photo,
 .about-founder-photo {
   width: 100%;
   height: 100%;
@@ -74,15 +109,12 @@
   object-position: center;
   display: block;
 }
-
-/* ── TEXT COLUMNS ── */
-.about-maker-text-col,
 .about-founder-text-col {
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 3rem 4.5rem;
-  background: #ffffff !important;
+  background: #ffffff;
 }
 .about-eyebrow {
   display: block;
@@ -117,14 +149,17 @@
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  .about-maker-grid,
+  .about-maker {
+    min-height: auto;
+    padding-top: 5rem;
+    padding-bottom: 48vw;
+  }
+  .about-maker-img--tr { width: 75%; height: 42%; }
+  .about-maker-img--bl { width: 75%; height: 46%; }
+  .about-maker-body { padding: 2rem; }
   .about-founder-grid { grid-template-columns: 1fr; min-height: auto; }
-  .about-maker-img-col { order: 1; height: 55vw; }
-  .about-maker-text-col { order: 2; }
   .about-founder-img-col { order: 1; height: 55vw; }
-  .about-founder-text-col { order: 2; }
-  .about-maker-text-col,
-  .about-founder-text-col { padding: 2rem 2rem 3rem; }
+  .about-founder-text-col { order: 2; padding: 2rem 2rem 3rem; }
 }
 </style>
 
