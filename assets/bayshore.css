@@ -249,7 +249,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
 .hero h1 em { color: var(--accent); font-style: normal; }
 
 .hero-sub {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 300;
   color: rgba(255,255,255,0.5);
   max-width: 40ch;
