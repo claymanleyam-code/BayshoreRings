@@ -202,7 +202,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
 }
 .hero-bg .hero-ring-photo {
   position: absolute;
-  top: -10%;
+  top: -5%;
   right: 0;
   width: 95%;
   height: 115%;
