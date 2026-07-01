@@ -203,7 +203,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: right 45%;
+  object-position: right 40%;
   display: block;
   transform-origin: right center;
   transform: scale(0.95);
