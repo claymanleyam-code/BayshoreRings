@@ -205,14 +205,14 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
   object-fit: cover;
   object-position: center 45%;
   display: block;
-  transform: scale(0.95);
+  transform: translateX(5px) scale(0.95);
 }
 /* gradient clears at 25% of full section width — image visible from midpoint of left side */
 .hero-bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, #0a0a0a 0%, rgba(10,10,10,0.78) 12%, rgba(10,10,10,0.35) 22%, transparent 28%);
+  background: linear-gradient(to right, #0a0a0a 0%, rgba(10,10,10,0.88) 12%, rgba(10,10,10,0.45) 22%, transparent 28%);
   pointer-events: none;
 }
 
