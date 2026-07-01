@@ -203,9 +203,8 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center 35%;
   display: block;
-  transform: scale(0.85);
 }
 /* gradient clears at 25% of full section width — image visible from midpoint of left side */
 .hero-bg::after {
