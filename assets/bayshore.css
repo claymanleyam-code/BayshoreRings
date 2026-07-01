@@ -31,13 +31,14 @@ body {
 a { text-decoration: none; color: inherit; }
 img { max-width: 100%; display: block; }
 
-h1, h2, h3 { font-family: 'Oswald', sans-serif; line-height: 1.1; }
+h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; line-height: 1.0; letter-spacing: 0.04em; }
 
 .eyebrow {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Josefin Slab', serif;
+  font-style: italic;
   font-weight: 700;
-  font-size: 0.65rem;
-  letter-spacing: 0.22em;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--gold);
 }
@@ -260,13 +261,14 @@ h1, h2, h3 { font-family: 'Oswald', sans-serif; line-height: 1.1; }
 .hero-kicker span { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
 
 .hero h1 {
-  font-size: clamp(3.2rem, 5.8vw, 6.2rem);
-  font-weight: 700;
+  font-size: clamp(3.8rem, 6.5vw, 7.5rem);
+  font-weight: 400;
   color: #ffffff;
   margin-bottom: 1.25rem;
   max-width: 16ch;
-  line-height: 1;
-  letter-spacing: -0.03em;
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+  font-family: 'Bebas Neue', 'Oswald', sans-serif;
 }
 .hero h1 em { color: var(--gold); font-style: italic; }
 
@@ -391,11 +393,12 @@ h1, h2, h3 { font-family: 'Oswald', sans-serif; line-height: 1.1; }
 
 .section-label { display: block; margin-bottom: 0.6rem; }
 .section-heading {
-  font-size: clamp(2rem, 3.5vw, 3.2rem);
-  font-weight: 700;
+  font-size: clamp(2.6rem, 4.5vw, 4.2rem);
+  font-weight: 400;
   color: #111111;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.04em;
+  font-family: 'Bebas Neue', 'Oswald', sans-serif;
 }
 .section-body {
   font-size: 1rem;
@@ -592,7 +595,7 @@ h1, h2, h3 { font-family: 'Oswald', sans-serif; line-height: 1.1; }
   z-index: 1;
 }
 .coastal-inner .eyebrow { color: var(--gold); display: block; margin-bottom: 0.6rem; }
-.coastal-inner h2 { color: #ffffff; font-size: clamp(2.6rem, 5vw, 4.5rem); letter-spacing: -0.03em; line-height: 1; text-transform: uppercase; }
+.coastal-inner h2 { color: #ffffff; font-size: clamp(3rem, 6vw, 5.5rem); letter-spacing: 0.04em; line-height: 0.95; text-transform: uppercase; font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; }
 .coastal-rule { width: 40px; height: 2px; background: var(--gold); margin: 1rem auto; }
 .coastal-inner > p { color: rgba(255,255,255,0.45); font-size: 1rem; line-height: 1.8; }
 .coastal-stats {
@@ -839,13 +842,14 @@ h1, h2, h3 { font-family: 'Oswald', sans-serif; line-height: 1.1; }
 .cta-content { position: relative; z-index: 1; }
 .cta-content .eyebrow { color: var(--gold); display: block; margin-bottom: 0.65rem; }
 .cta-content h2 {
-  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-size: clamp(3.5rem, 7vw, 6.5rem);
   color: #ffffff;
-  font-weight: 700;
+  font-weight: 400;
   margin-bottom: 1.75rem;
-  letter-spacing: -0.03em;
-  line-height: 1;
+  letter-spacing: 0.04em;
+  line-height: 0.95;
   text-transform: uppercase;
+  font-family: 'Bebas Neue', 'Oswald', sans-serif;
 }
 
 /* ================================================
@@ -867,14 +871,15 @@ h1, h2, h3 { font-family: 'Oswald', sans-serif; line-height: 1.1; }
 .sf-logo-link { display: block; margin-bottom: 2.5rem; position: relative; z-index: 1; }
 .sf-logo { height: 48px; width: auto; display: block; opacity: 0.9; }
 .sf-nl-heading {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(1.75rem, 2.5vw, 2.3rem);
-  font-weight: 700;
+  font-family: 'Bebas Neue', 'Oswald', sans-serif;
+  font-size: clamp(2.2rem, 3vw, 3rem);
+  font-weight: 400;
   color: #ffffff;
   margin: 0 0 0.8rem;
-  line-height: 1.2;
+  line-height: 1;
   max-width: 20ch;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
   position: relative; z-index: 1;
 }
 .sf-nl-sub {
@@ -1022,16 +1027,16 @@ body::after {
   pointer-events: none;
   z-index: 100;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
-  opacity: 0.022;
+  opacity: 0.048;
   mix-blend-mode: multiply;
 }
 
 /* ================================================
    SECTION HEADING SIZE VARIETY
    ================================================ */
-.story .section-heading    { font-size: clamp(2.2rem, 4vw, 3.5rem); letter-spacing: -0.025em; }
-.features .section-heading { font-size: clamp(2rem, 3.5vw, 3.2rem); letter-spacing: -0.02em; }
-.process .section-heading  { font-size: clamp(1.9rem, 3.2vw, 3rem); letter-spacing: -0.02em; }
+.story .section-heading    { font-size: clamp(2.8rem, 5vw, 4.8rem); letter-spacing: 0.04em; }
+.features .section-heading { font-size: clamp(2.6rem, 4.5vw, 4.2rem); letter-spacing: 0.04em; }
+.process .section-heading  { font-size: clamp(2.4rem, 4vw, 4rem); letter-spacing: 0.04em; }
 
 /* ── Product card — fully clickable ─────────────────────────── */
 a.p-card { display: flex; flex-direction: column; color: inherit; }
@@ -1184,7 +1189,7 @@ a.p-card .p-btn { pointer-events: none; }
 
 .drop-section { background: #0a0a0a; padding: 5.5rem 2rem 6rem; }
 .drop-header { max-width: 1160px; margin: 0 auto 3.6rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
-.drop-heading { font-family: 'Oswald', sans-serif; font-size: clamp(3rem, 5.5vw, 5.5rem); font-weight: 700; color: #ffffff; letter-spacing: -0.04em; line-height: 1; margin: 0.3rem 0 0; text-transform: uppercase; }
+.drop-heading { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-size: clamp(3.5rem, 6vw, 6.5rem); font-weight: 400; color: #ffffff; letter-spacing: 0.04em; line-height: 0.95; margin: 0.3rem 0 0; text-transform: uppercase; }
 .drop-view-all { font-family: 'Oswald', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); text-decoration: none; padding-bottom: 0.5rem; border-bottom: 1.5px solid rgba(255,255,255,0.2); transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
 .drop-view-all:hover { color: var(--gold); border-bottom-color: var(--gold); }
 
@@ -1210,10 +1215,10 @@ a.p-card .p-btn { pointer-events: none; }
 /* ══════════════════════════════════════════════════════════════
    COASTAL — photo
    ══════════════════════════════════════════════════════════════ */
-.coastal-photo-wrap { max-width: 1160px; margin: 3.5rem auto 0; padding: 0 2rem; position: relative; }
-.coastal-photo { width: 100%; height: 460px; object-fit: cover; object-position: center 40%; display: block; filter: grayscale(100%); opacity: 0.4; border: 1px solid rgba(255,255,255,0.05); background: #0a0a0a; }
-.coastal-photo[src=""] { min-height: 460px; background: rgba(255,255,255,0.02); border: 1.5px dashed rgba(255,255,255,0.07); }
-.coastal-photo-caption { font-family: 'Oswald', sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.22); text-align: center; margin-top: 0.75rem; display: block; }
+.coastal-photo-wrap { max-width: 100%; margin: 3.5rem 0 0; padding: 0; position: relative; }
+.coastal-photo { width: 100%; height: 520px; object-fit: cover; object-position: center 40%; display: block; filter: grayscale(100%); opacity: 0.55; background: #0a0a0a; }
+.coastal-photo[src=""] { min-height: 520px; background: rgba(255,255,255,0.02); border: 1.5px dashed rgba(255,255,255,0.07); }
+.coastal-photo-caption { font-family: 'Josefin Slab', serif; font-style: italic; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.25); text-align: center; margin-top: 0.75rem; display: block; }
 
 /* ══════════════════════════════════════════════════════════════
    PROCESS PAGE — image grid
@@ -1262,3 +1267,111 @@ a.p-card .p-btn { pointer-events: none; }
 .about-bayshore-img[src=""] { background: rgba(255,255,255,0.03); border-top: 1.5px dashed rgba(255,255,255,0.07); border-bottom: 1.5px dashed rgba(255,255,255,0.07); min-height: 500px; }
 .about-bayshore-caption { display: block; text-align: center; font-family: 'Oswald', sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #888; padding: 0.9rem 2rem; background: #ffffff; border-top: 1px solid #f0f0f0; }
 @media (max-width: 640px) { .about-bayshore-img { height: 320px; } .about-bayshore-img[src=""] { min-height: 320px; } }
+
+/* ════════════════════════════════════════════════════════
+   NAV SHOP PREVIEW — hover product window
+   ════════════════════════════════════════════════════════ */
+.nav-shop-wrap { position: relative; }
+
+.nav-shop-preview {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: -1rem;
+  width: 500px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-top: 3px solid var(--gold);
+  box-shadow: 0 28px 72px rgba(0,0,0,0.18), 0 8px 24px rgba(0,0,0,0.1);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  z-index: 400;
+}
+/* invisible bridge so cursor can move from button to panel */
+.nav-shop-preview::before {
+  content: '';
+  position: absolute;
+  top: -17px; left: 0; right: 0;
+  height: 17px;
+}
+.nav-shop-wrap:hover .nav-shop-preview {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.nav-shop-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: #e8e8e8;
+}
+.nav-shop-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  background: #fff;
+  transition: background 0.15s;
+  overflow: hidden;
+}
+.nav-shop-card:hover { background: #f8f8f8; }
+.nav-shop-card-img {
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+.nav-shop-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.nav-shop-card:hover .nav-shop-card-img img { transform: scale(1.07); }
+.nav-shop-card-info {
+  padding: 0.55rem 0.65rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  border-top: 1px solid #f0f0f0;
+}
+.nav-shop-card-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #111;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nav-shop-card-price {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+}
+.nav-shop-all {
+  display: block;
+  text-align: center;
+  padding: 0.8rem 1rem;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #111;
+  text-decoration: none;
+  border-top: 1px solid #f0f0f0;
+  transition: background 0.18s, color 0.18s;
+}
+.nav-shop-all:hover { background: #000; color: #fff; }
+
+/* hide preview on mobile — no hover on touch */
+@media (max-width: 800px) {
+  .nav-shop-wrap { position: static; }
+  .nav-shop-preview { display: none; }
+}
