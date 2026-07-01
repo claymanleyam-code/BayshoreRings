@@ -7,18 +7,7 @@
     <h1>{{ section.settings.heading }}</h1>
     <p class="hero-sub">{{ section.settings.subheading }}</p>
     <div class="hero-actions">
-      <a href="{{ section.settings.btn_primary_url | default: '/collections/all' }}" class="btn btn-gold btn-hero-primary">
-        <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0;">
-          <circle cx="10" cy="10" r="9.5" fill="#c07838"/>
-          <circle cx="10" cy="10" r="7.8" fill="#2e7e72"/>
-          <circle cx="10" cy="10" r="6.3" fill="#c07838"/>
-          <circle cx="10" cy="10" r="4.8" fill="#c4422c"/>
-          <circle cx="10" cy="10" r="3.4" fill="#c07838"/>
-          <circle cx="10" cy="10" r="2.1" fill="#d49638"/>
-          <circle cx="10" cy="10" r="1" fill="#0e1828"/>
-        </svg>
-        {{ section.settings.btn_primary }}
-      </a>
+      <a href="{{ section.settings.btn_primary_url | default: '/collections/all' }}" class="btn btn-gold btn-hero-primary">{{ section.settings.btn_primary }}</a>
       <a href="{{ section.settings.btn_secondary_url | default: '/pages/our-process' }}" class="btn btn-ghost">{{ section.settings.btn_secondary }}</a>
     </div>
     <div class="hero-trust">
@@ -31,19 +20,9 @@
 
   <div class="hero-visual">
     <div class="hero-ring-wrap">
-      {%- assign hero_product = all_products['mystery-ring'] -%}
-      {%- if hero_product.featured_image -%}
-        <div class="hero-ring-frame">
-          <div class="hero-ring-glow"></div>
-          {{ hero_product.featured_image | image_url: width: 840 | image_tag:
-            class: 'hero-ring-photo',
-            alt: hero_product.featured_image.alt | default: 'Bayshore Ring — Recycled Skateboard Wood',
-            loading: 'eager',
-            widths: '420, 600, 840'
-          }}
-          <div class="hero-ring-shadow"></div>
-        </div>
-      {%- endif -%}
+      <div class="hero-ring-frame">
+        <img class="hero-ring-photo" src="{{ 'about-working.jpg' | asset_url }}" alt="Bayshore Rings — handcrafted rings from recycled skateboard decks" loading="eager">
+      </div>
     </div>
   </div>
 </section>
