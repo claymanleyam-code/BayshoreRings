@@ -180,27 +180,38 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
 .btn-navy:hover { background: #222; transform: translateY(-1px); }
 
 /* ================================================
-   HERO — right column is the full-bleed image bg
+   HERO — full-bleed background image, text overlaid left
    ================================================ */
 .hero {
   min-height: 100vh;
   background: #0a0a0a;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: stretch;          /* columns fill full height */
+  display: flex;
+  align-items: center;
   padding-top: calc(var(--bar-h) + 68px);
   position: relative;
   z-index: 1;
   overflow: hidden;
 }
-.hero::before {
+
+/* full-bleed photo background */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-bg .hero-ring-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+/* gradient clears at 25% of full section width — image visible from midpoint of left side */
+.hero-bg::after {
   content: '';
-  position: absolute; inset: 0;
-  background: repeating-linear-gradient(
-    168deg,
-    transparent 0px, transparent 72px,
-    rgba(255,255,255,0.01) 72px, rgba(255,255,255,0.01) 73px
-  );
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, #0a0a0a 0%, rgba(10,10,10,0.88) 12%, rgba(10,10,10,0.45) 22%, transparent 28%);
   pointer-events: none;
 }
 
@@ -209,6 +220,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
   flex-direction: column;
   justify-content: center;
   padding: 5rem 3rem 5rem 5rem;
+  max-width: 52%;
   position: relative; z-index: 2;
 }
 .hero-kicker {
@@ -256,50 +268,6 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
 }
 .trust-item::before { content: '/'; color: var(--accent); opacity: 0.7; font-size: 0.8rem; margin-right: 2px; }
 
-/* Right column: full-bleed image — no circular frame */
-.hero-visual {
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  opacity: 0;
-  animation: fadeIn 1.2s 0.2s ease forwards;
-}
-.hero-ring-wrap {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-.hero-ring-frame {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 0;
-  overflow: hidden;
-  background: #0a0a0a;
-  box-shadow: none;
-  aspect-ratio: unset;
-}
-/* blend image into dark hero — fade clears at 50% */
-.hero-ring-frame::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, #0a0a0a 0%, rgba(10,10,10,0.75) 25%, rgba(10,10,10,0.2) 43%, transparent 50%);
-  z-index: 2;
-  pointer-events: none;
-}
-.hero-ring-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  border-radius: 0;
-  transform: scale(1.03);
-  transition: transform 8s ease;
-}
 .hero-ring-glow { display: none; }
 .hero-ring-shadow { display: none; }
 
@@ -325,16 +293,15 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
 }
 
 @media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; align-items: start; }
-  .hero-text { padding: 4rem 2rem 2rem; text-align: center; }
+  .hero { align-items: flex-end; padding-bottom: 4rem; }
+  .hero-text { max-width: 100%; padding: 4rem 2rem 2rem; text-align: center; }
   .hero-kicker { justify-content: center; }
   .hero h1 { max-width: 100%; margin: 0 auto 1.25rem; }
   .hero-sub { margin: 0 auto 2.5rem; }
   .hero-actions { justify-content: center; }
   .hero-trust { justify-content: center; flex-wrap: wrap; }
-  /* on mobile the visual becomes a normal image section */
-  .hero-visual { position: relative; height: 60vw; min-height: 240px; max-height: 420px; opacity: 1; animation: none; }
-  .hero-ring-frame::after { background: linear-gradient(to bottom, #0a0a0a 0%, rgba(10,10,10,0) 30%); }
+  /* on mobile gradient darkens from bottom so text reads over the photo */
+  .hero-bg::after { background: linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.85) 35%, rgba(10,10,10,0.3) 60%, transparent 100%); }
 }
 
 /* ================================================
