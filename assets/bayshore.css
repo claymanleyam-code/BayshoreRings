@@ -281,12 +281,12 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
   box-shadow: none;
   aspect-ratio: unset;
 }
-/* blend image into dark hero — aggressive fade confined to left 25% */
+/* blend image into dark hero — fade clears at 50% */
 .hero-ring-frame::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, #0a0a0a 0%, rgba(10,10,10,0.75) 12%, rgba(10,10,10,0.2) 22%, transparent 25%);
+  background: linear-gradient(to right, #0a0a0a 0%, rgba(10,10,10,0.75) 25%, rgba(10,10,10,0.2) 43%, transparent 50%);
   z-index: 2;
   pointer-events: none;
 }
