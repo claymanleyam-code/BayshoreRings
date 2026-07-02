@@ -28,7 +28,7 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 const sectionSelectors = '.story, .features, .coastal, .process, .products, .drop-section, .cta-section, .section';
 const sio = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); sio.unobserve(e.target); } });
-}, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+}, { threshold: 0, rootMargin: '0px 0px -4% 0px' });
 document.querySelectorAll(sectionSelectors).forEach(el => {
   el.classList.add('section-slide');
   sio.observe(el);
