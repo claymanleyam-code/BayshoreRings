@@ -18,11 +18,21 @@ if (toggle && links) {
   }));
 }
 
-// ── Scroll reveal ─────────────────────────────────────────────
+// ── Scroll reveal (elements) ──────────────────────────────────
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
 }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ── Section slide-up on scroll ────────────────────────────────
+const sectionSelectors = '.story, .features, .coastal, .process, .products, .drop-section, .cta-section, .section';
+const sio = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); sio.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll(sectionSelectors).forEach(el => {
+  el.classList.add('section-slide');
+  sio.observe(el);
+});
 
 // ── Cart count helper ─────────────────────────────────────────
 function updateCartCount(count) {
