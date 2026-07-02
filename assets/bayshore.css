@@ -363,7 +363,8 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
 /* Story (white) */
 .story {
   background: #ffffff;
-  padding-top: 5rem;
+  padding-top: 5.75rem;
+  padding-bottom: 5.75rem;
 }
 
 /* Features (gray) */
@@ -397,7 +398,8 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
 /* Drop section (dark) */
 .drop-section {
   background: #0a0a0a;
-  padding-top: 5.5rem;
+  padding-top: 4.4rem;
+  padding-bottom: 4.4rem;
 }
 
 /* CTA (pure black) */
