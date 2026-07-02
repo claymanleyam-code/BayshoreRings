@@ -428,17 +428,16 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
   opacity: 0.35;
   pointer-events: none;
 }
-.story-bg-overlay {
-  position: absolute; inset: 0;
-  background: rgba(0,0,0,0.45);
-  pointer-events: none;
-}
+.story-bg-overlay { display: none; }
 .story-container { position: relative; z-index: 1; }
 
 /* Brand story split layout: button left, text right */
 .story-split { display: grid; grid-template-columns: 1fr 1.6fr; gap: 5rem; align-items: center; }
 .story-split-btn { display: flex; align-items: center; justify-content: center; }
-.story-split-text {}
+.story-split-text { padding-left: 10%; }
+
+/* Brand story button: +15% size */
+.story-split-btn .btn { font-size: 0.98rem !important; padding: 1.04rem 2.53rem !important; }
 
 /* Text colors on dark background */
 .story .eyebrow { color: var(--accent) !important; }
