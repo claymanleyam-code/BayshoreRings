@@ -420,19 +420,31 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
 /* ================================================
    STORY content
    ================================================ */
-.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-.story-media { position: relative; display: flex; align-items: center; justify-content: center; }
-.story-badge { width: 280px; height: 280px; border-radius: 50%; border: none; background: none; display: flex; align-items: center; justify-content: center; position: relative; }
-.story-badge::before { display: none; }
-.story-badge-core {
-  width: 208px; height: 208px; border-radius: 50%;
-  background: linear-gradient(140deg, #0a0a0a 0%, #1c1c1c 50%, #2a2a2a 100%);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; padding: 1.75rem;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+/* Brand story background image + overlay */
+.story { background: #000; }
+.story-bg-img {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: 0.35;
+  pointer-events: none;
 }
-.story-badge-core p { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1rem; color: #ffffff; line-height: 1.35; }
-.story-badge-core small { display: block; font-family: 'Josefin Slab', serif; font-style: italic; font-size: 0.58rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 0.6rem; }
+.story-bg-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.45);
+  pointer-events: none;
+}
+.story-container { position: relative; z-index: 1; }
+
+/* Brand story split layout: button left, text right */
+.story-split { display: grid; grid-template-columns: 1fr 1.6fr; gap: 5rem; align-items: center; }
+.story-split-btn { display: flex; align-items: center; justify-content: center; }
+.story-split-text {}
+
+/* Text colors on dark background */
+.story .eyebrow { color: var(--accent) !important; }
+.story .section-heading { color: #ffffff; }
+.story .section-body { color: rgba(255,255,255,0.75); }
+
 .story-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.75rem; }
 .tag { font-family: 'Oswald', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.32rem 0.85rem; border-radius: 0; }
 .tag-navy { background: #000; color: #fff; }
@@ -440,8 +452,8 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
 .tag-red  { background: var(--red); color: #fff; }
 
 @media (max-width: 860px) {
-  .story-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .story-media { order: -1; }
+  .story-split { grid-template-columns: 1fr; gap: 2.5rem; }
+  .story-split-btn { justify-content: flex-start; }
 }
 
 /* ================================================
@@ -669,7 +681,7 @@ body::after {
 /* ================================================
    SECTION HEADING SIZE VARIETY
    ================================================ */
-.story .section-heading    { font-size: clamp(2.8rem, 5vw, 4.8rem); letter-spacing: 0.04em; }
+.story .section-heading    { font-size: clamp(3.5rem, 6vw, 6.5rem); letter-spacing: 0.04em; }
 .features .section-heading { font-size: clamp(2.6rem, 4.5vw, 4.2rem); letter-spacing: 0.04em; }
 .process .section-heading  { font-size: clamp(2.4rem, 4vw, 4rem); letter-spacing: 0.04em; }
 
