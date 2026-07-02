@@ -360,6 +360,13 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
 .cta-section  { position: relative; z-index: 9; }
 .sf           { position: relative; z-index: 10; }
 
+/* ── Section bleed — transparent edges via mask + overlap ───── */
+.story, .features, .coastal, .process, .products, .drop-ticker, .drop-section, .cta-section {
+  margin-bottom: -50px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0px, black 50px, black calc(100% - 50px), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0px, black 50px, black calc(100% - 50px), transparent 100%);
+}
+
 /* Story (white) */
 .story {
   background: #ffffff;
@@ -412,7 +419,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
 .section-slide {
   opacity: 0;
   transform: translateY(45vh);
-  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+  transition: transform 0.68s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
 }
 .section-slide.in {
   opacity: 1;
