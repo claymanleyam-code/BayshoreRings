@@ -409,8 +409,8 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
 /* ── Section slide-up on scroll ─────────────────────────────── */
 .section-slide {
   opacity: 0;
-  transform: translateY(64px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(140px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
 }
 .section-slide.in {
   opacity: 1;
