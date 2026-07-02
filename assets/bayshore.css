@@ -360,12 +360,6 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
 .cta-section  { position: relative; z-index: 9; }
 .sf           { position: relative; z-index: 10; }
 
-/* ── Section bleed — transparent edges via mask + overlap ───── */
-.story, .features, .coastal, .process, .products, .drop-ticker, .drop-section, .cta-section {
-  margin-bottom: -50px;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0px, black 50px, black calc(100% - 50px), transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0px, black 50px, black calc(100% - 50px), transparent 100%);
-}
 
 /* Story (white) */
 .story {
