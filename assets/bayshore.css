@@ -409,7 +409,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
 /* ── Section slide-up on scroll ─────────────────────────────── */
 .section-slide {
   opacity: 0;
-  transform: translateY(119px);
+  transform: translateY(95px);
   transition: opacity 0.75s ease, transform 0.75s ease;
 }
 .section-slide.in {
