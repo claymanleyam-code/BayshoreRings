@@ -14,7 +14,6 @@
   --charcoal:    #0a0a0a;
   --muted:       #666666;
   --bar-h:       34px;
-  --angle:       4vw;       /* diagonal section transition */
 }
 
 /* ================================================
@@ -361,67 +360,61 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
 .cta-section  { position: relative; z-index: 9; }
 .sf           { position: relative; z-index: 10; }
 
-/* Story (white) cuts into bottom of hero (dark) */
+/* Story (white) */
 .story {
   background: #ffffff;
-  clip-path: polygon(0 var(--angle), 100% 0, 100% 100%, 0 100%);
-  padding-top: calc(5rem + var(--angle));
-  margin-top: calc(-1 * var(--angle));
+  padding-top: 5rem;
 }
 
-/* Features (gray) — subtle separation from story */
+/* Features (gray) */
 .features {
   background: #f5f5f5;
-  clip-path: polygon(0 0, 100% var(--angle), 100% 100%, 0 calc(100% - var(--angle)));
-  padding-top: calc(5rem + var(--angle));
-  padding-bottom: calc(5rem + var(--angle));
-  margin-top: calc(-1 * var(--angle));
-  margin-bottom: calc(-1 * var(--angle));
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
-/* Coastal (dark) cuts into features */
+/* Coastal (dark) */
 .coastal {
   background: #0a0a0a;
-  clip-path: polygon(0 var(--angle), 100% 0, 100% calc(100% - var(--angle)), 0 100%);
-  padding-top: calc(7rem + var(--angle));
-  padding-bottom: calc(7rem + var(--angle));
-  margin-top: calc(-1 * var(--angle));
-  margin-bottom: calc(-1 * var(--angle));
+  padding-top: 7rem;
+  padding-bottom: 7rem;
   overflow: visible;
 }
 
-/* Process (white) cuts into coastal */
+/* Process (white) */
 .process {
   background: #ffffff;
-  clip-path: polygon(0 var(--angle), 100% 0, 100% 100%, 0 100%);
-  padding-top: calc(5rem + var(--angle));
-  margin-top: calc(-1 * var(--angle));
+  padding-top: 5rem;
 }
 
 /* Products (light gray) */
 .products {
   background: #f5f5f5;
-  clip-path: polygon(0 0, 100% var(--angle), 100% 100%, 0 calc(100% - var(--angle)));
-  padding-top: calc(5rem + var(--angle));
-  padding-bottom: calc(5rem + var(--angle));
-  margin-top: calc(-1 * var(--angle));
-  margin-bottom: calc(-1 * var(--angle));
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
-/* Drop section (dark) cuts from products */
+/* Drop section (dark) */
 .drop-section {
   background: #0a0a0a;
-  clip-path: polygon(0 var(--angle), 100% 0, 100% 100%, 0 100%);
-  padding-top: calc(5.5rem + var(--angle));
-  margin-top: calc(-1 * var(--angle));
+  padding-top: 5.5rem;
 }
 
 /* CTA (pure black) */
 .cta-section {
   background: #000000;
-  clip-path: polygon(0 var(--angle), 100% 0, 100% 100%, 0 100%);
-  padding-top: calc(8rem + var(--angle));
-  margin-top: calc(-1 * var(--angle));
+  padding-top: 8rem;
+}
+
+/* ── Section slide-up on scroll ─────────────────────────────── */
+.section-slide {
+  opacity: 0;
+  transform: translateY(64px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.section-slide.in {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ================================================
@@ -899,16 +892,9 @@ a.p-card .p-btn { pointer-events: none; }
 
 @media (max-width: 800px) { .nav-shop-wrap { position: static; } .nav-shop-preview { display: none; } }
 
-/* ── Responsive section flow overrides ──────────────────────── */
+/* ── Responsive section spacing ─────────────────────────────── */
 @media (max-width: 640px) {
-  /* Flatten angles on small screens */
-  .story, .features, .coastal, .process, .products, .drop-section, .cta-section {
-    clip-path: none;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
+  .story, .features, .process, .products, .drop-section { padding-top: 4rem; padding-bottom: 4rem; }
   .coastal { padding-top: 5rem; padding-bottom: 5rem; }
   .cta-section { padding-top: 6rem; padding-bottom: 6rem; }
 }
