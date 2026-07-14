@@ -36,19 +36,15 @@ document.querySelectorAll(sectionSelectors).forEach(el => {
 
 // ── Cart count helper ─────────────────────────────────────────
 function updateCartCount(count) {
-  const cartLink = document.querySelector('.nav-cart');
-  if (!cartLink) return;
-  let badge = cartLink.querySelector('.nav-cart-count');
-  if (count > 0) {
-    if (!badge) {
-      badge = document.createElement('span');
-      badge.className = 'nav-cart-count';
-      cartLink.appendChild(badge);
-    }
-    badge.textContent = count;
-  } else if (badge) {
-    badge.remove();
+  const cartIcon = document.querySelector('.nav-cart-icon');
+  if (!cartIcon) return;
+  let badge = cartIcon.querySelector('.nav-cart-count');
+  if (!badge) {
+    badge = document.createElement('span');
+    badge.className = 'nav-cart-count';
+    cartIcon.appendChild(badge);
   }
+  badge.textContent = count;
 }
 
 // ── Cart toast ────────────────────────────────────────────────
