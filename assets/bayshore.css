@@ -100,26 +100,33 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
   text-transform: uppercase;
   color: rgba(0,0,0,0.45);
   transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #e07000;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.22s ease;
 }
 .nav-links a:hover { color: #000000; }
-.nav-cta {
-  color: #ffffff !important;
-  background: #000000 !important;
-  border: 2px solid #000000 !important;
-  border-radius: 0 !important;
-  padding: 0.45rem 1.4rem !important;
-  font-family: 'Oswald', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 0.82rem !important;
-  letter-spacing: 0.1em !important;
-  text-transform: uppercase !important;
-  transition: background 0.2s, color 0.2s, border-color 0.2s !important;
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-shop-trigger {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.32rem !important;
 }
-.nav-cta:hover {
-  background: #333 !important;
-  border-color: #333 !important;
-  color: #ffffff !important;
+.nav-chevron {
+  flex-shrink: 0;
+  transition: transform 0.22s ease;
+  stroke: currentColor;
 }
+.nav-shop-wrap:hover .nav-chevron { transform: rotate(180deg); }
 
 .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 3px; }
 .hamburger span { display: block; width: 22px; height: 2px; background: #000000; border-radius: 0; transition: all 0.28s; }
@@ -133,7 +140,7 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
   .nav-links.open { display: flex; }
   .nav-links li { width: 100%; }
   .nav-links a { display: block; padding: 0.8rem 2.5rem; color: rgba(0,0,0,0.55); }
-  .nav-cta { margin: 0.5rem 2.5rem; text-align: center; border-radius: 0 !important; }
+  .nav-shop-trigger { justify-content: center; }
 }
 
 /* ================================================
