@@ -2,30 +2,43 @@
      BAYSHORE RINGS — About Us Page
      ═══════════════════════════════════════════════════ -->
 
-<!-- ── 1. PAGE HERO ────────────────────────────────────── -->
-<section class="about-hero">
+<!-- ── 1. HERO ──────────────────────────────────────────── -->
+<section class="about-hero" style="background-image:url('https://images.unsplash.com/photo-1499676988064-a3779763470e?fm=jpg&q=80&w=2400&auto=format&fit=crop')">
+  <div class="about-hero-overlay" aria-hidden="true"></div>
   <div class="container">
-    <span class="eyebrow reveal d1">{{ section.settings.eyebrow | default: 'Our Story' }}</span>
+    <span class="eyebrow reveal d1" style="color:var(--gold);">{{ section.settings.eyebrow | default: 'Our Story' }}</span>
     <h1 class="reveal d2">{{ section.settings.heading | default: 'Built From Boards' }}</h1>
     <p class="about-hero-sub reveal d3">{{ section.settings.subheading | default: 'Every ring starts with a skateboard that already lived a life. We just give it another one.' }}</p>
   </div>
 </section>
 
-<!-- ── 2. ORIGIN STORY ─────────────────────────────────── -->
+<!-- ── 2. THE STATEMENT ──────────────────────────────────── -->
+<section class="about-statement">
+  <div class="container">
+    <div class="reveal">
+      <p class="about-statement-text">Your board carried you.<br>Now it carries something else.</p>
+      <div class="about-statement-rule" aria-hidden="true"></div>
+      <p class="about-statement-sub">Every ring starts as a board that was actually skated — pressed maple, worn rails, real history. We don't use new wood. We don't need to. The material is already out there.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3. ORIGIN STORY ───────────────────────────────────── -->
 <section class="section story about-origin">
   <div class="container">
     <div class="story-grid">
       <div class="about-origin-text">
-        <h2 class="about-origin-heading reveal d1">{{ section.settings.origin_heading | default: 'A Board, a Saw, and a Good Idea' }}</h2>
-        <p class="section-body reveal d2">{{ section.settings.origin_body_1 | default: 'It started the way most things worth doing start — not with a business plan, but with a question. A retired skateboard deck was sitting in the corner of a garage, and instead of the trash, it went onto the bandsaw. What came out of that first cross-section cut stopped everything. Seven maple plies. Teal, red, and raw wood stacked like a tiny landscape. A ring was the first thing that came to mind.' }}</p>
-        <p class="section-body reveal d3" style="margin-top:1.25rem;">{{ section.settings.origin_body_2 | default: "Bayshore Rings grew from that one cut. We're a small operation rooted in Tampa, Florida — shaped by Bayshore Boulevard, the Gulf Coast, and a deep respect for things made by hand. Every ring we make starts with a board that's already been somewhere." }}</p>
+        <span class="eyebrow reveal d1" style="color:var(--teal);">{{ section.settings.origin_eyebrow | default: 'Where It Started' }}</span>
+        <h2 class="about-origin-heading reveal d2">{{ section.settings.origin_heading | default: 'A Board, a Saw, and a Good Idea' }}</h2>
+        <p class="section-body reveal d3">{{ section.settings.origin_body_1 | default: 'It started in a garage. A retired deck — cracked tail, worn rails, no more juice left in it — went onto the bandsaw instead of the trash. The cross-section stopped everything. Seven layers of hard maple with teal, red, and raw wood stacked like a tiny landscape. A ring was the obvious next move.' }}</p>
+        <p class="section-body reveal d4" style="margin-top:1.25rem;">{{ section.settings.origin_body_2 | default: "Bayshore Rings grew from that one cut. Small operation, made by hand, started from boards that have already been somewhere. The goal was never to make precious jewelry. It was to make something that means something to the person wearing it — and to the rider who skated the deck it came from." }}</p>
       </div>
       <div class="story-media reveal d2">
         <div class="about-origin-photos">
           <div class="about-origin-photo-main">
             <img
               src="{{ 'about-decks.jpg' | asset_url }}"
-              alt="Skateboard decks marked with ring size templates — Bayshore Rings workshop process, Tampa, FL"
+              alt="Retired skateboard decks prepped for ring-making at Bayshore Rings workshop"
               loading="lazy" width="600" height="400">
           </div>
         </div>
@@ -34,7 +47,7 @@
   </div>
 </section>
 
-<!-- ── 3. THE MATERIAL ─────────────────────────────────── -->
+<!-- ── 4. THE MATERIAL ───────────────────────────────────── -->
 <section class="section coastal about-material">
   <div class="container">
     <div class="coastal-inner">
@@ -56,7 +69,28 @@
   </div>
 </section>
 
-<!-- ── 4. VALUES ───────────────────────────────────────── -->
+<!-- ── 5. BUILT FOR RIDERS ───────────────────────────────── -->
+<section class="section about-riders">
+  <div class="container">
+    <div class="about-riders-grid">
+      <div class="about-riders-img reveal d1">
+        <img
+          src="https://images.unsplash.com/photo-1753354006417-951f5ee236e3?fm=jpg&q=80&w=1200&auto=format&fit=crop"
+          alt="Skateboarder riding a concrete bowl"
+          loading="lazy" width="800" height="1067">
+      </div>
+      <div class="reveal d2">
+        <span class="eyebrow" style="color:var(--teal);">For the Rider</span>
+        <h2 class="about-riders-heading">These Aren't for People Who Think Skating Is Cool.</h2>
+        <p class="section-body">They're for people who actually do it. Who know what a proper pop sounds like. Who've had the same deck for three years because the concave is perfect. Who understand that a board doesn't die — it just changes shape.</p>
+        <p class="section-body" style="margin-top:1rem;">We made rings for skaters because we are skaters. Every ring comes from a board that was actually ridden — not salvaged from a shelf, not bought new. Sourced from riders. Made for riders.</p>
+        <a href="/collections/all" class="btn btn-navy" style="margin-top:2rem;display:inline-block;">Shop the Rings &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 6. VALUES ─────────────────────────────────────────── -->
 <section class="section features about-values">
   <div class="container">
     <div class="about-values-header reveal">
@@ -78,56 +112,20 @@
   </div>
 </section>
 
-<!-- ── 4B. TAMPA SKATEPARKS ─────────────────────────────── -->
-<section class="section about-skateparks">
-  <div class="about-skateparks-header reveal container">
-    <h2 class="about-skatepark-heading">The Parks That Built the Culture</h2>
+<!-- ── 7. FULL-BLEED IMAGE MOMENT ────────────────────────── -->
+<div
+  class="about-fullbleed"
+  style="background-image:url('https://images.unsplash.com/photo-1580634240125-b9f6ff4283d1?fm=jpg&q=80&w=2400&auto=format&fit=crop')"
+  role="img"
+  aria-label="Skateboard on concrete road">
+  <div class="about-fullbleed-overlay" aria-hidden="true"></div>
+  <div class="about-fullbleed-text reveal">
+    <span class="about-fullbleed-eyebrow">Zero Waste</span>
+    <p class="about-fullbleed-statement">No virgin wood.<br>No landfill.<br>Just a board that already existed,<br>shaped into something that lasts.</p>
   </div>
-  <div class="skatepark-grid">
+</div>
 
-    <div class="skatepark-card reveal d1">
-      <img
-        src="{{ 'skatepark-of-tampa.jpg' | asset_url }}"
-        alt="Skatepark of Tampa (SPoT) — the legendary Florida skate venue that shaped generations of professional skateboarders and inspired Bayshore Rings"
-        class="skatepark-img"
-        loading="lazy"
-        width="800" height="532">
-      <div class="skatepark-overlay">
-        <h3 class="skatepark-name">Skatepark of Tampa</h3>
-        <p class="skatepark-blurb">Founded in 1993, SPoT became one of the world's most influential parks — home to Tampa Pro and Tampa Am, where generations of pros made their names.</p>
-      </div>
-    </div>
-
-    <div class="skatepark-card reveal d2">
-      <img
-        src="{{ 'skatepark-brobowl.jpg' | asset_url }}"
-        alt="BroBowl Skatepark in Tampa, Florida — a historic concrete bowl and cornerstone of Florida's skate community"
-        class="skatepark-img"
-        loading="lazy"
-        width="1920" height="1080">
-      <div class="skatepark-overlay">
-        <h3 class="skatepark-name">BroBowl Skatepark</h3>
-        <p class="skatepark-blurb">A vintage concrete bowl near Lowry Park, gathering local skaters since the 1970s. Living Florida skate history.</p>
-      </div>
-    </div>
-
-    <div class="skatepark-card reveal d3">
-      <img
-        src="{{ 'skatepark-perry-harvey.jpg' | asset_url }}"
-        alt="Perry Harvey Sr. Park skatepark in downtown Tampa, Florida — a community-built space honoring Tampa's civil rights legacy"
-        class="skatepark-img"
-        loading="lazy"
-        width="746" height="497">
-      <div class="skatepark-overlay">
-        <h3 class="skatepark-name">Perry Harvey Sr. Park</h3>
-        <p class="skatepark-blurb">Downtown Tampa skatepark honoring civil rights leader Perry Harvey Sr. Community-built, open to all skill levels.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ── 5. FOUNDER ──────────────────────────────────────── -->
+<!-- ── 8. FOUNDER ────────────────────────────────────────── -->
 <section class="section about-founder">
   <div class="container">
     <div class="about-founder-grid">
@@ -142,13 +140,13 @@
           <div class="about-founder-photos-stack">
             <img
               src="{{ 'about-first-workshop.jpg' | asset_url }}"
-              alt="Bayshore Rings founder measuring and marking skateboard wood in his first garage workshop in Tampa, FL"
+              alt="Bayshore Rings founder at work in the workshop"
               class="about-founder-photo"
               loading="lazy" width="600" height="800">
             <div class="about-founder-inset">
               <img
                 src="{{ 'about-rings-hand.jpg' | asset_url }}"
-                alt="Three handcrafted recycled skateboard rings — Bayshore Rings finished products"
+                alt="Handcrafted recycled skateboard rings"
                 loading="lazy" width="300" height="400">
             </div>
           </div>
@@ -157,8 +155,8 @@
       <div class="about-founder-text reveal d2">
         <span class="eyebrow">{{ section.settings.founder_eyebrow | default: 'The Maker' }}</span>
         <h2 class="about-founder-name">{{ section.settings.founder_name | default: 'Clay' }}</h2>
-        <p class="section-body">{{ section.settings.founder_bio | default: "This is where your story goes. Where you grew up, how you got into skateboarding, when you made your first ring, what this brand means to you. People buy from people — especially in small-batch craft. Replace this with your real story and it'll do more work than any ad ever could." }}</p>
-        <p class="section-body" style="margin-top:1rem;">{{ section.settings.founder_bio_2 | default: "Add a second paragraph here — your background, your workshop, Bayshore Boulevard, what Tampa and the Gulf Coast mean to this brand." }}</p>
+        <p class="section-body">{{ section.settings.founder_bio | default: "Replace this with your real story. Where you grew up, how you started skating, when you made your first ring, what this means to you. People buy from people — especially when the thing is made by hand." }}</p>
+        <p class="section-body" style="margin-top:1rem;">{{ section.settings.founder_bio_2 | default: "Add a second paragraph here — your background, your workshop, what skateboarding means to this brand." }}</p>
         {%- if section.settings.founder_signature != blank -%}
           <p class="about-founder-sig">{{ section.settings.founder_signature }}</p>
         {%- endif -%}
@@ -167,25 +165,25 @@
   </div>
 </section>
 
-<!-- ── 5B. BAYSHORE BLVD PHOTO ──────────────────────────── -->
+<!-- ── 9. BAYSHORE BLVD PHOTO ────────────────────────────── -->
 <figure class="about-bayshore-figure">
   <img
     src="{{ 'bayshore-blvd.jpg' | asset_url }}"
-    alt="Sunset over Bayshore Boulevard, Tampa, Florida — the longest continuous sidewalk in the United States and the coastal backdrop of Bayshore Rings"
+    alt="Bayshore Boulevard, Tampa, Florida — coastal backdrop of Bayshore Rings"
     class="about-bayshore-img"
     loading="lazy"
     width="1024"
     height="576">
-  <figcaption class="about-bayshore-caption">Bayshore Boulevard · Tampa, FL — sunset over Hillsborough Bay.</figcaption>
+  <figcaption class="about-bayshore-caption">Bayshore Boulevard · Tampa, FL</figcaption>
 </figure>
 
-<!-- ── 6. PROCESS TEASER ───────────────────────────────── -->
+<!-- ── 10. PROCESS TEASER ────────────────────────────────── -->
 <section class="section about-process-teaser">
   <div class="container">
     <div class="about-process-inner reveal d1">
       <div>
         <h2 class="about-process-heading">{{ section.settings.process_heading | default: 'Want to see the whole process?' }}</h2>
-        <p class="section-body" style="margin-top:0.75rem;">{{ section.settings.process_body | default: 'From finding the right board to the final hand-sanding. Four steps, built with care every time.' }}</p>
+        <p class="section-body" style="margin-top:0.75rem;">{{ section.settings.process_body | default: 'From sourcing the board to the final coat. Four steps, no shortcuts.' }}</p>
       </div>
       <a href="{{ section.settings.process_link | default: '/pages/our-process' }}" class="btn btn-navy">
         {{ section.settings.process_btn | default: 'See How We Make Them' }} &rarr;
@@ -194,7 +192,7 @@
   </div>
 </section>
 
-<!-- ── 7. CTA ──────────────────────────────────────────── -->
+<!-- ── 11. CTA ───────────────────────────────────────────── -->
 <section class="cta-section">
   <div class="cta-content">
     <span class="eyebrow">{{ section.settings.cta_eyebrow | default: 'Get Yours' }}</span>
@@ -208,32 +206,71 @@
 <style>
 /* ── About Hero ────────────────────────────────────────── */
 .about-hero {
-  background: var(--navy);
-  padding: 7rem 2rem 5rem;
-  text-align: center;
   position: relative;
+  background-size: cover;
+  background-position: center top;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 10rem 2rem 7rem;
   overflow: hidden;
+}
+.about-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(8,16,32,0.6) 0%, rgba(8,16,32,0.78) 100%);
 }
 .about-hero .container { position: relative; z-index: 1; }
 .about-hero h1 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(4rem, 8vw, 8rem);
+  font-size: clamp(4.5rem, 10vw, 9rem);
   font-weight: 400;
   color: var(--cream);
   letter-spacing: 0.04em;
-  line-height: 0.95;
+  line-height: 0.9;
   margin: 0.75rem 0 1.5rem;
 }
 .about-hero-sub {
-  font-size: 1.15rem;
-  color: rgba(240,231,211,0.72);
-  max-width: 42ch;
+  font-size: 1.1rem;
+  color: rgba(240,231,211,0.75);
+  max-width: 44ch;
   margin: 0 auto;
-  line-height: 1.75;
+  line-height: 1.8;
   font-weight: 300;
 }
 
-/* ── Origin story ──────────────────────────────────────── */
+/* ── Statement ─────────────────────────────────────────── */
+.about-statement {
+  background: var(--navy);
+  padding: 7rem 2rem;
+}
+.about-statement-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  color: var(--cream);
+  line-height: 0.92;
+  letter-spacing: 0.04em;
+  max-width: 14ch;
+  margin: 0;
+}
+.about-statement-rule {
+  width: 48px;
+  height: 2px;
+  background: var(--gold);
+  margin: 2.5rem 0;
+}
+.about-statement-sub {
+  font-family: 'Barlow', sans-serif;
+  font-size: 1.05rem;
+  color: rgba(240,231,211,0.6);
+  max-width: 50ch;
+  line-height: 1.82;
+  margin: 0;
+}
+
+/* ── Origin ────────────────────────────────────────────── */
+.about-origin { background: var(--cream-light); }
 .about-origin-heading {
   font-family: 'Oswald', sans-serif;
   font-size: clamp(1.3rem, 2.2vw, 1.8rem);
@@ -244,17 +281,6 @@
   line-height: 1.2;
   margin-bottom: 1.25rem;
 }
-.about-origin .section-body,
-.about-founder .section-body,
-.about-process-teaser .section-body {
-  font-size: 1.08rem;
-  line-height: 1.82;
-  color: #1a1a1a;
-  font-weight: 400;
-}
-
-/* ── Origin photo ──────────────────────────────────────── */
-.about-origin-photos { position: relative; width: 100%; }
 .about-origin-photo-main img {
   width: 100%;
   aspect-ratio: 3 / 2;
@@ -262,10 +288,48 @@
   display: block;
   border-radius: 2px;
 }
+.about-origin .section-body {
+  font-size: 1.05rem;
+  line-height: 1.82;
+  color: #1a1a1a;
+}
 
-/* ── Values (editorial stacked list) ───────────────────── */
-.about-values { background: var(--cream); }
-.about-values-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(0,0,0,0.07); }
+/* ── Built for Riders ──────────────────────────────────── */
+.about-riders { background: var(--cream); }
+.about-riders-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.about-riders-img img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.about-riders-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: var(--navy);
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  margin: 0.5rem 0 1.25rem;
+}
+.about-riders .section-body {
+  font-size: 1rem;
+  line-height: 1.82;
+  color: #1a1a1a;
+}
+
+/* ── Values ────────────────────────────────────────────── */
+.about-values { background: var(--cream-light); }
+.about-values-header {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
 .about-values-heading {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(2.5rem, 5vw, 4.5rem);
@@ -306,20 +370,48 @@
   color: #1a1a1a;
 }
 
-/* ── Skateparks heading ────────────────────────────────── */
-.about-skateparks-header { margin-bottom: 2rem; }
-.about-skatepark-heading {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  letter-spacing: 0.04em;
-  color: var(--navy);
-  line-height: 0.95;
+/* ── Full-bleed photo ──────────────────────────────────── */
+.about-fullbleed {
+  position: relative;
+  height: 60vh;
+  min-height: 400px;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  align-items: flex-end;
 }
-.skatepark-blurb {
-  font-size: 1rem;
-  line-height: 1.65;
-  color: rgba(240,231,211,0.88);
-  font-weight: 400;
+.about-fullbleed-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.2) 55%, transparent 100%);
+}
+.about-fullbleed-text {
+  position: relative;
+  z-index: 1;
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+.about-fullbleed-eyebrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+.about-fullbleed-statement {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: var(--cream);
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  max-width: 700px;
+  margin: 0;
 }
 
 /* ── Founder ───────────────────────────────────────────── */
@@ -331,13 +423,6 @@
   align-items: center;
 }
 .about-founder-img { position: relative; }
-.about-founder-photo {
-  width: 100%;
-  aspect-ratio: 3/4;
-  object-fit: cover;
-  border-radius: 2px;
-  display: block;
-}
 .about-founder-name {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(2.5rem, 4vw, 4rem);
@@ -361,7 +446,6 @@
   right: -1.5rem;
   width: 52%;
   border: 3px solid var(--cream-light);
-  border-radius: 2px;
   overflow: hidden;
   box-shadow: 0 8px 30px rgba(0,0,0,0.2);
 }
@@ -370,6 +454,18 @@
   aspect-ratio: 3 / 4;
   object-fit: cover;
   display: block;
+}
+.about-founder-photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 2px;
+  display: block;
+}
+.about-founder .section-body {
+  font-size: 1.05rem;
+  line-height: 1.82;
+  color: #1a1a1a;
 }
 .about-founder-sig {
   font-family: 'Josefin Slab', serif;
@@ -398,17 +494,28 @@
   gap: 3rem;
   flex-wrap: wrap;
 }
+.about-process-teaser .section-body {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--muted);
+}
 
 /* ── Responsive ────────────────────────────────────────── */
 @media (max-width: 860px) {
+  .about-riders-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .about-riders-img { max-width: 480px; }
   .about-founder-grid { grid-template-columns: 1fr; gap: 3rem; }
   .about-founder-img { max-width: 360px; margin: 0 auto; }
   .about-founder-inset { display: none; }
-  .about-process-inner { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
   .about-value-item { grid-template-columns: 52px 1fr; gap: 1.5rem; }
+  .about-process-inner { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+}
+@media (max-width: 768px) {
+  .about-fullbleed { background-attachment: scroll; }
 }
 @media (max-width: 600px) {
-  .about-hero { padding: 5rem 2rem 4rem; }
+  .about-hero { padding: 7rem 2rem 5rem; min-height: 60vh; }
+  .about-statement { padding: 5rem 2rem; }
 }
 </style>
 
@@ -420,39 +527,29 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our Story" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Built From Boards" },
     { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Every ring starts with a skateboard that already lived a life. We just give it another one." },
-
     { "type": "header", "content": "Origin Story" },
     { "type": "text", "id": "origin_eyebrow", "label": "Eyebrow", "default": "Where It Started" },
-    { "type": "text", "id": "origin_heading", "label": "Heading", "default": "When a Skateboarder Begins to Love Woodworking" },
-    { "type": "textarea", "id": "origin_body_1", "label": "Paragraph 1", "default": "It started in my dad's garage. Broken skateboards were piling up — boards that had been skated hard, snapped, and had nowhere left to go. Instead of tossing them, I started cutting them up to make things. Jewelry first. Whatever I could figure out." },
-    { "type": "textarea", "id": "origin_body_2", "label": "Paragraph 2", "default": "Rings ended up being the thing. Something about the cross-section of a deck — seven layers of hard maple with teal, red, and raw wood running through it — just looked right on a finger. Bayshore Rings grew from there. Still small, still made by hand, still started from boards that already had a life." },
-    { "type": "text", "id": "badge_text", "label": "Badge text", "default": "One Board. One Ring. One Story." },
-    { "type": "text", "id": "badge_sub", "label": "Badge subtext", "default": "Bayshore · Coastal Craft" },
-
+    { "type": "text", "id": "origin_heading", "label": "Heading", "default": "A Board, a Saw, and a Good Idea" },
+    { "type": "textarea", "id": "origin_body_1", "label": "Paragraph 1", "default": "It started in a garage. A retired deck — cracked tail, worn rails, no more juice left in it — went onto the bandsaw instead of the trash. The cross-section stopped everything. Seven layers of hard maple with teal, red, and raw wood stacked like a tiny landscape. A ring was the obvious next move." },
+    { "type": "textarea", "id": "origin_body_2", "label": "Paragraph 2", "default": "Bayshore Rings grew from that one cut. Small operation, made by hand, started from boards that have already been somewhere. The goal was never to make precious jewelry. It was to make something that means something to the person wearing it — and to the rider who skated the deck it came from." },
     { "type": "header", "content": "The Material" },
     { "type": "text", "id": "material_eyebrow", "label": "Eyebrow", "default": "The Material" },
     { "type": "text", "id": "material_heading", "label": "Heading", "default": "Why Skateboards" },
-    { "type": "textarea", "id": "material_body", "label": "Body" },
-
+    { "type": "textarea", "id": "material_body", "label": "Body", "default": "A skateboard deck is seven layers of hard maple, pressed and glued under thousands of pounds of force. Between those plies are thin colored veneers — teal, red, black, natural — that vary by brand, era, and rider. When you cut across the deck, those layers become the grain of the ring. No dye. No stain. That's the actual board." },
     { "type": "header", "content": "Values Section" },
-    { "type": "text", "id": "values_eyebrow", "label": "Eyebrow", "default": "What We Stand For" },
     { "type": "text", "id": "values_heading", "label": "Heading", "default": "Made Right. No Shortcuts." },
-
     { "type": "header", "content": "Founder" },
     { "type": "image_picker", "id": "founder_image", "label": "Founder photo" },
     { "type": "text", "id": "founder_eyebrow", "label": "Eyebrow", "default": "The Maker" },
-    { "type": "text", "id": "founder_name", "label": "Name", "default": "Your Name Here" },
-    { "type": "textarea", "id": "founder_bio", "label": "Bio paragraph 1" },
-    { "type": "textarea", "id": "founder_bio_2", "label": "Bio paragraph 2" },
+    { "type": "text", "id": "founder_name", "label": "Name", "default": "Clay" },
+    { "type": "textarea", "id": "founder_bio", "label": "Bio paragraph 1", "default": "Replace this with your real story." },
+    { "type": "textarea", "id": "founder_bio_2", "label": "Bio paragraph 2", "default": "Add a second paragraph here." },
     { "type": "text", "id": "founder_signature", "label": "Signature (optional)" },
-
     { "type": "header", "content": "Process Teaser" },
-    { "type": "text", "id": "process_eyebrow", "label": "Eyebrow", "default": "How Its Made" },
     { "type": "text", "id": "process_heading", "label": "Heading", "default": "Want to see the whole process?" },
-    { "type": "textarea", "id": "process_body", "label": "Body" },
+    { "type": "textarea", "id": "process_body", "label": "Body", "default": "From sourcing the board to the final coat. Four steps, no shortcuts." },
     { "type": "url", "id": "process_link", "label": "Link" },
     { "type": "text", "id": "process_btn", "label": "Button text", "default": "See How We Make Them" },
-
     { "type": "header", "content": "CTA Banner" },
     { "type": "text", "id": "cta_eyebrow", "label": "Eyebrow", "default": "Get Yours" },
     { "type": "text", "id": "cta_heading", "label": "Heading", "default": "Wear the Board. Keep the Story." },
@@ -470,10 +567,10 @@
     },
     {
       "type": "value",
-      "name": "Value Card",
+      "name": "Value",
       "settings": [
         { "type": "text", "id": "title", "label": "Title", "default": "No New Materials" },
-        { "type": "textarea", "id": "body", "label": "Body", "default": "Every ring is made from a board that already existed. We don't source new wood. We reclaim what's already there." }
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Every ring is made from a board that already existed." }
       ]
     }
   ],
@@ -486,7 +583,7 @@
         { "type": "stat", "settings": { "number": "1", "label": "Of a Kind" } },
         { "type": "value", "settings": { "title": "No New Materials", "body": "Every ring is made from a board that already existed. We don't source new wood. We reclaim what's already there." } },
         { "type": "value", "settings": { "title": "Small Batch Always", "body": "We don't run production lines. Rings are made in small batches, by hand, with attention to every one." } },
-        { "type": "value", "settings": { "title": "Coastal Craft", "body": "Rooted in Tampa, Florida — shaped by Bayshore Boulevard, the Gulf Coast, and the kind of making that takes time to get right." } }
+        { "type": "value", "settings": { "title": "Built for Daily Wear", "body": "Skateboard maple is one of the densest hardwoods in everyday production. It handles impact, heat, and daily use. So does the ring." } }
       ]
     }
   ]
