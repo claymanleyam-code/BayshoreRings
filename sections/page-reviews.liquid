@@ -18,7 +18,8 @@
 <!-- ══════════════════════════════════════════
      1. HERO
      ══════════════════════════════════════════ -->
-<section class="about-hero reviews-hero" aria-labelledby="reviews-h1">
+<section class="about-hero reviews-hero" style="background-image:url('https://images.unsplash.com/photo-1499676988064-a3779763470e?fm=jpg&q=80&w=2400&auto=format&fit=crop')" aria-labelledby="reviews-h1">
+  <div class="reviews-hero-overlay" aria-hidden="true"></div>
   <div class="container">
     <span class="eyebrow reveal d1">{{ section.settings.eyebrow | default: 'Bayshore Rings Reviews' }}</span>
     <h1 id="reviews-h1" class="reveal d2">{{ section.settings.heading | default: 'Reviews' }}</h1>
@@ -67,6 +68,14 @@
   </div>
 </section>
 {%- endif -%}
+
+<!-- ══ PULL QUOTE ══ -->
+<section class="reviews-pullquote">
+  <div class="container">
+    <blockquote class="reviews-pullquote-text reveal">"I've put this ring through everything. Skated in it, worked in it, slept in it. Still looks exactly the same."</blockquote>
+    <cite class="reviews-pullquote-cite reveal d2">— Verified Customer</cite>
+  </div>
+</section>
 
 <!-- ══════════════════════════════════════════
      3. REVIEW CARDS
@@ -144,6 +153,22 @@
   </div>
 </section>
 {%- endif -%}
+
+<!-- ══ WORN DAILY ══ -->
+<section class="section reviews-worn-section">
+  <div class="container">
+    <div class="reviews-worn-inner reveal">
+      <div class="reviews-worn-text">
+        <h2 class="reviews-worn-heading">Rings That Actually Hold Up</h2>
+        <p class="section-body">Skateboard maple is one of the hardest, most dense woods in everyday production. It handles impact. It handles heat. It handles the kind of daily use most jewelry wouldn't survive. Every ring is finished with natural beeswax oil — the longer you wear it, the better it looks.</p>
+      </div>
+      <div class="reviews-worn-stat">
+        <span class="reviews-worn-num">100%</span>
+        <span class="reviews-worn-label">Natural Finish. No Synthetic Coatings.</span>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ══════════════════════════════════════════
      4. LEAVE A REVIEW FORM
@@ -318,7 +343,21 @@
      ══════════════════════════════════════════ -->
 <style>
 /* ── Reviews Hero ── */
-.reviews-hero { padding-bottom: 3rem; }
+.reviews-hero {
+  position: relative;
+  background-size: cover;
+  background-position: center top;
+  min-height: 65vh;
+  display: flex;
+  align-items: center;
+  padding: 9rem 2rem 6rem;
+}
+.reviews-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8,16,32,0.72);
+}
+.reviews-hero .container { position: relative; z-index: 1; }
 .reviews-hero h1 {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(4rem, 8vw, 8rem);
@@ -327,6 +366,79 @@
   letter-spacing: 0.04em;
   line-height: 0.95;
   margin: 0.75rem 0 1.5rem;
+}
+
+/* ── Pull quote ── */
+.reviews-pullquote { background: var(--navy); padding: 6rem 2rem; }
+.reviews-pullquote-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  color: var(--cream);
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  max-width: 900px;
+  margin: 0 0 1.5rem;
+  quotes: none;
+  display: block;
+}
+.reviews-pullquote-cite {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-style: normal;
+  display: block;
+}
+
+/* ── Worn daily ── */
+.reviews-worn-section { background: var(--cream-light); }
+.reviews-worn-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+}
+.reviews-worn-text { flex: 1; min-width: 280px; }
+.reviews-worn-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: 0.04em;
+  color: var(--navy);
+  line-height: 0.95;
+  margin-bottom: 1rem;
+}
+.reviews-worn-section .section-body { font-size: 1rem; line-height: 1.82; color: #1a1a1a; }
+.reviews-worn-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  flex-shrink: 0;
+  padding-left: 4rem;
+  border-left: 1px solid rgba(0,0,0,0.08);
+}
+.reviews-worn-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4rem;
+  color: var(--navy);
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+.reviews-worn-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  max-width: 20ch;
+}
+@media (max-width: 680px) {
+  .reviews-worn-inner { flex-direction: column; }
+  .reviews-worn-stat { border-left: none; border-top: 1px solid rgba(0,0,0,0.08); padding-left: 0; padding-top: 1.5rem; }
 }
 
 /* ── Rating Summary ── */
