@@ -24,8 +24,8 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// ── Section slide-up on scroll ────────────────────────────────
-const sectionSelectors = '.story, .features, .coastal, .process, .products, .drop-section, .cta-section, .section';
+// ── Section fade-in on scroll ─────────────────────────────────
+const sectionSelectors = '.story, .features, .coastal, .process, .products, .drop-section, .cta-section, .section, .about-statement, .about-fullbleed, .about-bayshore-figure, .reviews-pullquote, .proc-hero, .about-hero, .reviews-hero';
 const sio = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); sio.unobserve(e.target); } });
 }, { threshold: 0, rootMargin: '0px 0px -4% 0px' });
