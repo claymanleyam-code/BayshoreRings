@@ -344,8 +344,8 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
 .drop-section .gold-bar::after,
 .cta-section .gold-bar::after { color: var(--accent); opacity: 0.5; }
 
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.68s ease, transform 0.68s ease; }
-.reveal.in { opacity: 1; transform: none; }
+.reveal { opacity: 0; transition: opacity 0.68s ease; }
+.reveal.in { opacity: 1; }
 .d1 { transition-delay: 0.1s; }
 .d2 { transition-delay: 0.2s; }
 .d3 { transition-delay: 0.3s; }
