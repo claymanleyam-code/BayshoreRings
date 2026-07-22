@@ -298,8 +298,8 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
 .hero-trust   { animation-delay: 0.58s; }
 
 @keyframes fadeUp {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 900px) {
@@ -344,8 +344,8 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
 .drop-section .gold-bar::after,
 .cta-section .gold-bar::after { color: var(--accent); opacity: 0.5; }
 
-.reveal { opacity: 0; transition: opacity 0.68s ease; }
-.reveal.in { opacity: 1; }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.38s ease, transform 0.38s cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal.in { opacity: 1; transform: translateY(0); }
 .d1 { transition-delay: 0.1s; }
 .d2 { transition-delay: 0.2s; }
 .d3 { transition-delay: 0.3s; }
@@ -416,13 +416,15 @@ h1, h2, h3 { font-family: 'Bebas Neue', 'Oswald', sans-serif; font-weight: 400; 
   padding-top: 8rem;
 }
 
-/* ── Section fade-in on scroll ───────────────────────────────── */
+/* ── Section slide-up + fade on scroll ───────────────────────── */
 .section-slide {
   opacity: 0;
-  transition: opacity 0.55s ease;
+  transform: translateY(32px);
+  transition: opacity 0.38s ease, transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .section-slide.in {
   opacity: 1;
+  transform: translateY(0);
 }
 
 /* ================================================
