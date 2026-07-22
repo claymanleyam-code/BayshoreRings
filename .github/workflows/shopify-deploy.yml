@@ -19,7 +19,7 @@ jobs:
         run: npm install -g @shopify/cli@latest
 
       - name: Push theme
-        run: shopify theme push --theme 140565446752 --allow-live
+        run: shopify theme push --theme 140608110688 --allow-live
         env:
           SHOPIFY_FLAG_STORE: bayshore-rings.myshopify.com
           SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
