@@ -28,7 +28,7 @@
   <div class="container">
     <div class="story-grid">
       <div class="about-origin-text">
-        <span class="eyebrow reveal d1" style="color:var(--teal);">{{ section.settings.origin_eyebrow | default: 'Where It Started' }}</span>
+        <span class="eyebrow reveal d1" style="color:#111;">{{ section.settings.origin_eyebrow | default: 'Where It Started' }}</span>
         <h2 class="about-origin-heading reveal d2">{{ section.settings.origin_heading | default: 'A Board, a Saw, and a Good Idea' }}</h2>
         <p class="section-body reveal d3">{{ section.settings.origin_body_1 | default: 'It started in a garage. A skateboard deck — maple wood dense enough to absorb years of impact — went onto the bandsaw. The cross-section stopped everything. Seven layers of hard maple with teal, red, and raw wood stacked like a tiny landscape. A ring was the obvious next move.' }}</p>
         <p class="section-body reveal d4" style="margin-top:1.25rem;">{{ section.settings.origin_body_2 | default: "Bayshore Rings grew from that one cut. Small operation, made by hand, built on a commitment to reclaimed materials and zero synthetic finishes. The goal was never to make precious jewelry. It was to make something worth keeping — jewelry that outlasts trends and throwaway culture." }}</p>
@@ -37,8 +37,8 @@
         <div class="about-origin-photos">
           <div class="about-origin-photo-main">
             <img
-              src="https://images.unsplash.com/photo-1696168406444-63be038c86ef?fm=jpg&q=80&w=1200&auto=format&fit=crop"
-              alt="Skateboarder riding on cement"
+              src="{{ 'about-first-workshop.jpg' | asset_url }}"
+              alt="Bayshore Rings founder working in the workshop"
               loading="lazy" width="600" height="400">
           </div>
         </div>
@@ -54,7 +54,7 @@
       <span class="eyebrow" style="color:var(--teal);display:block;margin-bottom:0.6rem;">{{ section.settings.material_eyebrow | default: 'The Material' }}</span>
       <h2 class="reveal d1">{{ section.settings.material_heading | default: 'Why Skateboards' }}</h2>
       <div class="coastal-rule"></div>
-      <p class="reveal d2">{{ section.settings.material_body | default: "A skateboard deck is seven layers of hard maple, pressed and glued under thousands of pounds of force. Between those plies are thin colored veneers — teal, red, black, natural — that vary by brand, era, and rider. When you cut across the deck, those layers become the grain of the ring. No dye. No stain. That's the actual board." }}</p>
+      <p class="reveal d2">{{ section.settings.material_body | default: "Skateboarding isn't just a sport — it's a culture built on creativity, grit, and self-expression. Every deck carries that energy: the tricks it absorbed, the concrete it crossed, the skater who shaped it. When we turn that wood into a ring, we're not just making jewelry. We're capturing something real — the soul of skateboarding, worn on your hand every day." }}</p>
       <div class="coastal-stats reveal d3">
         {%- for block in section.blocks -%}
           {%- if block.type == 'stat' -%}
@@ -534,7 +534,7 @@
     { "type": "header", "content": "The Material" },
     { "type": "text", "id": "material_eyebrow", "label": "Eyebrow", "default": "The Material" },
     { "type": "text", "id": "material_heading", "label": "Heading", "default": "Why Skateboards" },
-    { "type": "textarea", "id": "material_body", "label": "Body", "default": "A skateboard deck is seven layers of hard maple, pressed and glued under thousands of pounds of force. Between those plies are thin colored veneers — teal, red, black, natural — that vary by brand, era, and rider. When you cut across the deck, those layers become the grain of the ring. No dye. No stain. That's the actual board." },
+    { "type": "textarea", "id": "material_body", "label": "Body", "default": "Skateboarding isn't just a sport — it's a culture built on creativity, grit, and self-expression. Every deck carries that energy: the tricks it absorbed, the concrete it crossed, the skater who shaped it. When we turn that wood into a ring, we're not just making jewelry. We're capturing something real — the soul of skateboarding, worn on your hand every day." },
     { "type": "header", "content": "Values Section" },
     { "type": "text", "id": "values_heading", "label": "Heading", "default": "Made Right. No Shortcuts." },
     { "type": "header", "content": "Founder" },
