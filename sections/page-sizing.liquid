@@ -1,21 +1,21 @@
 <div class="page-wrap">
   <div class="collection-header reveal" style="max-width:680px;">
-    <span class="eyebrow section-label">Ring Sizing</span>
-    <h1>Find Your Size</h1>
+    <span class="eyebrow section-label">{{ section.settings.eyebrow | default: 'Ring Sizing' }}</span>
+    <h1>{{ section.settings.heading | default: 'Find Your Size' }}</h1>
     <div class="gold-bar"></div>
-    <p class="section-body">Our rings are sized to standard US ring sizes. If you're between sizes, we recommend sizing up.</p>
+    <p class="section-body">{{ section.settings.intro | default: 'Our rings are sized to standard US ring sizes. If you\'re between sizes, we recommend sizing up.' }}</p>
   </div>
 
   <div style="max-width:760px;margin:0 auto;">
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:2.5rem;">
       <div class="sizing-tip">
-        <h4>String Method</h4>
-        <p>Wrap a thin strip of paper or string around the base of your finger. Mark where it overlaps, then measure the length in millimeters. That's your finger circumference — use the table below.</p>
+        <h4>{{ section.settings.method_1_title | default: 'String Method' }}</h4>
+        <p>{{ section.settings.method_1_body | default: 'Wrap a thin strip of paper or string around the base of your finger. Mark where it overlaps, then measure the length in millimeters. That\'s your finger circumference — use the table below.' }}</p>
       </div>
       <div class="sizing-tip">
-        <h4>Existing Ring Method</h4>
-        <p>Place a ring you already own on a ruler and measure the inside diameter in millimeters. Match that measurement to the table below.</p>
+        <h4>{{ section.settings.method_2_title | default: 'Existing Ring Method' }}</h4>
+        <p>{{ section.settings.method_2_body | default: 'Place a ring you already own on a ruler and measure the inside diameter in millimeters. Match that measurement to the table below.' }}</p>
       </div>
     </div>
 
@@ -45,14 +45,14 @@
     </div>
 
     <div class="sizing-tip reveal" style="margin-top:2rem;">
-      <h4>Pro Tips</h4>
-      <p>Fingers swell slightly in heat and after physical activity — measure at the end of the day for the most accurate size. Wider bands (8mm+) typically fit tighter than thin bands, so consider sizing up half a size for our thicker styles.</p>
+      <h4>{{ section.settings.tips_title | default: 'Pro Tips' }}</h4>
+      <p>{{ section.settings.tips_body | default: 'Fingers swell slightly in heat and after physical activity — measure at the end of the day for the most accurate size. Wider bands (8mm+) typically fit tighter than thin bands, so consider sizing up half a size for our thicker styles.' }}</p>
     </div>
 
     <div style="text-align:center;margin-top:3rem;" class="reveal">
-      <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1.25rem;">Still not sure? We're happy to help.</p>
-      <a href="/pages/contact" class="btn btn-navy" style="margin-right:0.75rem;">Contact Us</a>
-      <a href="/collections/all" class="btn btn-gold">Shop Rings</a>
+      <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1.25rem;">{{ section.settings.cta_text | default: 'Still not sure? We\'re happy to help.' }}</p>
+      <a href="{{ section.settings.btn_1_url | default: '/pages/contact' }}" class="btn btn-navy" style="margin-right:0.75rem;">{{ section.settings.btn_1_label | default: 'Contact Us' }}</a>
+      <a href="{{ section.settings.btn_2_url | default: '/collections/all' }}" class="btn btn-gold">{{ section.settings.btn_2_label | default: 'Shop Rings' }}</a>
     </div>
 
   </div>
@@ -61,7 +61,102 @@
 {% schema %}
 {
   "name": "Ring Sizing",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "Ring Sizing"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Page heading",
+      "default": "Find Your Size"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro text",
+      "default": "Our rings are sized to standard US ring sizes. If you're between sizes, we recommend sizing up."
+    },
+    {
+      "type": "header",
+      "content": "Measuring Methods"
+    },
+    {
+      "type": "text",
+      "id": "method_1_title",
+      "label": "Method 1 title",
+      "default": "String Method"
+    },
+    {
+      "type": "textarea",
+      "id": "method_1_body",
+      "label": "Method 1 description",
+      "default": "Wrap a thin strip of paper or string around the base of your finger. Mark where it overlaps, then measure the length in millimeters. That's your finger circumference — use the table below."
+    },
+    {
+      "type": "text",
+      "id": "method_2_title",
+      "label": "Method 2 title",
+      "default": "Existing Ring Method"
+    },
+    {
+      "type": "textarea",
+      "id": "method_2_body",
+      "label": "Method 2 description",
+      "default": "Place a ring you already own on a ruler and measure the inside diameter in millimeters. Match that measurement to the table below."
+    },
+    {
+      "type": "header",
+      "content": "Pro Tips"
+    },
+    {
+      "type": "text",
+      "id": "tips_title",
+      "label": "Tips heading",
+      "default": "Pro Tips"
+    },
+    {
+      "type": "textarea",
+      "id": "tips_body",
+      "label": "Tips text",
+      "default": "Fingers swell slightly in heat and after physical activity — measure at the end of the day for the most accurate size. Wider bands (8mm+) typically fit tighter than thin bands, so consider sizing up half a size for our thicker styles."
+    },
+    {
+      "type": "header",
+      "content": "Bottom CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Still not sure? We're happy to help."
+    },
+    {
+      "type": "text",
+      "id": "btn_1_label",
+      "label": "Button 1 label",
+      "default": "Contact Us"
+    },
+    {
+      "type": "url",
+      "id": "btn_1_url",
+      "label": "Button 1 link"
+    },
+    {
+      "type": "text",
+      "id": "btn_2_label",
+      "label": "Button 2 label",
+      "default": "Shop Rings"
+    },
+    {
+      "type": "url",
+      "id": "btn_2_url",
+      "label": "Button 2 link"
+    }
+  ],
   "presets": [{ "name": "Ring Sizing" }]
 }
 {% endschema %}

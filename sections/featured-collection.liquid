@@ -5,20 +5,26 @@
 {%- endif -%}
 
 <!-- ── MARQUEE TICKER ──────────────────────────────────── -->
+{%- assign ticker_1 = section.settings.ticker_1 | default: 'RECLAIMED SKATEBOARDS' -%}
+{%- assign ticker_2 = section.settings.ticker_2 | default: 'HANDCRAFTED IN TAMPA' -%}
+{%- assign ticker_3 = section.settings.ticker_3 | default: 'SMALL BATCH' -%}
+{%- assign ticker_4 = section.settings.ticker_4 | default: '1 OF 1' -%}
+{%- assign ticker_5 = section.settings.ticker_5 | default: 'COASTAL FLORIDA' -%}
+{%- assign ticker_6 = section.settings.ticker_6 | default: 'BEESWAX FINISH' -%}
 <div class="drop-ticker" aria-hidden="true">
   <div class="drop-ticker-track">
     {%- for i in (1..4) -%}
-      <span>RECLAIMED SKATEBOARDS</span>
+      <span>{{ ticker_1 }}</span>
       <span class="drop-ticker-sep">·</span>
-      <span>HANDCRAFTED IN TAMPA</span>
+      <span>{{ ticker_2 }}</span>
       <span class="drop-ticker-sep">·</span>
-      <span>SMALL BATCH</span>
+      <span>{{ ticker_3 }}</span>
       <span class="drop-ticker-sep">·</span>
-      <span>1 OF 1</span>
+      <span>{{ ticker_4 }}</span>
       <span class="drop-ticker-sep">·</span>
-      <span>COASTAL FLORIDA</span>
+      <span>{{ ticker_5 }}</span>
       <span class="drop-ticker-sep">·</span>
-      <span>BEESWAX FINISH</span>
+      <span>{{ ticker_6 }}</span>
       <span class="drop-ticker-sep">·</span>
     {%- endfor -%}
   </div>
@@ -99,6 +105,14 @@
 {
   "name": "Featured Collection",
   "settings": [
+    { "type": "header", "content": "Marquee Ticker" },
+    { "type": "text", "id": "ticker_1", "label": "Ticker item 1", "default": "RECLAIMED SKATEBOARDS" },
+    { "type": "text", "id": "ticker_2", "label": "Ticker item 2", "default": "HANDCRAFTED IN TAMPA" },
+    { "type": "text", "id": "ticker_3", "label": "Ticker item 3", "default": "SMALL BATCH" },
+    { "type": "text", "id": "ticker_4", "label": "Ticker item 4", "default": "1 OF 1" },
+    { "type": "text", "id": "ticker_5", "label": "Ticker item 5", "default": "COASTAL FLORIDA" },
+    { "type": "text", "id": "ticker_6", "label": "Ticker item 6", "default": "BEESWAX FINISH" },
+    { "type": "header", "content": "Collection" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Collection" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Current Drop" },
     { "type": "collection", "id": "collection", "label": "Collection" },

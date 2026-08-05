@@ -3,7 +3,12 @@
      ═══════════════════════════════════════════════════ -->
 
 <!-- ── 1. HERO ──────────────────────────────────────────── -->
-<section class="about-hero" style="background-image:url('https://images.unsplash.com/photo-1499676988064-a3779763470e?fm=jpg&q=80&w=2400&auto=format&fit=crop')">
+{%- if section.settings.hero_bg_image != blank -%}
+  {%- assign about_hero_bg = section.settings.hero_bg_image | image_url: width: 2400 -%}
+{%- else -%}
+  {%- assign about_hero_bg = 'https://images.unsplash.com/photo-1499676988064-a3779763470e?fm=jpg&q=80&w=2400&auto=format&fit=crop' -%}
+{%- endif -%}
+<section class="about-hero" style="background-image:url('{{ about_hero_bg }}')">
   <div class="about-hero-overlay" aria-hidden="true"></div>
   <div class="container">
     <span class="eyebrow reveal d1" style="color:var(--gold);">{{ section.settings.eyebrow | default: 'Our Story' }}</span>
@@ -16,9 +21,9 @@
 <section class="about-statement">
   <div class="container">
     <div class="reveal">
-      <p class="about-statement-text">Your board carried you.<br>Now it carries something else.</p>
+      <p class="about-statement-text">{{ section.settings.statement_headline | default: 'Your board carried you.' | newline_to_br }}</p>
       <div class="about-statement-rule" aria-hidden="true"></div>
-      <p class="about-statement-sub">Every ring starts as a board that was actually skated — pressed maple, worn rails, real history. We don't use new wood. We don't need to. The material is already out there.</p>
+      <p class="about-statement-sub">{{ section.settings.statement_body | default: "Every ring starts as a board that was actually skated — pressed maple, worn rails, real history. We don't use new wood. We don't need to. The material is already out there." }}</p>
     </div>
   </div>
 </section>
@@ -70,21 +75,26 @@
 </section>
 
 <!-- ── 5. BUILT FOR RIDERS ───────────────────────────────── -->
+{%- if section.settings.riders_image != blank -%}
+  {%- assign riders_img_src = section.settings.riders_image | image_url: width: 1200 -%}
+{%- else -%}
+  {%- assign riders_img_src = 'https://images.unsplash.com/photo-1753354006417-951f5ee236e3?fm=jpg&q=80&w=1200&auto=format&fit=crop' -%}
+{%- endif -%}
 <section class="section about-riders">
   <div class="container">
     <div class="about-riders-grid">
       <div class="about-riders-img reveal d1">
         <img
-          src="https://images.unsplash.com/photo-1753354006417-951f5ee236e3?fm=jpg&q=80&w=1200&auto=format&fit=crop"
-          alt="Skateboarder riding a concrete bowl"
+          src="{{ riders_img_src }}"
+          alt="{{ section.settings.riders_image_alt | default: 'Skateboarder riding a concrete bowl' }}"
           loading="lazy" width="800" height="1067">
       </div>
       <div class="reveal d2">
-        <span class="eyebrow" style="color:var(--teal);">For the Rider</span>
-        <h2 class="about-riders-heading">These Aren't for People Who Think Skating Is Cool.</h2>
-        <p class="section-body">They're for people who actually do it. Who know what a proper pop sounds like. Who've had the same deck for three years because the concave is perfect. Who understand that a board doesn't die — it just changes shape.</p>
-        <p class="section-body" style="margin-top:1rem;">We make rings for skaters because we understand the culture — and the responsibility that comes with it. Every ring is built from reclaimed maple and finished with natural beeswax, because jewelry shouldn't cost the planet. Sustainable by design. Made to be worn every day.</p>
-        <a href="/collections/all" class="btn btn-navy" style="margin-top:2rem;display:inline-block;">Shop the Rings &rarr;</a>
+        <span class="eyebrow" style="color:var(--teal);">{{ section.settings.riders_eyebrow | default: 'For the Rider' }}</span>
+        <h2 class="about-riders-heading">{{ section.settings.riders_heading | default: "These Aren't for People Who Think Skating Is Cool." }}</h2>
+        <p class="section-body">{{ section.settings.riders_body_1 | default: "They're for people who actually do it. Who know what a proper pop sounds like. Who've had the same deck for three years because the concave is perfect. Who understand that a board doesn't die — it just changes shape." }}</p>
+        <p class="section-body" style="margin-top:1rem;">{{ section.settings.riders_body_2 | default: "We make rings for skaters because we understand the culture — and the responsibility that comes with it. Every ring is built from reclaimed maple and finished with natural beeswax, because jewelry shouldn't cost the planet. Sustainable by design. Made to be worn every day." }}</p>
+        <a href="{{ section.settings.riders_btn_url | default: '/collections/all' }}" class="btn btn-navy" style="margin-top:2rem;display:inline-block;">{{ section.settings.riders_btn_text | default: 'Shop the Rings' }} &rarr;</a>
       </div>
     </div>
   </div>
@@ -113,15 +123,20 @@
 </section>
 
 <!-- ── 7. FULL-BLEED IMAGE MOMENT ────────────────────────── -->
+{%- if section.settings.fullbleed_image != blank -%}
+  {%- assign fullbleed_bg = section.settings.fullbleed_image | image_url: width: 2400 -%}
+{%- else -%}
+  {%- assign fullbleed_bg = 'https://images.unsplash.com/photo-1580634240125-b9f6ff4283d1?fm=jpg&q=80&w=2400&auto=format&fit=crop' -%}
+{%- endif -%}
 <div
   class="about-fullbleed"
-  style="background-image:url('https://images.unsplash.com/photo-1580634240125-b9f6ff4283d1?fm=jpg&q=80&w=2400&auto=format&fit=crop')"
+  style="background-image:url('{{ fullbleed_bg }}')"
   role="img"
-  aria-label="Skateboard on concrete road">
+  aria-label="{{ section.settings.fullbleed_image_alt | default: 'Skateboard on concrete road' }}">
   <div class="about-fullbleed-overlay" aria-hidden="true"></div>
   <div class="about-fullbleed-text reveal">
-    <span class="about-fullbleed-eyebrow">Zero Waste</span>
-    <p class="about-fullbleed-statement">No virgin wood.<br>No landfill.<br>Just a board that already existed,<br>shaped into something that lasts.</p>
+    <span class="about-fullbleed-eyebrow">{{ section.settings.fullbleed_eyebrow | default: 'Zero Waste' }}</span>
+    <p class="about-fullbleed-statement">{{ section.settings.fullbleed_statement | default: 'No virgin wood. No landfill. Just a board that already existed, shaped into something that lasts.' | newline_to_br }}</p>
   </div>
 </div>
 
@@ -167,13 +182,23 @@
 
 <!-- ── 9. FULL-BLEED SKATE IMAGE ───────────────────────── -->
 <figure class="about-bayshore-figure">
-  <img
-    src="https://images.unsplash.com/photo-1760773766821-a3fea86fd44a?fm=jpg&q=80&w=2400&auto=format&fit=crop"
-    alt="Skateboarder at a concrete skatepark"
-    class="about-bayshore-img"
-    loading="lazy"
-    width="1024"
-    height="576">
+  {%- if section.settings.skate_image != blank -%}
+    <img
+      src="{{ section.settings.skate_image | image_url: width: 2400 }}"
+      alt="{{ section.settings.skate_image_alt | default: 'Skateboarder at a concrete skatepark' }}"
+      class="about-bayshore-img"
+      loading="lazy"
+      width="1024"
+      height="576">
+  {%- else -%}
+    <img
+      src="https://images.unsplash.com/photo-1760773766821-a3fea86fd44a?fm=jpg&q=80&w=2400&auto=format&fit=crop"
+      alt="{{ section.settings.skate_image_alt | default: 'Skateboarder at a concrete skatepark' }}"
+      class="about-bayshore-img"
+      loading="lazy"
+      width="1024"
+      height="576">
+  {%- endif -%}
 </figure>
 
 <!-- ── 10. PROCESS TEASER ────────────────────────────────── -->
@@ -524,9 +549,13 @@
   "name": "About Page",
   "settings": [
     { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_bg_image", "label": "Hero background image" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our Story" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Built From Boards" },
     { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Every ring starts with a skateboard that already lived a life. We just give it another one." },
+    { "type": "header", "content": "Statement" },
+    { "type": "textarea", "id": "statement_headline", "label": "Statement headline", "default": "Your board carried you.\nNow it carries something else." },
+    { "type": "textarea", "id": "statement_body", "label": "Statement body", "default": "Every ring starts as a board that was actually skated — pressed maple, worn rails, real history. We don't use new wood. We don't need to. The material is already out there." },
     { "type": "header", "content": "Origin Story" },
     { "type": "text", "id": "origin_eyebrow", "label": "Eyebrow", "default": "Where It Started" },
     { "type": "text", "id": "origin_heading", "label": "Heading", "default": "A Board, a Saw, and a Good Idea" },
@@ -536,8 +565,25 @@
     { "type": "text", "id": "material_eyebrow", "label": "Eyebrow", "default": "The Material" },
     { "type": "text", "id": "material_heading", "label": "Heading", "default": "Why Skateboards" },
     { "type": "textarea", "id": "material_body", "label": "Body", "default": "Skateboarding isn't just a sport — it's a culture built on creativity, grit, and self-expression. Every deck carries that energy: the tricks it absorbed, the concrete it crossed, the skater who shaped it. When we turn that wood into a ring, we're not just making jewelry. We're capturing something real — the soul of skateboarding, worn on your hand every day." },
+    { "type": "header", "content": "Built for Riders" },
+    { "type": "image_picker", "id": "riders_image", "label": "Riders photo" },
+    { "type": "text", "id": "riders_image_alt", "label": "Riders photo alt text", "default": "Skateboarder riding a concrete bowl" },
+    { "type": "text", "id": "riders_eyebrow", "label": "Eyebrow", "default": "For the Rider" },
+    { "type": "textarea", "id": "riders_heading", "label": "Heading", "default": "These Aren't for People Who Think Skating Is Cool." },
+    { "type": "textarea", "id": "riders_body_1", "label": "Paragraph 1", "default": "They're for people who actually do it. Who know what a proper pop sounds like. Who've had the same deck for three years because the concave is perfect. Who understand that a board doesn't die — it just changes shape." },
+    { "type": "textarea", "id": "riders_body_2", "label": "Paragraph 2", "default": "We make rings for skaters because we understand the culture — and the responsibility that comes with it. Every ring is built from reclaimed maple and finished with natural beeswax, because jewelry shouldn't cost the planet. Sustainable by design. Made to be worn every day." },
+    { "type": "text", "id": "riders_btn_text", "label": "Button text", "default": "Shop the Rings" },
+    { "type": "url", "id": "riders_btn_url", "label": "Button link" },
     { "type": "header", "content": "Values Section" },
     { "type": "text", "id": "values_heading", "label": "Heading", "default": "Made Right. No Shortcuts." },
+    { "type": "header", "content": "Full-Bleed Image" },
+    { "type": "image_picker", "id": "fullbleed_image", "label": "Full-bleed background image" },
+    { "type": "text", "id": "fullbleed_image_alt", "label": "Image alt text", "default": "Skateboard on concrete road" },
+    { "type": "text", "id": "fullbleed_eyebrow", "label": "Eyebrow label", "default": "Zero Waste" },
+    { "type": "textarea", "id": "fullbleed_statement", "label": "Statement text", "default": "No virgin wood.\nNo landfill.\nJust a board that already existed,\nshaped into something that lasts." },
+    { "type": "header", "content": "Skate Photo (below Founder)" },
+    { "type": "image_picker", "id": "skate_image", "label": "Full-width skate photo" },
+    { "type": "text", "id": "skate_image_alt", "label": "Skate photo alt text", "default": "Skateboarder at a concrete skatepark" },
     { "type": "header", "content": "Founder" },
     { "type": "image_picker", "id": "founder_image", "label": "Founder photo" },
     { "type": "text", "id": "founder_eyebrow", "label": "Eyebrow", "default": "The Maker" },

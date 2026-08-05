@@ -17,23 +17,43 @@
   </div>
 
   <figure class="coastal-photo-wrap reveal">
-    <img
-      src="https://images.unsplash.com/photo-1547447134-cd3f5c716030?fm=jpg&q=80&w=1600&auto=format&fit=crop"
-      alt="Skateboarder riding concrete at speed"
-      class="coastal-photo"
-      loading="lazy"
-      width="1024"
-      height="500">
+    {%- if section.settings.photo_1 != blank -%}
+      <img
+        src="{{ section.settings.photo_1 | image_url: width: 1600 }}"
+        alt="{{ section.settings.photo_1_alt | default: 'Skateboarder riding concrete at speed' }}"
+        class="coastal-photo"
+        loading="lazy"
+        width="1024"
+        height="500">
+    {%- else -%}
+      <img
+        src="https://images.unsplash.com/photo-1547447134-cd3f5c716030?fm=jpg&q=80&w=1600&auto=format&fit=crop"
+        alt="{{ section.settings.photo_1_alt | default: 'Skateboarder riding concrete at speed' }}"
+        class="coastal-photo"
+        loading="lazy"
+        width="1024"
+        height="500">
+    {%- endif -%}
   </figure>
 
   <figure class="coastal-photo-wrap coastal-photo-skate-wrap reveal">
-    <img
-      src="https://cdn.shopify.com/s/files/1/0530/0695/8744/t/22/assets/the-role-of-skateboard-clothing-in-skate-culture_550x.jpg"
-      alt="Skateboarding culture and community"
-      class="coastal-photo coastal-photo--skate"
-      loading="lazy"
-      width="1024"
-      height="500">
+    {%- if section.settings.photo_2 != blank -%}
+      <img
+        src="{{ section.settings.photo_2 | image_url: width: 1600 }}"
+        alt="{{ section.settings.photo_2_alt | default: 'Skateboarding culture and community' }}"
+        class="coastal-photo coastal-photo--skate"
+        loading="lazy"
+        width="1024"
+        height="500">
+    {%- else -%}
+      <img
+        src="https://cdn.shopify.com/s/files/1/0530/0695/8744/t/22/assets/the-role-of-skateboard-clothing-in-skate-culture_550x.jpg"
+        alt="{{ section.settings.photo_2_alt | default: 'Skateboarding culture and community' }}"
+        class="coastal-photo coastal-photo--skate"
+        loading="lazy"
+        width="1024"
+        height="500">
+    {%- endif -%}
   </figure>
 </section>
 
@@ -58,6 +78,32 @@
       "id": "body",
       "label": "Body text",
       "default": "Skate culture doesn't follow trends — it sets them. We make jewelry that's built the same way: from reclaimed materials that waste nothing, worn by people who actually skate. Sustainable by design. Made to last as long as the passion does."
+    },
+    {
+      "type": "header",
+      "content": "Photos"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo_1",
+      "label": "Photo 1"
+    },
+    {
+      "type": "text",
+      "id": "photo_1_alt",
+      "label": "Photo 1 alt text",
+      "default": "Skateboarder riding concrete at speed"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo_2",
+      "label": "Photo 2"
+    },
+    {
+      "type": "text",
+      "id": "photo_2_alt",
+      "label": "Photo 2 alt text",
+      "default": "Skateboarding culture and community"
     }
   ],
   "blocks": [
