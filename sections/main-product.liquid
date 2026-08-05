@@ -1,4 +1,10 @@
-<article class="page-wrap" itemscope itemtype="https://schema.org/Product">
+{%- if section.settings.bg_image != blank -%}
+  {%- assign _prod_bg = section.settings.bg_image | image_url: width: 2400 -%}
+{%- endif -%}
+<article class="page-wrap" itemscope itemtype="https://schema.org/Product" {% if section.settings.bg_image != blank %}style="background-image:url('{{ _prod_bg }}');background-size:cover;background-position:center;position:relative;"{% endif %}>
+  {%- if section.settings.bg_image != blank and section.settings.bg_overlay > 0 -%}
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,{{ section.settings.bg_overlay | divided_by: 100.0 }});pointer-events:none;" aria-hidden="true"></div>
+  {%- endif -%}
   <meta itemprop="brand" content="Bayshore Rings">
   <meta itemprop="category" content="Eco-Friendly Jewelry">
 
@@ -126,6 +132,24 @@
 {
   "name": "Product",
   "settings": [
+    {
+      "type": "header",
+      "content": "Page Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image"
+    },
+    {
+      "type": "range",
+      "id": "bg_overlay",
+      "label": "Overlay darkness (%)",
+      "min": 0,
+      "max": 80,
+      "step": 10,
+      "default": 0
+    },
     {
       "type": "header",
       "content": "Product Meta Badges"

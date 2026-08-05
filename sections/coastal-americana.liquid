@@ -1,5 +1,11 @@
-<section class="section coastal" id="coastal" style="padding-top:{{ section.settings.padding_top }}rem; padding-bottom:{{ section.settings.padding_bottom }}rem;">
-  <div class="container">
+{%- if section.settings.bg_image != blank -%}
+  {%- assign _coast_bg = section.settings.bg_image | image_url: width: 2400 -%}
+{%- endif -%}
+<section class="section coastal" id="coastal" style="padding-top:{{ section.settings.padding_top }}rem; padding-bottom:{{ section.settings.padding_bottom }}rem;{% if section.settings.bg_image != blank %} background-image:url('{{ _coast_bg }}');background-size:cover;background-position:center;position:relative;{% endif %}">
+  {%- if section.settings.bg_image != blank and section.settings.bg_overlay > 0 -%}
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,{{ section.settings.bg_overlay | divided_by: 100.0 }});pointer-events:none;" aria-hidden="true"></div>
+  {%- endif -%}
+  <div class="container" style="position:relative;">
     <div class="coastal-inner reveal">
       <span class="eyebrow">{{ section.settings.eyebrow }}</span>
       <h2>{{ section.settings.heading }}</h2>
@@ -78,6 +84,24 @@
       "id": "body",
       "label": "Body text",
       "default": "Skate culture doesn't follow trends — it sets them. We make jewelry that's built the same way: from reclaimed materials that waste nothing, worn by people who actually skate. Sustainable by design. Made to last as long as the passion does."
+    },
+    {
+      "type": "header",
+      "content": "Section Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Section background image"
+    },
+    {
+      "type": "range",
+      "id": "bg_overlay",
+      "label": "Overlay darkness (%)",
+      "min": 0,
+      "max": 80,
+      "step": 10,
+      "default": 0
     },
     {
       "type": "header",

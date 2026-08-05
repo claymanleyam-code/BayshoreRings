@@ -5,8 +5,11 @@
 
 {%- paginate blog.articles by 9 -%}
 
+{%- if section.settings.bg_image != blank -%}
+  {%- assign _blog_bg = section.settings.bg_image | image_url: width: 2400 -%}
+{%- endif -%}
 <!-- HERO -->
-<section class="about-hero blog-hero" aria-labelledby="blog-h1">
+<section class="about-hero blog-hero" aria-labelledby="blog-h1" {% if section.settings.bg_image != blank %}style="background-image:url('{{ _blog_bg }}');background-size:cover;background-position:center;"{% endif %}>
   <div class="container">
     <span class="eyebrow reveal d1">{{ section.settings.eyebrow | default: 'From the Workshop' }}</span>
     <div class="gold-bar center reveal d1" aria-hidden="true"></div>
@@ -228,6 +231,15 @@
 {
   "name": "Blog Index",
   "settings": [
+    {
+      "type": "header",
+      "content": "Hero Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Hero background image"
+    },
     {
       "type": "text",
       "id": "eyebrow",
