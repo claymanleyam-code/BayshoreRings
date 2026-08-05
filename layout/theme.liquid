@@ -162,6 +162,22 @@
 
   {{ content_for_header }}
   {{ 'bayshore.css' | asset_url | stylesheet_tag }}
+
+  {%- comment -%}Theme editor color + font overrides — injected after bayshore.css so they win{%- endcomment -%}
+  <style>
+    :root {
+      --navy:      {{ settings.color_navy }};
+      --navy-dark: {{ settings.color_navy }};
+      --cream:     {{ settings.color_cream }};
+      --teal:      {{ settings.color_teal }};
+      --red:       {{ settings.color_red }};
+      --accent:    {{ settings.color_accent }};
+      --muted:     {{ settings.color_muted }};
+    }
+    body { font-family: '{{ settings.font_body }}', sans-serif; }
+    h1, h2, h3 { font-family: '{{ settings.font_heading }}', 'Oswald', sans-serif; }
+    .eyebrow, .hero-kicker span, .section-label, .kicker { font-family: '{{ settings.font_accent }}', serif; }
+  </style>
 </head>
 <body>
 
