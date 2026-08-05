@@ -1,6 +1,6 @@
 <div class="page-wrap">
   <div class="collection-header reveal">
-    <span class="eyebrow section-label">The Collection</span>
+    <span class="eyebrow section-label">{{ section.settings.eyebrow | default: 'The Collection' }}</span>
     <h1>{{ collection.title }}</h1>
     <div class="gold-bar"></div>
     {%- if collection.description != blank -%}
@@ -8,7 +8,7 @@
     {%- endif -%}
   </div>
 
-  {%- paginate collection.products by 6 -%}
+  {%- paginate collection.products by section.settings.products_per_page -%}
 
     {%- if collection.products_count > 0 -%}
       <div class="collection-grid">
@@ -71,7 +71,23 @@
 {% schema %}
 {
   "name": "Collection",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "The Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 3,
+      "max": 24,
+      "step": 3,
+      "default": 6
+    }
+  ],
   "presets": [{ "name": "Collection" }]
 }
 {% endschema %}

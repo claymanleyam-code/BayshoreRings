@@ -8,10 +8,10 @@
 <!-- HERO -->
 <section class="about-hero blog-hero" aria-labelledby="blog-h1">
   <div class="container">
-    <span class="eyebrow reveal d1">From the Workshop</span>
+    <span class="eyebrow reveal d1">{{ section.settings.eyebrow | default: 'From the Workshop' }}</span>
     <div class="gold-bar center reveal d1" aria-hidden="true"></div>
     <h1 id="blog-h1" class="reveal d2">{{ blog.title }}</h1>
-    <p class="about-hero-sub reveal d3">Stories from the workshop floor — recycled skateboard rings, Tampa skate culture, eco friendly jewelry, and the craft behind every handmade wooden ring we make.</p>
+    <p class="about-hero-sub reveal d3">{{ section.settings.subheading | default: 'Stories from the workshop floor — recycled skateboard rings, Tampa skate culture, eco friendly jewelry, and the craft behind every handmade wooden ring we make.' }}</p>
   </div>
 </section>
 
@@ -227,7 +227,20 @@
 {% schema %}
 {
   "name": "Blog Index",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "From the Workshop"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Hero subheading",
+      "default": "Stories from the workshop floor — recycled skateboard rings, Tampa skate culture, eco friendly jewelry, and the craft behind every handmade wooden ring we make."
+    }
+  ],
   "presets": [{ "name": "Blog Index" }]
 }
 {% endschema %}

@@ -1,11 +1,14 @@
 <style>
-  #story { padding-top: 5.75rem !important; padding-bottom: 5.75rem !important; }
-  #products { padding-top: 4.4rem !important; padding-bottom: 4.4rem !important; }
   .section-slide { opacity: 0; transform: translateY(32px); transition: opacity 0.38s ease, transform 0.38s cubic-bezier(0.22, 1, 0.36, 1) !important; }
   .section-slide.in { opacity: 1; transform: translateY(0); }
 </style>
-<section class="section story" id="story">
-  <div class="story-bg-img" style="background-image:url('{{ 'decks-floor.jpg' | asset_url }}');"></div>
+{%- if section.settings.bg_image != blank -%}
+  {%- assign story_bg = section.settings.bg_image | image_url: width: 2400 -%}
+{%- else -%}
+  {%- assign story_bg = 'decks-floor.jpg' | asset_url -%}
+{%- endif -%}
+<section class="section story" id="story" style="padding-top:{{ section.settings.padding_top }}rem; padding-bottom:{{ section.settings.padding_bottom }}rem;">
+  <div class="story-bg-img" style="background-image:url('{{ story_bg }}');"></div>
   <div class="story-bg-overlay"></div>
   <div class="container story-container">
     <div class="story-split">
@@ -54,6 +57,37 @@
       "type": "url",
       "id": "btn_url",
       "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding (rem)",
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding (rem)",
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "default": 6
     }
   ],
   "presets": [

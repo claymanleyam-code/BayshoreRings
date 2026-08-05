@@ -18,7 +18,12 @@
 <!-- ══════════════════════════════════════════
      1. HERO
      ══════════════════════════════════════════ -->
-<section class="about-hero reviews-hero" style="background-image:url('https://assets.simpleviewinc.com/simpleview/image/upload/c_limit,h_1200,q_75,w_1200/v1/clients/tampabay/IMG_1569_6bd7bb8a-0680-47c6-abcb-b55941f58c39.jpg')" aria-labelledby="reviews-h1">
+{%- if section.settings.hero_bg_image != blank -%}
+  {%- assign reviews_hero_bg = section.settings.hero_bg_image | image_url: width: 2400 -%}
+{%- else -%}
+  {%- assign reviews_hero_bg = 'https://assets.simpleviewinc.com/simpleview/image/upload/c_limit,h_1200,q_75,w_1200/v1/clients/tampabay/IMG_1569_6bd7bb8a-0680-47c6-abcb-b55941f58c39.jpg' -%}
+{%- endif -%}
+<section class="about-hero reviews-hero" style="background-image:url('{{ reviews_hero_bg }}')" aria-labelledby="reviews-h1">
   <div class="reviews-hero-overlay" aria-hidden="true"></div>
   <div class="container">
     <span class="eyebrow reveal d1">{{ section.settings.eyebrow | default: 'Bayshore Rings Reviews' }}</span>
@@ -886,6 +891,11 @@
     {
       "type": "header",
       "content": "Hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_bg_image",
+      "label": "Hero background image"
     },
     {
       "type": "text",

@@ -1,4 +1,4 @@
-<section class="section features">
+<section class="section features" style="padding-top:{{ section.settings.padding_top }}rem; padding-bottom:{{ section.settings.padding_bottom }}rem;">
   <div class="container">
     <div class="reveal" style="text-align:center; margin-bottom:3rem;">
       <span class="eyebrow section-label">{{ section.settings.eyebrow }}</span>
@@ -32,6 +32,28 @@
       "id": "heading",
       "label": "Heading",
       "default": "Made Different. Worn Everyday."
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding (rem)",
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding (rem)",
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "default": 5
     }
   ],
   "blocks": [

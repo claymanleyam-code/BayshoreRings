@@ -1,4 +1,4 @@
-<section class="section coastal" id="coastal">
+<section class="section coastal" id="coastal" style="padding-top:{{ section.settings.padding_top }}rem; padding-bottom:{{ section.settings.padding_bottom }}rem;">
   <div class="container">
     <div class="coastal-inner reveal">
       <span class="eyebrow">{{ section.settings.eyebrow }}</span>
@@ -104,6 +104,28 @@
       "id": "photo_2_alt",
       "label": "Photo 2 alt text",
       "default": "Skateboarding culture and community"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding (rem)",
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding (rem)",
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "default": 5
     }
   ],
   "blocks": [

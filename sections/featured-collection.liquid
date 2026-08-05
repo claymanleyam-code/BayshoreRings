@@ -31,7 +31,7 @@
 </div>
 
 <!-- ── DROP SECTION ───────────────────────────────────── -->
-<section class="drop-section" id="products">
+<section class="drop-section" id="products" style="padding-top:{{ section.settings.padding_top }}rem; padding-bottom:{{ section.settings.padding_bottom }}rem;">
   <div class="drop-header">
     <div class="drop-header-left">
       <span class="eyebrow" style="color:var(--teal);">{{ section.settings.eyebrow }}</span>
@@ -118,7 +118,10 @@
     { "type": "collection", "id": "collection", "label": "Collection" },
     { "type": "range", "id": "product_limit", "label": "Max products", "min": 2, "max": 12, "step": 1, "default": 6 },
     { "type": "text", "id": "view_all_text", "label": "View All text", "default": "Shop All Rings" },
-    { "type": "url", "id": "view_all_url", "label": "View All link" }
+    { "type": "url", "id": "view_all_url", "label": "View All link" },
+    { "type": "header", "content": "Section Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding (rem)", "min": 0, "max": 16, "step": 1, "default": 4 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding (rem)", "min": 0, "max": 16, "step": 1, "default": 4 }
   ],
   "presets": [{ "name": "Featured Collection" }]
 }

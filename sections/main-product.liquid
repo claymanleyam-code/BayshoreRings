@@ -82,43 +82,41 @@
       {%- endform -%}
 
       <div class="product-meta">
+        {%- if section.settings.meta_1 != blank -%}
         <span class="product-meta-item">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-          Free shipping on all domestic orders
+          {{ section.settings.meta_1 }}
         </span>
+        {%- endif -%}
+        {%- if section.settings.meta_2 != blank -%}
         <span class="product-meta-item">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 12 20 22 4 22"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-          Handcrafted from recycled skateboard wood
+          {{ section.settings.meta_2 }}
         </span>
+        {%- endif -%}
+        {%- if section.settings.meta_3 != blank -%}
         <span class="product-meta-item">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Made to order — ships in 5–7 business days
+          {{ section.settings.meta_3 }}
         </span>
+        {%- endif -%}
       </div>
     </div>
 
   </div>
 
   <!-- SEO Feature Callouts -->
-  <section class="product-features" aria-label="Why Bayshore Rings">
-    <h2 class="product-features-heading">Why Bayshore Rings Skateboard Rings?</h2>
+  <section class="product-features" aria-label="{{ section.settings.features_heading | default: 'Why Bayshore Rings' }}">
+    <h2 class="product-features-heading">{{ section.settings.features_heading | default: 'Why Bayshore Rings Skateboard Rings?' }}</h2>
     <div class="product-features-grid">
-      <div class="product-feature-item">
-        <h3>Waterproof Wooden Jewelry</h3>
-        <p>Sealed with a food-grade beeswax finish so your wooden jewelry holds up to daily wear, water, and the elements — without cracking or warping.</p>
-      </div>
-      <div class="product-feature-item">
-        <h3>Real Recycled Jewelry</h3>
-        <p>Every skateboard ring is shaped from a retired deck. The natural maple layers make each piece of recycled jewelry unique — no two colorways are the same.</p>
-      </div>
-      <div class="product-feature-item">
-        <h3>Tampa-Made Recycled Jewelry</h3>
-        <p>Crafted by hand in Tampa, FL. Our recycled jewelry is made in small batches — zero mass production, zero virgin materials, zero shortcuts.</p>
-      </div>
-      <div class="product-feature-item">
-        <h3>The Only Skateboard Ring Like It</h3>
-        <p>A standout choice for skaters, surfers, and anyone who wants Tampa jewelry that tells a real story — an alternative wedding band with actual skate culture roots.</p>
-      </div>
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'feature' -%}
+          <div class="product-feature-item" {{ block.shopify_attributes }}>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.body }}</p>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
     </div>
   </section>
 
@@ -127,7 +125,68 @@
 {% schema %}
 {
   "name": "Product",
-  "settings": [],
-  "presets": [{ "name": "Product" }]
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product Meta Badges"
+    },
+    {
+      "type": "text",
+      "id": "meta_1",
+      "label": "Badge 1 (shipping)",
+      "default": "Free shipping on all domestic orders"
+    },
+    {
+      "type": "text",
+      "id": "meta_2",
+      "label": "Badge 2 (material)",
+      "default": "Handcrafted from recycled skateboard wood"
+    },
+    {
+      "type": "text",
+      "id": "meta_3",
+      "label": "Badge 3 (lead time)",
+      "default": "Made to order — ships in 5–7 business days"
+    },
+    {
+      "type": "header",
+      "content": "Feature Callouts"
+    },
+    {
+      "type": "text",
+      "id": "features_heading",
+      "label": "Features section heading",
+      "default": "Why Bayshore Rings Skateboard Rings?"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Feature title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Feature description",
+          "default": "Description of this feature."
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Product",
+    "blocks": [
+      { "type": "feature", "settings": { "title": "Waterproof Wooden Jewelry", "body": "Sealed with a food-grade beeswax finish so your wooden jewelry holds up to daily wear, water, and the elements — without cracking or warping." } },
+      { "type": "feature", "settings": { "title": "Real Recycled Jewelry", "body": "Every skateboard ring is shaped from a retired deck. The natural maple layers make each piece of recycled jewelry unique — no two colorways are the same." } },
+      { "type": "feature", "settings": { "title": "Tampa-Made Recycled Jewelry", "body": "Crafted by hand in Tampa, FL. Our recycled jewelry is made in small batches — zero mass production, zero virgin materials, zero shortcuts." } },
+      { "type": "feature", "settings": { "title": "The Only Skateboard Ring Like It", "body": "A standout choice for skaters, surfers, and anyone who wants Tampa jewelry that tells a real story — an alternative wedding band with actual skate culture roots." } }
+    ]
+  }]
 }
 {% endschema %}

@@ -1,4 +1,4 @@
-<section class="hero" id="home">
+<section class="hero" id="home" style="padding-top:{{ section.settings.padding_top }}rem; padding-bottom:{{ section.settings.padding_bottom }}rem;">
   <div class="hero-text">
     <div class="hero-kicker">
       <div class="hero-kicker-line"></div>
@@ -12,7 +12,11 @@
   </div>
 
   <div class="hero-bg">
-    <img class="hero-ring-photo" src="{{ 'about-working.jpg' | asset_url }}" alt="Bayshore Rings — handcrafted rings from recycled skateboard decks" loading="eager">
+    {%- if section.settings.hero_image != blank -%}
+      <img class="hero-ring-photo" src="{{ section.settings.hero_image | image_url: width: 1200 }}" alt="{{ section.settings.hero_image_alt | default: 'Bayshore Rings — handcrafted rings from recycled skateboard decks' }}" loading="eager">
+    {%- else -%}
+      <img class="hero-ring-photo" src="{{ 'about-working.jpg' | asset_url }}" alt="{{ section.settings.hero_image_alt | default: 'Bayshore Rings — handcrafted rings from recycled skateboard decks' }}" loading="eager">
+    {%- endif -%}
   </div>
 </section>
 
@@ -59,6 +63,43 @@
       "type": "url",
       "id": "btn_secondary_url",
       "label": "Secondary button link"
+    },
+    {
+      "type": "header",
+      "content": "Hero Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero photo"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Hero photo alt text",
+      "default": "Bayshore Rings — handcrafted rings from recycled skateboard decks"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding (rem)",
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding (rem)",
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "default": 0
     }
   ],
   "presets": [
