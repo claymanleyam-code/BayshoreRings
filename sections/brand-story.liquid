@@ -12,7 +12,7 @@
 {%- assign _mw    = section.settings.content_max_width -%}
 {%- assign _pos   = section.settings.content_position -%}
 {%- if _pos == 'left' -%}{%- assign _cmarg = '0 auto 0 0' -%}{%- elsif _pos == 'right' -%}{%- assign _cmarg = '0 0 0 auto' -%}{%- else -%}{%- assign _cmarg = '0 auto' -%}{%- endif -%}
-<section class="section story" id="story" style="padding-top:{{ section.settings.padding_top }}rem; padding-bottom:{{ section.settings.padding_bottom }}rem;{% if _min_h > 0 %}min-height:{{ _min_h }}vh;{% endif %}">
+<section class="section story" id="story" style="padding-top:{{ section.settings.padding_top }}rem; padding-bottom:{{ section.settings.padding_bottom }}rem;{% if _min_h > 0 %}min-height:{{ _min_h }}vh;display:flex;flex-direction:column;justify-content:center;{% endif %}">
   <div class="story-bg-img" style="background-image:url('{{ story_bg }}');"></div>
   <div class="story-bg-overlay"></div>
   <div class="container story-container">
@@ -51,7 +51,7 @@
     { "type": "range", "id": "content_max_width", "label": "Content width", "min": 300, "max": 1400, "step": 50, "unit": "px", "default": 550 },
     { "type": "select", "id": "content_position", "label": "Content position", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "left" },
     { "type": "header", "content": "Section Size" },
-    { "type": "range", "id": "section_min_height", "label": "Section height", "min": 0, "max": 100, "step": 5, "unit": "vh", "default": 0 }
+    { "type": "range", "id": "section_min_height", "label": "Section height", "min": 0, "max": 100, "step": 5, "unit": "vh", "default": 100 }
   ],
   "presets": [{ "name": "Brand Story" }]
 }

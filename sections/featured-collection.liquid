@@ -12,7 +12,7 @@
 {%- assign _mw    = section.settings.content_max_width -%}
 {%- assign _pos   = section.settings.content_position -%}
 {%- if _pos == 'left' -%}{%- assign _cmarg = '0 auto 0 0' -%}{%- elsif _pos == 'right' -%}{%- assign _cmarg = '0 0 0 auto' -%}{%- else -%}{%- assign _cmarg = '0 auto' -%}{%- endif -%}
-<div {% if section.settings.bg_image != blank %}style="background-image:url('{{ _fc_bg }}');background-size:cover;background-position:center;position:relative;{% if _min_h > 0 %}min-height:{{ _min_h }}vh;{% endif %}"{% elsif _min_h > 0 %}style="min-height:{{ _min_h }}vh;"{% endif %}>
+<div {% if section.settings.bg_image != blank %}style="background-image:url('{{ _fc_bg }}');background-size:cover;background-position:center;position:relative;{% if _min_h > 0 %}min-height:{{ _min_h }}vh;display:flex;flex-direction:column;justify-content:center;{% endif %}"{% elsif _min_h > 0 %}style="min-height:{{ _min_h }}vh;display:flex;flex-direction:column;justify-content:center;"{% endif %}>
   {%- if section.settings.bg_image != blank and section.settings.bg_overlay > 0 -%}
     <div style="position:absolute;inset:0;background:rgba(0,0,0,{{ section.settings.bg_overlay | divided_by: 100.0 }});pointer-events:none;" aria-hidden="true"></div>
   {%- endif -%}
@@ -121,7 +121,7 @@
     { "type": "range", "id": "content_max_width", "label": "Content width", "min": 300, "max": 1400, "step": 50, "unit": "px", "default": 1200 },
     { "type": "select", "id": "content_position", "label": "Content position", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "center" },
     { "type": "header", "content": "Section Size" },
-    { "type": "range", "id": "section_min_height", "label": "Section height", "min": 0, "max": 100, "step": 5, "unit": "vh", "default": 0 }
+    { "type": "range", "id": "section_min_height", "label": "Section height", "min": 0, "max": 100, "step": 5, "unit": "vh", "default": 100 }
   ],
   "presets": [{ "name": "Featured Collection" }]
 }
