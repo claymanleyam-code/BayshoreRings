@@ -1,22 +1,27 @@
 {%- if section.settings.bg_image != blank -%}
   {%- assign _feat_bg = section.settings.bg_image | image_url: width: 2400 -%}
 {%- endif -%}
-<section class="section features" style="padding-top:{{ section.settings.padding_top }}rem; padding-bottom:{{ section.settings.padding_bottom }}rem;{% if section.settings.bg_image != blank %} background-image:url('{{ _feat_bg }}');background-size:cover;background-position:center;position:relative;{% endif %}">
+{%- assign _min_h = section.settings.section_min_height -%}
+{%- assign _align = section.settings.text_align -%}
+{%- assign _mw    = section.settings.content_max_width -%}
+{%- assign _pos   = section.settings.content_position -%}
+{%- if _pos == 'left' -%}{%- assign _cmarg = '0 auto 0 0' -%}{%- elsif _pos == 'right' -%}{%- assign _cmarg = '0 0 0 auto' -%}{%- else -%}{%- assign _cmarg = '0 auto' -%}{%- endif -%}
+<section class="section features" style="padding-top:{{ section.settings.padding_top }}rem; padding-bottom:{{ section.settings.padding_bottom }}rem;{% if _min_h > 0 %}min-height:{{ _min_h }}vh;{% endif %}{% if section.settings.bg_image != blank %} background-image:url('{{ _feat_bg }}');background-size:cover;background-position:center;position:relative;{% endif %}">
   {%- if section.settings.bg_image != blank and section.settings.bg_overlay > 0 -%}
     <div style="position:absolute;inset:0;background:rgba(0,0,0,{{ section.settings.bg_overlay | divided_by: 100.0 }});pointer-events:none;" aria-hidden="true"></div>
   {%- endif -%}
   <div class="container" style="position:relative;">
-    <div class="reveal" style="text-align:center; margin-bottom:3rem;">
+    <div class="reveal" style="max-width:{{ _mw }}px;margin:{{ _cmarg }};text-align:{{ _align }};margin-bottom:3rem;">
       <span class="eyebrow section-label">{{ section.settings.eyebrow }}</span>
-      <h2 class="section-heading">{{ section.settings.heading }}</h2>
+      <h2 class="section-heading" style="font-size:{{ section.settings.heading_size }}px;">{{ section.settings.heading }}</h2>
       <div class="gold-bar center"></div>
     </div>
     <div class="features-grid">
       {%- for block in section.blocks -%}
         <div class="feature-card reveal d{{ forloop.index }}" {{ block.shopify_attributes }}>
           <div class="feature-num">0{{ forloop.index }}</div>
-          <h3>{{ block.settings.title }}</h3>
-          <p>{{ block.settings.body }}</p>
+          <h3 style="font-size:{{ section.settings.heading_size | times: 0.55 | round }}px;">{{ block.settings.title }}</h3>
+          <p style="font-size:{{ section.settings.body_size }}px;">{{ block.settings.body }}</p>
         </div>
       {%- endfor -%}
     </div>
@@ -27,76 +32,30 @@
 {
   "name": "Features",
   "settings": [
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow label",
-      "default": "Why Bayshore"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Made Different. Worn Everyday."
-    },
-    {
-      "type": "header",
-      "content": "Section Background"
-    },
-    {
-      "type": "image_picker",
-      "id": "bg_image",
-      "label": "Background image"
-    },
-    {
-      "type": "range",
-      "id": "bg_overlay",
-      "label": "Overlay darkness (%)",
-      "min": 0,
-      "max": 80,
-      "step": 10,
-      "default": 0
-    },
-    {
-      "type": "header",
-      "content": "Section Spacing"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "label": "Top padding (rem)",
-      "min": 0,
-      "max": 16,
-      "step": 1,
-      "default": 5
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "label": "Bottom padding (rem)",
-      "min": 0,
-      "max": 16,
-      "step": 1,
-      "default": 5
-    }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow label", "default": "Why Bayshore" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Made Different. Worn Everyday." },
+    { "type": "header", "content": "Section Background" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background image" },
+    { "type": "range", "id": "bg_overlay", "label": "Overlay darkness (%)", "min": 0, "max": 80, "step": 10, "default": 0 },
+    { "type": "header", "content": "Section Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding (rem)", "min": 0, "max": 16, "step": 1, "default": 5 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding (rem)", "min": 0, "max": 16, "step": 1, "default": 5 },
+    { "type": "header", "content": "Text & Layout" },
+    { "type": "range", "id": "heading_size", "label": "Heading size", "min": 16, "max": 96, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "body_size", "label": "Body text size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "select", "id": "text_align", "label": "Text alignment", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "center" },
+    { "type": "range", "id": "content_max_width", "label": "Content width", "min": 300, "max": 1400, "step": 50, "unit": "px", "default": 900 },
+    { "type": "select", "id": "content_position", "label": "Content position", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "center" },
+    { "type": "header", "content": "Section Size" },
+    { "type": "range", "id": "section_min_height", "label": "Section height", "min": 0, "max": 100, "step": 5, "unit": "vh", "default": 0 }
   ],
   "blocks": [
     {
       "type": "feature",
       "name": "Feature",
       "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Recycled Skateboard Wood"
-        },
-        {
-          "type": "textarea",
-          "id": "body",
-          "label": "Description",
-          "default": "Each ring is made from layered skateboard decks, giving every piece its own color pattern. No two rings are identical."
-        }
+        { "type": "text", "id": "title", "label": "Title", "default": "Recycled Skateboard Wood" },
+        { "type": "textarea", "id": "body", "label": "Description", "default": "Each ring is made from layered skateboard decks, giving every piece its own color pattern. No two rings are identical." }
       ]
     }
   ],
@@ -104,27 +63,9 @@
     {
       "name": "Features",
       "blocks": [
-        {
-          "type": "feature",
-          "settings": {
-            "title": "Recycled Skateboard Wood",
-            "body": "Each ring is made from layered skateboard decks, giving every piece its own color pattern. No two rings are identical."
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "title": "Clean Everyday Fit",
-            "body": "Designed to feel comfortable, simple, and wearable — not bulky or overdone. A ring you forget you're wearing."
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "title": "Small-Batch Craft",
-            "body": "Built in small batches with attention to finish, shape, and detail. We don't rush. Each ring gets the time it deserves."
-          }
-        }
+        { "type": "feature", "settings": { "title": "Recycled Skateboard Wood", "body": "Each ring is made from layered skateboard decks, giving every piece its own color pattern. No two rings are identical." } },
+        { "type": "feature", "settings": { "title": "Clean Everyday Fit", "body": "Designed to feel comfortable, simple, and wearable — not bulky or overdone. A ring you forget you're wearing." } },
+        { "type": "feature", "settings": { "title": "Small-Batch Craft", "body": "Built in small batches with attention to finish, shape, and detail. We don't rush. Each ring gets the time it deserves." } }
       ]
     }
   ]

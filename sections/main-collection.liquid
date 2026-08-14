@@ -1,21 +1,25 @@
 {%- if section.settings.bg_image != blank -%}
   {%- assign _col_bg = section.settings.bg_image | image_url: width: 2400 -%}
 {%- endif -%}
-<div class="page-wrap" {% if section.settings.bg_image != blank %}style="background-image:url('{{ _col_bg }}');background-size:cover;background-position:center;position:relative;"{% endif %}>
+{%- assign _min_h = section.settings.section_min_height -%}
+{%- assign _align = section.settings.text_align -%}
+{%- assign _mw    = section.settings.content_max_width -%}
+{%- assign _pos   = section.settings.content_position -%}
+{%- if _pos == 'left' -%}{%- assign _cmarg = '0 auto 0 0' -%}{%- elsif _pos == 'right' -%}{%- assign _cmarg = '0 0 0 auto' -%}{%- else -%}{%- assign _cmarg = '0 auto' -%}{%- endif -%}
+<div class="page-wrap" style="{% if section.settings.bg_image != blank %}background-image:url('{{ _col_bg }}');background-size:cover;background-position:center;position:relative;{% endif %}{% if _min_h > 0 %}min-height:{{ _min_h }}vh;{% endif %}">
   {%- if section.settings.bg_image != blank and section.settings.bg_overlay > 0 -%}
     <div style="position:absolute;inset:0;background:rgba(0,0,0,{{ section.settings.bg_overlay | divided_by: 100.0 }});pointer-events:none;" aria-hidden="true"></div>
   {%- endif -%}
-  <div class="collection-header reveal">
+  <div class="collection-header reveal" style="max-width:{{ _mw }}px;margin:{{ _cmarg }};text-align:{{ _align }};">
     <span class="eyebrow section-label">{{ section.settings.eyebrow | default: 'The Collection' }}</span>
-    <h1>{{ collection.title }}</h1>
+    <h1 style="font-size:{{ section.settings.heading_size }}px;">{{ collection.title }}</h1>
     <div class="gold-bar"></div>
     {%- if collection.description != blank -%}
-      <p class="section-body" style="margin-top:0.75rem;">{{ collection.description }}</p>
+      <p class="section-body" style="margin-top:0.75rem;font-size:{{ section.settings.body_size }}px;">{{ collection.description }}</p>
     {%- endif -%}
   </div>
 
   {%- paginate collection.products by section.settings.products_per_page -%}
-
     {%- if collection.products_count > 0 -%}
       <div class="collection-grid">
         {%- assign delay_classes = 'd1,d2,d3,d1,d2,d3,d1,d2,d3,d1,d2,d3' | split: ',' -%}
@@ -24,15 +28,10 @@
           <a href="{{ product.url }}" class="p-card reveal {{ delay }}">
             <div class="p-img">
               {%- if product.featured_image -%}
-                <img
-                  src="{{ product.featured_image | image_url: width: 600 }}"
-                  alt="{{ product.featured_image.alt | default: product.title | escape }}"
-                  width="600" height="600"
-                  loading="lazy">
+                <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="600" height="600" loading="lazy">
               {%- else -%}
                 {% render 'ring-placeholder' %}
               {%- endif -%}
-
               {%- if product.available == false -%}
                 <span class="p-status s-soldout">Sold Out</span>
               {%- elsif product.tags contains 'limited' or product.tags contains 'Limited' -%}
@@ -42,12 +41,11 @@
               {%- elsif product.tags contains 'popular' or product.tags contains 'Popular' -%}
                 <span class="p-status s-popular">Popular</span>
               {%- endif -%}
-
               <div class="p-img-overlay"></div>
             </div>
             <div class="p-info">
-              <div class="p-name">{{ product.title }}</div>
-              <p class="p-desc">{{ product.description | strip_html | truncate: 90 }}</p>
+              <div class="p-name" style="font-size:{{ section.settings.body_size }}px;">{{ product.title }}</div>
+              <p class="p-desc" style="font-size:{{ section.settings.body_size | minus: 2 }}px;">{{ product.description | strip_html | truncate: 90 }}</p>
               <div class="p-foot">
                 <span class="p-price">
                   {%- if product.price_varies -%}From {{ product.price_min | money }}{%- else -%}{{ product.price | money }}{%- endif -%}
@@ -60,17 +58,12 @@
           </a>
         {%- endfor -%}
       </div>
-
       {%- if paginate.pages > 1 -%}
-        <div style="text-align:center;margin-top:3rem;">
-          {{ paginate | default_pagination }}
-        </div>
+        <div style="text-align:center;margin-top:3rem;">{{ paginate | default_pagination }}</div>
       {%- endif -%}
-
     {%- else -%}
-      <p style="text-align:center;padding:4rem 0;color:var(--muted);">No products found in this collection.</p>
+      <p style="text-align:center;padding:4rem 0;color:var(--muted);font-size:{{ section.settings.body_size }}px;">No products found in this collection.</p>
     {%- endif -%}
-
   {%- endpaginate -%}
 </div>
 
@@ -78,39 +71,19 @@
 {
   "name": "Collection",
   "settings": [
-    {
-      "type": "header",
-      "content": "Page Background"
-    },
-    {
-      "type": "image_picker",
-      "id": "bg_image",
-      "label": "Background image"
-    },
-    {
-      "type": "range",
-      "id": "bg_overlay",
-      "label": "Overlay darkness (%)",
-      "min": 0,
-      "max": 80,
-      "step": 10,
-      "default": 0
-    },
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow label",
-      "default": "The Collection"
-    },
-    {
-      "type": "range",
-      "id": "products_per_page",
-      "label": "Products per page",
-      "min": 3,
-      "max": 24,
-      "step": 3,
-      "default": 6
-    }
+    { "type": "header", "content": "Page Background" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background image" },
+    { "type": "range", "id": "bg_overlay", "label": "Overlay darkness (%)", "min": 0, "max": 80, "step": 10, "default": 0 },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow label", "default": "The Collection" },
+    { "type": "range", "id": "products_per_page", "label": "Products per page", "min": 3, "max": 24, "step": 3, "default": 6 },
+    { "type": "header", "content": "Text & Layout" },
+    { "type": "range", "id": "heading_size", "label": "Heading size", "min": 16, "max": 96, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "body_size", "label": "Body text size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "select", "id": "text_align", "label": "Text alignment", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "center" },
+    { "type": "range", "id": "content_max_width", "label": "Content width", "min": 300, "max": 1400, "step": 50, "unit": "px", "default": 800 },
+    { "type": "select", "id": "content_position", "label": "Content position", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "center" },
+    { "type": "header", "content": "Section Size" },
+    { "type": "range", "id": "section_min_height", "label": "Section height", "min": 0, "max": 100, "step": 5, "unit": "vh", "default": 0 }
   ],
   "presets": [{ "name": "Collection" }]
 }

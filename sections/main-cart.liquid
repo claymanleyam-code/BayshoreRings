@@ -1,18 +1,22 @@
 {%- if section.settings.bg_image != blank -%}
   {%- assign _cart_bg = section.settings.bg_image | image_url: width: 2400 -%}
 {%- endif -%}
-<div class="cart-wrap" {% if section.settings.bg_image != blank %}style="background-image:url('{{ _cart_bg }}');background-size:cover;background-position:center;position:relative;"{% endif %}>
+{%- assign _min_h = section.settings.section_min_height -%}
+{%- assign _align = section.settings.text_align -%}
+{%- assign _mw    = section.settings.content_max_width -%}
+{%- assign _pos   = section.settings.content_position -%}
+{%- if _pos == 'left' -%}{%- assign _cmarg = '0 auto 0 0' -%}{%- elsif _pos == 'right' -%}{%- assign _cmarg = '0 0 0 auto' -%}{%- else -%}{%- assign _cmarg = '0 auto' -%}{%- endif -%}
+<div class="cart-wrap" style="{% if section.settings.bg_image != blank %}background-image:url('{{ _cart_bg }}');background-size:cover;background-position:center;position:relative;{% endif %}{% if _min_h > 0 %}min-height:{{ _min_h }}vh;{% endif %}">
   {%- if section.settings.bg_image != blank and section.settings.bg_overlay > 0 -%}
     <div style="position:absolute;inset:0;background:rgba(0,0,0,{{ section.settings.bg_overlay | divided_by: 100.0 }});pointer-events:none;" aria-hidden="true"></div>
   {%- endif -%}
-  <div class="cart-header">
+  <div class="cart-header" style="max-width:{{ _mw }}px;margin:{{ _cmarg }};text-align:{{ _align }};">
     <span class="eyebrow" style="color:var(--teal);">Your Order</span>
-    <h1>Shopping Cart</h1>
+    <h1 style="font-size:{{ section.settings.heading_size }}px;">Shopping Cart</h1>
   </div>
 
-  <div class="cart-body">
+  <div class="cart-body" style="max-width:{{ _mw }}px;margin:0 auto;">
     {%- if cart.item_count > 0 -%}
-
       <form action="/cart" method="post">
         <table class="cart-table">
           <thead>
@@ -28,31 +32,23 @@
                 <td class="cart-item-img-wrap">
                   <a href="{{ item.url }}">
                     {%- if item.image -%}
-                      <img class="cart-item-img"
-                        src="{{ item.image | image_url: width: 144 }}"
-                        alt="{{ item.image.alt | default: item.title | escape }}"
-                        width="72" height="72" loading="lazy">
+                      <img class="cart-item-img" src="{{ item.image | image_url: width: 144 }}" alt="{{ item.image.alt | default: item.title | escape }}" width="72" height="72" loading="lazy">
                     {%- else -%}
                       <div class="cart-item-img" style="display:flex;align-items:center;justify-content:center;font-size:1.5rem;">⚖</div>
                     {%- endif -%}
                   </a>
                 </td>
                 <td>
-                  <div class="cart-item-name">{{ item.product.title }}</div>
+                  <div class="cart-item-name" style="font-size:{{ section.settings.body_size }}px;">{{ item.product.title }}</div>
                   {%- unless item.variant.title == 'Default Title' -%}
-                    <div class="cart-item-variant">{{ item.variant.title }}</div>
+                    <div class="cart-item-variant" style="font-size:{{ section.settings.body_size }}px;">{{ item.variant.title }}</div>
                   {%- endunless -%}
                   <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="cart-item-remove">Remove</a>
                 </td>
                 <td>
                   <div class="cart-qty">
                     <button type="button" class="cart-qty-btn" data-dir="down" aria-label="Decrease quantity">&minus;</button>
-                    <input class="cart-qty-input"
-                      type="number"
-                      name="updates[]"
-                      value="{{ item.quantity }}"
-                      min="0"
-                      aria-label="Quantity for {{ item.title | escape }}">
+                    <input class="cart-qty-input" type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity for {{ item.title | escape }}">
                     <button type="button" class="cart-qty-btn" data-dir="up" aria-label="Increase quantity">+</button>
                   </div>
                 </td>
@@ -61,26 +57,22 @@
             {%- endfor -%}
           </tbody>
         </table>
-
         <div class="cart-footer">
           <div class="cart-summary">
             <div class="cart-subtotal-row">
               <span class="cart-subtotal-label">Subtotal</span>
               <span class="cart-subtotal-amount">{{ cart.total_price | money }}</span>
             </div>
-            <p class="cart-shipping-note">Shipping & taxes calculated at checkout</p>
-            <button type="submit" name="checkout" class="cart-checkout-btn">
-              Checkout &rarr;
-            </button>
+            <p class="cart-shipping-note" style="font-size:{{ section.settings.body_size }}px;">Shipping & taxes calculated at checkout</p>
+            <button type="submit" name="checkout" class="cart-checkout-btn">Checkout &rarr;</button>
             <a href="/collections/all" class="cart-continue">&#8592; Continue Shopping</a>
           </div>
         </div>
       </form>
-
     {%- else -%}
-      <div class="cart-empty">
-        <h2>Your cart is empty</h2>
-        <p>Looks like you haven't added any rings yet.</p>
+      <div class="cart-empty" style="text-align:{{ _align }};">
+        <h2 style="font-size:{{ section.settings.heading_size }}px;">Your cart is empty</h2>
+        <p style="font-size:{{ section.settings.body_size }}px;">Looks like you haven't added any rings yet.</p>
         <a href="/collections/all" class="btn btn-gold">Shop the Collection</a>
       </div>
     {%- endif -%}
@@ -93,7 +85,15 @@
   "settings": [
     { "type": "header", "content": "Page Background" },
     { "type": "image_picker", "id": "bg_image", "label": "Background image" },
-    { "type": "range", "id": "bg_overlay", "label": "Overlay darkness (%)", "min": 0, "max": 80, "step": 10, "default": 0 }
+    { "type": "range", "id": "bg_overlay", "label": "Overlay darkness (%)", "min": 0, "max": 80, "step": 10, "default": 0 },
+    { "type": "header", "content": "Text & Layout" },
+    { "type": "range", "id": "heading_size", "label": "Heading size", "min": 16, "max": 96, "step": 2, "unit": "px", "default": 32 },
+    { "type": "range", "id": "body_size", "label": "Body text size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "select", "id": "text_align", "label": "Text alignment", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "left" },
+    { "type": "range", "id": "content_max_width", "label": "Content width", "min": 300, "max": 1400, "step": 50, "unit": "px", "default": 900 },
+    { "type": "select", "id": "content_position", "label": "Content position", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "center" },
+    { "type": "header", "content": "Section Size" },
+    { "type": "range", "id": "section_min_height", "label": "Section height", "min": 0, "max": 100, "step": 5, "unit": "vh", "default": 0 }
   ],
   "presets": [{ "name": "Cart" }]
 }

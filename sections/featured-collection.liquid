@@ -7,7 +7,12 @@
 {%- if section.settings.bg_image != blank -%}
   {%- assign _fc_bg = section.settings.bg_image | image_url: width: 2400 -%}
 {%- endif -%}
-<div {% if section.settings.bg_image != blank %}style="background-image:url('{{ _fc_bg }}');background-size:cover;background-position:center;position:relative;"{% endif %}>
+{%- assign _min_h = section.settings.section_min_height -%}
+{%- assign _align = section.settings.text_align -%}
+{%- assign _mw    = section.settings.content_max_width -%}
+{%- assign _pos   = section.settings.content_position -%}
+{%- if _pos == 'left' -%}{%- assign _cmarg = '0 auto 0 0' -%}{%- elsif _pos == 'right' -%}{%- assign _cmarg = '0 0 0 auto' -%}{%- else -%}{%- assign _cmarg = '0 auto' -%}{%- endif -%}
+<div {% if section.settings.bg_image != blank %}style="background-image:url('{{ _fc_bg }}');background-size:cover;background-position:center;position:relative;{% if _min_h > 0 %}min-height:{{ _min_h }}vh;{% endif %}"{% elsif _min_h > 0 %}style="min-height:{{ _min_h }}vh;"{% endif %}>
   {%- if section.settings.bg_image != blank and section.settings.bg_overlay > 0 -%}
     <div style="position:absolute;inset:0;background:rgba(0,0,0,{{ section.settings.bg_overlay | divided_by: 100.0 }});pointer-events:none;" aria-hidden="true"></div>
   {%- endif -%}
@@ -22,28 +27,22 @@
 <div class="drop-ticker" aria-hidden="true">
   <div class="drop-ticker-track">
     {%- for i in (1..4) -%}
-      <span>{{ ticker_1 }}</span>
-      <span class="drop-ticker-sep">·</span>
-      <span>{{ ticker_2 }}</span>
-      <span class="drop-ticker-sep">·</span>
-      <span>{{ ticker_3 }}</span>
-      <span class="drop-ticker-sep">·</span>
-      <span>{{ ticker_4 }}</span>
-      <span class="drop-ticker-sep">·</span>
-      <span>{{ ticker_5 }}</span>
-      <span class="drop-ticker-sep">·</span>
-      <span>{{ ticker_6 }}</span>
-      <span class="drop-ticker-sep">·</span>
+      <span>{{ ticker_1 }}</span><span class="drop-ticker-sep">·</span>
+      <span>{{ ticker_2 }}</span><span class="drop-ticker-sep">·</span>
+      <span>{{ ticker_3 }}</span><span class="drop-ticker-sep">·</span>
+      <span>{{ ticker_4 }}</span><span class="drop-ticker-sep">·</span>
+      <span>{{ ticker_5 }}</span><span class="drop-ticker-sep">·</span>
+      <span>{{ ticker_6 }}</span><span class="drop-ticker-sep">·</span>
     {%- endfor -%}
   </div>
 </div>
 
 <!-- ── DROP SECTION ───────────────────────────────────── -->
 <section class="drop-section" id="products" style="padding-top:{{ section.settings.padding_top }}rem; padding-bottom:{{ section.settings.padding_bottom }}rem;">
-  <div class="drop-header">
+  <div class="drop-header" style="max-width:{{ _mw }}px;margin:{{ _cmarg }};text-align:{{ _align }};">
     <div class="drop-header-left">
       <span class="eyebrow" style="color:var(--teal);">{{ section.settings.eyebrow }}</span>
-      <h2 class="drop-heading">{{ section.settings.heading }}</h2>
+      <h2 class="drop-heading" style="font-size:{{ section.settings.heading_size }}px;">{{ section.settings.heading }}</h2>
     </div>
     <a href="{{ section.settings.view_all_url | default: '/collections/shop-rings' }}" class="drop-view-all">
       {{ section.settings.view_all_text }} &rarr;
@@ -54,23 +53,16 @@
     <div class="drop-grid">
       {%- for product in featured_collection.products limit: section.settings.product_limit -%}
         <a href="{{ product.url }}" class="drop-card">
-
           <div class="drop-card-img-wrap">
             {%- if product.featured_image -%}
               {%- assign card_alt = product.featured_image.alt | default: product.title -%}
               {%- unless card_alt contains 'Bayshore' -%}
                 {%- assign card_alt = card_alt | append: ' — Recycled Skateboard Ring by Bayshore Rings' -%}
               {%- endunless -%}
-              <img
-                src="{{ product.featured_image | image_url: width: 800 }}"
-                alt="{{ card_alt | escape }}"
-                width="800" height="800"
-                loading="lazy"
-                class="drop-card-img">
+              <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ card_alt | escape }}" width="800" height="800" loading="lazy" class="drop-card-img">
             {%- else -%}
               {%- render 'ring-placeholder' -%}
             {%- endif -%}
-
             {%- if product.available == false -%}
               <span class="drop-card-badge drop-card-badge--sold">Sold Out</span>
             {%- elsif product.tags contains 'Limited' or product.tags contains 'limited' -%}
@@ -79,34 +71,21 @@
               <span class="drop-card-badge drop-card-badge--new">New</span>
             {%- endif -%}
           </div>
-
           <div class="drop-card-info">
-            <div class="drop-card-name">{{ product.title }}</div>
+            <div class="drop-card-name" style="font-size:{{ section.settings.body_size }}px;">{{ product.title }}</div>
             <div class="drop-card-price">
-              {%- if product.price_varies -%}
-                From {{ product.price_min | money }}
-              {%- else -%}
-                {{ product.price | money }}
-              {%- endif -%}
+              {%- if product.price_varies -%}From {{ product.price_min | money }}{%- else -%}{{ product.price | money }}{%- endif -%}
             </div>
           </div>
-
         </a>
       {%- endfor -%}
     </div>
-
     <div class="drop-footer">
-      <a href="{{ section.settings.view_all_url | default: '/collections/shop-rings' }}" class="btn btn-gold btn-hero-primary">
-        {{ section.settings.view_all_text }}
-      </a>
+      <a href="{{ section.settings.view_all_url | default: '/collections/shop-rings' }}" class="btn btn-gold btn-hero-primary">{{ section.settings.view_all_text }}</a>
     </div>
-
   {%- else -%}
-    <p class="products-empty">
-      Create a collection called <strong>Shop Rings</strong> and add products to see them here.
-    </p>
+    <p class="products-empty">Create a collection called <strong>Shop Rings</strong> and add products to see them here.</p>
   {%- endif -%}
-
 </section>
   </div>
 </div>
@@ -134,7 +113,15 @@
     { "type": "range", "id": "bg_overlay", "label": "Overlay darkness (%)", "min": 0, "max": 80, "step": 10, "default": 0 },
     { "type": "header", "content": "Section Spacing" },
     { "type": "range", "id": "padding_top", "label": "Top padding (rem)", "min": 0, "max": 16, "step": 1, "default": 4 },
-    { "type": "range", "id": "padding_bottom", "label": "Bottom padding (rem)", "min": 0, "max": 16, "step": 1, "default": 4 }
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding (rem)", "min": 0, "max": 16, "step": 1, "default": 4 },
+    { "type": "header", "content": "Text & Layout" },
+    { "type": "range", "id": "heading_size", "label": "Heading size", "min": 16, "max": 96, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "body_size", "label": "Body text size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "select", "id": "text_align", "label": "Text alignment", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "left" },
+    { "type": "range", "id": "content_max_width", "label": "Content width", "min": 300, "max": 1400, "step": 50, "unit": "px", "default": 1200 },
+    { "type": "select", "id": "content_position", "label": "Content position", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "center" },
+    { "type": "header", "content": "Section Size" },
+    { "type": "range", "id": "section_min_height", "label": "Section height", "min": 0, "max": 100, "step": 5, "unit": "vh", "default": 0 }
   ],
   "presets": [{ "name": "Featured Collection" }]
 }

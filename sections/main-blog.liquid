@@ -8,13 +8,18 @@
 {%- if section.settings.bg_image != blank -%}
   {%- assign _blog_bg = section.settings.bg_image | image_url: width: 2400 -%}
 {%- endif -%}
+{%- assign _min_h = section.settings.section_min_height -%}
+{%- assign _align = section.settings.text_align -%}
+{%- assign _mw    = section.settings.content_max_width -%}
+{%- assign _pos   = section.settings.content_position -%}
+{%- if _pos == 'left' -%}{%- assign _cmarg = '0 auto 0 0' -%}{%- elsif _pos == 'right' -%}{%- assign _cmarg = '0 0 0 auto' -%}{%- else -%}{%- assign _cmarg = '0 auto' -%}{%- endif -%}
 <!-- HERO -->
-<section class="about-hero blog-hero" aria-labelledby="blog-h1" {% if section.settings.bg_image != blank %}style="background-image:url('{{ _blog_bg }}');background-size:cover;background-position:center;"{% endif %}>
-  <div class="container">
+<section class="about-hero blog-hero" aria-labelledby="blog-h1" style="{% if section.settings.bg_image != blank %}background-image:url('{{ _blog_bg }}');background-size:cover;background-position:center;{% endif %}{% if _min_h > 0 %}min-height:{{ _min_h }}vh;{% endif %}">
+  <div class="container" style="text-align:{{ _align }};max-width:{{ _mw }}px;margin:{{ _cmarg }};">
     <span class="eyebrow reveal d1">{{ section.settings.eyebrow | default: 'From the Workshop' }}</span>
     <div class="gold-bar center reveal d1" aria-hidden="true"></div>
-    <h1 id="blog-h1" class="reveal d2">{{ blog.title }}</h1>
-    <p class="about-hero-sub reveal d3">{{ section.settings.subheading | default: 'Stories from the workshop floor — recycled skateboard rings, Tampa skate culture, eco friendly jewelry, and the craft behind every handmade wooden ring we make.' }}</p>
+    <h1 id="blog-h1" class="reveal d2" style="font-size:{{ section.settings.heading_size }}px;">{{ blog.title }}</h1>
+    <p class="about-hero-sub reveal d3" style="font-size:{{ section.settings.body_size }}px;">{{ section.settings.subheading | default: 'Stories from the workshop floor — recycled skateboard rings, Tampa skate culture, eco friendly jewelry, and the craft behind every handmade wooden ring we make.' }}</p>
   </div>
 </section>
 
@@ -251,7 +256,15 @@
       "id": "subheading",
       "label": "Hero subheading",
       "default": "Stories from the workshop floor — recycled skateboard rings, Tampa skate culture, eco friendly jewelry, and the craft behind every handmade wooden ring we make."
-    }
+    },
+    { "type": "header", "content": "Text & Layout" },
+    { "type": "range", "id": "heading_size", "label": "Heading size", "min": 16, "max": 96, "step": 2, "unit": "px", "default": 48 },
+    { "type": "range", "id": "body_size", "label": "Body text size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "select", "id": "text_align", "label": "Text alignment", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "center" },
+    { "type": "range", "id": "content_max_width", "label": "Content width", "min": 300, "max": 1400, "step": 50, "unit": "px", "default": 700 },
+    { "type": "select", "id": "content_position", "label": "Content position", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "center" },
+    { "type": "header", "content": "Section Size" },
+    { "type": "range", "id": "section_min_height", "label": "Section height", "min": 0, "max": 100, "step": 5, "unit": "vh", "default": 0 }
   ],
   "presets": [{ "name": "Blog Index" }]
 }

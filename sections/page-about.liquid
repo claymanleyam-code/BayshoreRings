@@ -8,12 +8,17 @@
 {%- else -%}
   {%- assign about_hero_bg = 'https://images.unsplash.com/photo-1499676988064-a3779763470e?fm=jpg&q=80&w=2400&auto=format&fit=crop' -%}
 {%- endif -%}
-<section class="about-hero" style="background-image:url('{{ about_hero_bg }}')">
+{%- assign _min_h = section.settings.section_min_height -%}
+{%- assign _align = section.settings.text_align -%}
+{%- assign _mw    = section.settings.content_max_width -%}
+{%- assign _pos   = section.settings.content_position -%}
+{%- if _pos == 'left' -%}{%- assign _cmarg = '0 auto 0 0' -%}{%- elsif _pos == 'right' -%}{%- assign _cmarg = '0 0 0 auto' -%}{%- else -%}{%- assign _cmarg = '0 auto' -%}{%- endif -%}
+<section class="about-hero" style="background-image:url('{{ about_hero_bg }}');{% if _min_h > 0 %}min-height:{{ _min_h }}vh;{% endif %}">
   <div class="about-hero-overlay" aria-hidden="true"></div>
-  <div class="container">
+  <div class="container" style="text-align:{{ _align }};max-width:{{ _mw }}px;margin:{{ _cmarg }};">
     <span class="eyebrow reveal d1" style="color:var(--gold);">{{ section.settings.eyebrow | default: 'Our Story' }}</span>
-    <h1 class="reveal d2">{{ section.settings.heading | default: 'Built From Boards' }}</h1>
-    <p class="about-hero-sub reveal d3">{{ section.settings.subheading | default: 'Every ring starts with a skateboard that already lived a life. We just give it another one.' }}</p>
+    <h1 class="reveal d2" style="font-size:{{ section.settings.heading_size }}px;">{{ section.settings.heading | default: 'Built From Boards' }}</h1>
+    <p class="about-hero-sub reveal d3" style="font-size:{{ section.settings.body_size }}px;">{{ section.settings.subheading | default: 'Every ring starts with a skateboard that already lived a life. We just give it another one.' }}</p>
   </div>
 </section>
 
@@ -600,7 +605,15 @@
     { "type": "text", "id": "cta_eyebrow", "label": "Eyebrow", "default": "Get Yours" },
     { "type": "text", "id": "cta_heading", "label": "Heading", "default": "Wear the Board. Keep the Story." },
     { "type": "url", "id": "cta_link", "label": "Link" },
-    { "type": "text", "id": "cta_btn", "label": "Button text", "default": "Shop the Collection" }
+    { "type": "text", "id": "cta_btn", "label": "Button text", "default": "Shop the Collection" },
+    { "type": "header", "content": "Text & Layout" },
+    { "type": "range", "id": "heading_size", "label": "Heading size", "min": 16, "max": 96, "step": 2, "unit": "px", "default": 52 },
+    { "type": "range", "id": "body_size", "label": "Body text size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "select", "id": "text_align", "label": "Text alignment", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "center" },
+    { "type": "range", "id": "content_max_width", "label": "Content width", "min": 300, "max": 1400, "step": 50, "unit": "px", "default": 800 },
+    { "type": "select", "id": "content_position", "label": "Content position", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "center" },
+    { "type": "header", "content": "Section Size" },
+    { "type": "range", "id": "section_min_height", "label": "Hero height", "min": 0, "max": 100, "step": 5, "unit": "vh", "default": 0 }
   ],
   "blocks": [
     {

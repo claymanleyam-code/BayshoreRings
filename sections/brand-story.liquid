@@ -7,7 +7,12 @@
 {%- else -%}
   {%- assign story_bg = 'decks-floor.jpg' | asset_url -%}
 {%- endif -%}
-<section class="section story" id="story" style="padding-top:{{ section.settings.padding_top }}rem; padding-bottom:{{ section.settings.padding_bottom }}rem;">
+{%- assign _min_h = section.settings.section_min_height -%}
+{%- assign _align = section.settings.text_align -%}
+{%- assign _mw    = section.settings.content_max_width -%}
+{%- assign _pos   = section.settings.content_position -%}
+{%- if _pos == 'left' -%}{%- assign _cmarg = '0 auto 0 0' -%}{%- elsif _pos == 'right' -%}{%- assign _cmarg = '0 0 0 auto' -%}{%- else -%}{%- assign _cmarg = '0 auto' -%}{%- endif -%}
+<section class="section story" id="story" style="padding-top:{{ section.settings.padding_top }}rem; padding-bottom:{{ section.settings.padding_bottom }}rem;{% if _min_h > 0 %}min-height:{{ _min_h }}vh;{% endif %}">
   <div class="story-bg-img" style="background-image:url('{{ story_bg }}');"></div>
   <div class="story-bg-overlay"></div>
   <div class="container story-container">
@@ -15,11 +20,11 @@
       <div class="story-split-btn reveal">
         <a href="{{ section.settings.btn_url | default: '/pages/our-process' }}" class="btn btn-gold">{{ section.settings.btn_text }}</a>
       </div>
-      <div class="story-split-text reveal d1">
+      <div class="story-split-text reveal d1" style="max-width:{{ _mw }}px;margin:{{ _cmarg }};text-align:{{ _align }};">
         <span class="eyebrow section-label">{{ section.settings.eyebrow }}</span>
-        <h2 class="section-heading">{{ section.settings.heading }}</h2>
+        <h2 class="section-heading" style="font-size:{{ section.settings.heading_size }}px;">{{ section.settings.heading }}</h2>
         <div class="gold-bar"></div>
-        <p class="section-body">{{ section.settings.body }}</p>
+        <p class="section-body" style="font-size:{{ section.settings.body_size }}px;">{{ section.settings.body }}</p>
       </div>
     </div>
   </div>
@@ -29,71 +34,25 @@
 {
   "name": "Brand Story",
   "settings": [
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow label",
-      "default": "Our Story"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Built From Boards With a Story"
-    },
-    {
-      "type": "textarea",
-      "id": "body",
-      "label": "Body text",
-      "default": "Every ring starts with a skateboard that has already lived a life. We preserve the layered wood, color, and character of the deck, then shape it into a clean everyday ring made for people who value craft, movement, and originality."
-    },
-    {
-      "type": "text",
-      "id": "btn_text",
-      "label": "Button text",
-      "default": "See How We Make Them"
-    },
-    {
-      "type": "url",
-      "id": "btn_url",
-      "label": "Button link"
-    },
-    {
-      "type": "header",
-      "content": "Background Image"
-    },
-    {
-      "type": "image_picker",
-      "id": "bg_image",
-      "label": "Background image"
-    },
-    {
-      "type": "header",
-      "content": "Section Spacing"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "label": "Top padding (rem)",
-      "min": 0,
-      "max": 16,
-      "step": 1,
-      "default": 6
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "label": "Bottom padding (rem)",
-      "min": 0,
-      "max": 16,
-      "step": 1,
-      "default": 6
-    }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow label", "default": "Our Story" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Built From Boards With a Story" },
+    { "type": "textarea", "id": "body", "label": "Body text", "default": "Every ring starts with a skateboard that has already lived a life. We preserve the layered wood, color, and character of the deck, then shape it into a clean everyday ring made for people who value craft, movement, and originality." },
+    { "type": "text", "id": "btn_text", "label": "Button text", "default": "See How We Make Them" },
+    { "type": "url", "id": "btn_url", "label": "Button link" },
+    { "type": "header", "content": "Background Image" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background image" },
+    { "type": "header", "content": "Section Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding (rem)", "min": 0, "max": 16, "step": 1, "default": 6 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding (rem)", "min": 0, "max": 16, "step": 1, "default": 6 },
+    { "type": "header", "content": "Text & Layout" },
+    { "type": "range", "id": "heading_size", "label": "Heading size", "min": 16, "max": 96, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "body_size", "label": "Body text size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "select", "id": "text_align", "label": "Text alignment", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "left" },
+    { "type": "range", "id": "content_max_width", "label": "Content width", "min": 300, "max": 1400, "step": 50, "unit": "px", "default": 550 },
+    { "type": "select", "id": "content_position", "label": "Content position", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "left" },
+    { "type": "header", "content": "Section Size" },
+    { "type": "range", "id": "section_min_height", "label": "Section height", "min": 0, "max": 100, "step": 5, "unit": "vh", "default": 0 }
   ],
-  "presets": [
-    {
-      "name": "Brand Story"
-    }
-  ]
+  "presets": [{ "name": "Brand Story" }]
 }
 {% endschema %}

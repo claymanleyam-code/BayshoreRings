@@ -1,14 +1,19 @@
 {%- if section.settings.bg_image != blank -%}
   {%- assign _prod_bg = section.settings.bg_image | image_url: width: 2400 -%}
 {%- endif -%}
-<article class="page-wrap" itemscope itemtype="https://schema.org/Product" {% if section.settings.bg_image != blank %}style="background-image:url('{{ _prod_bg }}');background-size:cover;background-position:center;position:relative;"{% endif %}>
+{%- assign _min_h = section.settings.section_min_height -%}
+{%- assign _align = section.settings.text_align -%}
+{%- assign _mw    = section.settings.content_max_width -%}
+{%- assign _pos   = section.settings.content_position -%}
+{%- if _pos == 'left' -%}{%- assign _cmarg = '0 auto 0 0' -%}{%- elsif _pos == 'right' -%}{%- assign _cmarg = '0 0 0 auto' -%}{%- else -%}{%- assign _cmarg = '0 auto' -%}{%- endif -%}
+<article class="page-wrap" itemscope itemtype="https://schema.org/Product" style="{% if section.settings.bg_image != blank %}background-image:url('{{ _prod_bg }}');background-size:cover;background-position:center;position:relative;{% endif %}{% if _min_h > 0 %}min-height:{{ _min_h }}vh;{% endif %}">
   {%- if section.settings.bg_image != blank and section.settings.bg_overlay > 0 -%}
     <div style="position:absolute;inset:0;background:rgba(0,0,0,{{ section.settings.bg_overlay | divided_by: 100.0 }});pointer-events:none;" aria-hidden="true"></div>
   {%- endif -%}
   <meta itemprop="brand" content="Bayshore Rings">
   <meta itemprop="category" content="Eco-Friendly Jewelry">
 
-  <div class="product-layout">
+  <div class="product-layout" style="max-width:{{ _mw }}px;margin:{{ _cmarg }};">
 
     <div class="product-image">
       {%- if product.featured_image -%}
@@ -16,24 +21,18 @@
         {%- unless img_alt contains 'Bayshore' -%}
           {%- assign img_alt = img_alt | append: ' — Recycled Skateboard Ring by Bayshore Rings' -%}
         {%- endunless -%}
-        <img
-          src="{{ product.featured_image | image_url: width: 800 }}"
-          alt="{{ img_alt | escape }}"
-          width="800"
-          height="800"
-          loading="eager"
-          itemprop="image">
+        <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ img_alt | escape }}" width="800" height="800" loading="eager" itemprop="image">
       {%- else -%}
         {% render 'ring-placeholder' %}
       {%- endif -%}
     </div>
 
-    <div class="product-info">
+    <div class="product-info" style="text-align:{{ _align }};">
       {%- if product.type != blank -%}
-        <p class="product-type" itemprop="category">{{ product.type }}</p>
+        <p class="product-type" itemprop="category" style="font-size:{{ section.settings.body_size }}px;">{{ product.type }}</p>
       {%- endif -%}
 
-      <h1 itemprop="name">{{ product.title }}</h1>
+      <h1 itemprop="name" style="font-size:{{ section.settings.heading_size }}px;">{{ product.title }}</h1>
       <div class="product-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
         <span itemprop="price" content="{{ product.price | money_without_currency | remove: ',' }}">{{ product.price | money }}</span>
         <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
@@ -41,18 +40,15 @@
       </div>
 
       {%- if product.description != blank -%}
-        <div class="product-desc" itemprop="description">{{ product.description }}</div>
+        <div class="product-desc" itemprop="description" style="font-size:{{ section.settings.body_size }}px;">{{ product.description }}</div>
       {%- endif -%}
 
       {%- form 'product', product, class: 'product-form' -%}
-
         {%- unless product.has_only_default_variant -%}
           {%- for option in product.options_with_values -%}
             <div class="product-option">
               <div class="product-option-header">
-                <label class="product-option-label" for="Option-{{ forloop.index }}">
-                  {{ option.name }}
-                </label>
+                <label class="product-option-label" for="Option-{{ forloop.index }}">{{ option.name }}</label>
                 {%- if option.name == 'Size' or option.name == 'Ring Size' -%}
                   <a href="/pages/ring-sizing" class="size-guide-link" target="_blank">
                     Size Guide
@@ -62,11 +58,7 @@
               </div>
               <select id="Option-{{ forloop.index }}" name="id" class="product-select">
                 {%- for variant in product.variants -%}
-                  <option
-                    value="{{ variant.id }}"
-                    {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
-                    {% unless variant.available %}disabled{% endunless %}
-                  >
+                  <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
                     {{ variant.title }}{% unless variant.available %} — Sold Out{% endunless %}
                   </option>
                 {%- endfor -%}
@@ -76,35 +68,29 @@
         {%- else -%}
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
         {%- endunless -%}
-
         <button type="submit" class="product-submit" {% unless product.available %}disabled{% endunless %}>
-          {%- if product.available -%}
-            Add to Cart
-          {%- else -%}
-            Sold Out
-          {%- endif -%}
+          {%- if product.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}
         </button>
-
       {%- endform -%}
 
       <div class="product-meta">
         {%- if section.settings.meta_1 != blank -%}
-        <span class="product-meta-item">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-          {{ section.settings.meta_1 }}
-        </span>
+          <span class="product-meta-item" style="font-size:{{ section.settings.body_size | minus: 2 }}px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            {{ section.settings.meta_1 }}
+          </span>
         {%- endif -%}
         {%- if section.settings.meta_2 != blank -%}
-        <span class="product-meta-item">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 12 20 22 4 22"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-          {{ section.settings.meta_2 }}
-        </span>
+          <span class="product-meta-item" style="font-size:{{ section.settings.body_size | minus: 2 }}px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 12 20 22 4 22"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+            {{ section.settings.meta_2 }}
+          </span>
         {%- endif -%}
         {%- if section.settings.meta_3 != blank -%}
-        <span class="product-meta-item">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          {{ section.settings.meta_3 }}
-        </span>
+          <span class="product-meta-item" style="font-size:{{ section.settings.body_size | minus: 2 }}px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            {{ section.settings.meta_3 }}
+          </span>
         {%- endif -%}
       </div>
     </div>
@@ -113,13 +99,13 @@
 
   <!-- SEO Feature Callouts -->
   <section class="product-features" aria-label="{{ section.settings.features_heading | default: 'Why Bayshore Rings' }}">
-    <h2 class="product-features-heading">{{ section.settings.features_heading | default: 'Why Bayshore Rings Skateboard Rings?' }}</h2>
+    <h2 class="product-features-heading" style="font-size:{{ section.settings.heading_size | times: 0.65 | round }}px;">{{ section.settings.features_heading | default: 'Why Bayshore Rings Skateboard Rings?' }}</h2>
     <div class="product-features-grid">
       {%- for block in section.blocks -%}
         {%- if block.type == 'feature' -%}
           <div class="product-feature-item" {{ block.shopify_attributes }}>
-            <h3>{{ block.settings.title }}</h3>
-            <p>{{ block.settings.body }}</p>
+            <h3 style="font-size:{{ section.settings.body_size | plus: 2 }}px;">{{ block.settings.title }}</h3>
+            <p style="font-size:{{ section.settings.body_size }}px;">{{ block.settings.body }}</p>
           </div>
         {%- endif -%}
       {%- endfor -%}
@@ -132,74 +118,31 @@
 {
   "name": "Product",
   "settings": [
-    {
-      "type": "header",
-      "content": "Page Background"
-    },
-    {
-      "type": "image_picker",
-      "id": "bg_image",
-      "label": "Background image"
-    },
-    {
-      "type": "range",
-      "id": "bg_overlay",
-      "label": "Overlay darkness (%)",
-      "min": 0,
-      "max": 80,
-      "step": 10,
-      "default": 0
-    },
-    {
-      "type": "header",
-      "content": "Product Meta Badges"
-    },
-    {
-      "type": "text",
-      "id": "meta_1",
-      "label": "Badge 1 (shipping)",
-      "default": "Free shipping on all domestic orders"
-    },
-    {
-      "type": "text",
-      "id": "meta_2",
-      "label": "Badge 2 (material)",
-      "default": "Handcrafted from recycled skateboard wood"
-    },
-    {
-      "type": "text",
-      "id": "meta_3",
-      "label": "Badge 3 (lead time)",
-      "default": "Made to order — ships in 5–7 business days"
-    },
-    {
-      "type": "header",
-      "content": "Feature Callouts"
-    },
-    {
-      "type": "text",
-      "id": "features_heading",
-      "label": "Features section heading",
-      "default": "Why Bayshore Rings Skateboard Rings?"
-    }
+    { "type": "header", "content": "Page Background" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background image" },
+    { "type": "range", "id": "bg_overlay", "label": "Overlay darkness (%)", "min": 0, "max": 80, "step": 10, "default": 0 },
+    { "type": "header", "content": "Product Meta Badges" },
+    { "type": "text", "id": "meta_1", "label": "Badge 1 (shipping)", "default": "Free shipping on all domestic orders" },
+    { "type": "text", "id": "meta_2", "label": "Badge 2 (material)", "default": "Handcrafted from recycled skateboard wood" },
+    { "type": "text", "id": "meta_3", "label": "Badge 3 (lead time)", "default": "Made to order — ships in 5–7 business days" },
+    { "type": "header", "content": "Feature Callouts" },
+    { "type": "text", "id": "features_heading", "label": "Features section heading", "default": "Why Bayshore Rings Skateboard Rings?" },
+    { "type": "header", "content": "Text & Layout" },
+    { "type": "range", "id": "heading_size", "label": "Heading size", "min": 16, "max": 96, "step": 2, "unit": "px", "default": 32 },
+    { "type": "range", "id": "body_size", "label": "Body text size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "select", "id": "text_align", "label": "Text alignment", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "left" },
+    { "type": "range", "id": "content_max_width", "label": "Content width", "min": 300, "max": 1400, "step": 50, "unit": "px", "default": 1100 },
+    { "type": "select", "id": "content_position", "label": "Content position", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "center" },
+    { "type": "header", "content": "Section Size" },
+    { "type": "range", "id": "section_min_height", "label": "Section height", "min": 0, "max": 100, "step": 5, "unit": "vh", "default": 0 }
   ],
   "blocks": [
     {
       "type": "feature",
       "name": "Feature",
       "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Feature title",
-          "default": "Feature Title"
-        },
-        {
-          "type": "textarea",
-          "id": "body",
-          "label": "Feature description",
-          "default": "Description of this feature."
-        }
+        { "type": "text", "id": "title", "label": "Feature title", "default": "Feature Title" },
+        { "type": "textarea", "id": "body", "label": "Feature description", "default": "Description of this feature." }
       ]
     }
   ],
