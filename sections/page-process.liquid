@@ -19,14 +19,12 @@
       var v = document.getElementById('proc-hero-video');
       if(!v) return;
       v.muted = true;
-      function tryPlay(){
-        v.play().catch(function(){
-          document.addEventListener('click', function once(){ v.play(); document.removeEventListener('click', once); });
-        });
-      }
-      if(v.readyState >= 2){ tryPlay(); } else { v.addEventListener('canplaythrough', tryPlay, {once:true}); }
-      v.addEventListener('pause', function(){ if(!v.ended) tryPlay(); });
-      document.addEventListener('visibilitychange', function(){ if(!document.hidden && v.paused) tryPlay(); });
+      v.volume = 0;
+      function tryPlay(){ v.muted=true; v.play().catch(function(){}); }
+      var retry = setInterval(function(){ if(!v.paused){ clearInterval(retry); } else { tryPlay(); } }, 300);
+      setTimeout(function(){ clearInterval(retry); }, 5000);
+      v.addEventListener('pause', function(){ if(!v.ended){ tryPlay(); } });
+      document.addEventListener('visibilitychange', function(){ if(!document.hidden && v.paused){ tryPlay(); } });
     })();
   </script>
   <div class="proc-hero-overlay" aria-hidden="true" style="position:absolute;inset:0;z-index:1;"></div>
