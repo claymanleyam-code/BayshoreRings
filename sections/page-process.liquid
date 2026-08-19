@@ -10,9 +10,12 @@
 {%- if _pos == 'left' -%}{%- assign _cmarg = '0 auto 0 0' -%}{%- elsif _pos == 'right' -%}{%- assign _cmarg = '0 0 0 auto' -%}{%- else -%}{%- assign _cmarg = '0 auto' -%}{%- endif -%}
 <div
   class="proc-hero"
-  style="background-image:url('https://images.unsplash.com/photo-1554635917-1fb8f0f63f7c?fm=jpg&q=80&w=1600&auto=format&fit=crop');{% if _min_h > 0 %}min-height:{{ _min_h }}vh;display:flex;flex-direction:column;justify-content:center;{% endif %}">
-  <div class="proc-hero-overlay" aria-hidden="true"></div>
-  <div class="container" style="text-align:{{ _align }};max-width:{{ _mw }}px;margin:{{ _cmarg }};">
+  style="position:relative;overflow:hidden;{% if _min_h > 0 %}min-height:{{ _min_h }}vh;display:flex;flex-direction:column;justify-content:center;{% endif %}">
+  <video autoplay muted loop playsinline aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+    <source src="{{ 'bayshore-production-web.mp4' | asset_url }}" type="video/mp4">
+  </video>
+  <div class="proc-hero-overlay" aria-hidden="true" style="position:absolute;inset:0;z-index:1;"></div>
+  <div class="container" style="position:relative;z-index:2;text-align:{{ _align }};max-width:{{ _mw }}px;margin:{{ _cmarg }};">
     <span class="eyebrow reveal d1" style="color:#ffffff;">Handcrafted</span>
     <h1 class="reveal d2" style="font-size:{{ section.settings.heading_size }}px;">From Retired Deck<br>to Daily Wear</h1>
     <p class="proc-hero-sub reveal d3" style="font-size:{{ section.settings.body_size }}px;">Built without compromise. Every ring starts with reclaimed maple — a material skaters already trust with their feet. No new lumber. No synthetic finishes. Just something built to last.</p>
