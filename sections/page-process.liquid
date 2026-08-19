@@ -11,18 +11,22 @@
 <div
   class="proc-hero"
   style="position:relative;overflow:hidden;{% if _min_h > 0 %}min-height:{{ _min_h }}vh;display:flex;flex-direction:column;justify-content:center;{% endif %}">
-  <video id="proc-hero-video" autoplay muted loop playsinline aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+  <video id="proc-hero-video" autoplay muted loop playsinline preload="auto" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
     <source src="{{ 'bayshore-production-web.mp4' | asset_url }}" type="video/mp4">
   </video>
   <script>
     (function(){
       var v = document.getElementById('proc-hero-video');
       if(!v) return;
-      function play(){ v.muted=true; v.play().catch(function(){}); }
-      v.addEventListener('canplay', play);
-      v.addEventListener('pause', play);
-      document.addEventListener('visibilitychange', function(){ if(!document.hidden) play(); });
-      play();
+      v.muted = true;
+      function tryPlay(){
+        v.play().catch(function(){
+          document.addEventListener('click', function once(){ v.play(); document.removeEventListener('click', once); });
+        });
+      }
+      if(v.readyState >= 2){ tryPlay(); } else { v.addEventListener('canplaythrough', tryPlay, {once:true}); }
+      v.addEventListener('pause', function(){ if(!v.ended) tryPlay(); });
+      document.addEventListener('visibilitychange', function(){ if(!document.hidden && v.paused) tryPlay(); });
     })();
   </script>
   <div class="proc-hero-overlay" aria-hidden="true" style="position:absolute;inset:0;z-index:1;"></div>
