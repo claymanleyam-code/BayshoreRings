@@ -2,37 +2,6 @@
      BAYSHORE RINGS — About Us Page
      ═══════════════════════════════════════════════════ -->
 
-<!-- ── 1. HERO ──────────────────────────────────────────── -->
-{%- if section.settings.hero_bg_image != blank -%}
-  {%- assign about_hero_bg = section.settings.hero_bg_image | image_url: width: 2400 -%}
-{%- else -%}
-  {%- assign about_hero_bg = 'https://images.unsplash.com/photo-1499676988064-a3779763470e?fm=jpg&q=80&w=2400&auto=format&fit=crop' -%}
-{%- endif -%}
-{%- assign _min_h = section.settings.section_min_height -%}
-{%- assign _align = section.settings.text_align -%}
-{%- assign _mw    = section.settings.content_max_width -%}
-{%- assign _pos   = section.settings.content_position -%}
-{%- if _pos == 'left' -%}{%- assign _cmarg = '0 auto 0 0' -%}{%- elsif _pos == 'right' -%}{%- assign _cmarg = '0 0 0 auto' -%}{%- else -%}{%- assign _cmarg = '0 auto' -%}{%- endif -%}
-<section class="about-hero" style="background-image:url('{{ about_hero_bg }}');{% if _min_h > 0 %}min-height:{{ _min_h }}vh;display:flex;flex-direction:column;justify-content:center;{% endif %}">
-  <div class="about-hero-overlay" aria-hidden="true"></div>
-  <div class="container" style="text-align:{{ _align }};max-width:{{ _mw }}px;margin:{{ _cmarg }};">
-    <span class="eyebrow reveal d1" style="color:var(--gold);">{{ section.settings.eyebrow | default: 'Our Story' }}</span>
-    <h1 class="reveal d2" style="font-size:{{ section.settings.heading_size }}px;">{{ section.settings.heading | default: 'Built From Boards' }}</h1>
-    <p class="about-hero-sub reveal d3" style="font-size:{{ section.settings.body_size }}px;">{{ section.settings.subheading | default: 'Every ring starts with a skateboard that already lived a life. We just give it another one.' }}</p>
-  </div>
-</section>
-
-<!-- ── 2. THE STATEMENT ──────────────────────────────────── -->
-<section class="about-statement">
-  <div class="container">
-    <div class="reveal">
-      <p class="about-statement-text">{{ section.settings.statement_headline | default: 'Your board carried you.' | newline_to_br }}</p>
-      <div class="about-statement-rule" aria-hidden="true"></div>
-      <p class="about-statement-sub">{{ section.settings.statement_body | default: "Every ring starts as a board that was actually skated — pressed maple, worn rails, real history. We don't use new wood. We don't need to. The material is already out there." }}</p>
-    </div>
-  </div>
-</section>
-
 <!-- ── 3. ORIGIN STORY ───────────────────────────────────── -->
 <section class="section story about-origin">
   <div class="container">
@@ -56,94 +25,6 @@
     </div>
   </div>
 </section>
-
-<!-- ── 4. THE MATERIAL ───────────────────────────────────── -->
-<section class="section coastal about-material">
-  <div class="container">
-    <div class="coastal-inner">
-      <span class="eyebrow" style="color:var(--teal);display:block;margin-bottom:0.6rem;">{{ section.settings.material_eyebrow | default: 'The Material' }}</span>
-      <h2 class="reveal d1">{{ section.settings.material_heading | default: 'Why Skateboards' }}</h2>
-      <div class="coastal-rule"></div>
-      <p class="reveal d2">{{ section.settings.material_body | default: "Skateboarding isn't just a sport — it's a culture built on creativity, grit, and self-expression. Every deck carries that energy: the tricks it absorbed, the concrete it crossed, the skater who shaped it. When we turn that wood into a ring, we're not just making jewelry. We're capturing something real — the soul of skateboarding, worn on your hand every day." }}</p>
-      <div class="coastal-stats reveal d3">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'stat' -%}
-            <div class="coastal-stat" {{ block.shopify_attributes }}>
-              <span class="stat-num">{{ block.settings.number }}</span>
-              <span class="stat-lbl">{{ block.settings.label }}</span>
-            </div>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── 5. BUILT FOR RIDERS ───────────────────────────────── -->
-{%- if section.settings.riders_image != blank -%}
-  {%- assign riders_img_src = section.settings.riders_image | image_url: width: 1200 -%}
-{%- else -%}
-  {%- assign riders_img_src = 'https://images.unsplash.com/photo-1753354006417-951f5ee236e3?fm=jpg&q=80&w=1200&auto=format&fit=crop' -%}
-{%- endif -%}
-<section class="section about-riders">
-  <div class="container">
-    <div class="about-riders-grid">
-      <div class="about-riders-img reveal d1">
-        <img
-          src="{{ riders_img_src }}"
-          alt="{{ section.settings.riders_image_alt | default: 'Skateboarder riding a concrete bowl' }}"
-          loading="lazy" width="800" height="1067">
-      </div>
-      <div class="reveal d2">
-        <span class="eyebrow" style="color:var(--teal);">{{ section.settings.riders_eyebrow | default: 'For the Rider' }}</span>
-        <h2 class="about-riders-heading">{{ section.settings.riders_heading | default: "These Aren't for People Who Think Skating Is Cool." }}</h2>
-        <p class="section-body">{{ section.settings.riders_body_1 | default: "They're for people who actually do it. Who know what a proper pop sounds like. Who've had the same deck for three years because the concave is perfect. Who understand that a board doesn't die — it just changes shape." }}</p>
-        <p class="section-body" style="margin-top:1rem;">{{ section.settings.riders_body_2 | default: "We make rings for skaters because we understand the culture — and the responsibility that comes with it. Every ring is built from reclaimed maple and finished with natural beeswax, because jewelry shouldn't cost the planet. Sustainable by design. Made to be worn every day." }}</p>
-        <a href="{{ section.settings.riders_btn_url | default: '/collections/all' }}" class="btn btn-navy" style="margin-top:2rem;display:inline-block;">{{ section.settings.riders_btn_text | default: 'Shop the Rings' }} &rarr;</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── 6. VALUES ─────────────────────────────────────────── -->
-<section class="section features about-values">
-  <div class="container">
-    <div class="about-values-header reveal">
-      <h2 class="about-values-heading">{{ section.settings.values_heading | default: 'Made Right. No Shortcuts.' }}</h2>
-    </div>
-    <div class="about-values-list">
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'value' -%}
-          <div class="about-value-item reveal" {{ block.shopify_attributes }}>
-            <span class="about-value-num">0{{ forloop.index }}</span>
-            <div class="about-value-content">
-              <h3>{{ block.settings.title }}</h3>
-              <p>{{ block.settings.body }}</p>
-            </div>
-          </div>
-        {%- endif -%}
-      {%- endfor -%}
-    </div>
-  </div>
-</section>
-
-<!-- ── 7. FULL-BLEED IMAGE MOMENT ────────────────────────── -->
-{%- if section.settings.fullbleed_image != blank -%}
-  {%- assign fullbleed_bg = section.settings.fullbleed_image | image_url: width: 2400 -%}
-{%- else -%}
-  {%- assign fullbleed_bg = 'https://images.unsplash.com/photo-1580634240125-b9f6ff4283d1?fm=jpg&q=80&w=2400&auto=format&fit=crop' -%}
-{%- endif -%}
-<div
-  class="about-fullbleed"
-  style="background-image:url('{{ fullbleed_bg }}')"
-  role="img"
-  aria-label="{{ section.settings.fullbleed_image_alt | default: 'Skateboard on concrete road' }}">
-  <div class="about-fullbleed-overlay" aria-hidden="true"></div>
-  <div class="about-fullbleed-text reveal">
-    <span class="about-fullbleed-eyebrow">{{ section.settings.fullbleed_eyebrow | default: 'Zero Waste' }}</span>
-    <p class="about-fullbleed-statement">{{ section.settings.fullbleed_statement | default: 'No virgin wood. No landfill. Just a board that already existed, shaped into something that lasts.' | newline_to_br }}</p>
-  </div>
-</div>
 
 <!-- ── 8. FOUNDER ────────────────────────────────────────── -->
 <section class="section about-founder">
@@ -182,53 +63,6 @@
         {%- endif -%}
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ── 9. FULL-BLEED SKATE IMAGE ───────────────────────── -->
-<figure class="about-bayshore-figure">
-  {%- if section.settings.skate_image != blank -%}
-    <img
-      src="{{ section.settings.skate_image | image_url: width: 2400 }}"
-      alt="{{ section.settings.skate_image_alt | default: 'Skateboarder at a concrete skatepark' }}"
-      class="about-bayshore-img"
-      loading="lazy"
-      width="1024"
-      height="576">
-  {%- else -%}
-    <img
-      src="https://images.unsplash.com/photo-1760773766821-a3fea86fd44a?fm=jpg&q=80&w=2400&auto=format&fit=crop"
-      alt="{{ section.settings.skate_image_alt | default: 'Skateboarder at a concrete skatepark' }}"
-      class="about-bayshore-img"
-      loading="lazy"
-      width="1024"
-      height="576">
-  {%- endif -%}
-</figure>
-
-<!-- ── 10. PROCESS TEASER ────────────────────────────────── -->
-<section class="section about-process-teaser">
-  <div class="container">
-    <div class="about-process-inner reveal d1">
-      <div>
-        <h2 class="about-process-heading">{{ section.settings.process_heading | default: 'Want to see the whole process?' }}</h2>
-        <p class="section-body" style="margin-top:0.75rem;">{{ section.settings.process_body | default: 'From sourcing the board to the final coat. Four steps, no shortcuts.' }}</p>
-      </div>
-      <a href="{{ section.settings.process_link | default: '/pages/our-process' }}" class="btn btn-navy">
-        {{ section.settings.process_btn | default: 'See How We Make Them' }} &rarr;
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ── 11. CTA ───────────────────────────────────────────── -->
-<section class="cta-section">
-  <div class="cta-content">
-    <span class="eyebrow">{{ section.settings.cta_eyebrow | default: 'Get Yours' }}</span>
-    <h2>{{ section.settings.cta_heading | default: 'Wear the Board. Keep the Story.' }}</h2>
-    <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="btn btn-gold">
-      {{ section.settings.cta_btn | default: 'Shop the Collection' }}
-    </a>
   </div>
 </section>
 
