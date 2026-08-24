@@ -34,19 +34,11 @@
             loading: 'lazy'
           }}
         {%- else -%}
-          <div class="about-founder-photos-stack">
-            <img
-              src="{{ 'about-first-workshop.jpg' | asset_url }}"
-              alt="Bayshore Rings founder at work in the workshop"
-              class="about-founder-photo"
-              loading="lazy" width="600" height="800">
-            <div class="about-founder-inset">
-              <img
-                src="{{ 'about-rings-hand.jpg' | asset_url }}"
-                alt="Handcrafted recycled skateboard rings"
-                loading="lazy" width="300" height="400">
-            </div>
-          </div>
+          <img
+            src="{{ 'about-first-workshop.jpg' | asset_url }}"
+            alt="Bayshore Rings founder at work in the workshop"
+            class="about-founder-photo"
+            loading="lazy" width="600" height="800">
         {%- endif -%}
       </div>
       <div class="about-founder-text reveal d2">
