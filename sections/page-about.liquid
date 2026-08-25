@@ -121,7 +121,19 @@
 }
 
 /* ── Origin ────────────────────────────────────────────── */
-.about-origin { background: var(--cream-light); padding-bottom: 0; }
+.about-origin {
+  background: var(--cream-light);
+  padding-bottom: 0;
+  position: relative;
+}
+.about-origin::after {
+  content: '';
+  display: block;
+  height: 4.5rem;
+  background: linear-gradient(to bottom, transparent, var(--cream-light));
+  position: relative;
+  z-index: 1;
+}
 .about-origin-image-block {
   background: var(--cream-light);
   width: 100%;
@@ -131,8 +143,6 @@
   aspect-ratio: 3 / 2;
   object-fit: cover;
   display: block;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
 }
 .about-origin-heading {
   font-family: 'Oswald', sans-serif;
@@ -279,7 +289,18 @@
 }
 
 /* ── Founder ───────────────────────────────────────────── */
-.about-founder { background: var(--cream-light); }
+.about-founder {
+  background: var(--cream-light);
+  position: relative;
+}
+.about-founder::before {
+  content: '';
+  display: block;
+  height: 4.5rem;
+  background: linear-gradient(to top, transparent, var(--cream-light));
+  position: relative;
+  z-index: 1;
+}
 .about-founder-grid {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
