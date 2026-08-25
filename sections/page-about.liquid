@@ -24,7 +24,6 @@
 
 <!-- ── 8. FOUNDER ────────────────────────────────────────── -->
 <section class="section about-founder">
-  <div class="about-founder-top-fade" aria-hidden="true"></div>
   <div class="container">
     <div class="about-founder-grid">
       <div class="about-founder-img reveal d1">
@@ -122,21 +121,15 @@
 }
 
 /* ── Origin ────────────────────────────────────────────── */
-.about-origin {
-  background: var(--cream-light);
-  padding-bottom: 4.5rem;
-}
-.about-origin-image-block {
-  background: var(--cream-light);
-  width: 100%;
-}
+.about-origin { background: var(--cream-light); padding-bottom: 4.5rem; }
+.about-origin-image-block { background: var(--cream-light); width: 100%; }
 .about-origin-image-block img {
   width: 100%;
   aspect-ratio: 3 / 2;
   object-fit: cover;
   display: block;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%);
 }
 .about-origin-heading {
   font-family: 'Oswald', sans-serif;
@@ -283,15 +276,7 @@
 }
 
 /* ── Founder ───────────────────────────────────────────── */
-.about-founder { background: var(--cream-light); position: relative; }
-.about-founder-top-fade {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 120px;
-  background: linear-gradient(to bottom, var(--cream-light), transparent);
-  z-index: 2;
-  pointer-events: none;
-}
+.about-founder { background: var(--cream-light); }
 .about-founder-grid {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
