@@ -611,7 +611,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
 /* ================================================
    FOOTER
    ================================================ */
-.sf { background: #C8A57A; }
+.sf { background: #E7D8C3; }
 .sf-split { display: grid; grid-template-columns: 42% 58%; min-height: 320px; }
 
 .sf-left {
@@ -651,7 +651,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
 }
 .sf-email-btn:hover { text-decoration-color: var(--accent); }
 
-.sf-right { background: #C8A57A; padding: 3.5rem 3.5rem 3rem 3rem; display: flex; flex-direction: column; justify-content: space-between; }
+.sf-right { background: #E7D8C3; padding: 3.5rem 3.5rem 3rem 3rem; display: flex; flex-direction: column; justify-content: space-between; }
 .sf-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
 .sf-group h4 { font-family: 'Moms Typewriter', sans-serif; font-size: 1rem; font-weight: 700; color: #1C1A18; margin-bottom: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .sf-group ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
