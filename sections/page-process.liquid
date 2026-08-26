@@ -96,65 +96,6 @@
   </div>
 </section>
 
-<!-- ── THE 4 STEPS ─────────────────────────────────────── -->
-<section class="section proc-steps-section">
-  <div class="container">
-    <div class="proc-steps-header reveal">
-      <h2 class="proc-steps-heading">Four Steps.<br>Zero Shortcuts.</h2>
-    </div>
-
-    <!-- STEP 01 -->
-    <div class="proc-step reveal">
-      <div class="proc-step-num">01</div>
-      <div class="proc-step-content">
-        <h3>Starting With Reclaimed Wood</h3>
-        <p>We build exclusively from reclaimed skateboard wood — hard maple that's already done its job on the streets and parks. Rather than cutting down new trees, we work with material that already exists, giving it a second life as something durable, beautiful, and wearable.</p>
-        <p>Hard maple is one of the strongest, most sustainable hardwoods available. The same properties that make it ideal for skating — density, grain structure, natural resilience — make it ideal for jewelry that lasts decades, not seasons.</p>
-      </div>
-    </div>
-
-    <!-- STEP 02 -->
-    <div class="proc-step reveal">
-      <div class="proc-step-num">02</div>
-      <div class="proc-step-content">
-        <h3>Milling Down &amp; Prepping the Wood</h3>
-        <p>Once a deck comes in, we inspect it and figure out what it's got. Then we mill it down to its cross-section — exposing the seven plies of hard maple and the colored veneers between them. This is the moment the ring's color pattern shows itself for the first time.</p>
-        <p>No two boards mill out the same way. The grip tape history, the ply colors, the brand — all of it is part of what we're working with. We prep blanks from the best sections of each deck and set them aside until they're ready to shape.</p>
-      </div>
-    </div>
-
-    <!-- STEP 03 -->
-    <div class="proc-step reveal">
-      <div class="proc-step-num">03</div>
-      <div class="proc-step-content">
-        <h3>Cutting, Shaping &amp; All the Finishing</h3>
-        <p>The blank gets drilled, cut to width, and shaped on a precision lathe. We run through multiple rounds of sanding — starting coarse to get the form right, working down through finer and finer grits until the surface feels like nothing at all.</p>
-        <p>The inside edge gets rounded and polished so it sits comfortably on the finger. The outside gets its final profile — clean and wearable. This is the stage where most of the time goes. There's no rushing a good ring.</p>
-      </div>
-    </div>
-
-    <!-- STEP 04 -->
-    <div class="proc-step reveal">
-      <div class="proc-step-num">04</div>
-      <div class="proc-step-content">
-        <h3>Finished With Howard Feed-N-Wax</h3>
-        <p>Every ring is hand-finished with <strong>Howard Feed-N-Wax Wood Polish &amp; Conditioner</strong> — a natural, oil-based beeswax formula. No synthetic lacquers. No UV resins. No chemical coatings that will crack or peel over time.</p>
-        <p>Unlike surface sealers, Feed-N-Wax penetrates deep into the maple grain and nourishes it from the inside out. The finish feels like wood, not plastic — and only gets better the longer you wear it.</p>
-        <div class="proc-feedwax-note">
-          <span class="proc-feedwax-note-label">What's in it</span>
-          <ul class="proc-feedwax-list">
-            <li><strong>Natural beeswax</strong> — seals wood against moisture without masking feel or grain</li>
-            <li><strong>Orange oil</strong> — conditions the maple plies and deepens every layer's color</li>
-            <li><strong>No petroleum distillates</strong> — food-safe, trusted on fine furniture and kitchenware</li>
-            <li><strong>Renewable &amp; biodegradable</strong> — aligned with a no-waste approach to materials</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
 <!-- ── DONATE CTA ──────────────────────────────────────── -->
 <section class="section proc-donate">
   <div class="container">
@@ -303,104 +244,6 @@
   backdrop-filter: blur(4px);
 }
 
-/* ── Steps ─────────────────────────────────────────────── */
-.proc-steps-section { background: var(--cream); }
-.proc-steps-header {
-  margin-bottom: 4rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(0,0,0,0.07);
-}
-.proc-steps-heading {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(3rem, 6vw, 5.5rem);
-  letter-spacing: 0.04em;
-  color: var(--navy);
-  line-height: 0.95;
-}
-.proc-step {
-  display: grid;
-  grid-template-columns: 100px 1fr;
-  gap: 3rem;
-  align-items: start;
-  padding: 3.5rem 0;
-  border-bottom: 1px solid rgba(0,0,0,0.07);
-}
-.proc-step-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 4.5rem;
-  font-weight: 400;
-  color: rgba(0,0,0,0.07);
-  line-height: 1;
-  text-align: right;
-  padding-top: 0.15rem;
-  transition: color 0.25s;
-  letter-spacing: 0.04em;
-  flex-shrink: 0;
-}
-.proc-step:hover .proc-step-num { color: rgba(0,0,0,0.14); }
-.proc-step-content h3 {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
-  font-weight: 600;
-  color: var(--navy);
-  margin: 0 0 0.9rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-.proc-step-content p {
-  font-size: 0.96rem;
-  color: var(--muted);
-  line-height: 1.82;
-  margin-bottom: 0.75rem;
-}
-.proc-step-content p:last-of-type { margin-bottom: 0; }
-.proc-inline-link {
-  color: var(--teal);
-  font-weight: 600;
-  border-bottom: 1px solid rgba(46,126,114,0.3);
-  transition: border-color 0.15s;
-}
-.proc-inline-link:hover { border-color: var(--teal); }
-
-/* ── Feed-N-Wax note ───────────────────────────────────── */
-.proc-feedwax-note {
-  border-top: 1px solid rgba(0,0,0,0.08);
-  padding-top: 1.4rem;
-  margin-top: 1.6rem;
-}
-.proc-feedwax-note-label {
-  font-family: 'Oswald', sans-serif;
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--teal);
-  display: block;
-  margin-bottom: 0.75rem;
-}
-.proc-feedwax-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-}
-.proc-feedwax-list li {
-  font-family: 'Barlow', sans-serif;
-  font-size: 0.88rem;
-  color: var(--muted);
-  line-height: 1.6;
-  padding-left: 1.25rem;
-  position: relative;
-}
-.proc-feedwax-list li::before {
-  content: '—';
-  position: absolute;
-  left: 0;
-  color: var(--teal);
-  font-weight: 300;
-}
-
 /* ── Donate CTA ────────────────────────────────────────── */
 .proc-donate { background: var(--cream-light); }
 .proc-donate-heading {
@@ -440,8 +283,6 @@
   .proc-donate-actions { flex-direction: row; }
 }
 @media (max-width: 620px) {
-  .proc-step { grid-template-columns: 52px 1fr; gap: 1.25rem; }
-  .proc-step-num { font-size: 2.8rem; }
   .proc-gallery-grid { grid-template-columns: 1fr; }
   .proc-donate-actions { flex-direction: column; }
 }
