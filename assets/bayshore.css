@@ -106,7 +106,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
 .nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.1); }
 
 .nav-brand { display: flex; align-items: center; }
-.nav-logo-img { height: 87px; width: auto; display: block; flex-shrink: 0; transition: opacity 0.2s; margin-left: -18px; }
+.nav-logo-img { height: 72px; width: auto; display: block; flex-shrink: 0; transition: opacity 0.2s; margin-left: -18px; }
 .nav-brand:hover .nav-logo-img { opacity: 0.6; }
 
 .nav-links { list-style: none; display: flex; align-items: center; gap: 2.4rem; }
@@ -622,7 +622,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
   position: relative; overflow: hidden;
 }
 .sf-logo-link { display: block; margin-bottom: 2.5rem; position: relative; z-index: 1; }
-.sf-logo { height: 48px; width: auto; display: block; opacity: 0.9; }
+.sf-logo { height: 96px; width: auto; display: block; opacity: 0.9; }
 .sf-nl-heading {
   font-family: 'Moms Typewriter', sans-serif;
   font-size: clamp(2.2rem, 3vw, 3rem);
