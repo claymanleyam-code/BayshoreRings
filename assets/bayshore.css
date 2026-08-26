@@ -207,7 +207,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
    HERO — full-bleed background image, text overlaid left
    ================================================ */
 .hero {
-  min-height: 100vh;
+  min-height: 50vh;
   background: #1C1A18;
   display: flex;
   align-items: center;
