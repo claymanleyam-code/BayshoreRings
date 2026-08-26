@@ -106,7 +106,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
 .nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.1); }
 
 .nav-brand { display: flex; align-items: center; }
-.nav-logo-img { height: 58px; width: auto; display: block; flex-shrink: 0; transition: opacity 0.2s; margin-left: -8px; }
+.nav-logo-img { height: 58px; width: auto; display: block; flex-shrink: 0; transition: opacity 0.2s; margin-left: -18px; }
 .nav-brand:hover .nav-logo-img { opacity: 0.6; }
 
 .nav-links { list-style: none; display: flex; align-items: center; gap: 2.4rem; }
