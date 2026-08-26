@@ -23,7 +23,7 @@
   --navy:        #1C1A18;
   --navy-dark:   #1C1A18;
   --cream:       #C8A57A;
-  --cream-light: #E7D8C3;
+  --cream-light: #C8A57A;
   --cream-dark:  #e0e0e0;
   --red:         #c4422c;
   --teal:        #2e7e72;
@@ -388,7 +388,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
 
 /* Story (white) */
 .story {
-  background: #E7D8C3;
+  background: #C8A57A;
   padding-top: 5.75rem;
   padding-bottom: 5.75rem;
 }
@@ -410,7 +410,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
 
 /* Process (white) */
 .process {
-  background: #E7D8C3;
+  background: #C8A57A;
   padding-top: 5rem;
 }
 
@@ -611,7 +611,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
 /* ================================================
    FOOTER
    ================================================ */
-.sf { background: #E7D8C3; }
+.sf { background: #C8A57A; }
 .sf-split { display: grid; grid-template-columns: 42% 58%; min-height: 320px; }
 
 .sf-left {
@@ -651,7 +651,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
 }
 .sf-email-btn:hover { text-decoration-color: var(--accent); }
 
-.sf-right { background: #E7D8C3; padding: 3.5rem 3.5rem 3rem 3rem; display: flex; flex-direction: column; justify-content: space-between; }
+.sf-right { background: #C8A57A; padding: 3.5rem 3.5rem 3rem 3rem; display: flex; flex-direction: column; justify-content: space-between; }
 .sf-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
 .sf-group h4 { font-family: 'Moms Typewriter', sans-serif; font-size: 1rem; font-weight: 700; color: #1C1A18; margin-bottom: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .sf-group ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
@@ -730,7 +730,7 @@ a.p-card .p-btn { pointer-events: none; }
 .cart-toast-ghost:hover { color: #E7D8C3; border-color: rgba(255,255,255,0.4); }
 
 /* ── Cart Page ───────────────────────────────────────────────── */
-.cart-wrap { background: #E7D8C3; min-height: 60vh; }
+.cart-wrap { background: #C8A57A; min-height: 60vh; }
 .cart-header { background: #1C1A18; padding: 5rem 2rem 3.5rem; text-align: center; }
 .cart-header h1 { font-size: clamp(2.2rem, 4vw, 3.5rem); color: #E7D8C3; font-weight: 400; letter-spacing: 0.04em; margin-top: 0.5rem; text-transform: uppercase; }
 .cart-body { max-width: 860px; margin: 0 auto; padding: 3.5rem 2rem 5rem; }
@@ -885,7 +885,7 @@ a.p-card .p-btn { pointer-events: none; }
 /* ══════════════════════════════════════════════════════════════
    ABOUT PAGE
    ══════════════════════════════════════════════════════════════ */
-.about-skateparks { background: #E7D8C3; padding-left: 0; padding-right: 0; }
+.about-skateparks { background: #C8A57A; padding-left: 0; padding-right: 0; }
 .about-skateparks .container { padding: 0 2rem; }
 .about-skateparks-header { margin-bottom: 2rem; padding: 0 2rem; }
 .skatepark-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 100%; background: #e0e0e0; }
