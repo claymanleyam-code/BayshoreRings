@@ -39,27 +39,50 @@
     <meta property="og:type" content="product">
     <meta property="og:title" content="{{ product.title | escape }} | Recycled Wooden Jewelry — Bayshore Rings">
     <meta property="og:description" content="Handcrafted skateboard ring &amp; recycled wooden jewelry from Tampa, FL. {{ product.description | strip_html | truncate: 140, '...' | escape }}">
-    <meta property="og:image" content="{{ product.featured_image | image_url: width: 1200 }}">
+    {%- if product.featured_image -%}
+      <meta property="og:image" content="https:{{ product.featured_image | image_url: width: 1200 }}">
+    {%- else -%}
+      <meta property="og:image" content="https:{{ 'logo-transparent.png' | asset_url }}">
+    {%- endif -%}
     <meta property="product:price:amount" content="{{ product.price | money_without_currency }}">
     <meta property="product:price:currency" content="{{ cart.currency.iso_code }}">
   {%- elsif template.name == 'index' -%}
     <meta property="og:type" content="website">
     <meta property="og:title" content="Bayshore Rings | Skateboard Rings &amp; Recycled Wooden Jewelry — Tampa, FL">
     <meta property="og:description" content="Handcrafted skateboard rings &amp; recycled wooden jewelry made in Tampa, FL. Unique eco-friendly Tampa jewelry from retired skateboard decks — small batch, coastal craft.">
-    <meta property="og:image" content="{{ 'logo-512.png' | asset_url }}">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="https:{{ 'logo-transparent.png' | asset_url }}">
+    <meta property="og:image:width" content="450">
+    <meta property="og:image:height" content="384">
   {%- else -%}
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ page_title }} — {{ shop.name }}">
     <meta property="og:description" content="{{ page_description | default: shop.description | escape }}">
+    {%- if template.name == 'collection' and collection.image -%}
+      <meta property="og:image" content="https:{{ collection.image | image_url: width: 1200 }}">
+    {%- else -%}
+      <meta property="og:image" content="https:{{ 'logo-transparent.png' | asset_url }}">
+      <meta property="og:image:width" content="450">
+      <meta property="og:image:height" content="384">
+    {%- endif -%}
   {%- endif -%}
   <meta property="og:url" content="{{ canonical_url }}">
 
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if template.name == 'product' %}{{ product.title | escape }}{% elsif template.name == 'collection' %}{{ collection.title | escape }}{% else %}{{ page_title }}{% endif %} — {{ shop.name }}">
+  <meta name="twitter:description" content="{% if template.name == 'product' %}{{ product.description | strip_html | truncate: 140, '...' | escape }}{% else %}{{ page_description | default: shop.description | escape }}{% endif %}">
+  {%- if template.name == 'product' and product.featured_image -%}
+    <meta name="twitter:image" content="https:{{ product.featured_image | image_url: width: 1200 }}">
+  {%- elsif template.name == 'collection' and collection.image -%}
+    <meta name="twitter:image" content="https:{{ collection.image | image_url: width: 1200 }}">
+  {%- else -%}
+    <meta name="twitter:image" content="https:{{ 'logo-transparent.png' | asset_url }}">
+  {%- endif -%}
+
   <!-- Favicon — multiple sizes for Google search listing & browser tabs -->
-  <link rel="icon" type="image/png" sizes="96x96" href="{{ 'favicon-96.png' | asset_url }}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ 'favicon-32.png' | asset_url }}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ 'favicon-16.png' | asset_url }}">
+  <link rel="icon" type="image/png" sizes="96x96" href="{{ 'favicon-transparent.png' | asset_url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ 'favicon-transparent.png' | asset_url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ 'favicon-transparent.png' | asset_url }}">
   <link rel="apple-touch-icon" sizes="192x192" href="{{ 'logo-192.png' | asset_url }}">
   <link rel="apple-touch-icon" sizes="512x512" href="{{ 'logo-512.png' | asset_url }}">
   <meta name="msapplication-TileImage" content="{{ 'logo-192.png' | asset_url }}">
@@ -158,6 +181,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
   {{ content_for_header }}
   {{ 'bayshore.css' | asset_url | stylesheet_tag }}
@@ -177,6 +201,11 @@
     h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; }
     .eyebrow, .hero-kicker span, .section-label, .kicker { font-family: 'Moms Typewriter', sans-serif; }
   </style>
+
+  {%- if settings.enable_klaviyo and settings.klaviyo_public_api_key != blank -%}
+    {%- comment -%}Klaviyo onsite script — tracking, popups/flyouts, forms{%- endcomment -%}
+    <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id={{ settings.klaviyo_public_api_key }}"></script>
+  {%- endif -%}
 </head>
 <body>
 
@@ -184,7 +213,7 @@
 <!-- NAV -->
 <nav class="nav" id="mainNav">
   <a href="/" class="nav-brand">
-    <img src="{{ 'BayshoreRings Logo Mark (Black).svg' | asset_url }}" alt="Bayshore Rings" class="nav-logo-img">
+    <img src="{{ 'logo-transparent.png' | asset_url }}" alt="Bayshore Rings" class="nav-logo-img">
   </a>
   <button class="hamburger" id="navToggle" aria-label="Toggle menu">
     <span></span><span></span><span></span>
@@ -193,7 +222,7 @@
     <li><a href="/">Home</a></li>
     <li><a href="/pages/our-process">Our Process</a></li>
     <li><a href="/pages/about">About</a></li>
-    <li><a href="/pages/reviews">Reviews</a></li>
+    {%- comment -%}<li><a href="/pages/reviews">Reviews</a></li>{%- endcomment -%}
     <li class="nav-shop-wrap">
       <a href="/collections/all" class="nav-shop-trigger">
         Shop Rings
@@ -242,7 +271,7 @@
     <!-- LEFT: gradient + newsletter -->
     <div class="sf-left">
       <a href="/" class="sf-logo-link">
-        <img src="{{ 'BayshoreRings Logo Mark (Black).svg' | asset_url }}" alt="Bayshore Rings" class="sf-logo" style="filter:brightness(0) invert(1);">
+        <img src="{{ 'logo-transparent.png' | asset_url }}" alt="Bayshore Rings" class="sf-logo" style="filter:invert(1);">
       </a>
       <h3 class="sf-nl-heading">Become a Bayshore insider.</h3>
       <p class="sf-nl-sub">First drop notifications, behind-the-scenes from the workshop, and early access to limited batches — straight to your inbox.</p>
@@ -277,7 +306,7 @@
           <h4>Shop</h4>
           <ul>
             <li><a href="/collections/all">All Rings</a></li>
-            <li><a href="{{ 'ringsizing.webp' | asset_url }}" target="_blank">Ring Sizing Guide</a></li>
+            {%- comment -%}<li><a href="{{ 'ringsizing.webp' | asset_url }}" target="_blank">Ring Sizing Guide</a></li>{%- endcomment -%}
             <li><a href="/pages/our-process">How It's Made</a></li>
             <li><a href="/pages/about">Our Story</a></li>
             <li><a href="/blogs/journal">Articles</a></li>
@@ -347,9 +376,10 @@
   <div class="sf-bottom">
     <p>&copy; {{ 'now' | date: '%Y' }} Bayshore Rings. All rights reserved.</p>
     <p>
-      <a href="/policies/privacy-policy">Privacy</a>
-      <a href="/policies/terms-of-service">Terms</a>
-      <a href="/policies/shipping-policy">Shipping</a>
+      {%- if shop.privacy_policy -%}<a href="{{ shop.privacy_policy.url }}">Privacy Policy</a>{%- endif -%}
+      {%- if shop.terms_of_service -%}<a href="{{ shop.terms_of_service.url }}">Terms of Service</a>{%- endif -%}
+      {%- if shop.shipping_policy -%}<a href="{{ shop.shipping_policy.url }}">Shipping Policy</a>{%- endif -%}
+      {%- if shop.refund_policy -%}<a href="{{ shop.refund_policy.url }}">Refund Policy</a>{%- endif -%}
     </p>
   </div>
 </footer>

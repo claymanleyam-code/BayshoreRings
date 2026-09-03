@@ -1,0 +1,139 @@
+<!-- ═══════════════════════════════════════════════════
+     BAYSHORE RINGS — Video Reel Carousel
+     Infinite horizontal marquee of Instagram Reel previews
+     ═══════════════════════════════════════════════════ -->
+
+{%- style -%}
+  #reel-{{ section.id }} { overflow: hidden; width: 100%; padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px; }
+  #reel-{{ section.id }} .reel-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    gap: {{ section.settings.gap }}px;
+    animation: reel-scroll-{{ section.id }} {{ section.settings.scroll_speed }}s linear infinite;
+  }
+  #reel-{{ section.id }} .reel-track:hover { animation-play-state: paused; }
+  #reel-{{ section.id }} .reel-slide {
+    flex: 0 0 auto;
+    display: block;
+    height: {{ section.settings.slide_height }}px;
+    width: auto;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    background: #111;
+  }
+  #reel-{{ section.id }} .reel-video { height: 100%; width: auto; display: block; object-fit: cover; pointer-events: none; }
+  @keyframes reel-scroll-{{ section.id }} {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #reel-{{ section.id }} .reel-track { animation: none; }
+  }
+{%- endstyle -%}
+
+<div class="video-reel-carousel" id="reel-{{ section.id }}">
+  <div class="reel-track">
+    {%- for i in (1..2) -%}
+      {%- assign is_clone = false -%}
+      {%- if i == 2 -%}{%- assign is_clone = true -%}{%- endif -%}
+      {%- for block in section.blocks -%}
+        <a
+          class="reel-slide"
+          href="{{ block.settings.link_url | default: '#' }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="{{ block.settings.alt | default: 'Instagram Reel' }}"
+          {%- if is_clone %}
+          aria-hidden="true" tabindex="-1"
+          {%- else %}
+          {{ block.shopify_attributes }}
+          {%- endif %}
+        >
+          {%- if block.settings.video != blank -%}
+            {{ block.settings.video | video_tag: image_size: '600x', autoplay: false, loop: true, muted: true, controls: false, class: 'reel-video' }}
+          {%- elsif block.settings.video_url != blank -%}
+            <video class="reel-video" muted loop playsinline preload="metadata" src="{{ block.settings.video_url }}"></video>
+          {%- endif -%}
+        </a>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+<script>
+(function () {
+  function initReelCarousel(root) {
+    if (!root) return;
+    var videos = root.querySelectorAll('.reel-video');
+    videos.forEach(function (video) {
+      var slide = video.closest('.reel-slide');
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+
+      var play = function () { video.play().catch(function () {}); };
+      var pause = function () { video.pause(); };
+
+      slide.addEventListener('mouseenter', play);
+      slide.addEventListener('mouseleave', pause);
+
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) { play(); } else { pause(); }
+          });
+        }, { threshold: 0.4 });
+        observer.observe(slide);
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    initReelCarousel(document.getElementById('reel-{{ section.id }}'));
+  });
+  document.addEventListener('shopify:section:load', function (event) {
+    var root = event.target.querySelector('#reel-{{ section.id }}');
+    if (root) initReelCarousel(root);
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Video Reel Carousel",
+  "tag": "section",
+  "class": "video-reel-carousel-section",
+  "settings": [
+    { "type": "range", "id": "slide_height", "label": "Slide height", "min": 120, "max": 500, "step": 10, "unit": "px", "default": 320 },
+    { "type": "range", "id": "gap", "label": "Gap between videos", "min": 0, "max": 60, "step": 4, "unit": "px", "default": 16 },
+    { "type": "range", "id": "scroll_speed", "label": "Scroll duration (seconds per full loop)", "min": 5, "max": 90, "step": 5, "default": 30 },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "blocks": [
+    {
+      "type": "reel_slide",
+      "name": "Reel Slide",
+      "settings": [
+        { "type": "video", "id": "video", "label": "Video (Shopify-hosted)" },
+        { "type": "url", "id": "video_url", "label": "External video URL (MP4/WebM)", "info": "Used only if no Shopify-hosted video is selected above." },
+        { "type": "url", "id": "link_url", "label": "Instagram Reel link" },
+        { "type": "text", "id": "alt", "label": "Accessible label", "default": "Instagram Reel" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Reel Carousel",
+      "blocks": [
+        { "type": "reel_slide" },
+        { "type": "reel_slide" },
+        { "type": "reel_slide" },
+        { "type": "reel_slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}

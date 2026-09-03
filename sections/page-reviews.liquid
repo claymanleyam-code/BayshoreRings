@@ -42,6 +42,7 @@
 <!-- ══════════════════════════════════════════
      2. RATING SUMMARY
      ══════════════════════════════════════════ -->
+{%- unless section.settings.only_show_write_review -%}
 {%- if total_reviews > 0 -%}
 <section class="section reviews-summary-section" aria-label="Overall rating">
   <div class="container">
@@ -86,10 +87,12 @@
     <cite class="reviews-pullquote-cite reveal d2">— Verified Customer</cite>
   </div>
 </section>
+{%- endunless -%}
 
 <!-- ══════════════════════════════════════════
      3. REVIEW CARDS
      ══════════════════════════════════════════ -->
+{%- unless section.settings.only_show_write_review -%}
 {%- if total_reviews > 0 -%}
 <section class="section reviews-cards-section" aria-label="Customer reviews for Bayshore Rings skateboard jewelry">
   <div class="container">
@@ -104,13 +107,13 @@
           class="review-card reveal"
           style="--delay:{{ forloop.index | times: 80 }}ms"
           {{ block.shopify_attributes }}
-          aria-label="Review by {{ block.settings.name | default: 'Anonymous' }}{% if block.settings.ring != blank %} for {{ block.settings.ring }}{% endif %}">
+          aria-label="Review by {{ block.settings.name | default: 'Anonymous' | escape }}{% if block.settings.ring != blank %} for {{ block.settings.ring | escape }}{% endif %}">
 
           {%- if block.settings.image != blank -%}
             <div class="review-card-img-wrap">
               <img
                 src="{{ block.settings.image | image_url: width: 600 }}"
-                alt="Customer photo of Bayshore Rings {{ block.settings.ring | default: 'recycled skateboard ring' }} — review by {{ block.settings.name | default: 'customer' }}"
+                alt="Customer photo of Bayshore Rings {{ block.settings.ring | default: 'recycled skateboard ring' | escape }} — review by {{ block.settings.name | default: 'customer' | escape }}"
                 class="review-card-img"
                 loading="lazy"
                 width="600"
@@ -130,14 +133,14 @@
               {%- endif -%}
             </div>
             {%- if block.settings.title != blank -%}
-              <h3 class="review-title">{{ block.settings.title }}</h3>
+              <h3 class="review-title">{{ block.settings.title | escape }}</h3>
             {%- endif -%}
-            <p class="review-body">{{ block.settings.body }}</p>
+            <p class="review-body">{{ block.settings.body | escape }}</p>
             <div class="review-card-footer">
               <div class="review-author">
-                <span class="review-name">{{ block.settings.name | default: 'Anonymous' }}</span>
+                <span class="review-name">{{ block.settings.name | default: 'Anonymous' | escape }}</span>
                 {%- if block.settings.location != blank -%}
-                  <span class="review-location">{{ block.settings.location }}</span>
+                  <span class="review-location">{{ block.settings.location | escape }}</span>
                 {%- endif -%}
               </div>
               {%- if block.settings.ring != blank or block.settings.date != blank -%}
@@ -163,6 +166,7 @@
   </div>
 </section>
 {%- endif -%}
+{%- endunless -%}
 
 <!-- ══ WORN DAILY ══ -->
 <section class="section reviews-worn-section">
@@ -268,6 +272,7 @@
 <!-- ══════════════════════════════════════════
      5. INSTAGRAM / COMMUNITY POSTS
      ══════════════════════════════════════════ -->
+{%- unless section.settings.only_show_write_review -%}
 {%- if ig_blocks.size > 0 or section.settings.community_show_placeholder -%}
 <section class="section community-section" aria-labelledby="community-heading">
   <div class="container">
@@ -289,7 +294,7 @@
         {%- for block in ig_blocks -%}
           <article class="community-post reveal" style="--delay:{{ forloop.index | times: 60 }}ms" {{ block.shopify_attributes }}>
             {%- if block.settings.post_url != blank -%}
-              <a href="{{ block.settings.post_url }}" target="_blank" rel="noopener noreferrer" class="community-post-link" aria-label="View Instagram post by {{ block.settings.handle | default: '@bayshorerings' }}: {{ block.settings.caption | truncate: 80 }}">
+              <a href="{{ block.settings.post_url }}" target="_blank" rel="noopener noreferrer" class="community-post-link" aria-label="View Instagram post by {{ block.settings.handle | default: '@bayshorerings' | escape }}: {{ block.settings.caption | truncate: 80 | escape }}">
             {%- endif -%}
 
             <div class="community-post-img-wrap">
@@ -346,6 +351,7 @@
   </div>
 </section>
 {%- endif -%}
+{%- endunless -%}
 
 
 <!-- ══════════════════════════════════════════
@@ -602,7 +608,7 @@
 .review-location { font-family: 'Shine Typewriter', sans-serif; font-size: 0.81rem; color: #999; }
 .review-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 0.15rem; }
 .review-ring { font-family: 'Shine Typewriter', sans-serif; font-size: 0.78rem; color: var(--teal); font-style: italic; }
-.review-date { font-family: 'Shine Typewriter', sans-serif; font-size: 0.78rem; color: #bbb; }
+.review-date { font-family: 'Shine Typewriter', sans-serif; font-size: 0.78rem; color: var(--muted); }
 
 /* ── Inline CTA below cards ── */
 .reviews-shop-cta {
@@ -673,7 +679,7 @@
 .review-photo-note strong { color: var(--navy); display: block; margin-bottom: 0.25rem; }
 
 .review-submit-btn { align-self: flex-start; padding: 0.85rem 2.5rem; }
-.review-disclaimer { font-family: 'Shine Typewriter', sans-serif; font-size: 0.84rem; color: #aaa; margin: 0; }
+.review-disclaimer { font-family: 'Shine Typewriter', sans-serif; font-size: 0.84rem; color: var(--muted); margin: 0; }
 .review-success {
   display: flex; align-items: center; gap: 1rem;
   background: rgba(46,126,114,0.08);
@@ -895,6 +901,13 @@
 {
   "name": "Reviews Page",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "only_show_write_review",
+      "label": "Show only the \"Write a Review\" form",
+      "info": "Hides the rating summary, review cards, pull-quote, and Instagram community section — leaves only the hero and the Write a Review form visible.",
+      "default": true
+    },
     {
       "type": "header",
       "content": "Hero"

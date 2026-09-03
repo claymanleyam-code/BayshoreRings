@@ -9,7 +9,9 @@
  */
 {
   "current": {
-    "content_for_index": []
+    "content_for_index": [],
+    "enable_klaviyo": true,
+    "klaviyo_public_api_key": "XZRXHM"
   },
   "platform_customizations": {
     "custom_css": []

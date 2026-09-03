@@ -39,6 +39,10 @@
    ================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid #1C1A18;
+  outline-offset: 2px;
+}
 body {
   font-family: 'Shine Typewriter', sans-serif;
   background: #E7D8C3;
@@ -106,7 +110,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
 .nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.1); }
 
 .nav-brand { display: flex; align-items: center; }
-.nav-logo-img { height: 72px; width: auto; display: block; flex-shrink: 0; transition: opacity 0.2s; margin-left: -28px; }
+.nav-logo-img { height: 61px; width: auto; display: block; flex-shrink: 0; transition: opacity 0.2s; margin-left: -28px; }
 .nav-brand:hover .nav-logo-img { opacity: 0.6; }
 
 .nav-links { list-style: none; display: flex; align-items: center; gap: 2.4rem; }
@@ -622,7 +626,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
   position: relative; overflow: hidden;
 }
 .sf-logo-link { display: block; margin-bottom: 2.5rem; position: relative; z-index: 1; }
-.sf-logo { height: 144px; width: auto; display: block; opacity: 0.9; margin-left: -22px; }
+.sf-logo { max-height: 56px; width: auto; display: block; opacity: 0.9; margin-left: -22px; }
 .sf-nl-heading {
   font-family: 'Moms Typewriter', sans-serif;
   font-size: clamp(2.2rem, 3vw, 3rem);
@@ -809,7 +813,8 @@ a.p-card .p-btn { pointer-events: none; }
 .size-guide-link { font-family: 'Moms Typewriter', sans-serif; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); display: inline-flex; align-items: center; gap: 0.3rem; text-decoration: none; transition: color 0.2s; }
 .size-guide-link:hover { color: #1C1A18; }
 .product-select { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid #e0e0e0; border-radius: 0; background: #E7D8C3; color: #1C1A18; font-family: 'Moms Typewriter', sans-serif; font-size: 0.92rem; cursor: pointer; appearance: auto; transition: border-color 0.2s; }
-.product-select:focus { outline: none; border-color: #1C1A18; }
+.product-select:focus { border-color: #1C1A18; }
+.product-select:focus:not(:focus-visible) { outline: none; }
 .product-submit { width: 100%; padding: 1rem; background: #1C1A18; color: #E7D8C3; font-family: 'Moms Typewriter', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase; border: none; border-radius: 0; cursor: pointer; transition: background 0.2s, transform 0.15s; margin-top: 0.5rem; }
 .product-submit:hover:not(:disabled) { background: #333; transform: translateY(-1px); }
 .product-submit:disabled { background: #ccc; color: #888; cursor: not-allowed; }

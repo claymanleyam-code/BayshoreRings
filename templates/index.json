@@ -13,23 +13,47 @@
       "type": "hero",
       "settings": {
         "kicker": "Tampa, FL · Small Batch · Recycled Wooden Jewelry",
-        "heading": "Skateboard Rings. Recycled Wooden Jewelry.",
-        "subheading": "Bayshore Rings turns retired skateboard decks into clean, durable wooden jewelry with natural color, character, and history in every piece — Tampa-made recycled jewelry, crafted by hand.",
+        "heading": "Recycled Skateboard Jewelry",
+        "subheading": "Bayshore Rings turns authentic, skated decks into tasteful wooden jewelry.Made in the USA. We craft real boards into sleek, low-profile bands built for daily wear.",
         "btn_primary": "Shop the Drop",
         "btn_primary_url": "",
         "btn_secondary": "See How It's Made",
-        "btn_secondary_url": ""
+        "btn_secondary_url": "",
+        "hero_image_alt": "Bayshore Rings — handcrafted rings from recycled skateboard decks",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "heading_size": 52,
+        "body_size": 16,
+        "text_align": "left",
+        "content_max_width": 650,
+        "content_position": "left",
+        "section_min_height": 50
       }
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
+        "ticker_1": "RECLAIMED SKATEBOARDS",
+        "ticker_2": "HANDCRAFTED IN TAMPA",
+        "ticker_3": "SMALL BATCH",
+        "ticker_4": "1 OF 1",
+        "ticker_5": "COASTAL FLORIDA",
+        "ticker_6": "BEESWAX FINISH",
         "eyebrow": "The Collection",
         "heading": "Featured Rings",
         "collection": "",
         "product_limit": 6,
         "view_all_text": "View All Rings",
-        "view_all_url": ""
+        "view_all_url": "",
+        "bg_overlay": 0,
+        "padding_top": 4,
+        "padding_bottom": 4,
+        "heading_size": 40,
+        "body_size": 16,
+        "text_align": "left",
+        "content_max_width": 1200,
+        "content_position": "center",
+        "section_min_height": 100
       }
     },
     "brand_story": {
@@ -37,19 +61,17 @@
       "settings": {
         "eyebrow": "Our Story",
         "heading": "Recycled Jewelry Built From Boards",
-        "body": "Every piece of recycled jewelry starts with a skateboard that has already lived a life. We preserve the layered wood and color of the deck, then shape it into unique wooden jewelry for people who value craft, movement, and originality.",
+        "body": "Every piece of recycled jewelry starts with a skateboard that has already lived a life. We preserve the layered wood and color of the deck, then shape it into unique wooden jewelry for people who value craft and culture",
         "btn_text": "See How We Make Them",
         "btn_url": "",
-        "badge_text": "Boards with a Life of Their Own",
-        "badge_sub": "Est. Bayshore · Coastal Craft"
-      }
-    },
-    "coastal": {
-      "type": "coastal-americana",
-      "settings": {
-        "eyebrow": "Brand Direction",
-        "heading": "Tampa Jewelry. Skate Roots.",
-        "body": "Bayshore Rings is Tampa's source for handcrafted skateboard rings and recycled wooden jewelry. We blend coastal design with skate culture — Tampa jewelry that feels classic, personal, and genuinely different."
+        "padding_top": 6,
+        "padding_bottom": 6,
+        "heading_size": 40,
+        "body_size": 16,
+        "text_align": "left",
+        "content_max_width": 550,
+        "content_position": "left",
+        "section_min_height": 100
       }
     },
     "cta": {
@@ -58,7 +80,16 @@
         "eyebrow": "Get Yours",
         "heading": "Wear the Board. Keep the Story.",
         "btn_text": "Shop the Collection",
-        "btn_url": ""
+        "btn_url": "",
+        "bg_overlay": 0,
+        "padding_top": 5,
+        "padding_bottom": 5,
+        "heading_size": 48,
+        "body_size": 16,
+        "text_align": "center",
+        "content_max_width": 700,
+        "content_position": "center",
+        "section_min_height": 100
       }
     }
   },
@@ -66,7 +97,6 @@
     "hero",
     "featured_collection",
     "brand_story",
-    "coastal",
     "cta"
   ]
 }

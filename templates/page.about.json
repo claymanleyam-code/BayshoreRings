@@ -12,9 +12,27 @@
     "main": {
       "type": "page-about",
       "blocks": {
-        "stat_1": { "type": "stat", "settings": { "number": "100%", "label": "Recycled Jewelry" } },
-        "stat_2": { "type": "stat", "settings": { "number": "7", "label": "Maple Plies" } },
-        "stat_3": { "type": "stat", "settings": { "number": "1", "label": "Of a Kind" } },
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "100%",
+            "label": "Recycled Jewelry"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "7",
+            "label": "Maple Plies"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "1",
+            "label": "Of a Kind"
+          }
+        },
         "val_1": {
           "type": "value",
           "settings": {
@@ -37,44 +55,63 @@
           }
         }
       },
-      "block_order": ["stat_1", "stat_2", "stat_3", "val_1", "val_2", "val_3"],
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "val_1",
+        "val_2",
+        "val_3"
+      ],
       "settings": {
         "eyebrow": "Our Story",
         "heading": "Built From Boards",
         "subheading": "Every ring starts with a board that already had a life. We just give it another one.",
-
+        "statement_headline": "Your board carried you.\nNow it carries your story.",
+        "statement_body": "Every ring starts as a board that was actually skated, pressed maple, worn rails, real history. We don't use new wood. We don't need to. The material is already perfect.",
         "origin_eyebrow": "Where It Started",
         "origin_heading": "When a Skateboarder Begins to Love Woodworking",
-        "origin_body_1": "Started in my dad's garage. Broken boards piling up, nowhere to go. I started cutting them up. Jewelry first.",
-        "origin_body_2": "Rings turned out to be the thing. Seven layers of maple — teal, red, raw wood — stacked like nothing else. Looked right on a finger. Bayshore Rings grew from there.",
-        "badge_text": "One Board. One Ring. One Story.",
-        "badge_sub": "Bayshore · Tampa, FL",
-
+        "origin_body_1": "Started in my dad's garage. Broken boards piling up, nowhere to go. Rings turned out to be the thing. Seven layers of beautiful maple.",
+        "origin_body_2": "",
+        "origin_image_alt": "Bayshore Rings workshop tools and setup",
         "material_eyebrow": "The Material",
         "material_heading": "Why Skateboards",
-        "material_body": "Seven layers of hard maple, pressed under thousands of pounds of force. Between those plies: colored veneers that change by brand and era. Cut across the deck — those layers become the ring's grain. No dye. No stain.",
-
-        "values_eyebrow": "What We Stand For",
+        "material_body": "Seven layers of hard maple, pressed under thousands of pounds of force. Between those plies: colored veneers that change by brand and era. Cut across the deck, those layers become the ring's grain. No dye. No stain.",
+        "riders_image_alt": "Skateboarder riding a concrete bowl",
+        "riders_eyebrow": "",
+        "riders_heading": "",
+        "riders_body_1": "They're for people who actually do it. Who know what a proper pop sounds like. Who've had the same deck for three years because the concave is perfect. Who understand that a board doesn't die, it just changes shape.",
+        "riders_body_2": "",
+        "riders_btn_text": "Shop the Rings",
+        "riders_btn_url": "",
         "values_heading": "Made Right. Every Time.",
-
-        "founder_eyebrow": "The Maker",
-        "founder_name": "Clay",
-        "founder_bio": "Started in Tampa, named for Bayshore Boulevard. Both founders grew up here. First rings went to local skaters who got it before anyone else.",
-        "founder_bio_2": "Retired skaters had no way to carry the culture without the full kit. A ring from a real board fills that — wearable, understated, made from something that already meant something.",
-        "founder_signature": "",
-
-        "process_eyebrow": "How It's Made",
+        "fullbleed_image_alt": "Skateboard on concrete road",
+        "fullbleed_eyebrow": "Zero Waste",
+        "fullbleed_statement": "No landfill.\nJust a board that already existed,\nshaped into something that lasts.",
+        "skate_image_alt": "Skateboarder at a concrete skatepark",
+        "founder_eyebrow": "The Woodworker",
+        "founder_name": "Founder",
+        "founder_bio": "Raised on the East Coast and now crafting in Tampa, Clay found his way to woodworking after an injury took him off his board.",
+        "founder_bio_2": "\"Retired skaters have no way to carry the culture without riding. Now they can stay connected to the lifestyle through tasteful jewelry.\"",
+        "founder_signature": "- Clayden Manley",
         "process_heading": "Want to see the whole process?",
         "process_body": "From source board to finished ring. Four steps, no shortcuts.",
         "process_link": "/pages/our-process",
         "process_btn": "See How We Make Them",
-
         "cta_eyebrow": "Get Yours",
         "cta_heading": "Wear the Board. Keep the Story.",
         "cta_link": "/collections/all",
-        "cta_btn": "Shop the Collection"
+        "cta_btn": "Shop the Collection",
+        "heading_size": 52,
+        "body_size": 16,
+        "text_align": "center",
+        "content_max_width": 800,
+        "content_position": "center",
+        "section_min_height": 100
       }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

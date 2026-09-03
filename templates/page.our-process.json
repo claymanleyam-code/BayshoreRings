@@ -11,8 +11,84 @@
   "sections": {
     "main": {
       "type": "page-process",
-      "settings": {}
+      "blocks": {
+        "stat-1": {
+          "type": "stat",
+          "settings": {
+            "number": "100%",
+            "label": "Reclaimed Wood"
+          }
+        },
+        "stat-2": {
+          "type": "stat",
+          "settings": {
+            "number": "0",
+            "label": "New Wood Used"
+          }
+        },
+        "stat-3": {
+          "type": "stat",
+          "settings": {
+            "number": "1 of 1",
+            "label": "Every Ring Is Unique"
+          }
+        },
+        "gallery-1": {
+          "type": "gallery_item",
+          "settings": {
+            "image": "shopify://shop_images/IMG_7494.jpg_1.jpg",
+            "alt": "Close-up cross-section of a skateboard deck showing seven maple plies",
+            "label": "The History"
+          }
+        },
+        "gallery-2": {
+          "type": "gallery_item",
+          "settings": {
+            "alt": "Colorful skateboard deck art — the raw character we preserve in every ring",
+            "label": "Ridden Hard"
+          }
+        },
+        "gallery-3": {
+          "type": "gallery_item",
+          "settings": {
+            "image": "shopify://shop_images/grain.jpg",
+            "alt": "Close-up of warm maple wood grain — the layered texture of reclaimed skateboard wood",
+            "label": "The Grain"
+          }
+        }
+      },
+      "block_order": [
+        "stat-1",
+        "stat-2",
+        "stat-3",
+        "gallery-1",
+        "gallery-2",
+        "gallery-3"
+      ],
+      "settings": {
+        "hero_eyebrow": "Handcrafted",
+        "hero_heading": "Decks to Jewelry",
+        "hero_body": "No new lumber. No mass production. Built to last",
+        "intro_heading": "Sustainable Woodworking",
+        "intro_body": "<p>We craft our eco-friendly wooden rings exclusively from upcycled skateboard decks. By converting dense hard maple plies into refined jewelry, we protect natural resources without sacrificing durability. It’s a subtle, sustainable choice for those looking for handmade jewelry built to last</p>",
+        "donate_heading": "Built to Last.\nNot to Replace.",
+        "donate_body": "Sustainable woodworking means creating pieces designed for the long haul, not the landfill. We craft our eco-friendly wooden rings from upcycled hard rock maple, combining natural durability with a clean, low-profile fit. It’s jewelry built right, giving you a timeless, sustainable band designed for daily wear.",
+        "donate_btn_text": "Shop the Rings",
+        "donate_btn_url": "/collections/all",
+        "final_eyebrow": "Handcrafted",
+        "final_heading": "Every Ring Has a Story.\nWhat's Yours?",
+        "final_btn_text": "Shop the Collection",
+        "final_btn_url": "/collections/all",
+        "heading_size": 52,
+        "body_size": 16,
+        "text_align": "center",
+        "content_max_width": 900,
+        "content_position": "center",
+        "section_min_height": 60
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

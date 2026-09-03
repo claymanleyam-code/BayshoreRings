@@ -113,5 +113,27 @@
         "label": "Pinterest URL"
       }
     ]
+  },
+  {
+    "name": "Klaviyo",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Klaviyo Integration"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_klaviyo",
+        "label": "Enable Klaviyo tracking",
+        "info": "Loads the Klaviyo onsite script (analytics, popups, flyouts, back-in-stock, etc.) sitewide.",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "klaviyo_public_api_key",
+        "label": "Klaviyo Public API Key (Company ID)",
+        "info": "Found in Klaviyo under Settings → API Keys → Public API Key. 6-character code."
+      }
+    ]
   }
 ]

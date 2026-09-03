@@ -12,10 +12,16 @@
   {%- endif -%}
   <div class="container" style="position:relative;">
     <div class="coastal-inner reveal" style="max-width:{{ _mw }}px;margin:{{ _cmarg }};text-align:{{ _align }};">
-      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
-      <h2 style="font-size:{{ section.settings.heading_size }}px;">{{ section.settings.heading }}</h2>
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 style="font-size:{{ section.settings.heading_size }}px;">{{ section.settings.heading }}</h2>
+      {%- endif -%}
       <div class="coastal-rule"></div>
-      <p style="font-size:{{ section.settings.body_size }}px;">{{ section.settings.body }}</p>
+      {%- if section.settings.body != blank -%}
+        <p style="font-size:{{ section.settings.body_size }}px;">{{ section.settings.body }}</p>
+      {%- endif -%}
       <div class="coastal-stats">
         {%- for block in section.blocks -%}
           <div {{ block.shopify_attributes }}>
@@ -27,21 +33,17 @@
     </div>
   </div>
 
-  <figure class="coastal-photo-wrap reveal">
-    {%- if section.settings.photo_1 != blank -%}
-      <img src="{{ section.settings.photo_1 | image_url: width: 1600 }}" alt="{{ section.settings.photo_1_alt | default: 'Skateboarder riding concrete at speed' }}" class="coastal-photo" loading="lazy" width="1024" height="500">
-    {%- else -%}
-      <img src="https://images.unsplash.com/photo-1547447134-cd3f5c716030?fm=jpg&q=80&w=1600&auto=format&fit=crop" alt="{{ section.settings.photo_1_alt | default: 'Skateboarder riding concrete at speed' }}" class="coastal-photo" loading="lazy" width="1024" height="500">
-    {%- endif -%}
-  </figure>
+  {%- if section.settings.photo_1 != blank -%}
+    <figure class="coastal-photo-wrap reveal">
+      <img src="{{ section.settings.photo_1 | image_url: width: 1600 }}" alt="{{ section.settings.photo_1_alt | escape }}" class="coastal-photo" loading="lazy" width="1024" height="500">
+    </figure>
+  {%- endif -%}
 
-  <figure class="coastal-photo-wrap coastal-photo-skate-wrap reveal">
-    {%- if section.settings.photo_2 != blank -%}
-      <img src="{{ section.settings.photo_2 | image_url: width: 1600 }}" alt="{{ section.settings.photo_2_alt | default: 'Skateboarding culture and community' }}" class="coastal-photo coastal-photo--skate" loading="lazy" width="1024" height="500">
-    {%- else -%}
-      <img src="https://cdn.shopify.com/s/files/1/0530/0695/8744/t/22/assets/the-role-of-skateboard-clothing-in-skate-culture_550x.jpg" alt="{{ section.settings.photo_2_alt | default: 'Skateboarding culture and community' }}" class="coastal-photo coastal-photo--skate" loading="lazy" width="1024" height="500">
-    {%- endif -%}
-  </figure>
+  {%- if section.settings.photo_2 != blank -%}
+    <figure class="coastal-photo-wrap coastal-photo-skate-wrap reveal">
+      <img src="{{ section.settings.photo_2 | image_url: width: 1600 }}" alt="{{ section.settings.photo_2_alt | escape }}" class="coastal-photo coastal-photo--skate" loading="lazy" width="1024" height="500">
+    </figure>
+  {%- endif -%}
 </section>
 
 {% schema %}
@@ -49,11 +51,11 @@
   "name": "Coastal Americana",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow label", "default": "The Community" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Jewelry for the Culture." },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Jewelry for the Culture." },
     { "type": "textarea", "id": "body", "label": "Body text", "default": "Skate culture doesn't follow trends — it sets them. We make jewelry that's built the same way: from reclaimed materials that waste nothing, worn by people who actually skate. Sustainable by design. Made to last as long as the passion does." },
     { "type": "header", "content": "Section Background" },
     { "type": "image_picker", "id": "bg_image", "label": "Section background image" },
-    { "type": "range", "id": "bg_overlay", "label": "Overlay darkness (%)", "min": 0, "max": 80, "step": 10, "default": 0 },
+    { "type": "range", "id": "bg_overlay", "label": "Overlay darkness", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 0 },
     { "type": "header", "content": "Photos" },
     { "type": "image_picker", "id": "photo_1", "label": "Photo 1" },
     { "type": "text", "id": "photo_1_alt", "label": "Photo 1 alt text", "default": "Skateboarder riding concrete at speed" },

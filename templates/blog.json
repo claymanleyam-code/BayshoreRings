@@ -12,7 +12,14 @@
     "main": {
       "type": "main-blog",
       "settings": {}
+    },
+    "video_reel_carousel": {
+      "type": "video-reel-carousel",
+      "settings": {}
     }
   },
-  "order": ["main"]
+  "order": [
+    "main",
+    "video_reel_carousel"
+  ]
 }
