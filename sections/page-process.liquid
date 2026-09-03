@@ -2,6 +2,9 @@
      BAYSHORE RINGS — Our Process Page
      ═══════════════════════════════════════════════════ -->
 
+{%- assign stat_blocks = section.blocks | where: 'type', 'stat' -%}
+{%- assign gallery_blocks = section.blocks | where: 'type', 'gallery_item' -%}
+
 <!-- ── HERO ────────────────────────────────────────────── -->
 {%- assign _min_h = section.settings.section_min_height -%}
 {%- assign _align = section.settings.text_align -%}
@@ -29,9 +32,15 @@
   </script>
   <div class="proc-hero-overlay" aria-hidden="true" style="position:absolute;inset:0;z-index:1;"></div>
   <div class="container" style="position:relative;z-index:2;text-align:{{ _align }};max-width:{{ _mw }}px;margin:{{ _cmarg }};">
-    <span class="eyebrow reveal d1" style="color:#ffffff;">Handcrafted</span>
-    <h1 class="reveal d2" style="font-size:{{ section.settings.heading_size }}px;">From Retired Deck<br>to Daily Wear</h1>
-    <p class="proc-hero-sub reveal d3" style="font-size:{{ section.settings.body_size }}px;">Built without compromise. Every ring starts with reclaimed maple — a material skaters already trust with their feet. No new lumber. No synthetic finishes. Just something built to last.</p>
+    {%- if section.settings.hero_eyebrow != blank -%}
+      <span class="eyebrow reveal d1" style="color:#ffffff;">{{ section.settings.hero_eyebrow }}</span>
+    {%- endif -%}
+    {%- if section.settings.hero_heading != blank -%}
+      <h1 class="reveal d2" style="font-size:{{ section.settings.heading_size }}px;">{{ section.settings.hero_heading | newline_to_br }}</h1>
+    {%- endif -%}
+    {%- if section.settings.hero_body != blank -%}
+      <p class="proc-hero-sub reveal d3" style="font-size:{{ section.settings.body_size }}px;">{{ section.settings.hero_body }}</p>
+    {%- endif -%}
   </div>
 </div>
 
@@ -40,73 +49,81 @@
   <div class="container">
     <div class="proc-intro-grid">
       <div class="reveal d1">
-        <h2 class="proc-intro-heading">Where the Wood Comes From</h2>
-        <p class="section-body">Every ring starts with reclaimed hard maple — the same wood skate decks are built from for a reason. Dense, durable, and naturally beautiful, hard maple is one of the most resilient hardwoods available. We use it exclusively.</p>
-        <p class="section-body" style="margin-top:1rem;">By working with reclaimed wood, we eliminate the need for newly harvested lumber and keep usable material out of the waste stream. Every ring is a direct investment in a more sustainable approach to jewelry that doesn't compromise on quality.</p>
+        {%- if section.settings.intro_heading != blank -%}
+          <h2 class="proc-intro-heading">{{ section.settings.intro_heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.intro_body != blank -%}
+          <div class="section-body">{{ section.settings.intro_body }}</div>
+        {%- endif -%}
       </div>
-      <div class="proc-community-visual reveal d2">
-        <div class="proc-stat-stack">
-          <div class="proc-stat-item">
-            <span class="proc-stat-num">100%</span>
-            <span class="proc-stat-label">Reclaimed Wood</span>
-          </div>
-          <div class="proc-stat-item">
-            <span class="proc-stat-num">0</span>
-            <span class="proc-stat-label">New Wood Used</span>
-          </div>
-          <div class="proc-stat-item">
-            <span class="proc-stat-num">1 of 1</span>
-            <span class="proc-stat-label">Every Ring Is Unique</span>
+      {%- if stat_blocks.size > 0 -%}
+        <div class="proc-community-visual reveal d2">
+          <div class="proc-stat-stack">
+            {%- for block in stat_blocks -%}
+              <div class="proc-stat-item" {{ block.shopify_attributes }}>
+                <span class="proc-stat-num">{{ block.settings.number }}</span>
+                <span class="proc-stat-label">{{ block.settings.label }}</span>
+              </div>
+            {%- endfor -%}
           </div>
         </div>
-      </div>
+      {%- endif -%}
     </div>
   </div>
 </section>
 
 <!-- ── PROCESS IMAGE GRID ───────────────────────────────── -->
+{%- if gallery_blocks.size > 0 -%}
 <section class="section proc-gallery">
   <div class="container">
     <div class="proc-gallery-grid">
-      <div class="proc-gallery-item proc-gallery-item--large">
-        <img
-          src="https://www.skatedeluxe.com/blog/wp-content/uploads/2016/10/Skateboard-Deck-Plys-Close-Up.jpg"
-          alt="Close-up cross-section of a skateboard deck showing seven maple plies"
-          class="proc-gallery-img"
-          loading="lazy" width="800" height="560">
-        <span class="proc-gallery-label">The Source Material</span>
-      </div>
-      <div class="proc-gallery-item">
-        <img
-          src="https://everskate.com/wp-content/uploads/2020/02/skateboard-art-1.jpg"
-          alt="Colorful skateboard deck art — the raw character we preserve in every ring"
-          class="proc-gallery-img"
-          loading="lazy" width="600" height="420">
-        <span class="proc-gallery-label">Ridden Hard</span>
-      </div>
-      <div class="proc-gallery-item">
-        <img
-          src="https://images.unsplash.com/photo-1763392199096-6efd9d28d8cc?fm=jpg&q=80&w=1200&auto=format&fit=crop"
-          alt="Close-up of warm maple wood grain — the layered texture of reclaimed skateboard wood"
-          class="proc-gallery-img"
-          loading="lazy" width="600" height="420">
-        <span class="proc-gallery-label">The Grain</span>
-      </div>
+      {%- for block in gallery_blocks -%}
+        {%- if block.settings.image != blank -%}
+          {%- assign gallery_src = block.settings.image | image_url: width: 1200 -%}
+        {%- elsif forloop.index == 1 -%}
+          {%- assign gallery_src = 'https://www.skatedeluxe.com/blog/wp-content/uploads/2016/10/Skateboard-Deck-Plys-Close-Up.jpg' -%}
+        {%- elsif forloop.index == 2 -%}
+          {%- assign gallery_src = 'https://everskate.com/wp-content/uploads/2020/02/skateboard-art-1.jpg' -%}
+        {%- elsif forloop.index == 3 -%}
+          {%- assign gallery_src = 'https://images.unsplash.com/photo-1763392199096-6efd9d28d8cc?fm=jpg&q=80&w=1200&auto=format&fit=crop' -%}
+        {%- else -%}
+          {%- assign gallery_src = blank -%}
+        {%- endif -%}
+        {%- if gallery_src != blank -%}
+          <div class="proc-gallery-item{% if forloop.first %} proc-gallery-item--large{% endif %}" {{ block.shopify_attributes }}>
+            <img
+              src="{{ gallery_src }}"
+              alt="{{ block.settings.alt | escape }}"
+              class="proc-gallery-img"
+              loading="lazy" width="800" height="560">
+            {%- if block.settings.label != blank -%}
+              <span class="proc-gallery-label">{{ block.settings.label }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
     </div>
   </div>
 </section>
+{%- endif -%}
 
 <!-- ── DONATE CTA ──────────────────────────────────────── -->
 <section class="section proc-donate">
   <div class="container">
     <div class="proc-donate-inner reveal">
       <div>
-        <h2 class="proc-donate-heading">Built to Last.<br>Not to Replace.</h2>
-        <p class="section-body">Fast fashion has a cost. We make rings from reclaimed maple and finish them with natural beeswax — no synthetic resins, no coatings that crack or peel. One ring, built right, built to stay on your finger for years.</p>
+        {%- if section.settings.donate_heading != blank -%}
+          <h2 class="proc-donate-heading">{{ section.settings.donate_heading | newline_to_br }}</h2>
+        {%- endif -%}
+        {%- if section.settings.donate_body != blank -%}
+          <p class="section-body">{{ section.settings.donate_body }}</p>
+        {%- endif -%}
       </div>
-      <div class="proc-donate-actions">
-        <a href="/collections/all" class="btn btn-gold">Shop the Rings &rarr;</a>
-      </div>
+      {%- if section.settings.donate_btn_text != blank -%}
+        <div class="proc-donate-actions">
+          <a href="{{ section.settings.donate_btn_url | default: '/collections/all' }}" class="btn btn-gold">{{ section.settings.donate_btn_text }} &rarr;</a>
+        </div>
+      {%- endif -%}
     </div>
   </div>
 </section>
@@ -114,9 +131,15 @@
 <!-- ── FINAL CTA ───────────────────────────────────────── -->
 <section class="cta-section">
   <div class="cta-content reveal">
-    <span class="eyebrow">Handcrafted</span>
-    <h2>Every Ring Has a Story.<br>What's Yours?</h2>
-    <a href="/collections/all" class="btn btn-gold" style="font-size:0.85rem;padding:1rem 2.5rem;">Shop the Collection</a>
+    {%- if section.settings.final_eyebrow != blank -%}
+      <span class="eyebrow">{{ section.settings.final_eyebrow }}</span>
+    {%- endif -%}
+    {%- if section.settings.final_heading != blank -%}
+      <h2>{{ section.settings.final_heading | newline_to_br }}</h2>
+    {%- endif -%}
+    {%- if section.settings.final_btn_text != blank -%}
+      <a href="{{ section.settings.final_btn_url | default: '/collections/all' }}" class="btn btn-gold" style="font-size:0.85rem;padding:1rem 2.5rem;">{{ section.settings.final_btn_text }}</a>
+    {%- endif -%}
   </div>
 </section>
 
@@ -174,6 +197,7 @@
   line-height: 1.82;
   color: #1a1a1a;
 }
+.proc-intro .section-body p + p { margin-top: 1rem; }
 .proc-intro-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -292,15 +316,63 @@
 {
   "name": "Our Process Page",
   "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "Handcrafted" },
+    { "type": "textarea", "id": "hero_heading", "label": "Hero heading", "info": "Line breaks in this field become line breaks in the heading.", "default": "From Retired Deck\nto Daily Wear" },
+    { "type": "textarea", "id": "hero_body", "label": "Hero subheading", "default": "Built without compromise. Every ring starts with reclaimed maple — a material skaters already trust with their feet. No new lumber. No synthetic finishes. Just something built to last." },
+    { "type": "header", "content": "Where the Wood Comes From" },
+    { "type": "text", "id": "intro_heading", "label": "Heading", "default": "Where the Wood Comes From" },
+    { "type": "richtext", "id": "intro_body", "label": "Body text", "default": "<p>Every ring starts with reclaimed hard maple — the same wood skate decks are built from for a reason. Dense, durable, and naturally beautiful, hard maple is one of the most resilient hardwoods available. We use it exclusively.</p><p>By working with reclaimed wood, we eliminate the need for newly harvested lumber and keep usable material out of the waste stream. Every ring is a direct investment in a more sustainable approach to jewelry that doesn't compromise on quality.</p>" },
+    { "type": "header", "content": "Donate CTA" },
+    { "type": "textarea", "id": "donate_heading", "label": "Heading", "info": "Line breaks in this field become line breaks in the heading.", "default": "Built to Last.\nNot to Replace." },
+    { "type": "textarea", "id": "donate_body", "label": "Body text", "default": "Fast fashion has a cost. We make rings from reclaimed maple and finish them with natural beeswax — no synthetic resins, no coatings that crack or peel. One ring, built right, built to stay on your finger for years." },
+    { "type": "text", "id": "donate_btn_text", "label": "Button text", "default": "Shop the Rings" },
+    { "type": "url", "id": "donate_btn_url", "label": "Button link" },
+    { "type": "header", "content": "Final CTA" },
+    { "type": "text", "id": "final_eyebrow", "label": "Eyebrow", "default": "Handcrafted" },
+    { "type": "textarea", "id": "final_heading", "label": "Heading", "info": "Line breaks in this field become line breaks in the heading.", "default": "Every Ring Has a Story.\nWhat's Yours?" },
+    { "type": "text", "id": "final_btn_text", "label": "Button text", "default": "Shop the Collection" },
+    { "type": "url", "id": "final_btn_url", "label": "Button link" },
     { "type": "header", "content": "Text & Layout" },
-    { "type": "range", "id": "heading_size", "label": "Heading size", "min": 16, "max": 96, "step": 2, "unit": "px", "default": 52 },
-    { "type": "range", "id": "body_size", "label": "Body text size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
-    { "type": "select", "id": "text_align", "label": "Text alignment", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "center" },
-    { "type": "range", "id": "content_max_width", "label": "Content width", "min": 300, "max": 1400, "step": 50, "unit": "px", "default": 900 },
-    { "type": "select", "id": "content_position", "label": "Content position", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "center" },
+    { "type": "range", "id": "heading_size", "label": "Hero heading size", "min": 16, "max": 96, "step": 2, "unit": "px", "default": 52 },
+    { "type": "range", "id": "body_size", "label": "Hero body text size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "select", "id": "text_align", "label": "Hero text alignment", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "center" },
+    { "type": "range", "id": "content_max_width", "label": "Hero content width", "min": 300, "max": 1400, "step": 50, "unit": "px", "default": 900 },
+    { "type": "select", "id": "content_position", "label": "Hero content position", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "center" },
     { "type": "header", "content": "Section Size" },
     { "type": "range", "id": "section_min_height", "label": "Hero height", "min": 0, "max": 100, "step": 5, "unit": "vh", "default": 100 }
   ],
-  "presets": [{ "name": "Our Process Page" }]
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "100%" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Reclaimed Wood" }
+      ]
+    },
+    {
+      "type": "gallery_item",
+      "name": "Gallery Photo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text", "id": "alt", "label": "Alt text", "default": "Bayshore Rings process photo" },
+        { "type": "text", "id": "label", "label": "Caption label" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Process Page",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "100%", "label": "Reclaimed Wood" } },
+        { "type": "stat", "settings": { "number": "0", "label": "New Wood Used" } },
+        { "type": "stat", "settings": { "number": "1 of 1", "label": "Every Ring Is Unique" } },
+        { "type": "gallery_item", "settings": { "alt": "Close-up cross-section of a skateboard deck showing seven maple plies", "label": "The Source Material" } },
+        { "type": "gallery_item", "settings": { "alt": "Colorful skateboard deck art — the raw character we preserve in every ring", "label": "Ridden Hard" } },
+        { "type": "gallery_item", "settings": { "alt": "Close-up of warm maple wood grain — the layered texture of reclaimed skateboard wood", "label": "The Grain" } }
+      ]
+    }
+  ]
 }
 {% endschema %}
