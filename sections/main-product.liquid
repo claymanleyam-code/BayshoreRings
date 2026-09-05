@@ -176,6 +176,7 @@
     document.body.style.overflow = '';
     form.reset();
     form.hidden = false;
+    form.querySelector('.so-submit').hidden = false;
     success.hidden = true;
   }
 
@@ -192,8 +193,7 @@
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var btn = form.querySelector('.so-submit');
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
+    btn.hidden = true;
 
     var data = new FormData(form);
     fetch(SHEET_URL, {
@@ -215,8 +215,7 @@
       success.hidden = false;
     })
     .catch(function () {
-      btn.textContent = 'Send Inquiry';
-      btn.disabled = false;
+      btn.hidden = false;
       alert('Something went wrong. Please email us directly.');
     });
   });
