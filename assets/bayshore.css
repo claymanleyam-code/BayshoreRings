@@ -940,7 +940,7 @@ a.p-card .p-btn { pointer-events: none; }
 .nav-shop-card-name { font-family: 'Moms Typewriter', sans-serif; font-size: 0.62rem; font-weight: 700; color: #1C1A18; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .nav-shop-card-price { font-family: 'Moms Typewriter', sans-serif; font-size: 0.6rem; font-weight: 600; color: #555; letter-spacing: 0.02em; }
 .nav-shop-all { display: block; text-align: center; padding: 0.8rem 1rem; font-family: 'Moms Typewriter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #1C1A18; text-decoration: none; border-top: 1px solid #c9b99e; transition: background 0.18s, color 0.18s; }
-.nav-shop-all:hover { background: #1C1A18; color: #E7D8C3; }
+.nav-shop-all:hover { background: rgba(28,26,24,0.1); color: #1C1A18; }
 
 @media (max-width: 800px) { .nav-shop-wrap { position: static; } .nav-shop-preview { display: none; } }
 
