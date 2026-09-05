@@ -930,16 +930,16 @@ a.p-card .p-btn { pointer-events: none; }
 .nav-shop-preview::before { content: ''; position: absolute; top: -17px; left: 0; right: 0; height: 17px; }
 .nav-shop-wrap:hover .nav-shop-preview { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
-.nav-shop-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #e8e8e8; }
+.nav-shop-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #c9b99e; }
 .nav-shop-card { display: flex; flex-direction: column; text-decoration: none; background: #E7D8C3; transition: background 0.15s; overflow: hidden; }
-.nav-shop-card:hover { background: #f8f8f8; }
-.nav-shop-card-img { aspect-ratio: 1; overflow: hidden; background: #f0f0f0; }
+.nav-shop-card:hover { background: #ddd0bc; }
+.nav-shop-card-img { aspect-ratio: 1; overflow: hidden; background: #E7D8C3; }
 .nav-shop-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
 .nav-shop-card:hover .nav-shop-card-img img { transform: scale(1.07); }
-.nav-shop-card-info { padding: 0.55rem 0.65rem 0.7rem; display: flex; flex-direction: column; gap: 0.1rem; border-top: 1px solid #f0f0f0; }
+.nav-shop-card-info { padding: 0.55rem 0.65rem 0.7rem; display: flex; flex-direction: column; gap: 0.1rem; border-top: 1px solid #c9b99e; }
 .nav-shop-card-name { font-family: 'Moms Typewriter', sans-serif; font-size: 0.62rem; font-weight: 700; color: #1C1A18; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .nav-shop-card-price { font-family: 'Moms Typewriter', sans-serif; font-size: 0.6rem; font-weight: 600; color: #555; letter-spacing: 0.02em; }
-.nav-shop-all { display: block; text-align: center; padding: 0.8rem 1rem; font-family: 'Moms Typewriter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #1C1A18; text-decoration: none; border-top: 1px solid #f0f0f0; transition: background 0.18s, color 0.18s; }
+.nav-shop-all { display: block; text-align: center; padding: 0.8rem 1rem; font-family: 'Moms Typewriter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #1C1A18; text-decoration: none; border-top: 1px solid #c9b99e; transition: background 0.18s, color 0.18s; }
 .nav-shop-all:hover { background: #1C1A18; color: #E7D8C3; }
 
 @media (max-width: 800px) { .nav-shop-wrap { position: static; } .nav-shop-preview { display: none; } }
