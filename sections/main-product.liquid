@@ -68,9 +68,11 @@
         {%- else -%}
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
         {%- endunless -%}
-        <button type="submit" class="product-submit" {% unless product.available %}disabled{% endunless %}>
-          {%- if product.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}
-        </button>
+        {%- if product.available -%}
+          <button type="submit" class="product-submit">Add to Cart</button>
+        {%- else -%}
+          <button type="button" class="product-submit so-trigger" data-product="{{ product.title | escape }}">Sold Out</button>
+        {%- endif -%}
       {%- endform -%}
 
       <div class="product-meta">
@@ -113,6 +115,101 @@
   </section>
 
 </article>
+
+<div id="so-modal" class="so-overlay" aria-hidden="true">
+  <div class="so-dialog" role="dialog" aria-modal="true" aria-labelledby="so-heading">
+    <button class="so-close" aria-label="Close">&times;</button>
+    <h2 class="so-heading" id="so-heading">Ring Inquiry</h2>
+    <p class="so-sub">This ring is currently sold out. Leave your info and we'll reach out when it's back.</p>
+    <form id="so-form" class="so-form">
+      <input type="hidden" id="so-product-name" name="product">
+      <div class="so-field">
+        <label for="so-name">Name</label>
+        <input type="text" id="so-name" name="name" placeholder="Your name" autocomplete="name" required>
+      </div>
+      <div class="so-field">
+        <label for="so-email">Email</label>
+        <input type="email" id="so-email" name="email" placeholder="your@email.com" autocomplete="email" required>
+      </div>
+      <div class="so-field">
+        <label for="so-phone">Phone</label>
+        <input type="tel" id="so-phone" name="phone" placeholder="(555) 000-0000" autocomplete="tel">
+      </div>
+      <div class="so-field">
+        <label for="so-size">Ring Size</label>
+        <input type="text" id="so-size" name="ring_size" placeholder="e.g. 8, 8.5" required>
+      </div>
+      <button type="submit" class="so-submit">Send Inquiry</button>
+    </form>
+    <div id="so-success" class="so-success" hidden>
+      <p>Thanks! We'll be in touch soon.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+  var modal   = document.getElementById('so-modal');
+  var form    = document.getElementById('so-form');
+  var success = document.getElementById('so-success');
+
+  function openModal(productName) {
+    document.getElementById('so-product-name').value = productName || '';
+    modal.setAttribute('aria-hidden', 'false');
+    document.getElementById('so-name').focus();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    form.reset();
+    form.hidden = false;
+    success.hidden = true;
+  }
+
+  document.querySelectorAll('.so-trigger').forEach(function (btn) {
+    btn.addEventListener('click', function () { openModal(this.dataset.product); });
+  });
+
+  modal.querySelector('.so-close').addEventListener('click', closeModal);
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal();
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = form.querySelector('.so-submit');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    var data = new FormData(form);
+    fetch(SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify({
+        submitted_at: new Date().toISOString(),
+        product:      data.get('product'),
+        name:         data.get('name'),
+        email:        data.get('email'),
+        phone:        data.get('phone'),
+        ring_size:    data.get('ring_size')
+      })
+    })
+    .then(function () {
+      form.hidden = true;
+      success.hidden = false;
+    })
+    .catch(function () {
+      btn.textContent = 'Send Inquiry';
+      btn.disabled = false;
+      alert('Something went wrong. Please email us directly.');
+    });
+  });
+})();
+</script>
 
 {% schema %}
 {
