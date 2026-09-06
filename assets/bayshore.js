@@ -190,6 +190,8 @@ function closeHelpModal() {
     helpForm.hidden = false;
     helpForm.reset();
     helpForm.querySelectorAll('input, textarea').forEach(i => clearHelpError(i));
+    const btn = helpForm.querySelector('.help-submit');
+    if (btn) { btn.textContent = 'Send Message'; btn.disabled = false; }
   }
   if (helpSuccess) helpSuccess.hidden = true;
 }
