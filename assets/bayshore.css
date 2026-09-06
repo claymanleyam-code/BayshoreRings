@@ -1202,8 +1202,11 @@ a.p-card .p-btn { pointer-events: none; }
 }
 .help-submit--ghost:hover { background: #f0ebe3; }
 .help-success {
+  display: none;
   text-align: center;
   padding: 1.5rem 0;
+}
+.help-success:not([hidden]) {
   display: flex;
   flex-direction: column;
   align-items: center;
