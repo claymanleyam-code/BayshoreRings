@@ -121,12 +121,58 @@ document.querySelectorAll('.cart-qty-btn').forEach(btn => {
 // ── Help Center Modal ─────────────────────────────────────────
 const HELP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxl2ASk642Upf_s53deqG4V55oOBX_xDXX0xKZrRMCdVJvGnSWj4hYiUCfc0ilWFAfClA/exec';
 
-const helpModal    = document.getElementById('helpModal');
-const helpOpenBtn  = document.getElementById('helpCenterBtn');
-const helpClose    = document.getElementById('helpModalClose');
-const helpForm     = document.getElementById('helpForm');
-const helpSuccess  = document.getElementById('helpSuccess');
+const helpModal       = document.getElementById('helpModal');
+const helpOpenBtn     = document.getElementById('helpCenterBtn');
+const helpClose       = document.getElementById('helpModalClose');
+const helpForm        = document.getElementById('helpForm');
+const helpSuccess     = document.getElementById('helpSuccess');
 const helpSuccessClose = document.getElementById('helpSuccessClose');
+
+function helpToTitleCase(str) {
+  return str.trim().replace(/\S+/g, w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
+}
+
+function setHelpError(input, msg) {
+  clearHelpError(input);
+  const err = document.createElement('span');
+  err.className = 'help-error';
+  err.textContent = msg;
+  input.closest('.help-field').appendChild(err);
+  input.setAttribute('aria-invalid', 'true');
+}
+
+function clearHelpError(input) {
+  const field = input.closest('.help-field');
+  const err = field.querySelector('.help-error');
+  if (err) err.remove();
+  input.removeAttribute('aria-invalid');
+}
+
+function validateHelp() {
+  const fn  = helpForm.querySelector('#helpFirstName');
+  const ln  = helpForm.querySelector('#helpLastName');
+  const em  = helpForm.querySelector('#helpEmail');
+  const msg = helpForm.querySelector('#helpMessage');
+  let ok = true;
+
+  if (!fn.value.trim() || !/^[A-Za-z\s\-']+$/.test(fn.value.trim())) {
+    setHelpError(fn, 'Letters only — no numbers or special characters.'); ok = false;
+  } else { clearHelpError(fn); }
+
+  if (!ln.value.trim() || !/^[A-Za-z\s\-']+$/.test(ln.value.trim())) {
+    setHelpError(ln, 'Letters only — no numbers or special characters.'); ok = false;
+  } else { clearHelpError(ln); }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em.value.trim())) {
+    setHelpError(em, 'Enter a valid email address.'); ok = false;
+  } else { clearHelpError(em); }
+
+  if (!msg.value.trim()) {
+    setHelpError(msg, 'Please enter a message.'); ok = false;
+  } else { clearHelpError(msg); }
+
+  return ok;
+}
 
 function openHelpModal() {
   if (!helpModal) return;
@@ -140,28 +186,47 @@ function closeHelpModal() {
   helpModal.setAttribute('aria-hidden', 'true');
   helpModal.classList.remove('open');
   document.body.style.overflow = '';
+  if (helpForm) {
+    helpForm.hidden = false;
+    helpForm.reset();
+    helpForm.querySelectorAll('input, textarea').forEach(i => clearHelpError(i));
+  }
+  if (helpSuccess) helpSuccess.hidden = true;
 }
 
-if (helpOpenBtn)     helpOpenBtn.addEventListener('click', openHelpModal);
-if (helpClose)       helpClose.addEventListener('click', closeHelpModal);
+if (helpOpenBtn)      helpOpenBtn.addEventListener('click', openHelpModal);
+if (helpClose)        helpClose.addEventListener('click', closeHelpModal);
 if (helpSuccessClose) helpSuccessClose.addEventListener('click', closeHelpModal);
-if (helpModal)       helpModal.addEventListener('click', e => { if (e.target === helpModal) closeHelpModal(); });
+if (helpModal)        helpModal.addEventListener('click', e => { if (e.target === helpModal) closeHelpModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && helpModal?.classList.contains('open')) closeHelpModal(); });
 
 if (helpForm) {
+  helpForm.querySelectorAll('input, textarea').forEach(input => {
+    input.addEventListener('input', function () { if (this.getAttribute('aria-invalid')) clearHelpError(this); });
+  });
+
   helpForm.addEventListener('submit', async e => {
     e.preventDefault();
+    if (!validateHelp()) return;
+
     const btn = helpForm.querySelector('.help-submit');
     const originalText = btn.textContent;
     btn.textContent = 'Sending…';
     btn.disabled = true;
 
-    const data = new FormData(helpForm);
-    data.append('timestamp', new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
-    data.append('page', window.location.href);
+    const raw = new FormData(helpForm);
+    const params = new URLSearchParams({
+      timestamp:  new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }),
+      first_name: helpToTitleCase(raw.get('first_name') || ''),
+      last_name:  helpToTitleCase(raw.get('last_name')  || ''),
+      email:      (raw.get('email')   || '').trim().toLowerCase(),
+      subject:    (raw.get('subject') || '').trim(),
+      message:    (raw.get('message') || '').trim(),
+      page:       window.location.href
+    });
 
     try {
-      await fetch(HELP_SCRIPT_URL, { method: 'POST', body: data, mode: 'no-cors' });
+      await fetch(HELP_SCRIPT_URL + '?' + params.toString(), { mode: 'no-cors' });
       helpForm.hidden = true;
       helpSuccess.hidden = false;
     } catch {
