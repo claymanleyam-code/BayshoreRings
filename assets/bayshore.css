@@ -343,6 +343,16 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
   .hero-trust { justify-content: center; flex-wrap: wrap; }
   /* on mobile gradient darkens from bottom so text reads over the photo */
   .hero-bg::after { background: linear-gradient(to top, #1C1A18 0%, rgba(10,10,10,0.85) 35%, rgba(10,10,10,0.3) 60%, transparent 100%); }
+  /* center + fill image on mobile */
+  .hero-bg .hero-ring-photo {
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
 }
 
 /* ================================================
