@@ -32,7 +32,7 @@
   --charcoal:    #1C1A18;
   --muted:       #666666;
   --bar-h:       0px;
-  --grain:       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='0.15'/%3E%3C/svg%3E");
+  --grain:       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='0.45'/%3E%3C/svg%3E");
 }
 
 /* ================================================
@@ -648,7 +648,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
   letter-spacing: 0.04em;
   position: relative; z-index: 1;
 }
-.sf-nl-sub { font-size: 1rem; color: rgba(255,255,255,0.42); line-height: 1.75; max-width: 36ch; margin-bottom: 2.5rem; position: relative; z-index: 1; }
+.sf-nl-sub { font-size: 1rem; color: #1C1A18; line-height: 1.75; max-width: 36ch; margin-bottom: 2.5rem; position: relative; z-index: 1; }
 .sf-form { position: relative; z-index: 1; max-width: 400px; }
 .sf-email-wrap { display: flex; align-items: baseline; gap: 2rem; border-bottom: 1.5px solid rgba(255,255,255,0.18); padding-bottom: 0.7rem; }
 .sf-email-input { flex: 1; background: transparent; border: none; outline: none; font-family: 'Moms Typewriter', sans-serif; font-size: 1rem; color: #E7D8C3; padding: 0; min-width: 0; }
@@ -668,19 +668,19 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
 .sf-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
 .sf-group h4 { font-family: 'Moms Typewriter', sans-serif; font-size: 1rem; font-weight: 700; color: #1C1A18; margin-bottom: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .sf-group ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
-.sf-group ul a { font-size: 0.9rem; color: #666; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: transparent; transition: color 0.15s, text-decoration-color 0.15s; line-height: 1.4; font-weight: 500; }
+.sf-group ul a { font-size: 0.9rem; color: #1C1A18; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: transparent; transition: color 0.15s, text-decoration-color 0.15s; line-height: 1.4; font-weight: 500; }
 .sf-group ul a:hover { color: #1C1A18; text-decoration-color: #1C1A18; }
 .sf-social-link { display: inline-flex; align-items: center; gap: 0.5rem; }
 .sf-social-link svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; opacity: 0.55; transition: opacity 0.15s; }
 .sf-social-link:hover svg { opacity: 1; }
 .sf-socials { display: flex; gap: 1rem; margin-top: 3rem; }
-.sf-soc { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; transition: opacity 0.15s; color: #555; }
+.sf-soc { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; transition: opacity 0.15s; color: #1C1A18; }
 .sf-soc:hover { opacity: 0.5; }
 .sf-soc svg { width: 15px; height: 15px; fill: currentColor; }
 .sf-bottom { background: var(--grain) repeat, #AA8055; background-size: 200px 200px, auto; border-top: 1px solid rgba(28,26,24,0.15); padding: 1.2rem 5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
-.sf-bottom p { font-size: 0.88rem; color: #888; margin: 0; font-weight: 500; }
+.sf-bottom p { font-size: 0.88rem; color: #1C1A18; margin: 0; font-weight: 500; }
 .sf-bottom p:last-child { display: flex; gap: 1.75rem; }
-.sf-bottom a { color: #666; transition: color 0.15s; font-weight: 600; }
+.sf-bottom a { color: #1C1A18; transition: color 0.15s; font-weight: 600; }
 .sf-bottom a:hover { color: #1C1A18; }
 
 @media (max-width: 900px) { .sf-split { grid-template-columns: 1fr; } .sf-left { padding: 3.5rem 2.5rem; } .sf-right { padding: 3rem 2.5rem; } .sf-bottom { padding: 1.2rem 2.5rem; } .sf-cols { grid-template-columns: repeat(2, 1fr); gap: 2rem 1.5rem; } }
