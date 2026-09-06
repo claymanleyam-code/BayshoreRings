@@ -226,7 +226,7 @@ if (helpForm) {
     });
 
     try {
-      await fetch(HELP_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' });
+      await fetch(HELP_SCRIPT_URL + '?' + params.toString(), { mode: 'no-cors' });
       btn.textContent = 'Sent ✓';
       setTimeout(() => {
         helpForm.hidden = true;
