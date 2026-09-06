@@ -682,8 +682,8 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
    ================================================ */
 .page-wrap { max-width: 1160px; margin: 0 auto; padding: 6rem 2rem 4rem; }
 .product-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-.product-image { background: #E7D8C3; border-radius: 0; overflow: hidden; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
-.product-image img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; }
+.product-image { background: transparent; border-radius: 0; overflow: hidden; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
+.product-image img { width: 100%; height: 100%; object-fit: cover; }
 .product-info { padding-top: 1rem; }
 .product-info h1 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: #1C1A18; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.04em; }
 .product-price { font-family: 'Moms Typewriter', sans-serif; font-size: 1.4rem; font-weight: 700; color: #1C1A18; margin-bottom: 1.5rem; }
