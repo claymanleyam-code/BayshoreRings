@@ -403,13 +403,17 @@
     <form id="helpForm" class="help-form" novalidate>
       <div class="help-field-row">
         <div class="help-field">
-          <label for="helpName">Name</label>
-          <input type="text" id="helpName" name="name" placeholder="Your name" required autocomplete="name">
+          <label for="helpFirstName">First Name</label>
+          <input type="text" id="helpFirstName" name="first_name" placeholder="First name" required autocomplete="given-name">
         </div>
         <div class="help-field">
-          <label for="helpEmail">Email</label>
-          <input type="email" id="helpEmail" name="email" placeholder="your@email.com" required autocomplete="email">
+          <label for="helpLastName">Last Name</label>
+          <input type="text" id="helpLastName" name="last_name" placeholder="Last name" required autocomplete="family-name">
         </div>
+      </div>
+      <div class="help-field">
+        <label for="helpEmail">Email</label>
+        <input type="email" id="helpEmail" name="email" placeholder="your@email.com" required autocomplete="email">
       </div>
       <div class="help-field">
         <label for="helpSubject">Subject</label>
