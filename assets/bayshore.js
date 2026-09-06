@@ -227,8 +227,11 @@ if (helpForm) {
 
     try {
       await fetch(HELP_SCRIPT_URL + '?' + params.toString(), { mode: 'no-cors' });
-      helpForm.hidden = true;
-      helpSuccess.hidden = false;
+      btn.textContent = 'Sent ✓';
+      setTimeout(() => {
+        helpForm.hidden = true;
+        helpSuccess.hidden = false;
+      }, 700);
     } catch {
       btn.textContent = originalText;
       btn.disabled = false;
