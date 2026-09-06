@@ -106,6 +106,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
   padding: 0 2.5rem;
   background: #AA8055;
   border: 1.5px solid #1C1A18;
+  border-bottom-width: 16.5px;
   transition: box-shadow 0.3s;
 }
 .nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.1); }
