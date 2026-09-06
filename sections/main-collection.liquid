@@ -21,6 +21,16 @@
 
   {%- paginate collection.products by section.settings.products_per_page -%}
     {%- if collection.products_count > 0 -%}
+      <div class="collection-sort-bar">
+        <span class="collection-sort-label">Sort By</span>
+        <div class="collection-sort-wrap">
+          <select id="collection-sort" class="collection-sort-select">
+            {%- for option in collection.sort_options -%}
+              <option value="{{ option.value }}"{% if collection.sort_by == option.value %} selected{% endif %}>{{ option.name }}</option>
+            {%- endfor -%}
+          </select>
+        </div>
+      </div>
       <div class="collection-grid">
         {%- assign delay_classes = 'd1,d2,d3,d1,d2,d3,d1,d2,d3,d1,d2,d3' | split: ',' -%}
         {%- for product in collection.products -%}
@@ -66,6 +76,14 @@
     {%- endif -%}
   {%- endpaginate -%}
 </div>
+
+<script>
+  document.getElementById('collection-sort').addEventListener('change', function () {
+    var url = new URL(window.location.href);
+    url.searchParams.set('sort_by', this.value);
+    window.location = url.toString();
+  });
+</script>
 
 {% schema %}
 {
