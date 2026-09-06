@@ -164,10 +164,82 @@
   var form    = document.getElementById('so-form');
   var success = document.getElementById('so-success');
 
+  var STATES = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA',
+                'KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ',
+                'NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT',
+                'VA','WA','WV','WI','WY'];
+
+  function toTitleCase(str) {
+    return str.trim().replace(/\S+/g, function (w) {
+      return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+    });
+  }
+
+  function normalizePhone(str) {
+    return str.replace(/[\s()\-]/g, '');
+  }
+
+  function setError(input, msg) {
+    clearError(input);
+    var err = document.createElement('span');
+    err.className = 'so-error';
+    err.textContent = msg;
+    input.closest('.so-field').appendChild(err);
+    input.setAttribute('aria-invalid', 'true');
+  }
+
+  function clearError(input) {
+    var field = input.closest('.so-field');
+    var err = field.querySelector('.so-error');
+    if (err) err.remove();
+    input.removeAttribute('aria-invalid');
+  }
+
+  function validate(data) {
+    var ok = true;
+    var fn = form.querySelector('#so-first-name');
+    var ln = form.querySelector('#so-last-name');
+    var em = form.querySelector('#so-email');
+    var ph = form.querySelector('#so-phone');
+    var st = form.querySelector('#so-state');
+    var sz = form.querySelector('#so-size');
+
+    if (!fn.value.trim() || !/^[A-Za-z\s\-']+$/.test(fn.value.trim())) {
+      setError(fn, 'Letters only — no numbers or special characters.'); ok = false;
+    } else { clearError(fn); }
+
+    if (!ln.value.trim() || !/^[A-Za-z\s\-']+$/.test(ln.value.trim())) {
+      setError(ln, 'Letters only — no numbers or special characters.'); ok = false;
+    } else { clearError(ln); }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em.value.trim())) {
+      setError(em, 'Enter a valid email address.'); ok = false;
+    } else { clearError(em); }
+
+    if (ph.value.trim()) {
+      var phoneClean = ph.value.trim();
+      if (!/^[\d\s()\-]+$/.test(phoneClean) || !/^\d{10}$/.test(phoneClean.replace(/[\s()\-]/g, ''))) {
+        setError(ph, 'Use (555) 000-0000, 555-000-0000, or 10 digits.'); ok = false;
+      } else { clearError(ph); }
+    } else { clearError(ph); }
+
+    if (st.value.trim()) {
+      if (!STATES.includes(st.value.trim().toUpperCase())) {
+        setError(st, 'Enter a valid 2-letter US state abbreviation.'); ok = false;
+      } else { clearError(st); }
+    } else { clearError(st); }
+
+    if (!sz.value.trim() || !/^\d+(\.\d+)?$/.test(sz.value.trim())) {
+      setError(sz, 'Enter a number (e.g. 8 or 8.5).'); ok = false;
+    } else { clearError(sz); }
+
+    return ok;
+  }
+
   function openModal(productName) {
     document.getElementById('so-product-name').value = productName || '';
     modal.setAttribute('aria-hidden', 'false');
-    document.getElementById('so-name').focus();
+    document.getElementById('so-first-name').focus();
     document.body.style.overflow = 'hidden';
   }
 
@@ -178,7 +250,12 @@
     form.hidden = false;
     form.querySelector('.so-submit').hidden = false;
     success.hidden = true;
+    form.querySelectorAll('input').forEach(function (i) { clearError(i); });
   }
+
+  form.querySelectorAll('input').forEach(function (input) {
+    input.addEventListener('input', function () { if (this.getAttribute('aria-invalid')) clearError(this); });
+  });
 
   document.querySelectorAll('.so-trigger').forEach(function (btn) {
     btn.addEventListener('click', function () { openModal(this.dataset.product); });
@@ -193,19 +270,24 @@
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var btn = form.querySelector('.so-submit');
+    if (!validate()) return;
     btn.hidden = true;
 
     var data = new FormData(form);
+    var rawPhone = (data.get('phone') || '').trim();
+    var rawState = (data.get('state') || '').trim();
+
     var params = new URLSearchParams({
       submitted_at: new Date().toISOString(),
-      product:      data.get('product') || '',
-      first_name:   data.get('first_name') || '',
-      last_name:    data.get('last_name') || '',
-      email:        data.get('email') || '',
-      phone:        data.get('phone') || '',
-      state:        data.get('state') || '',
-      ring_size:    data.get('ring_size') || ''
+      product:    data.get('product') || '',
+      first_name: toTitleCase(data.get('first_name') || ''),
+      last_name:  toTitleCase(data.get('last_name') || ''),
+      email:      (data.get('email') || '').trim(),
+      phone:      rawPhone ? normalizePhone(rawPhone) : '',
+      state:      rawState ? rawState.toUpperCase() : '',
+      ring_size:  (data.get('ring_size') || '').trim()
     });
+
     fetch(SHEET_URL + '?' + params.toString(), { mode: 'no-cors' })
     .then(function () {
       form.hidden = true;

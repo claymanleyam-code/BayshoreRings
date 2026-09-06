@@ -1032,3 +1032,5 @@ a.p-card .p-btn { pointer-events: none; }
 .so-submit:disabled { opacity: 0.45; cursor: not-allowed; }
 .so-success { text-align: center; padding: 2rem 0; }
 .so-success p { font-family: 'Moms Typewriter', sans-serif; font-size: 1rem; color: #1C1A18; margin: 0; }
+.so-error { font-size: 0.72rem; color: #b94040; margin-top: 0.1rem; min-height: 1em; display: block; }
+.so-field input[aria-invalid="true"] { border-color: #b94040; }
