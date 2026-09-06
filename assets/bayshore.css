@@ -166,8 +166,11 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 @media (max-width: 800px) {
+  .nav { height: 58px; }
+  .nav-brand { position: absolute; left: 50%; transform: translateX(-50%); }
+  .nav-logo-img { height: 52px; }
   .hamburger { display: flex; }
-  .nav-links { display: none; position: absolute; top: 68px; left: 0; right: 0; background: rgba(170,128,85,0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); flex-direction: column; gap: 0; border-top: 1px solid rgba(28,26,24,0.1); border-bottom: 1px solid rgba(28,26,24,0.1); padding: 0.5rem 0 1rem; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+  .nav-links { display: none; position: absolute; top: 58px; left: 0; right: 0; background: rgba(170,128,85,0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); flex-direction: column; gap: 0; border-top: 1px solid rgba(28,26,24,0.1); border-bottom: 1px solid rgba(28,26,24,0.1); padding: 0.5rem 0 1rem; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
   .nav-links.open { display: flex; }
   .nav-links li { width: 100%; }
   .nav-links a { display: block; padding: 0.6rem 2.5rem; color: rgba(28,26,24,0.75); border: none; }
@@ -335,10 +338,12 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
 
 @media (max-width: 900px) {
   .hero { align-items: flex-end; padding-bottom: 4rem; }
-  .hero-text { max-width: 100%; padding: 4rem 2rem 2rem; text-align: center; }
+  .hero-text { max-width: 100%; padding: calc(4rem + 10px) 2rem 2rem; text-align: center; }
   .hero-kicker { justify-content: center; }
-  .hero h1 { max-width: 100%; margin: 0 auto 1.25rem; }
-  .hero-sub { margin: 0 auto 2.5rem; }
+  .hero-kicker span { font-size: 0.64rem !important; }
+  .hero h1 { max-width: 100%; margin: 0 auto 1.25rem; font-size: 44px !important; }
+  .hero-sub { margin: 0 auto 2.5rem; font-size: 0.72rem; }
+  .hero-actions .btn { font-size: 0.77rem !important; }
   .hero-actions { justify-content: center; }
   .hero-trust { justify-content: center; flex-wrap: wrap; }
   /* on mobile gradient darkens from bottom so text reads over the photo */
