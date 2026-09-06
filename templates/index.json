@@ -38,7 +38,6 @@
         "ticker_3": "SMALL BATCH",
         "ticker_4": "1 OF 1",
         "ticker_5": "COASTAL FLORIDA",
-        "ticker_6": "BEESWAX FINISH",
         "pinned_product_handle": "mystery-ring",
         "eyebrow": "The Collection",
         "heading": "Featured Rings",
@@ -54,7 +53,7 @@
         "text_align": "left",
         "content_max_width": 1200,
         "content_position": "center",
-        "section_min_height": 100
+        "section_min_height": 0
       }
     },
     "brand_story": {

@@ -27,7 +27,6 @@
 {%- assign ticker_3 = section.settings.ticker_3 | default: 'SMALL BATCH' -%}
 {%- assign ticker_4 = section.settings.ticker_4 | default: '1 OF 1' -%}
 {%- assign ticker_5 = section.settings.ticker_5 | default: 'COASTAL FLORIDA' -%}
-{%- assign ticker_6 = section.settings.ticker_6 | default: 'BEESWAX FINISH' -%}
 <div class="drop-ticker" aria-hidden="true">
   <div class="drop-ticker-track">
     {%- for i in (1..4) -%}
@@ -36,7 +35,6 @@
       <span>{{ ticker_3 }}</span><span class="drop-ticker-sep">·</span>
       <span>{{ ticker_4 }}</span><span class="drop-ticker-sep">·</span>
       <span>{{ ticker_5 }}</span><span class="drop-ticker-sep">·</span>
-      <span>{{ ticker_6 }}</span><span class="drop-ticker-sep">·</span>
     {%- endfor -%}
   </div>
 </div>
@@ -135,7 +133,6 @@
     { "type": "text", "id": "ticker_3", "label": "Ticker item 3", "default": "SMALL BATCH" },
     { "type": "text", "id": "ticker_4", "label": "Ticker item 4", "default": "1 OF 1" },
     { "type": "text", "id": "ticker_5", "label": "Ticker item 5", "default": "COASTAL FLORIDA" },
-    { "type": "text", "id": "ticker_6", "label": "Ticker item 6", "default": "BEESWAX FINISH" },
     { "type": "header", "content": "Collection" },
     { "type": "text", "id": "pinned_product_handle", "label": "Pinned product handle (overrides collection)", "info": "Enter a product handle to always show only that product. Leave blank to use the collection below." },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Collection" },
