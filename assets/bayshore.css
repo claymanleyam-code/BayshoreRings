@@ -69,7 +69,8 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
 .story .eyebrow,
 .features .eyebrow,
 .process .eyebrow,
-.products .eyebrow {
+.products .eyebrow,
+.page-wrap .eyebrow {
   color: #1C1A18;
 }
 
