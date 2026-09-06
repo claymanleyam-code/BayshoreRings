@@ -196,20 +196,17 @@
     btn.hidden = true;
 
     var data = new FormData(form);
-    fetch(SHEET_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: JSON.stringify({
-        submitted_at: new Date().toISOString(),
-        product:      data.get('product'),
-        first_name:   data.get('first_name'),
-        last_name:    data.get('last_name'),
-        email:        data.get('email'),
-        phone:        data.get('phone'),
-        state:        data.get('state'),
-        ring_size:    data.get('ring_size')
-      })
-    })
+    var params = new URLSearchParams({
+      submitted_at: new Date().toISOString(),
+      product:      data.get('product') || '',
+      first_name:   data.get('first_name') || '',
+      last_name:    data.get('last_name') || '',
+      email:        data.get('email') || '',
+      phone:        data.get('phone') || '',
+      state:        data.get('state') || '',
+      ring_size:    data.get('ring_size') || ''
+    });
+    fetch(SHEET_URL + '?' + params.toString(), { mode: 'no-cors' })
     .then(function () {
       form.hidden = true;
       success.hidden = false;
