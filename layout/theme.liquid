@@ -300,7 +300,12 @@
           <h4>Support</h4>
           <ul>
             <li><a href="mailto:contact@bayshorerings.com">contact@bayshorerings.com</a></li>
-            <li><a href="/pages/faq">Help Center</a></li>
+            <li>
+              <button class="sf-help-btn" id="helpCenterBtn" aria-label="Open Help Center">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                Help Center
+              </button>
+            </li>
           </ul>
         </div>
 
@@ -385,6 +390,52 @@
     </p>
   </div>
 </footer>
+
+<!-- ── Help Center Modal ── -->
+<div id="helpModal" class="help-modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="helpModalTitle">
+  <div class="help-modal-panel">
+    <button class="help-modal-close" id="helpModalClose" aria-label="Close help center">&times;</button>
+    <div class="help-modal-header">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <h2 id="helpModalTitle">Help Center</h2>
+    </div>
+    <p class="help-modal-sub">Send us a message and we'll get back to you within 1–2 business days.</p>
+    <form id="helpForm" class="help-form" novalidate>
+      <div class="help-field-row">
+        <div class="help-field">
+          <label for="helpName">Name</label>
+          <input type="text" id="helpName" name="name" placeholder="Your name" required autocomplete="name">
+        </div>
+        <div class="help-field">
+          <label for="helpEmail">Email</label>
+          <input type="email" id="helpEmail" name="email" placeholder="your@email.com" required autocomplete="email">
+        </div>
+      </div>
+      <div class="help-field">
+        <label for="helpSubject">Subject</label>
+        <select id="helpSubject" name="subject">
+          <option value="Order Question">Order Question</option>
+          <option value="Ring Sizing">Ring Sizing</option>
+          <option value="Custom Order">Custom Order</option>
+          <option value="Shipping">Shipping</option>
+          <option value="Returns & Exchanges">Returns &amp; Exchanges</option>
+          <option value="Wholesale / Collaboration">Wholesale / Collaboration</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="help-field">
+        <label for="helpMessage">Message</label>
+        <textarea id="helpMessage" name="message" rows="4" placeholder="How can we help?" required></textarea>
+      </div>
+      <button type="submit" class="help-submit">Send Message</button>
+    </form>
+    <div id="helpSuccess" class="help-success" hidden>
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#AA8055" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+      <p>Message sent! We'll be in touch soon.</p>
+      <button class="help-submit help-submit--ghost" id="helpSuccessClose">Close</button>
+    </div>
+  </div>
+</div>
 
 {{ 'bayshore.js' | asset_url | script_tag }}
 </body>

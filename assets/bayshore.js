@@ -117,3 +117,57 @@ document.querySelectorAll('.cart-qty-btn').forEach(btn => {
     if (res.ok) window.location.reload();
   });
 });
+
+// ── Help Center Modal ─────────────────────────────────────────
+const HELP_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL';
+
+const helpModal    = document.getElementById('helpModal');
+const helpOpenBtn  = document.getElementById('helpCenterBtn');
+const helpClose    = document.getElementById('helpModalClose');
+const helpForm     = document.getElementById('helpForm');
+const helpSuccess  = document.getElementById('helpSuccess');
+const helpSuccessClose = document.getElementById('helpSuccessClose');
+
+function openHelpModal() {
+  if (!helpModal) return;
+  helpModal.removeAttribute('aria-hidden');
+  helpModal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  helpModal.querySelector('input, select, textarea')?.focus();
+}
+function closeHelpModal() {
+  if (!helpModal) return;
+  helpModal.setAttribute('aria-hidden', 'true');
+  helpModal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+if (helpOpenBtn)     helpOpenBtn.addEventListener('click', openHelpModal);
+if (helpClose)       helpClose.addEventListener('click', closeHelpModal);
+if (helpSuccessClose) helpSuccessClose.addEventListener('click', closeHelpModal);
+if (helpModal)       helpModal.addEventListener('click', e => { if (e.target === helpModal) closeHelpModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && helpModal?.classList.contains('open')) closeHelpModal(); });
+
+if (helpForm) {
+  helpForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = helpForm.querySelector('.help-submit');
+    const originalText = btn.textContent;
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    const data = new FormData(helpForm);
+    data.append('timestamp', new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
+    data.append('page', window.location.href);
+
+    try {
+      await fetch(HELP_SCRIPT_URL, { method: 'POST', body: data, mode: 'no-cors' });
+      helpForm.hidden = true;
+      helpSuccess.hidden = false;
+    } catch {
+      btn.textContent = originalText;
+      btn.disabled = false;
+      alert('Something went wrong. Please email us at contact@bayshorerings.com');
+    }
+  });
+}
