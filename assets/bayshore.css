@@ -104,7 +104,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
   align-items: center;
   justify-content: space-between;
   padding: 0 2.5rem;
-  background: #C8A57A;
+  background: #AA8055;
   border: 2px solid #1C1A18;
   transition: box-shadow 0.3s;
 }
@@ -130,13 +130,28 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(28,26,24,0.75);
-  border: 1.5px solid rgba(28,26,24,0.35);
-  padding: 0.35rem 0.85rem;
-  transition: color 0.2s, border-color 0.2s;
+  padding: 0.35rem 0.1rem;
+  transition: color 0.2s;
   position: relative;
 }
-.nav-links a::after { display: none; }
-.nav-links a:hover { color: #1C1A18; border-color: #1C1A18; }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 1.5px;
+  width: 100%;
+  background: rgba(28,26,24,0.35);
+}
+.nav-links a:hover { color: #1C1A18; }
+.nav-links a:hover::after {
+  background: #1C1A18;
+  animation: nav-underline 0.5s ease forwards;
+}
+@keyframes nav-underline {
+  from { width: 0; }
+  to   { width: 100%; }
+}
 .nav-shop-trigger {
   display: flex !important;
   align-items: center !important;
@@ -157,7 +172,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
 
 @media (max-width: 800px) {
   .hamburger { display: flex; }
-  .nav-links { display: none; position: absolute; top: 68px; left: 0; right: 0; background: rgba(201,185,158,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); flex-direction: column; gap: 0; border-top: 1px solid rgba(28,26,24,0.1); border-bottom: 1px solid rgba(28,26,24,0.1); padding: 0.5rem 0 1rem; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+  .nav-links { display: none; position: absolute; top: 68px; left: 0; right: 0; background: rgba(170,128,85,0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); flex-direction: column; gap: 0; border-top: 1px solid rgba(28,26,24,0.1); border-bottom: 1px solid rgba(28,26,24,0.1); padding: 0.5rem 0 1rem; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
   .nav-links.open { display: flex; }
   .nav-links li { width: 100%; }
   .nav-links a { display: block; padding: 0.6rem 2.5rem; color: rgba(28,26,24,0.75); border: none; }
@@ -614,7 +629,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
 /* ================================================
    FOOTER
    ================================================ */
-.sf { background: #C8A57A; }
+.sf { background: #AA8055; }
 .sf-split { display: grid; grid-template-columns: 42% 58%; min-height: 320px; }
 
 .sf-left {
@@ -654,7 +669,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
 }
 .sf-email-btn:hover { text-decoration-color: var(--accent); }
 
-.sf-right { background: #C8A57A; padding: 3.5rem 3.5rem 3rem 3rem; display: flex; flex-direction: column; justify-content: space-between; }
+.sf-right { background: #AA8055; padding: 3.5rem 3.5rem 3rem 3rem; display: flex; flex-direction: column; justify-content: space-between; }
 .sf-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
 .sf-group h4 { font-family: 'Moms Typewriter', sans-serif; font-size: 1rem; font-weight: 700; color: #1C1A18; margin-bottom: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .sf-group ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
@@ -667,7 +682,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
 .sf-soc { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; transition: opacity 0.15s; color: #555; }
 .sf-soc:hover { opacity: 0.5; }
 .sf-soc svg { width: 15px; height: 15px; fill: currentColor; }
-.sf-bottom { background: #C8A57A; border-top: 1px solid rgba(28,26,24,0.15); padding: 1.2rem 5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+.sf-bottom { background: #AA8055; border-top: 1px solid rgba(28,26,24,0.15); padding: 1.2rem 5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
 .sf-bottom p { font-size: 0.88rem; color: #888; margin: 0; font-weight: 500; }
 .sf-bottom p:last-child { display: flex; gap: 1.75rem; }
 .sf-bottom a { color: #666; transition: color 0.15s; font-weight: 600; }
