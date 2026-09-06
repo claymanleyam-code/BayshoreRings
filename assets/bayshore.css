@@ -681,12 +681,12 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
    PRODUCT & COLLECTION PAGES
    ================================================ */
 .page-wrap { max-width: 1160px; margin: 0 auto; padding: 6rem 2rem 4rem; }
-.product-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.product-layout { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 4rem; align-items: center; }
 .product-image { background: #E7D8C3; border-radius: 0; overflow: hidden; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
 .product-image img { width: 100%; height: 100%; object-fit: cover; }
 .product-image svg { width: 100%; height: 100%; }
-.product-info { padding-top: 1rem; }
-.product-info h1 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: #1C1A18; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.product-info { padding-top: 0; }
+.product-info h1 { font-size: clamp(2rem, 4vw, 3rem); color: #1C1A18; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.04em; }
 .product-price { font-family: 'Moms Typewriter', sans-serif; font-size: 1.4rem; font-weight: 700; color: #1C1A18; margin-bottom: 1.5rem; }
 .product-desc { color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
 .product-form select { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid #c9b99e; border-radius: 0; background: #E7D8C3; color: #1C1A18; font-family: 'Moms Typewriter', sans-serif; margin-bottom: 1rem; }
