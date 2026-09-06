@@ -231,7 +231,7 @@
       <div class="nav-shop-preview" aria-hidden="true">
         <div class="nav-shop-grid">
           {%- assign _preview = collections['all'] -%}
-          {%- for product in _preview.products limit: 3 -%}
+          {%- for product in _preview.products limit: 1 -%}
             <a href="{{ product.url }}" class="nav-shop-card" tabindex="-1">
               <div class="nav-shop-card-img">
                 {%- if product.featured_image -%}
@@ -239,11 +239,9 @@
                     loading: 'lazy',
                     alt: product.featured_image.alt | default: product.title
                   }}
+                {%- else -%}
+                  {% render 'ring-placeholder' %}
                 {%- endif -%}
-              </div>
-              <div class="nav-shop-card-info">
-                <span class="nav-shop-card-name">{{ product.title }}</span>
-                <span class="nav-shop-card-price">{{ product.price | money }}</span>
               </div>
             </a>
           {%- endfor -%}

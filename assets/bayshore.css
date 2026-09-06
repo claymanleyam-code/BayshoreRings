@@ -934,7 +934,7 @@ a.p-card .p-btn { pointer-events: none; }
 .nav-shop-preview {
   position: absolute;
   top: calc(100% + 14px); right: -1rem;
-  width: 480px;
+  width: 160px;
   background: #E7D8C3;
   border: 1px solid #e0e0e0;
   border-top: 3px solid #1C1A18;
@@ -947,9 +947,7 @@ a.p-card .p-btn { pointer-events: none; }
 .nav-shop-preview::before { content: ''; position: absolute; top: -17px; left: 0; right: 0; height: 17px; }
 .nav-shop-wrap:hover .nav-shop-preview { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
-.nav-shop-grid { display: grid; grid-template-columns: repeat(3, 160px); gap: 0; justify-content: center; }
-.nav-shop-grid:has(.nav-shop-card:only-child) { grid-template-columns: 160px; }
-.nav-shop-grid:has(.nav-shop-card:first-child:nth-last-child(2)) { grid-template-columns: repeat(2, 160px); }
+.nav-shop-grid { display: grid; grid-template-columns: 160px; }
 .nav-shop-card { display: flex; flex-direction: column; text-decoration: none; background: #E7D8C3; transition: background 0.15s; overflow: hidden; }
 .nav-shop-card:hover { background: #ddd0bc; }
 .nav-shop-card-img { aspect-ratio: 1; overflow: hidden; background: #E7D8C3; }
