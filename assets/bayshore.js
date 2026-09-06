@@ -119,7 +119,7 @@ document.querySelectorAll('.cart-qty-btn').forEach(btn => {
 });
 
 // ── Help Center Modal ─────────────────────────────────────────
-const HELP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxl2ASk642Upf_s53deqG4V55oOBX_xDXX0xKZrRMCdVJvGnSWj4hYiUCfc0ilWFAfClA/exec';
+const HELP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyinYDBUuWchOoh2ip9uQuZ5gOJKpKsKov3t43ERJGFixF3IebvCjRPlPVhU-SksIVypw/exec';
 
 const helpModal       = document.getElementById('helpModal');
 const helpOpenBtn     = document.getElementById('helpCenterBtn');
