@@ -243,6 +243,10 @@
                   {% render 'ring-placeholder' %}
                 {%- endif -%}
               </div>
+              <div class="nav-shop-card-info">
+                <span class="nav-shop-card-name">{{ product.title }}</span>
+                <span class="nav-shop-card-price">{{ product.price | money }}</span>
+              </div>
             </a>
           {%- endfor -%}
         </div>
