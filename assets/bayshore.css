@@ -104,9 +104,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
   align-items: center;
   justify-content: space-between;
   padding: 0 2.5rem;
-  background: rgba(201,185,158,0.10);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: transparent;
   border: 2px solid #1C1A18;
   transition: box-shadow 0.3s;
 }
