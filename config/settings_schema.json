@@ -95,6 +95,22 @@
     ]
   },
   {
+    "name": "Product Listings",
+    "settings": [
+      { "type": "header", "content": "Layout" },
+      { "type": "select", "id": "product_text_align", "label": "Text alignment", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}], "default": "left" },
+      { "type": "select", "id": "product_content_position", "label": "Content position", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}], "default": "center" },
+      { "type": "range", "id": "product_content_max_width", "label": "Content width", "min": 300, "max": 1400, "step": 50, "unit": "px", "default": 1100 },
+      { "type": "range", "id": "product_section_min_height", "label": "Section height", "min": 0, "max": 100, "step": 5, "unit": "vh", "default": 100 },
+      { "type": "header", "content": "Typography" },
+      { "type": "range", "id": "product_heading_size", "label": "Heading size", "min": 16, "max": 96, "step": 2, "unit": "px", "default": 32 },
+      { "type": "range", "id": "product_body_size", "label": "Body text size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+      { "type": "header", "content": "Colors" },
+      { "type": "color", "id": "product_heading_color", "label": "Heading color", "default": "#1C1A18" },
+      { "type": "color", "id": "product_body_color", "label": "Body text color", "default": "#5a5146" }
+    ]
+  },
+  {
     "name": "Social",
     "settings": [
       {

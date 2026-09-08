@@ -1,10 +1,10 @@
 {%- if section.settings.bg_image != blank -%}
   {%- assign _prod_bg = section.settings.bg_image | image_url: width: 2400 -%}
 {%- endif -%}
-{%- assign _min_h = section.settings.section_min_height -%}
-{%- assign _align = section.settings.text_align -%}
-{%- assign _mw    = section.settings.content_max_width -%}
-{%- assign _pos   = section.settings.content_position -%}
+{%- assign _min_h = settings.product_section_min_height -%}
+{%- assign _align = settings.product_text_align -%}
+{%- assign _mw    = settings.product_content_max_width -%}
+{%- assign _pos   = settings.product_content_position -%}
 {%- if _pos == 'left' -%}{%- assign _cmarg = '0 auto 0 0' -%}{%- elsif _pos == 'right' -%}{%- assign _cmarg = '0 0 0 auto' -%}{%- else -%}{%- assign _cmarg = '0 auto' -%}{%- endif -%}
 {%- assign _use_block_imgs = false -%}
 {%- for block in section.blocks -%}
@@ -92,10 +92,10 @@
         </div>
       {%- endif -%}
       {%- if product.type != blank -%}
-        <p class="product-type" itemprop="category" style="font-size:{{ section.settings.body_size }}px;">{{ product.type }}</p>
+        <p class="product-type" itemprop="category" style="font-size:{{ settings.product_body_size }}px;">{{ product.type }}</p>
       {%- endif -%}
 
-      <h1 itemprop="name" style="font-size:{{ section.settings.heading_size }}px;{% if section.settings.heading_color != blank %}color:{{ section.settings.heading_color }};{% endif %}">{{ product.title }}</h1>
+      <h1 itemprop="name" style="font-size:{{ settings.product_heading_size }}px;{% if settings.product_heading_color != blank %}color:{{ settings.product_heading_color }};{% endif %}">{{ product.title }}</h1>
       <div class="product-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
         <span itemprop="price" content="{{ product.price | money_without_currency | remove: ',' }}">{{ product.price | money }}</span>
         <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
@@ -103,7 +103,7 @@
       </div>
 
       {%- if product.description != blank -%}
-        <div class="product-desc" itemprop="description" style="font-size:{{ section.settings.body_size }}px;{% if section.settings.body_color != blank %}color:{{ section.settings.body_color }};{% endif %}">{{ product.description }}</div>
+        <div class="product-desc" itemprop="description" style="font-size:{{ settings.product_body_size }}px;{% if settings.product_body_color != blank %}color:{{ settings.product_body_color }};{% endif %}">{{ product.description }}</div>
       {%- endif -%}
 
       {%- form 'product', product, class: 'product-form' -%}
@@ -140,19 +140,19 @@
 
       <div class="product-meta">
         {%- if section.settings.meta_1 != blank -%}
-          <span class="product-meta-item" style="font-size:{{ section.settings.body_size | minus: 2 }}px;">
+          <span class="product-meta-item" style="font-size:{{ settings.product_body_size | minus: 2 }}px;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
             {{ section.settings.meta_1 }}
           </span>
         {%- endif -%}
         {%- if section.settings.meta_2 != blank -%}
-          <span class="product-meta-item" style="font-size:{{ section.settings.body_size | minus: 2 }}px;">
+          <span class="product-meta-item" style="font-size:{{ settings.product_body_size | minus: 2 }}px;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 12 20 22 4 22"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
             {{ section.settings.meta_2 }}
           </span>
         {%- endif -%}
         {%- if section.settings.meta_3 != blank -%}
-          <span class="product-meta-item" style="font-size:{{ section.settings.body_size | minus: 2 }}px;">
+          <span class="product-meta-item" style="font-size:{{ settings.product_body_size | minus: 2 }}px;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             {{ section.settings.meta_3 }}
           </span>
@@ -162,10 +162,10 @@
         {%- if block.type == 'rich_text' -%}
           <div class="product-rich-text" {{ block.shopify_attributes }}>
             {%- if block.settings.heading != blank -%}
-              <h3 class="product-rich-heading" style="font-size:{{ section.settings.body_size | plus: 2 }}px;{% if section.settings.heading_color != blank %}color:{{ section.settings.heading_color }};{% endif %}">{{ block.settings.heading }}</h3>
+              <h3 class="product-rich-heading" style="font-size:{{ settings.product_body_size | plus: 2 }}px;{% if settings.product_heading_color != blank %}color:{{ settings.product_heading_color }};{% endif %}">{{ block.settings.heading }}</h3>
             {%- endif -%}
             {%- if block.settings.content != blank -%}
-              <div class="product-rich-body" style="font-size:{{ section.settings.body_size }}px;{% if section.settings.body_color != blank %}color:{{ section.settings.body_color }};{% endif %}">{{ block.settings.content }}</div>
+              <div class="product-rich-body" style="font-size:{{ settings.product_body_size }}px;{% if settings.product_body_color != blank %}color:{{ settings.product_body_color }};{% endif %}">{{ block.settings.content }}</div>
             {%- endif -%}
           </div>
         {%- elsif block.type == 'divider' -%}
@@ -178,13 +178,13 @@
 
   <!-- SEO Feature Callouts -->
   <section class="product-features" aria-label="{{ section.settings.features_heading | default: 'Why Bayshore Rings' }}">
-    <h2 class="product-features-heading" style="font-size:{{ section.settings.heading_size | times: 0.65 | round }}px;">{{ section.settings.features_heading | default: 'Why Bayshore Rings Skateboard Rings?' }}</h2>
+    <h2 class="product-features-heading" style="font-size:{{ settings.product_heading_size | times: 0.65 | round }}px;">{{ section.settings.features_heading | default: 'Why Bayshore Rings Skateboard Rings?' }}</h2>
     <div class="product-features-grid">
       {%- for block in section.blocks -%}
         {%- if block.type == 'feature' -%}
           <div class="product-feature-item" {{ block.shopify_attributes }}>
-            <h3 style="font-size:{{ section.settings.body_size | plus: 2 }}px;">{{ block.settings.title }}</h3>
-            <p style="font-size:{{ section.settings.body_size }}px;">{{ block.settings.body }}</p>
+            <h3 style="font-size:{{ settings.product_body_size | plus: 2 }}px;">{{ block.settings.title }}</h3>
+            <p style="font-size:{{ settings.product_body_size }}px;">{{ block.settings.body }}</p>
           </div>
         {%- endif -%}
       {%- endfor -%}
@@ -420,17 +420,7 @@
     { "type": "text", "id": "meta_3", "label": "Badge 3 (lead time)", "default": "Made to order — ships in 5–7 business days" },
     { "type": "header", "content": "Feature Callouts" },
     { "type": "text", "id": "features_heading", "label": "Features section heading", "default": "Why Bayshore Rings Skateboard Rings?" },
-    { "type": "header", "content": "Text & Layout" },
-    { "type": "range", "id": "heading_size", "label": "Heading size", "min": 16, "max": 96, "step": 2, "unit": "px", "default": 32 },
-    { "type": "range", "id": "body_size", "label": "Body text size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
-    { "type": "select", "id": "text_align", "label": "Text alignment", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "left" },
-    { "type": "range", "id": "content_max_width", "label": "Content width", "min": 300, "max": 1400, "step": 50, "unit": "px", "default": 1100 },
-    { "type": "select", "id": "content_position", "label": "Content position", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "center" },
-    { "type": "header", "content": "Colors" },
-    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#1C1A18" },
-    { "type": "color", "id": "body_color", "label": "Body text color", "default": "#5a5146" },
-    { "type": "header", "content": "Section Size" },
-    { "type": "range", "id": "section_min_height", "label": "Section height", "min": 0, "max": 100, "step": 5, "unit": "vh", "default": 100 }
+    { "type": "paragraph", "content": "Typography, colors, layout, and section height are controlled globally under Theme Settings → Product Listings." }
   ],
   "blocks": [
     {
