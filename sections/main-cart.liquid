@@ -41,8 +41,13 @@
                 <td>
                   <div class="cart-item-name" style="font-size:{{ section.settings.body_size }}px;">{{ item.product.title }}</div>
                   {%- unless item.variant.title == 'Default Title' -%}
-                    <div class="cart-item-variant" style="font-size:{{ section.settings.body_size }}px;">{{ item.variant.title }}</div>
+                    <div class="cart-item-variant">{{ item.variant.title }}</div>
                   {%- endunless -%}
+                  {%- for p in item.properties -%}
+                    {%- unless p.last == blank -%}
+                      <div class="cart-item-property">{{ p.first }}: {{ p.last }}</div>
+                    {%- endunless -%}
+                  {%- endfor -%}
                   <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="cart-item-remove">Remove</a>
                 </td>
                 <td>

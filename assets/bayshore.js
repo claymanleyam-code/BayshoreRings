@@ -48,7 +48,7 @@ function updateCartCount(count) {
 }
 
 // ── Cart toast ────────────────────────────────────────────────
-function showCartToast(title) {
+function showCartToast(title, size) {
   let toast = document.getElementById('cart-toast');
   if (!toast) {
     toast = document.createElement('div');
@@ -60,6 +60,7 @@ function showCartToast(title) {
         Added to Cart
       </div>
       <p class="cart-toast-product"></p>
+      <p class="cart-toast-size" hidden></p>
       <div class="cart-toast-actions">
         <a href="/cart" class="cart-toast-btn cart-toast-primary">View Cart &rarr;</a>
         <button class="cart-toast-btn cart-toast-ghost" id="cart-toast-dismiss">Continue Shopping</button>
@@ -68,6 +69,13 @@ function showCartToast(title) {
     toast.querySelector('#cart-toast-dismiss').addEventListener('click', () => toast.classList.remove('show'));
   }
   toast.querySelector('.cart-toast-product').textContent = title;
+  const sizeEl = toast.querySelector('.cart-toast-size');
+  if (size) {
+    sizeEl.textContent = 'Size ' + size;
+    sizeEl.hidden = false;
+  } else {
+    sizeEl.hidden = true;
+  }
   toast.classList.add('show');
   clearTimeout(toast._t);
   toast._t = setTimeout(() => toast.classList.remove('show'), 5000);
@@ -90,7 +98,8 @@ document.querySelectorAll('.product-form').forEach(form => {
       const cartRes = await fetch('/cart.js');
       const cart = await cartRes.json();
       updateCartCount(cart.item_count);
-      showCartToast(item.title);
+      const ringSize = item.properties && item.properties['Ring Size'] ? item.properties['Ring Size'] : null;
+      showCartToast(item.title, ringSize);
 
       btn.textContent = 'Added ✓';
       setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 2200);
