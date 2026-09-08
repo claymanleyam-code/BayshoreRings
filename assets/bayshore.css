@@ -747,7 +747,7 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
 .collection-sort-select { appearance: none; background: #E7D8C3; border: 1px solid #c9b99e; padding: 0.5rem 2.5rem 0.5rem 0.85rem; font-family: 'Moms Typewriter', sans-serif; font-size: 0.78rem; font-weight: 600; color: #1C1A18; cursor: pointer; outline: none; transition: border-color 0.15s; }
 .collection-sort-select:focus { border-color: #1C1A18; }
 .collection-sort-wrap::after { content: '▾'; position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 0.7rem; color: #1C1A18; }
-.collection-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 1rem; }
+.collection-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 1rem; }
 .collection-grid .p-card:only-child { grid-column: 2; }
 .collection-grid .p-card:only-child .p-img svg { width: 100%; height: 100%; }
 .collection-grid:has(> .p-card:first-child:nth-last-child(2)) { grid-template-columns: repeat(2, 1fr); }
