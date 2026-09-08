@@ -131,6 +131,28 @@
         {%- else -%}
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
         {%- endunless -%}
+        {%- assign _has_size_option = false -%}
+        {%- for opt in product.options -%}
+          {%- if opt == 'Size' or opt == 'Ring Size' -%}{%- assign _has_size_option = true -%}{%- break -%}{%- endif -%}
+        {%- endfor -%}
+        {%- if _has_size_option == false and settings.ring_sizes != blank -%}
+          {%- assign _sizes = settings.ring_sizes | split: ',' -%}
+          <div class="product-option">
+            <div class="product-option-header">
+              <label class="product-option-label" for="ring-size-{{ section.id }}">Ring Size</label>
+              <a href="/pages/ring-sizing" class="size-guide-link" target="_blank">
+                Size Guide
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+            <select id="ring-size-{{ section.id }}" name="properties[Ring Size]" class="product-select ring-size-select" required>
+              <option value="" disabled selected>Select a size</option>
+              {%- for size in _sizes -%}
+                <option value="{{ size | strip }}">{{ size | strip }}</option>
+              {%- endfor -%}
+            </select>
+          </div>
+        {%- endif -%}
         {%- if product.available -%}
           <button type="submit" class="product-submit">Add to Cart</button>
         {%- else -%}
