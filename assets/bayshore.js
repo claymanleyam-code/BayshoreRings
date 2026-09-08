@@ -83,8 +83,32 @@ function showCartToast(title, size) {
 
 // ── AJAX Add to Cart ──────────────────────────────────────────
 document.querySelectorAll('.product-form').forEach(form => {
+  const sizeSelect = form.querySelector('[name="properties[Ring Size]"]');
+
+  if (sizeSelect) {
+    sizeSelect.addEventListener('change', () => {
+      sizeSelect.classList.remove('ring-size-error-state');
+      const err = sizeSelect.parentNode.querySelector('.ring-size-err');
+      if (err) err.remove();
+    });
+  }
+
   form.addEventListener('submit', async e => {
     e.preventDefault();
+
+    if (sizeSelect && !sizeSelect.value) {
+      sizeSelect.classList.add('ring-size-error-state');
+      sizeSelect.focus();
+      let err = sizeSelect.parentNode.querySelector('.ring-size-err');
+      if (!err) {
+        err = document.createElement('p');
+        err.className = 'ring-size-err';
+        sizeSelect.parentNode.appendChild(err);
+      }
+      err.textContent = 'Please select a ring size.';
+      return;
+    }
+
     const btn = form.querySelector('.product-submit');
     const original = btn.textContent;
     btn.textContent = 'Adding…';
@@ -104,7 +128,9 @@ document.querySelectorAll('.product-form').forEach(form => {
       btn.textContent = 'Added ✓';
       setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 2200);
     } catch {
-      form.submit();
+      btn.disabled = false;
+      btn.textContent = original;
+      if (!sizeSelect || sizeSelect.value) form.submit();
     }
   });
 });
