@@ -21,6 +21,7 @@
 
   {%- paginate collection.products by section.settings.products_per_page -%}
     {%- if collection.products_count > 0 -%}
+      <div style="max-width:{{ section.settings.grid_scale }}%;margin:0 auto;">
       <div class="collection-sort-bar">
         <span class="collection-sort-label">Sort By</span>
         <div class="collection-sort-wrap">
@@ -71,6 +72,7 @@
       {%- if paginate.pages > 1 -%}
         <div style="text-align:center;margin-top:3rem;">{{ paginate | default_pagination }}</div>
       {%- endif -%}
+      </div>
     {%- else -%}
       <p style="text-align:center;padding:4rem 0;color:var(--muted);font-size:{{ section.settings.body_size }}px;">No products found in this collection.</p>
     {%- endif -%}
@@ -94,6 +96,8 @@
     { "type": "range", "id": "bg_overlay", "label": "Overlay darkness (%)", "min": 0, "max": 80, "step": 10, "default": 0 },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow label", "default": "The Collection" },
     { "type": "range", "id": "products_per_page", "label": "Products per page", "min": 3, "max": 24, "step": 3, "default": 6 },
+    { "type": "header", "content": "Product Grid" },
+    { "type": "range", "id": "grid_scale", "label": "Product listing size", "min": 50, "max": 100, "step": 5, "unit": "%", "default": 85 },
     { "type": "header", "content": "Text & Layout" },
     { "type": "range", "id": "heading_size", "label": "Heading size", "min": 16, "max": 96, "step": 2, "unit": "px", "default": 40 },
     { "type": "range", "id": "body_size", "label": "Body text size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
