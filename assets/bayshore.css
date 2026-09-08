@@ -706,9 +706,31 @@ h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; font-weight: normal; li
    ================================================ */
 .page-wrap { max-width: 1160px; margin: 0 auto; padding: 6rem 2rem 4rem; }
 .product-layout { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 4rem; align-items: center; }
-.product-image { background: #E7D8C3; border-radius: 0; overflow: hidden; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
+.product-image { background: #E7D8C3; border-radius: 0; overflow: hidden; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; position: relative; }
 .product-image img { width: 100%; height: 100%; object-fit: cover; }
 .product-image svg { width: 100%; height: 100%; }
+.carousel-track { position: absolute; inset: 0; }
+.carousel-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.35s ease; }
+.carousel-slide.active { opacity: 1; }
+.carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.carousel-caption { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(28,26,24,0.6); color: #E7D8C3; font-family: 'Moms Typewriter', sans-serif; font-size: 0.72rem; text-align: center; padding: 0.4rem 0.75rem; margin: 0; }
+.carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(28,26,24,0.45); border: none; color: #E7D8C3; font-size: 1.6rem; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; z-index: 3; display: flex; align-items: center; justify-content: center; line-height: 1; padding: 0; transition: background 0.2s; }
+.carousel-btn:hover { background: rgba(28,26,24,0.75); }
+.carousel-prev { left: 0.65rem; }
+.carousel-next { right: 0.65rem; }
+.carousel-dots { position: absolute; bottom: 0.65rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.4rem; z-index: 3; }
+.carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(231,216,195,0.5); border: none; cursor: pointer; padding: 0; transition: background 0.2s; }
+.carousel-dot.active { background: #E7D8C3; }
+.product-badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
+.product-badge { display: inline-block; font-family: 'Moms Typewriter', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.65rem; }
+.product-badge--default { background: #1C1A18; color: #E7D8C3; }
+.product-badge--highlight { background: #c9a84c; color: #1C1A18; }
+.product-badge--sale { background: #b84040; color: #E7D8C3; }
+.product-rich-text { margin-top: 1.5rem; }
+.product-rich-heading { color: #1C1A18; margin-bottom: 0.5rem; font-family: 'Moms Typewriter', sans-serif; text-transform: uppercase; letter-spacing: 0.04em; }
+.product-rich-body { color: var(--muted); line-height: 1.8; }
+.product-rich-body p { margin: 0 0 0.75rem; }
+.product-divider { border: none; border-top: 1px solid #c9b99e; margin: 1.5rem 0; }
 .product-info { padding-top: 0; }
 .product-info h1 { font-size: clamp(2rem, 4vw, 3rem); color: #1C1A18; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.04em; }
 .product-price { font-family: 'Moms Typewriter', sans-serif; font-size: 1.4rem; font-weight: 700; color: #1C1A18; margin-bottom: 1.5rem; }

@@ -6,6 +6,24 @@
 {%- assign _mw    = section.settings.content_max_width -%}
 {%- assign _pos   = section.settings.content_position -%}
 {%- if _pos == 'left' -%}{%- assign _cmarg = '0 auto 0 0' -%}{%- elsif _pos == 'right' -%}{%- assign _cmarg = '0 0 0 auto' -%}{%- else -%}{%- assign _cmarg = '0 auto' -%}{%- endif -%}
+{%- assign _use_block_imgs = false -%}
+{%- for block in section.blocks -%}
+  {%- if block.type == 'product_image' and block.settings.image != blank -%}
+    {%- assign _use_block_imgs = true -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if _use_block_imgs -%}
+  {%- assign _slide_count = 0 -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'product_image' and block.settings.image != blank -%}
+      {%- assign _slide_count = _slide_count | plus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- else -%}
+  {%- assign _slide_count = product.images.size -%}
+  {%- if _slide_count == 0 -%}{%- assign _slide_count = 1 -%}{%- endif -%}
+{%- endif -%}
 <article class="page-wrap" itemscope itemtype="https://schema.org/Product" style="{% if section.settings.bg_image != blank %}background-image:url('{{ _prod_bg }}');background-size:cover;background-position:center;position:relative;{% endif %}{% if _min_h > 0 %}min-height:{{ _min_h }}vh;display:flex;flex-direction:column;justify-content:center;{% endif %}">
   {%- if section.settings.bg_image != blank and section.settings.bg_overlay > 0 -%}
     <div style="position:absolute;inset:0;background:rgba(0,0,0,{{ section.settings.bg_overlay | divided_by: 100.0 }});pointer-events:none;" aria-hidden="true"></div>
@@ -15,24 +33,69 @@
 
   <div class="product-layout" style="max-width:{{ _mw }}px;margin:{{ _cmarg }};">
 
-    <div class="product-image">
-      {%- if product.featured_image -%}
-        {%- assign img_alt = product.featured_image.alt | default: product.title -%}
-        {%- unless img_alt contains 'Bayshore' -%}
-          {%- assign img_alt = img_alt | append: ' — Recycled Skateboard Ring by Bayshore Rings' -%}
-        {%- endunless -%}
-        <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ img_alt | escape }}" width="800" height="800" loading="eager" itemprop="image">
-      {%- else -%}
-        {% render 'ring-placeholder' %}
+    <div class="product-image product-carousel" id="pcarousel-{{ section.id }}">
+      <div class="carousel-track">
+        {%- if _use_block_imgs -%}
+          {%- assign _si = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'product_image' and block.settings.image != blank -%}
+              {%- assign _img = block.settings.image -%}
+              {%- assign _alt = _img.alt | default: product.title -%}
+              <div class="carousel-slide{% if _si == 0 %} active{% endif %}" {{ block.shopify_attributes }}>
+                <img src="{{ _img | image_url: width: 800 }}" alt="{{ _alt | escape }}" width="800" height="800" loading="{% if _si == 0 %}eager{% else %}lazy{% endif %}"{% if _si == 0 %} itemprop="image"{% endif %}>
+                {%- if block.settings.caption != blank -%}
+                  <p class="carousel-caption">{{ block.settings.caption }}</p>
+                {%- endif -%}
+              </div>
+              {%- assign _si = _si | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- elsif product.images.size > 0 -%}
+          {%- for img in product.images -%}
+            {%- assign _alt = img.alt | default: product.title -%}
+            {%- unless _alt contains 'Bayshore' -%}
+              {%- assign _alt = _alt | append: ' — Recycled Skateboard Ring by Bayshore Rings' -%}
+            {%- endunless -%}
+            <div class="carousel-slide{% if forloop.first %} active{% endif %}">
+              <img src="{{ img | image_url: width: 800 }}" alt="{{ _alt | escape }}" width="800" height="800" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"{% if forloop.first %} itemprop="image"{% endif %}>
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <div class="carousel-slide active">
+            {% render 'ring-placeholder' %}
+          </div>
+        {%- endif -%}
+      </div>
+      {%- if _slide_count > 1 -%}
+        <button class="carousel-btn carousel-prev" aria-label="Previous image">&#8249;</button>
+        <button class="carousel-btn carousel-next" aria-label="Next image">&#8250;</button>
+        <div class="carousel-dots" aria-hidden="true">
+          {%- for i in (1.._slide_count) -%}
+            <button class="carousel-dot{% if forloop.first %} active{% endif %}"></button>
+          {%- endfor -%}
+        </div>
       {%- endif -%}
     </div>
 
     <div class="product-info" style="text-align:{{ _align }};">
+      {%- assign _has_badges = false -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'badge' and block.settings.label != blank -%}{%- assign _has_badges = true -%}{%- break -%}{%- endif -%}
+      {%- endfor -%}
+      {%- if _has_badges -%}
+        <div class="product-badges">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'badge' and block.settings.label != blank -%}
+              <span class="product-badge product-badge--{{ block.settings.style }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
       {%- if product.type != blank -%}
         <p class="product-type" itemprop="category" style="font-size:{{ section.settings.body_size }}px;">{{ product.type }}</p>
       {%- endif -%}
 
-      <h1 itemprop="name" style="font-size:{{ section.settings.heading_size }}px;">{{ product.title }}</h1>
+      <h1 itemprop="name" style="font-size:{{ section.settings.heading_size }}px;{% if section.settings.heading_color != blank %}color:{{ section.settings.heading_color }};{% endif %}">{{ product.title }}</h1>
       <div class="product-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
         <span itemprop="price" content="{{ product.price | money_without_currency | remove: ',' }}">{{ product.price | money }}</span>
         <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
@@ -40,7 +103,7 @@
       </div>
 
       {%- if product.description != blank -%}
-        <div class="product-desc" itemprop="description" style="font-size:{{ section.settings.body_size }}px;">{{ product.description }}</div>
+        <div class="product-desc" itemprop="description" style="font-size:{{ section.settings.body_size }}px;{% if section.settings.body_color != blank %}color:{{ section.settings.body_color }};{% endif %}">{{ product.description }}</div>
       {%- endif -%}
 
       {%- form 'product', product, class: 'product-form' -%}
@@ -95,6 +158,20 @@
           </span>
         {%- endif -%}
       </div>
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'rich_text' -%}
+          <div class="product-rich-text" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}
+              <h3 class="product-rich-heading" style="font-size:{{ section.settings.body_size | plus: 2 }}px;{% if section.settings.heading_color != blank %}color:{{ section.settings.heading_color }};{% endif %}">{{ block.settings.heading }}</h3>
+            {%- endif -%}
+            {%- if block.settings.content != blank -%}
+              <div class="product-rich-body" style="font-size:{{ section.settings.body_size }}px;{% if section.settings.body_color != blank %}color:{{ section.settings.body_color }};{% endif %}">{{ block.settings.content }}</div>
+            {%- endif -%}
+          </div>
+        {%- elsif block.type == 'divider' -%}
+          <hr class="product-divider" {{ block.shopify_attributes }}>
+        {%- endif -%}
+      {%- endfor -%}
     </div>
 
   </div>
@@ -301,6 +378,35 @@
 })();
 </script>
 
+<script>
+(function(){
+  var el = document.getElementById('pcarousel-{{ section.id }}');
+  if (!el) return;
+  var slides = el.querySelectorAll('.carousel-slide');
+  var dots   = el.querySelectorAll('.carousel-dot');
+  var prevBtn = el.querySelector('.carousel-prev');
+  var nextBtn = el.querySelector('.carousel-next');
+  if (slides.length < 2) return;
+  var cur = 0;
+  function go(n) {
+    slides[cur].classList.remove('active');
+    if (dots[cur]) dots[cur].classList.remove('active');
+    cur = (n + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    if (dots[cur]) dots[cur].classList.add('active');
+  }
+  if (prevBtn) prevBtn.addEventListener('click', function(){ go(cur - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', function(){ go(cur + 1); });
+  dots.forEach(function(d, i){ d.addEventListener('click', function(){ go(i); }); });
+  var tx = 0;
+  el.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, {passive:true});
+  el.addEventListener('touchend', function(e){
+    var dx = tx - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 40) go(dx > 0 ? cur + 1 : cur - 1);
+  }, {passive:true});
+})();
+</script>
+
 {% schema %}
 {
   "name": "Product",
@@ -320,13 +426,49 @@
     { "type": "select", "id": "text_align", "label": "Text alignment", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "left" },
     { "type": "range", "id": "content_max_width", "label": "Content width", "min": 300, "max": 1400, "step": 50, "unit": "px", "default": 1100 },
     { "type": "select", "id": "content_position", "label": "Content position", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}, {"value": "right", "label": "Right"}], "default": "center" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#1C1A18" },
+    { "type": "color", "id": "body_color", "label": "Body text color", "default": "#5a5146" },
     { "type": "header", "content": "Section Size" },
     { "type": "range", "id": "section_min_height", "label": "Section height", "min": 0, "max": 100, "step": 5, "unit": "vh", "default": 100 }
   ],
   "blocks": [
     {
+      "type": "product_image",
+      "name": "Image",
+      "limit": 10,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "caption", "label": "Caption (optional)" }
+      ]
+    },
+    {
+      "type": "badge",
+      "name": "Badge / Label",
+      "limit": 5,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Badge text", "default": "New" },
+        { "type": "select", "id": "style", "label": "Style", "options": [{"value":"default","label":"Default (dark)"},{"value":"highlight","label":"Highlight (gold)"},{"value":"sale","label":"Sale (red)"}], "default": "default" }
+      ]
+    },
+    {
+      "type": "rich_text",
+      "name": "Text Block",
+      "limit": 5,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading" },
+        { "type": "richtext", "id": "content", "label": "Content" }
+      ]
+    },
+    {
+      "type": "divider",
+      "name": "Divider",
+      "limit": 5,
+      "settings": []
+    },
+    {
       "type": "feature",
-      "name": "Feature",
+      "name": "Feature Callout",
       "settings": [
         { "type": "text", "id": "title", "label": "Feature title", "default": "Feature Title" },
         { "type": "textarea", "id": "body", "label": "Feature description", "default": "Description of this feature." }
