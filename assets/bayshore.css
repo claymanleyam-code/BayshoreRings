@@ -799,15 +799,15 @@ a.p-card .p-btn { pointer-events: none; }
 .cart-header h1 { font-size: clamp(2.2rem, 4vw, 3.5rem); color: #E7D8C3; font-weight: 400; letter-spacing: 0.04em; margin-top: 0.5rem; text-transform: uppercase; }
 .cart-body { max-width: 860px; margin: 0 auto; padding: 3.5rem 2rem 5rem; }
 .cart-table { width: 100%; border-collapse: collapse; }
-.cart-table th { font-family: 'Moms Typewriter', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #888; padding: 0 0 1rem; text-align: left; border-bottom: 1px solid #e5e5e5; }
+.cart-table th { font-family: 'Moms Typewriter', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); padding: 0 0 1rem; text-align: left; border-bottom: 1px solid #e5e5e5; }
 .cart-table th:last-child { text-align: right; }
 .cart-row td { padding: 1.6rem 0; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
 .cart-item-img { width: 72px; height: 72px; object-fit: cover; border-radius: 0; display: block; background: #f0f0f0; }
 .cart-item-img-wrap { padding-right: 1.25rem; }
 .cart-item-name { font-family: 'Moms Typewriter', sans-serif; font-size: 1rem; font-weight: 700; color: #1C1A18; margin-bottom: 0.2rem; text-transform: uppercase; word-break: break-word; }
-.cart-item-variant { font-size: 0.82rem; color: #888; margin-bottom: 0.1rem; }
-.cart-item-property { font-size: 0.82rem; color: #888; margin-bottom: 0.1rem; }
-.cart-item-remove { font-size: 0.75rem; color: #888; text-decoration: none; display: inline-block; margin-top: 0.35rem; transition: color 0.15s; }
+.cart-item-variant { font-size: 0.82rem; color: var(--teal); margin-bottom: 0.1rem; }
+.cart-item-property { font-size: 0.82rem; color: var(--teal); margin-bottom: 0.1rem; }
+.cart-item-remove { font-size: 0.75rem; color: var(--teal); text-decoration: none; display: inline-block; margin-top: 0.35rem; transition: color 0.15s; }
 .cart-item-remove:hover { color: var(--red); }
 .cart-table { table-layout: fixed; }
 .cart-item-img-wrap { width: 88px; }
@@ -821,16 +821,16 @@ a.p-card .p-btn { pointer-events: none; }
 .cart-footer { border-top: 2px solid #e5e5e5; padding-top: 2rem; margin-top: 0.5rem; display: flex; justify-content: flex-end; }
 .cart-summary { width: 100%; max-width: 320px; }
 .cart-subtotal-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
-.cart-subtotal-label { font-family: 'Moms Typewriter', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #888; }
+.cart-subtotal-label { font-family: 'Moms Typewriter', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); }
 .cart-subtotal-amount { font-family: 'Moms Typewriter', sans-serif; font-size: 1.5rem; font-weight: 700; color: #1C1A18; }
-.cart-shipping-note { font-size: 0.82rem; color: #888; margin-bottom: 1.5rem; }
+.cart-shipping-note { font-size: 0.82rem; color: var(--teal); margin-bottom: 1.5rem; }
 .cart-checkout-btn { display: block; width: 100%; padding: 1rem; background: #1C1A18; color: #E7D8C3; font-family: 'Moms Typewriter', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase; text-align: center; border: none; border-radius: 0; cursor: pointer; text-decoration: none; transition: background 0.2s; margin-bottom: 0.75rem; }
 .cart-checkout-btn:hover { background: #333; }
-.cart-continue { display: block; text-align: center; font-size: 0.8rem; color: #888; text-decoration: none; transition: color 0.15s; }
+.cart-continue { display: block; text-align: center; font-size: 0.8rem; color: var(--teal); text-decoration: none; transition: color 0.15s; }
 .cart-continue:hover { color: #1C1A18; }
 .cart-empty { text-align: center; padding: 5rem 2rem; }
 .cart-empty h2 { font-size: 2rem; color: #1C1A18; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
-.cart-empty p { color: #888; margin-bottom: 2rem; }
+.cart-empty p { color: var(--teal); margin-bottom: 2rem; }
 
 /* ── Ring Sizing Page ────────────────────────────────────────── */
 .sizing-table-wrap { overflow-x: auto; margin: 2rem 0; }
