@@ -119,7 +119,7 @@
                   </a>
                 {%- endif -%}
               </div>
-              <select id="Option-{{ forloop.index }}" name="id" class="product-select">
+              <select id="Option-{{ forloop.index }}" name="id" class="product-select" {% unless product.available %}disabled{% endunless %}>
                 {%- for variant in product.variants -%}
                   <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
                     {{ variant.title }}{% unless variant.available %} — Sold Out{% endunless %}
@@ -145,7 +145,7 @@
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               </a>
             </div>
-            <select id="ring-size-{{ section.id }}" name="properties[Ring Size]" class="product-select ring-size-select" required>
+            <select id="ring-size-{{ section.id }}" name="properties[Ring Size]" class="product-select ring-size-select" {% unless product.available %}disabled{% endunless %} required>
               <option value="" disabled selected>Select a size</option>
               {%- for size in _sizes -%}
                 <option value="{{ size | strip }}">{{ size | strip }}</option>
