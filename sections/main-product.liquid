@@ -135,12 +135,10 @@
             <div class="product-option">
               <div class="product-option-header">
                 <label class="product-option-label" for="Option-{{ forloop.index }}">{{ option.name }}</label>
-                {%- if option.name == 'Size' or option.name == 'Ring Size' -%}
-                  <a href="/pages/ring-sizing" class="size-guide-link" target="_blank">
-                    Size Guide
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                  </a>
-                {%- endif -%}
+                <a href="/pages/ring-sizing" class="size-guide-link" target="_blank">
+                  Size Guide
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
               </div>
               {%- assign _available_variants = product.variants | where: 'available', true -%}
               {%- if _available_variants.size > 0 -%}
