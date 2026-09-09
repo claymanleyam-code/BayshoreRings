@@ -142,13 +142,22 @@
                   </a>
                 {%- endif -%}
               </div>
-              <select id="Option-{{ forloop.index }}" name="id" class="product-select" {% unless product.available %}disabled{% endunless %}>
-                {%- for variant in product.variants -%}
-                  <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
-                    {{ variant.title }}{% unless variant.available %} — Sold Out{% endunless %}
-                  </option>
-                {%- endfor -%}
-              </select>
+              {%- assign _available_variants = product.variants | where: 'available', true -%}
+              {%- if _available_variants.size > 0 -%}
+                <select id="Option-{{ forloop.index }}" name="id" class="product-select">
+                  {%- for variant in product.variants -%}
+                    {%- if variant.available -%}
+                      <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %}>
+                        {{ variant.title }}
+                      </option>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </select>
+              {%- else -%}
+                <select id="Option-{{ forloop.index }}" name="id" class="product-select" disabled>
+                  <option>Sold Out</option>
+                </select>
+              {%- endif -%}
             </div>
           {%- endfor -%}
         {%- else -%}
