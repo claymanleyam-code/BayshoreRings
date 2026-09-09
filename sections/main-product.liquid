@@ -33,6 +33,7 @@
 
   <div class="product-layout" style="max-width:{{ _mw }}px;margin:{{ _cmarg }};">
 
+    <div class="product-image-wrap">
     <div class="product-image product-carousel" id="pcarousel-{{ section.id }}">
       <div class="carousel-track">
         {%- if _use_block_imgs -%}
@@ -75,6 +76,28 @@
           {%- endfor -%}
         </div>
       {%- endif -%}
+    </div>
+    {%- if _slide_count > 1 -%}
+      <div class="carousel-thumbs" id="pcarousel-thumbs-{{ section.id }}">
+        {%- if _use_block_imgs -%}
+          {%- assign _ti = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'product_image' and block.settings.image != blank -%}
+              <button class="carousel-thumb{% if _ti == 0 %} active{% endif %}" aria-label="View image {{ _ti | plus: 1 }}">
+                <img src="{{ block.settings.image | image_url: width: 120 }}" alt="" loading="lazy">
+              </button>
+              {%- assign _ti = _ti | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- elsif product.images.size > 0 -%}
+          {%- for img in product.images -%}
+            <button class="carousel-thumb{% if forloop.first %} active{% endif %}" aria-label="View image {{ forloop.index }}">
+              <img src="{{ img | image_url: width: 120 }}" alt="{{ img.alt | default: product.title | escape }}" loading="lazy">
+            </button>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
     </div>
 
     <div class="product-info" style="text-align:{{ _align }};">
@@ -406,6 +429,8 @@
   if (!el) return;
   var slides = el.querySelectorAll('.carousel-slide');
   var dots   = el.querySelectorAll('.carousel-dot');
+  var thumbWrap = document.getElementById('pcarousel-thumbs-{{ section.id }}');
+  var thumbs = thumbWrap ? thumbWrap.querySelectorAll('.carousel-thumb') : [];
   var prevBtn = el.querySelector('.carousel-prev');
   var nextBtn = el.querySelector('.carousel-next');
   if (slides.length < 2) return;
@@ -413,13 +438,19 @@
   function go(n) {
     slides[cur].classList.remove('active');
     if (dots[cur]) dots[cur].classList.remove('active');
+    if (thumbs[cur]) thumbs[cur].classList.remove('active');
     cur = (n + slides.length) % slides.length;
     slides[cur].classList.add('active');
     if (dots[cur]) dots[cur].classList.add('active');
+    if (thumbs[cur]) {
+      thumbs[cur].classList.add('active');
+      thumbs[cur].scrollIntoView({ inline: 'nearest', behavior: 'smooth', block: 'nearest' });
+    }
   }
   if (prevBtn) prevBtn.addEventListener('click', function(){ go(cur - 1); });
   if (nextBtn) nextBtn.addEventListener('click', function(){ go(cur + 1); });
   dots.forEach(function(d, i){ d.addEventListener('click', function(){ go(i); }); });
+  thumbs.forEach(function(t, i){ t.addEventListener('click', function(){ go(i); }); });
   var tx = 0;
   el.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, {passive:true});
   el.addEventListener('touchend', function(e){
