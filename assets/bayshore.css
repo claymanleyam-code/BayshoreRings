@@ -851,6 +851,20 @@ a.p-card .p-btn { pointer-events: none; }
 .sizing-tip { background: #f5f5f5; border-left: 3px solid #1C1A18; padding: 1.25rem 1.5rem; border-radius: 0; margin-bottom: 1.25rem; }
 .sizing-tip h4 { font-size: 0.9rem; font-weight: 700; color: #1C1A18; margin-bottom: 0.35rem; }
 .sizing-tip p { font-size: 0.88rem; color: #666; line-height: 1.65; }
+.sizing-print-btn { display: inline-flex; align-items: center; gap: 0.45rem; font-family: 'Moms Typewriter', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.45rem 1rem; background: none; border: 1.5px solid #c9b99e; color: #1C1A18; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+.sizing-print-btn:hover { border-color: #1C1A18; background: #f5f0e8; }
+
+@media print {
+  .nav, .sf, #helpBtn, .cart-toast, .so-overlay, .help-modal, .sizing-print-btn, .collection-header .gold-bar { display: none !important; }
+  body { background: #fff !important; color: #000 !important; }
+  .page-wrap { padding: 1.5rem !important; min-height: auto !important; background: none !important; box-shadow: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .sizing-table th { background: #1C1A18 !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .sizing-highlight td { background: #e8e8e8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .sizing-tip { background: #f5f5f5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a[href].btn { display: none !important; }
+  .collection-header { margin-bottom: 1rem !important; }
+}
 
 /* ── Nav cart ───────────────────────────────────────────────── */
 .nav-cart,
