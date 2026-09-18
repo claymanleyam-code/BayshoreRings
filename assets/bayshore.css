@@ -971,7 +971,7 @@ a.p-card .p-btn { pointer-events: none; }
 @keyframes drop-ticker-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 .drop-container { max-width: 1160px; margin: 0 auto; }
-.drop-header { margin-bottom: 5px; display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+.drop-header { margin-bottom: 20px; display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
 .drop-heading { font-family: 'Moms Typewriter', sans-serif; font-size: clamp(3.5rem, 6vw, 6.5rem); font-weight: 400; color: #E7D8C3; letter-spacing: 0.04em; line-height: 0.95; margin: 0.3rem 0 0; text-transform: uppercase; }
 .drop-view-all { font-family: 'Moms Typewriter', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); text-decoration: none; padding-bottom: 0.5rem; border-bottom: 1.5px solid rgba(255,255,255,0.2); transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
 .drop-view-all:hover { color: var(--accent); border-bottom-color: var(--accent); }
