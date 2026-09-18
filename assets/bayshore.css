@@ -970,12 +970,13 @@ a.p-card .p-btn { pointer-events: none; }
 .drop-ticker-sep { color: var(--accent) !important; opacity: 0.7; }
 @keyframes drop-ticker-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-.drop-header { max-width: 1160px; margin: 0 auto 3.6rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+.drop-container { max-width: 1160px; margin: 0 auto; }
+.drop-header { margin-bottom: 5px; display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
 .drop-heading { font-family: 'Moms Typewriter', sans-serif; font-size: clamp(3.5rem, 6vw, 6.5rem); font-weight: 400; color: #E7D8C3; letter-spacing: 0.04em; line-height: 0.95; margin: 0.3rem 0 0; text-transform: uppercase; }
 .drop-view-all { font-family: 'Moms Typewriter', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); text-decoration: none; padding-bottom: 0.5rem; border-bottom: 1.5px solid rgba(255,255,255,0.2); transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
 .drop-view-all:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
-.drop-grid { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.drop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
 .drop-card { display: block; text-decoration: none; position: relative; background: #1C1A18; overflow: hidden; transition: transform 0.28s ease; }
 .drop-card:hover { transform: translateY(-5px); }
 .drop-card-img-wrap { position: relative; aspect-ratio: 1 / 1; overflow: hidden; background: #1C1A18; }
@@ -989,7 +990,7 @@ a.p-card .p-btn { pointer-events: none; }
 .drop-card-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 2.5rem 1.4rem 1.4rem; z-index: 2; display: flex; align-items: flex-end; justify-content: space-between; gap: 0.5rem; }
 .drop-card-name { font-family: 'Moms Typewriter', sans-serif; font-size: 1.15rem; font-weight: 700; color: #E7D8C3; letter-spacing: -0.01em; line-height: 1.2; text-transform: uppercase; }
 .drop-card-price { font-family: 'Moms Typewriter', sans-serif; font-size: 1rem; font-weight: 700; color: var(--accent); white-space: nowrap; }
-.drop-footer { max-width: 1160px; margin: 3.5rem auto 0; text-align: center; }
+.drop-footer { margin-top: 3.5rem; text-align: center; }
 
 @media screen and (max-width: 860px) { .drop-grid { grid-template-columns: repeat(2, 1fr); } .drop-heading { font-size: clamp(2.2rem, 6vw, 3.5rem); } }
 @media screen and (max-width: 540px) { .drop-section { padding-left: 1.2rem; padding-right: 1.2rem; } .drop-grid { gap: 1px; } .drop-heading { font-size: 2.4rem; } }

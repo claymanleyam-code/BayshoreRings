@@ -41,57 +41,25 @@
 
 <!-- ── DROP SECTION ───────────────────────────────────── -->
 <section class="drop-section" id="products" style="padding-top:{{ section.settings.padding_top }}rem; padding-bottom:{{ section.settings.padding_bottom }}rem;">
-  <div class="drop-header" style="max-width:{{ _mw }}px;margin:{{ _cmarg }};text-align:{{ _align }};">
-    <div class="drop-header-left">
-      <span class="eyebrow" style="color:var(--teal);">{{ section.settings.eyebrow }}</span>
-      <h2 class="drop-heading" style="font-size:{{ section.settings.heading_size }}px;">{{ section.settings.heading }}</h2>
-    </div>
-    <a href="{{ section.settings.view_all_url | default: '/collections/shop-rings' }}" class="drop-view-all">
-      {{ section.settings.view_all_text }} &rarr;
-    </a>
-  </div>
-
-  {%- if _pinned_product != blank -%}
-    {%- assign product = _pinned_product -%}
-    <div class="drop-grid">
-      <a href="{{ product.url }}" class="drop-card">
-        <div class="drop-card-img-wrap">
-          {%- if product.featured_image -%}
-            {%- assign card_alt = product.featured_image.alt | default: product.title -%}
-            {%- unless card_alt contains 'Bayshore' -%}{%- assign card_alt = card_alt | append: ' — Recycled Skateboard Ring by Bayshore Rings' -%}{%- endunless -%}
-            <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ card_alt | escape }}" width="800" height="800" loading="lazy" class="drop-card-img">
-          {%- else -%}
-            {%- render 'ring-placeholder' -%}
-          {%- endif -%}
-          {%- if product.available == false -%}
-            <span class="drop-card-badge drop-card-badge--sold">Sold Out</span>
-          {%- elsif product.tags contains 'Limited' or product.tags contains 'limited' -%}
-            <span class="drop-card-badge drop-card-badge--limited">Limited</span>
-          {%- elsif product.tags contains 'New' or product.tags contains 'new' -%}
-            <span class="drop-card-badge drop-card-badge--new">New</span>
-          {%- endif -%}
-        </div>
-        <div class="drop-card-info">
-          <div class="drop-card-name" style="font-size:{{ section.settings.body_size }}px;">{{ product.title }}</div>
-          <div class="drop-card-price">
-            {%- if product.price_varies -%}From {{ product.price_min | money }}{%- else -%}{{ product.price | money }}{%- endif -%}
-          </div>
-        </div>
+  <div class="drop-container" style="max-width:{{ _mw }}px;margin:{{ _cmarg }};">
+    <div class="drop-header" style="text-align:{{ _align }};">
+      <div class="drop-header-left">
+        <span class="eyebrow" style="color:var(--teal);">{{ section.settings.eyebrow }}</span>
+        <h2 class="drop-heading" style="font-size:{{ section.settings.heading_size }}px;">{{ section.settings.heading }}</h2>
+      </div>
+      <a href="{{ section.settings.view_all_url | default: '/collections/shop-rings' }}" class="drop-view-all">
+        {{ section.settings.view_all_text }} &rarr;
       </a>
     </div>
-    <div class="drop-footer">
-      <a href="{{ section.settings.view_all_url | default: '/collections/shop-rings' }}" class="btn btn-gold btn-hero-primary">{{ section.settings.view_all_text }}</a>
-    </div>
-  {%- elsif featured_collection != blank and featured_collection.products_count > 0 -%}
-    <div class="drop-grid">
-      {%- for product in featured_collection.products limit: section.settings.product_limit -%}
+
+    {%- if _pinned_product != blank -%}
+      {%- assign product = _pinned_product -%}
+      <div class="drop-grid">
         <a href="{{ product.url }}" class="drop-card">
           <div class="drop-card-img-wrap">
             {%- if product.featured_image -%}
               {%- assign card_alt = product.featured_image.alt | default: product.title -%}
-              {%- unless card_alt contains 'Bayshore' -%}
-                {%- assign card_alt = card_alt | append: ' — Recycled Skateboard Ring by Bayshore Rings' -%}
-              {%- endunless -%}
+              {%- unless card_alt contains 'Bayshore' -%}{%- assign card_alt = card_alt | append: ' — Recycled Skateboard Ring by Bayshore Rings' -%}{%- endunless -%}
               <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ card_alt | escape }}" width="800" height="800" loading="lazy" class="drop-card-img">
             {%- else -%}
               {%- render 'ring-placeholder' -%}
@@ -111,14 +79,48 @@
             </div>
           </div>
         </a>
-      {%- endfor -%}
-    </div>
-    <div class="drop-footer">
-      <a href="{{ section.settings.view_all_url | default: '/collections/shop-rings' }}" class="btn btn-gold btn-hero-primary">{{ section.settings.view_all_text }}</a>
-    </div>
-  {%- else -%}
-    <p class="products-empty">Create a collection called <strong>Shop Rings</strong> and add products to see them here.</p>
-  {%- endif -%}
+      </div>
+      <div class="drop-footer">
+        <a href="{{ section.settings.view_all_url | default: '/collections/shop-rings' }}" class="btn btn-gold btn-hero-primary">{{ section.settings.view_all_text }}</a>
+      </div>
+    {%- elsif featured_collection != blank and featured_collection.products_count > 0 -%}
+      <div class="drop-grid">
+        {%- for product in featured_collection.products limit: section.settings.product_limit -%}
+          <a href="{{ product.url }}" class="drop-card">
+            <div class="drop-card-img-wrap">
+              {%- if product.featured_image -%}
+                {%- assign card_alt = product.featured_image.alt | default: product.title -%}
+                {%- unless card_alt contains 'Bayshore' -%}
+                  {%- assign card_alt = card_alt | append: ' — Recycled Skateboard Ring by Bayshore Rings' -%}
+                {%- endunless -%}
+                <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ card_alt | escape }}" width="800" height="800" loading="lazy" class="drop-card-img">
+              {%- else -%}
+                {%- render 'ring-placeholder' -%}
+              {%- endif -%}
+              {%- if product.available == false -%}
+                <span class="drop-card-badge drop-card-badge--sold">Sold Out</span>
+              {%- elsif product.tags contains 'Limited' or product.tags contains 'limited' -%}
+                <span class="drop-card-badge drop-card-badge--limited">Limited</span>
+              {%- elsif product.tags contains 'New' or product.tags contains 'new' -%}
+                <span class="drop-card-badge drop-card-badge--new">New</span>
+              {%- endif -%}
+            </div>
+            <div class="drop-card-info">
+              <div class="drop-card-name" style="font-size:{{ section.settings.body_size }}px;">{{ product.title }}</div>
+              <div class="drop-card-price">
+                {%- if product.price_varies -%}From {{ product.price_min | money }}{%- else -%}{{ product.price | money }}{%- endif -%}
+              </div>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+      <div class="drop-footer">
+        <a href="{{ section.settings.view_all_url | default: '/collections/shop-rings' }}" class="btn btn-gold btn-hero-primary">{{ section.settings.view_all_text }}</a>
+      </div>
+    {%- else -%}
+      <p class="products-empty">Create a collection called <strong>Shop Rings</strong> and add products to see them here.</p>
+    {%- endif -%}
+  </div>
 </section>
   </div>
 </div>
