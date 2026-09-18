@@ -12,13 +12,25 @@
     "settings": [
       {
         "type": "range",
-        "id": "logo_height",
-        "label": "Logo size",
-        "min": 30,
-        "max": 120,
+        "id": "logo_size",
+        "label": "Logo size (scales proportionally)",
+        "info": "Scales width and height together — diagonal resize only.",
+        "min": 40,
+        "max": 200,
         "step": 5,
         "unit": "px",
-        "default": 65
+        "default": 91
+      },
+      {
+        "type": "range",
+        "id": "logo_x",
+        "label": "Logo horizontal position",
+        "info": "Negative values move left, positive values move right.",
+        "min": -60,
+        "max": 60,
+        "step": 5,
+        "unit": "px",
+        "default": -25
       }
     ]
   },
