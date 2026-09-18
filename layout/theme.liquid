@@ -189,13 +189,14 @@
   {%- comment -%}Theme editor color + font overrides — injected after bayshore.css so they win{%- endcomment -%}
   <style>
     :root {
-      --navy:      {{ settings.color_navy }};
-      --navy-dark: {{ settings.color_navy }};
-      --cream:     {{ settings.color_cream }};
-      --teal:      {{ settings.color_teal }};
-      --red:       {{ settings.color_red }};
-      --accent:    {{ settings.color_accent }};
-      --muted:     {{ settings.color_muted }};
+      --navy:        {{ settings.color_navy }};
+      --navy-dark:   {{ settings.color_navy }};
+      --cream:       {{ settings.color_cream }};
+      --teal:        {{ settings.color_teal }};
+      --red:         {{ settings.color_red }};
+      --accent:      {{ settings.color_accent }};
+      --muted:       {{ settings.color_muted }};
+      --logo-height: {{ settings.logo_height | default: 65 }}px;
     }
     body { font-family: 'Shine Typewriter', sans-serif; }
     h1, h2, h3 { font-family: 'Moms Typewriter', sans-serif; }
