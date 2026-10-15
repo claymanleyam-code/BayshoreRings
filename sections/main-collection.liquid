@@ -59,7 +59,14 @@
               <p class="p-desc" style="font-size:{{ section.settings.body_size | minus: 2 }}px;">{{ product.description | strip_html | truncate: 90 }}</p>
               <div class="p-foot">
                 <span class="p-price">
-                  {{ product.price_min | money }}
+                  {%- assign _cp = product.compare_at_price_min -%}
+                  {%- assign _p  = product.price_min -%}
+                  {%- if _cp > _p -%}
+                    {%- assign _pct = _cp | minus: _p | times: 100 | divided_by: _cp | round -%}
+                    <s class="price-was">{{ _cp | money }}</s><span class="price-sale">{{ _p | money }}</span><span class="price-off">{{ _pct }}% OFF</span>
+                  {%- else -%}
+                    {{ _p | money }}
+                  {%- endif -%}
                 </span>
                 <span class="p-btn{% unless product.available %} p-btn--sold-out{% endunless %}">
                   {%- if product.available -%}Shop Now{%- else -%}Sold Out{%- endif -%}

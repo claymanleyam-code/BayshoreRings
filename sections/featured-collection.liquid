@@ -57,7 +57,14 @@
           <div class="drop-card-info">
             <div class="drop-card-name" style="font-size:{{ section.settings.body_size }}px;">{{ product.title }}</div>
             <div class="drop-card-price">
-              {{ product.price_min | money }}
+              {%- assign _cp = product.compare_at_price_min -%}
+              {%- assign _p  = product.price_min -%}
+              {%- if _cp > _p -%}
+                {%- assign _pct = _cp | minus: _p | times: 100 | divided_by: _cp | round -%}
+                <s class="price-was">{{ _cp | money }}</s><span class="price-sale">{{ _p | money }}</span><span class="price-off">{{ _pct }}% OFF</span>
+              {%- else -%}
+                {{ _p | money }}
+              {%- endif -%}
             </div>
           </div>
         </a>
@@ -90,7 +97,14 @@
             <div class="drop-card-info">
               <div class="drop-card-name" style="font-size:{{ section.settings.body_size }}px;">{{ product.title }}</div>
               <div class="drop-card-price">
-                {{ product.price_min | money }}
+                {%- assign _cp = product.compare_at_price_min -%}
+              {%- assign _p  = product.price_min -%}
+              {%- if _cp > _p -%}
+                {%- assign _pct = _cp | minus: _p | times: 100 | divided_by: _cp | round -%}
+                <s class="price-was">{{ _cp | money }}</s><span class="price-sale">{{ _p | money }}</span><span class="price-off">{{ _pct }}% OFF</span>
+              {%- else -%}
+                {{ _p | money }}
+              {%- endif -%}
               </div>
             </div>
           </a>

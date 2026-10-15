@@ -992,6 +992,9 @@ a.p-card .p-btn { pointer-events: none; }
 .drop-card-name { font-family: 'Moms Typewriter', sans-serif; font-size: 1.15rem; font-weight: 700; color: #E7D8C3; letter-spacing: -0.01em; line-height: 1.2; text-transform: uppercase; }
 .drop-card-price { font-family: 'Moms Typewriter', sans-serif; font-size: 1rem; font-weight: 700; color: var(--accent); white-space: nowrap; }
 .drop-footer { margin-top: 3.5rem; text-align: center; }
+.price-was { text-decoration: line-through; opacity: 0.5; font-weight: 400; margin-right: 0.25em; }
+.price-sale { color: var(--accent); }
+.price-off { font-family: 'Moms Typewriter', sans-serif; font-size: 0.7em; font-weight: 700; letter-spacing: 0.06em; color: var(--teal); margin-left: 0.35em; text-transform: uppercase; white-space: nowrap; }
 
 @media screen and (max-width: 860px) { .drop-grid { grid-template-columns: repeat(2, 1fr); } .drop-heading { font-size: clamp(2.2rem, 6vw, 3.5rem); } }
 @media screen and (max-width: 540px) { .drop-section { padding-left: 1.2rem; padding-right: 1.2rem; } .drop-grid { gap: 1px; } .drop-heading { font-size: 2.4rem; } }
