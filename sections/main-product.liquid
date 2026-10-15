@@ -125,7 +125,7 @@
         {%- assign _p   = _var.price -%}
         {%- if _cp > _p -%}
           {%- assign _pct = _cp | minus: _p | times: 100 | divided_by: _cp | round -%}
-          <s class="price-was">{{ _cp | money }}</s><span class="price-sale" itemprop="price" content="{{ _p | money_without_currency | remove: ',' }}">{{ _p | money }}</span><span class="price-off">{{ _pct }}% OFF</span>
+          <span class="price-wrap"><span class="price-row"><s class="price-was">{{ _cp | money }}</s><span class="price-sale" itemprop="price" content="{{ _p | money_without_currency | remove: ',' }}">{{ _p | money }}</span></span><span class="price-off">{{ _pct }}% OFF</span></span>
         {%- else -%}
           <span itemprop="price" content="{{ _p | money_without_currency | remove: ',' }}">{{ _p | money }}</span>
         {%- endif -%}
