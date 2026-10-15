@@ -994,6 +994,13 @@ a.p-card .p-btn { pointer-events: none; }
 
 @media screen and (max-width: 860px) { .drop-grid { grid-template-columns: repeat(2, 1fr); } .drop-heading { font-size: clamp(2.2rem, 6vw, 3.5rem); } }
 @media screen and (max-width: 540px) { .drop-section { padding-left: 1.2rem; padding-right: 1.2rem; } .drop-grid { gap: 1px; } .drop-heading { font-size: 2.4rem; } }
+@media screen and (max-width: 540px) {
+  .drop-card { overflow: visible; }
+  .drop-card-img-wrap::after { display: none; }
+  .drop-card-info { position: static; padding: 0.75rem 0.9rem 0.9rem; background: #1C1A18; align-items: flex-start; flex-direction: column; gap: 0.2rem; }
+  .drop-card-name { font-size: 0.85rem; }
+  .drop-card-price { font-size: 0.85rem; }
+}
 
 /* ══════════════════════════════════════════════════════════════
    PROCESS PAGE — image grid
