@@ -59,7 +59,7 @@
               <p class="p-desc" style="font-size:{{ section.settings.body_size | minus: 2 }}px;">{{ product.description | strip_html | truncate: 90 }}</p>
               <div class="p-foot">
                 <span class="p-price">
-                  {%- if product.price_varies -%}From {{ product.price_min | money }}{%- else -%}{{ product.price | money }}{%- endif -%}
+                  {{ product.price_min | money }}
                 </span>
                 <span class="p-btn{% unless product.available %} p-btn--sold-out{% endunless %}">
                   {%- if product.available -%}Shop Now{%- else -%}Sold Out{%- endif -%}

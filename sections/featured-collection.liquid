@@ -21,24 +21,6 @@
     <div style="position:absolute;inset:0;background:rgba(0,0,0,{{ section.settings.bg_overlay | divided_by: 100.0 }});pointer-events:none;" aria-hidden="true"></div>
   {%- endif -%}
   <div style="position:relative;">
-<!-- ── MARQUEE TICKER ──────────────────────────────────── -->
-{%- assign ticker_1 = section.settings.ticker_1 | default: 'RECLAIMED SKATEBOARDS' -%}
-{%- assign ticker_2 = section.settings.ticker_2 | default: 'HANDCRAFTED IN TAMPA' -%}
-{%- assign ticker_3 = section.settings.ticker_3 | default: 'SMALL BATCH' -%}
-{%- assign ticker_4 = section.settings.ticker_4 | default: '1 OF 1' -%}
-{%- assign ticker_5 = section.settings.ticker_5 | default: 'COASTAL FLORIDA' -%}
-<div class="drop-ticker" aria-hidden="true">
-  <div class="drop-ticker-track">
-    {%- for i in (1..4) -%}
-      <span>{{ ticker_1 }}</span><span class="drop-ticker-sep">·</span>
-      <span>{{ ticker_2 }}</span><span class="drop-ticker-sep">·</span>
-      <span>{{ ticker_3 }}</span><span class="drop-ticker-sep">·</span>
-      <span>{{ ticker_4 }}</span><span class="drop-ticker-sep">·</span>
-      <span>{{ ticker_5 }}</span><span class="drop-ticker-sep">·</span>
-    {%- endfor -%}
-  </div>
-</div>
-
 <!-- ── DROP SECTION ───────────────────────────────────── -->
 <section class="drop-section" id="products" style="padding-top:{{ section.settings.padding_top }}rem; padding-bottom:{{ section.settings.padding_bottom }}rem;">
   <div class="drop-container" style="max-width:{{ _mw }}px;margin:{{ _cmarg }};">
@@ -75,7 +57,7 @@
           <div class="drop-card-info">
             <div class="drop-card-name" style="font-size:{{ section.settings.body_size }}px;">{{ product.title }}</div>
             <div class="drop-card-price">
-              {%- if product.price_varies -%}From {{ product.price_min | money }}{%- else -%}{{ product.price | money }}{%- endif -%}
+              {{ product.price_min | money }}
             </div>
           </div>
         </a>
@@ -108,7 +90,7 @@
             <div class="drop-card-info">
               <div class="drop-card-name" style="font-size:{{ section.settings.body_size }}px;">{{ product.title }}</div>
               <div class="drop-card-price">
-                {%- if product.price_varies -%}From {{ product.price_min | money }}{%- else -%}{{ product.price | money }}{%- endif -%}
+                {{ product.price_min | money }}
               </div>
             </div>
           </a>
